@@ -1,0 +1,30 @@
+{
+  "name": "Rollingpaper_client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Nexters/Rollingpaper_client.git",
+  "author": "DANNIEL <donghoon149@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fullpage/react-fullpage": "0.1.17",
+    "@zeit/next-sass": "1.0.1",
+    "axios": "0.19.2",
+    "next": "9.4.4",
+    "nextjs-fonts": "0.22.0",
+    "node-sass": "4.14.1",
+    "particles-bg": "2.5.0",
+    "react": "16.13.1",
+    "react-copy-to-clipboard": "5.0.2",
+    "react-countup": "4.3.3",
+    "react-dom": "16.13.1",
+    "react-input-autosize": "2.2.2",
+    "react-textarea-autosize": "8.2.0",
+    "react-visibility-sensor": "5.1.1",
+    "wired-elements": "2.1.2"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}

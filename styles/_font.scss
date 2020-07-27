@@ -1,0 +1,37 @@
+// @import url("https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean");
+// @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+// @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
+// @import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
+// 나눔 펜 스크립트
+@font-face {
+  font-family: "Nanum Pen Script", cursive;
+  src: url("/fonts/NanumPenScript-Regular.ttf");
+}
+
+// 나눔 스퀘어 라운드 맥용
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url("/fonts/NanumSquareRoundR.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url("/fonts/NanumSquareRoundL.ttf");
+  font-weight: lighter;
+}
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url("/fonts/NanumSquareRoundB.ttf");
+  font-weight: bold;
+}
+// 나눔 브러쉬
+@font-face {
+  font-family: "NanumBrush";
+  src: url("/fonts/NanumBrush.ttf");
+}
+// $black-han-sans: "Black Han Sans", sans-serif;
+// $spoqa-han-sans: "Spoqa Han Sans", "Spoqa Han Sans JP", "Sans-serif";
+$nanum-square: "NanumSquare", sans-serif !important;
+$nanum-square-round: "NanumSquareRond";
+$nanum-pen: "Nanum Pen Script", cursive;
+$nanum-brush: "NanumBrush";

@@ -1,0 +1,85 @@
+@import "./font.scss";
+@import "./mixin.scss";
+
+.link {
+  // font-style: $spoqa-han-sans;
+  color: grey;
+  font-size: 14px;
+}
+.paper {
+  display: flex;
+  width: 300px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  // font-family: $nanum-square;
+  border: 1px solid #f64c71;
+  border-radius: 25px;
+  padding: 30px;
+  font-weight: lighter;
+  font-size: 22px;
+  white-space: pre-line;
+  transition: background-color 1s;
+  -webkit-transition: background-color 1s;
+  &-content {
+    text-align: left;
+  }
+  &-clicked {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    border: 1px solid #f64c71;
+    border-radius: 25px;
+    padding: 30px;
+    width: 300px;
+    height: 500px;
+    background-color: #f64c71;
+  }
+  &-author {
+    font-size: 28px;
+    font-weight: lighter;
+    color: white;
+  }
+}
+// .section-first {
+//   background-image: url("/ballon-background.png");
+//   background-repeat: no-repeat;
+//   background-size: 100% 40%;
+// }
+.rolling-paper {
+  width: 100%;
+  margin: 0 auto;
+  align-content: center;
+  text-align: center;
+
+  .intro {
+    text-align: center;
+  }
+  .allow {
+    color: #f64c71;
+    margin-top: 30px;
+  }
+  // .papers {
+  //   width: 100%;
+  //   justify-content: center;
+  //   display: flex;
+  //   flex-wrap: wrap;
+
+  //   .paper {
+  //     // background-color: #12b886;
+  //     justify-content: center;
+  //     width: 200px;
+  //     margin-left: 10px;
+  //     margin-right: 10px;
+  //     padding: 10px;
+  //     height: 300px;
+  //     font-size: 20px;
+  //     margin-top: 20px;
+  //     // color: white;
+  //     font-size: 15px;
+  //     text-align: left;
+  //   }
+  // }
+}
