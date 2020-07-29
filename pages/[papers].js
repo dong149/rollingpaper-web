@@ -1,12 +1,13 @@
+// 준비자가 보는 페이지
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Paper from "../components/Paper";
+import Post from "../components/Post";
 import { useRouter } from "next/router";
 import { isEmpty } from "../functions";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import rollingService from "../services/rollingService";
 import "../styles/home.scss";
-import "../styles/papers.scss";
+import "../styles/post.scss";
 import Head from "next/head";
 import ReactFullpage from "@fullpage/react-fullpage";
 const Papers = (props) => {
@@ -87,7 +88,7 @@ const Papers = (props) => {
       },
     });
     window.Kakao.Link.createDefaultButton({
-      container: "#kakao-link-btn-giver",
+      container: "#kakao-link-btn-receiver",
       objectType: "feed",
       content: {
         title: `${name}님 생일 축하드립니다!`,
@@ -96,8 +97,8 @@ const Papers = (props) => {
           "https://github.com/dong149/image_resources/blob/master/rollingpaper/present.png?raw=true",
 
         link: {
-          webUrl: `https://rollingpaper.site/p/[giver]?name=${name}&pw=${password}&id=${id}`,
-          mobileWebUrl: `https://rollingpaper.site/p/[giver]?name=${name}&pw=${password}&id=${id}`,
+          webUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
+          mobileWebUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
         },
       },
       social: {
@@ -109,8 +110,8 @@ const Papers = (props) => {
         {
           title: "열어보기",
           link: {
-            webUrl: `https://rollingpaper.site/p/[giver]?name=${name}&pw=${password}&id=${id}`,
-            mobileWebUrl: `https://rollingpaper.site/p/[giver]?name=${name}&pw=${password}&id=${id}`,
+            webUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
+            mobileWebUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
           },
         },
       ],
@@ -209,14 +210,14 @@ const Papers = (props) => {
                     <span>작성페이지 링크 복사</span>
                   </CopyToClipboard>
                   <Link
-                    href={`/p/[giver]?name=${name}&pw=${password}&id=${id}`}
-                    as={`/p/[giver]?name=${name}&pw=${password}&id=${id}`}
+                    href={`/p/[receiver]?name=${name}&pw=${password}&id=${id}`}
+                    as={`/p/[receiver]?name=${name}&pw=${password}&id=${id}`}
                   >
                     <div className="create-btn" name={name}>
                       <span>롤링페이지 현황 보기</span>
                     </div>
                   </Link>
-                  <a id="kakao-link-btn-giver" className="present-btn">
+                  <a id="kakao-link-btn-receiver" className="present-btn">
                     <div>
                       <span>주인공에게 보내기</span>
                     </div>

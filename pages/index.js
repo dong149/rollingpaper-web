@@ -1,8 +1,9 @@
+// 스플래쉬 뷰
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Paper from "../components/Paper";
+import Paper from "../components/Post";
 import "../styles/home.scss";
-import "../styles/papers.scss";
+import "../styles/post.scss";
 import Head from "next/head";
 import ReactFullpage from "@fullpage/react-fullpage";
 import Start from "./start";

@@ -1,19 +1,20 @@
+// 주인공이 받는 페이지
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Paper from "../../components/Paper";
+import Post from "../../components/Post";
 import { useRouter } from "next/router";
 import { isEmpty } from "../../functions";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import rollingService from "../../services/rollingService";
 import "../../styles/home.scss";
-import "../../styles/papers.scss";
+import "../../styles/post.scss";
 import Head from "next/head";
 import ReactFullpage from "@fullpage/react-fullpage";
 import dynamic from "next/dynamic";
 
 const ParticlesBg = dynamic(() => import("particles-bg"), { ssr: false });
 // import ParticlesBg from "particles-bg";
-const Giver = (props) => {
+const Receiver = (props) => {
   const { rollings, name, password, id } = props;
   // console.log(rollings);
   console.log("name:", name);
@@ -74,7 +75,7 @@ const Giver = (props) => {
                 {rollings.map((object) => {
                   return (
                     <div className="slide">
-                      <Paper
+                      <Post
                         key={object._id}
                         name={name}
                         content={object.content}
@@ -94,7 +95,7 @@ const Giver = (props) => {
   );
 };
 
-Giver.getInitialProps = async (context) => {
+Receiver.getInitialProps = async (context) => {
   // const name = context.query.giver;
   // const password = context.asPath.split("?")[1];
   // const id = context.asPath.split("%3f")[2];
@@ -114,4 +115,4 @@ Giver.getInitialProps = async (context) => {
   };
 };
 
-export default Giver;
+export default Receiver;
