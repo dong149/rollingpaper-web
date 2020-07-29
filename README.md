@@ -12,9 +12,9 @@
 
 ## Dev stack
 
-- React
-- Nextjs
-- Material UI
+- React.js with JavaScript
+- SSL Framework로 Next.js 사용
+- UI Framework로 material-ui 사용
 
 ## Deploy
 
