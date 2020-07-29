@@ -19,3 +19,9 @@
 ## Deploy
 
 - vercel
+
+## Build
+
+```
+yarn dev
+```
