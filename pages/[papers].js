@@ -173,18 +173,7 @@ const Papers = (props) => {
             <ReactFullpage.Wrapper>
               <div className="section">
                 <div className="layout">
-                  <a href="https://rollingpaper.site">
-                    <img
-                      src="/r.png"
-                      alt="롤링페이퍼 파비콘"
-                      className="rolling-home-btn"
-                    />
-                  </a>
-                  <div className="question-text">
-                    {name}님
-                    <br />
-                    롤링페이퍼
-                  </div>
+                  <div className="question-text">to. {name}님</div>
                   <br />
                   <div className="question-text">현재까지 {count}명 작성</div>
                   <div
