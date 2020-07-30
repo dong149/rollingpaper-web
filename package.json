@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@fullpage/react-fullpage": "0.1.17",
+    "@material-ui/core": "^4.11.0",
     "@zeit/next-sass": "1.0.1",
     "axios": "0.19.2",
     "next": "9.4.4",
@@ -26,5 +27,13 @@
     "dev": "next",
     "build": "next build",
     "start": "next start"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.5",
+    "prettier": "2.0.5"
   }
 }
