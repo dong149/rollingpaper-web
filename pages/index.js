@@ -56,7 +56,7 @@ const Index = () => {
                   <img
                     className={img1Load ? `lefthanders` : `lefthanders-unload`}
                     ref={image1}
-                    src="/lefthanders.jpeg"
+                    src="/images/lefthanders.jpeg"
                     alt="왼손잡이들 로고"
                     onLoad={() => {
                       setImg1Load(true);
@@ -65,7 +65,7 @@ const Index = () => {
 
                   <img
                     className={img2Load ? `logo` : `logo-unload`}
-                    src="/pen.jpeg"
+                    src="/images/pen.jpeg"
                     ref={image2}
                     alt="롤링페이퍼 메인"
                     onLoad={() => {
@@ -76,7 +76,7 @@ const Index = () => {
                     className={img3Load ? `logo` : `logo-unload`}
                     // className="logo"
                     ref={image3}
-                    src="/rolling.jpeg"
+                    src="/images/rolling.jpeg"
                     alt="롤링페이퍼 로고"
                     onLoad={() => {
                       setImg3Load(true);
