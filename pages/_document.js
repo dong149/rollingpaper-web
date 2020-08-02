@@ -1,4 +1,6 @@
 import Document, { Head, Main, NextScript } from "next/document";
+import { ServerStyleSheets } from '@material-ui/styles';
+import flush from 'styled-jsx/server';
 
 export default class RootDocument extends Document {
   render() {
@@ -117,7 +119,7 @@ export default class RootDocument extends Document {
             type="text/javascript"
             src="https://developers.kakao.com/sdk/js/kakao.js"
           ></script> */}
-          <script type="text/javascript" src="/static/kakao.js"></script>
+          <script type="text/javascript" src="/public/kakao.js"></script>
         </Head>
         <body>
           <Main />
@@ -127,3 +129,20 @@ export default class RootDocument extends Document {
     );
   }
 }
+
+RootDocument.getInitialProps = async (ctx) => {
+  const sheets = new ServerStyleSheets();
+  const originalRenderPage = ctx.renderPage;
+
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+    });
+
+  const initialProps = await Document.getInitialProps(ctx);
+
+  return {
+    ...initialProps,
+    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
+  };
+};
