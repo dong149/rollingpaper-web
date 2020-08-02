@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Typography from '@material-ui/core/Typography';
-import Cards from "../components/Cards"
 import Buttons from '../components/Buttons';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +18,6 @@ const Guide = () => {
 	const classes = useStyles();
   return (
 		<>
-		<Cards/>
 			<Typography variant="h3" gutterBottom>
 				Common Guide
 			</Typography>
