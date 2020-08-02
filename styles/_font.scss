@@ -5,29 +5,29 @@
 // 나눔 펜 스크립트
 @font-face {
   font-family: "Nanum Pen Script", cursive;
-  src: url("/fonts/NanumPenScript-Regular.ttf");
+  src: url("/public/fonts/NanumPenScript-Regular.ttf");
 }
 
 // 나눔 스퀘어 라운드 맥용
 @font-face {
   font-family: "NanumSquareRound";
-  src: url("/fonts/NanumSquareRoundR.ttf");
+  src: url("/public/fonts/NanumSquareRoundR.ttf");
   font-weight: normal;
 }
 @font-face {
   font-family: "NanumSquareRound";
-  src: url("/fonts/NanumSquareRoundL.ttf");
+  src: url("/public/fonts/NanumSquareRoundL.ttf");
   font-weight: lighter;
 }
 @font-face {
   font-family: "NanumSquareRound";
-  src: url("/fonts/NanumSquareRoundB.ttf");
+  src: url("/public/fonts/NanumSquareRoundB.ttf");
   font-weight: bold;
 }
 // 나눔 브러쉬
 @font-face {
   font-family: "NanumBrush";
-  src: url("/fonts/NanumBrush.ttf");
+  src: url("/public/fonts/NanumBrush.ttf");
 }
 // $black-han-sans: "Black Han Sans", sans-serif;
 // $spoqa-han-sans: "Spoqa Han Sans", "Spoqa Han Sans JP", "Sans-serif";
