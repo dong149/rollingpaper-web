@@ -9,6 +9,8 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import AutosizeInput from 'react-input-autosize';
 import { isEmpty } from '../functions';
 import rollingService from '../services/rollingService';
+import CountUp from 'react-countup';
+import VisibilitySensor from 'react-visibility-sensor';
 const useStyles = makeStyles({
   main: {
     width: '100%',
@@ -37,7 +39,7 @@ const Index = () => {
         .then(async (res) => {
           console.log(res);
           if (!isEmpty(res)) {
-            alert('이미존재');
+            // alert('이미존재');
             setError(1);
             return;
           }
@@ -48,7 +50,7 @@ const Index = () => {
               password: password,
             })
             .then((res) => {
-              alert('성공');
+              // alert('성공');
               setError(2);
             });
         });
@@ -96,9 +98,23 @@ const Index = () => {
                   <div className={classes.main}>
                     <span>지금까지</span>
                     <br />
-                    <span>3243명이 작성하고</span>
+                    <CountUp end={3243} redraw={true}>
+                      {({ countUpRef, start }) => (
+                        <VisibilitySensor onChange={start} delayedCall>
+                          <span ref={countUpRef} />
+                        </VisibilitySensor>
+                      )}
+                    </CountUp>
+                    <span>명이 작성하고</span>
                     <br />
-                    <span>132명이 축하를</span>
+                    <CountUp end={132} redraw={true}>
+                      {({ countUpRef, start }) => (
+                        <VisibilitySensor onChange={start} delayedCall>
+                          <span ref={countUpRef} />
+                        </VisibilitySensor>
+                      )}
+                    </CountUp>
+                    <span>명이 축하를</span>
                     <br />
                     <span>받았어요!</span>
                   </div>
@@ -159,13 +175,19 @@ const Index = () => {
                     <span>이에요.</span>
                   </div>
                   {!isEmpty(name) && !isEmpty(password) ? (
-                    <Buttons
-                      content="생성하기"
-                      full={true}
-                      onClick={() => {
-                        onSubmit();
-                      }}
-                    />
+                    <Link
+                      href={`/sender/[main]`}
+                      // p/[receiver]?name=${name}&pw=${password}&id=${id}
+                      as={`/sender/main?name=${name}&num=${password}`}
+                    >
+                      <Buttons
+                        content="생성하기"
+                        full={true}
+                        onClick={() => {
+                          onSubmit();
+                        }}
+                      />
+                    </Link>
                   ) : (
                     <Buttons content="모두 작성해주세요" full={true} />
                   )}

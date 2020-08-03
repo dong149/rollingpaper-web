@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, NoSsr } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   btn: {
@@ -33,16 +33,18 @@ const Buttons = (props) => {
   const classes = useStyles();
   const { content, light, full, onClick } = props;
   return (
-    <Button
-      variant="contained"
-      fullWidth={full ? true : false}
-      className={
-        classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark)
-      }
-      onClick={onClick}
-    >
-      {content}
-    </Button>
+    <NoSsr>
+      <Button
+        variant="contained"
+        fullWidth={full ? true : false}
+        className={
+          classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark)
+        }
+        onClick={onClick}
+      >
+        {content}
+      </Button>
+    </NoSsr>
   );
 };
 
