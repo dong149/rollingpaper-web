@@ -7,6 +7,8 @@ import Layouts from '../components/Layouts';
 import { makeStyles } from '@material-ui/core';
 import ReactFullpage from '@fullpage/react-fullpage';
 import AutosizeInput from 'react-input-autosize';
+import { isEmpty } from '../functions';
+import rollingService from '../services/rollingService';
 const useStyles = makeStyles({
   main: {
     width: '310px',
@@ -25,6 +27,36 @@ const Index = () => {
   const classes = useStyles();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const onSubmit = async () => {
+    console.log(name);
+    console.log(password);
+    let temp = {};
+    try {
+      await rollingService
+        .getRollingByName(name, password)
+        .then(async (res) => {
+          console.log(res);
+          if (!isEmpty(res)) {
+            alert('이미존재');
+            setError(1);
+            return;
+          }
+          await rollingService
+            .postRolling({
+              name: name,
+              color: '#f64c71',
+              password: password,
+            })
+            .then((res) => {
+              alert('성공');
+              setError(2);
+            });
+        });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+  };
   return (
     <div>
       <Head>
@@ -42,8 +74,6 @@ const Index = () => {
       <ReactFullpage
         controlArrows={false}
         render={({ state, fullpageApi }) => {
-          console.log(fullpageApi);
-
           return (
             <ReactFullpage.Wrapper>
               <div className="section">
@@ -121,31 +151,29 @@ const Index = () => {
                       }}
                       maxLength="10"
                       value={password}
-                      placeholder="비밀번호"
+                      placeholder="****"
                       onChange={(e) => {
                         setPassword(e.target.value);
                       }}
                     />
                     <span>이에요.</span>
                   </div>
-                  <Buttons content="다음" full={true} />
+                  {!isEmpty(name) && !isEmpty(password) ? (
+                    <Buttons
+                      content="생성하기"
+                      full={true}
+                      onClick={() => {
+                        console.log('dddd');
+                        onSubmit();
+                      }}
+                    />
+                  ) : (
+                    <Buttons content="모두 작성해주세요" full={true} />
+                  )}
                 </Layouts>
               </div>
             </ReactFullpage.Wrapper>
           );
-          // <Layouts>
-          //   <div className={classes.main}>
-          //     <span>롤링페이퍼로</span>
-          //     <br />
-          //     <span>마음을 선물하세요.</span>
-          //   </div>
-          //   <img
-          //     className={classes.rolling}
-          //     src="/images/pen.jpeg"
-          //     alt="롤링페이퍼 메인 이미지"
-          //   />
-          //   <Buttons content="롤링페이퍼 시작하기" full={true} />
-          // </Layouts>
         }}
       />
     </div>
