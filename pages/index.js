@@ -11,14 +11,14 @@ import { isEmpty } from '../functions';
 import rollingService from '../services/rollingService';
 const useStyles = makeStyles({
   main: {
-    width: '310px',
+    width: '100%',
     textAlign: 'left',
     fontSize: '32px',
     fontWeight: 'bold',
     lineHeight: '46px',
   },
   rolling: {
-    maxWidth: '310px',
+    width: '100%',
     marginTop: '48px',
     marginBottom: '87px',
   },
@@ -163,7 +163,6 @@ const Index = () => {
                       content="생성하기"
                       full={true}
                       onClick={() => {
-                        console.log('dddd');
                         onSubmit();
                       }}
                     />
