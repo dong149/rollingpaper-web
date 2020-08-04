@@ -37,6 +37,7 @@ const Buttons = (props) => {
 			variant="contained"
 			fullWidth={full ? true : false}
 			className={classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark)}
+			onClick={props.onClick}
 		>
 			{content}
 		</Button>
