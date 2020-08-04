@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Layouts from '../../../components/Layouts';
 import Buttons from '../../../components/Buttons';
-
+import { makeStyles } from '@material-ui/core';
+const useStyles = makeStyles({
+  main: {
+    width: '100%',
+    textAlign: 'left',
+    fontSize: '32px',
+    fontWeight: 'bold',
+    lineHeight: '46px',
+  },
+  rolling: {
+    width: '100%',
+    marginTop: '48px',
+    marginBottom: '87px',
+  },
+});
 const Share = (props) => {
+  const classes = useStyles();
   const { name, num } = props;
   useEffect(() => {
     if (!window.Kakao.isInitialized()) {
@@ -80,10 +95,20 @@ const Share = (props) => {
   });
   return (
     <Layouts>
-      공유페이지입니다.
-      <a id="kakao-link-btn" className="share-btn">
-        <Buttons content="카카오톡으로 작성페이지 공유" full={true} />
+      <div className={classes.main}>
+        <span>누구에게</span>
+        <br />
+        <span>공유하세요?</span>
+      </div>
+      <img
+        className={classes.rolling}
+        src="/images/pen.jpeg"
+        alt="롤링페이퍼 메인 이미지"
+      />
+      <a id="kakao-link-btn" style={{ width: '100%', marginBottom: '16px' }}>
+        <Buttons content="준비하는 친구들에게 공유" full={true} />
       </a>
+      <Buttons content="주인공에게 공유" full={true} light={true} />
     </Layouts>
   );
 };

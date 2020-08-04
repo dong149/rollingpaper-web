@@ -90,12 +90,28 @@ const Index = () => {
                     src="/images/pen.jpeg"
                     alt="롤링페이퍼 메인 이미지"
                   />
-                  <Buttons content="롤링페이퍼 시작하기" full={true} />
+                  <Buttons
+                    content="롤링페이퍼 시작하기"
+                    full={true}
+                    onClick={() => {
+                      fullpageApi.moveSectionDown();
+                      fullpageApi.moveSectionDown();
+                    }}
+                  />
+                  <br />
+                  <Buttons
+                    content="내 롤링페이퍼 찾기"
+                    full={true}
+                    light={true}
+                  />
                 </Layouts>
               </div>
               <div className="section">
                 <Layouts>
-                  <div className={classes.main}>
+                  <div
+                    className={classes.main}
+                    style={{ marginBottom: '16px' }}
+                  >
                     <span>지금까지</span>
                     <br />
                     <CountUp end={3243} redraw={true}>
@@ -118,12 +134,21 @@ const Index = () => {
                     <br />
                     <span>받았어요!</span>
                   </div>
-                  <Buttons content="다음" full={true} />
+                  <Buttons
+                    content="다음"
+                    full={true}
+                    onClick={() => {
+                      fullpageApi.moveSectionDown();
+                    }}
+                  />
                 </Layouts>
               </div>
               <div className="section">
                 <Layouts>
-                  <div className={classes.main}>
+                  <div
+                    className={classes.main}
+                    style={{ marginBottom: '16px' }}
+                  >
                     <span>받을 사람은</span>
                     <AutosizeInput
                       inputStyle={{
