@@ -11,9 +11,9 @@ const Main = (props) => {
     <Layouts>
       준비자 페이지 메인 페이지입니다.
       <Link
-        href={`/sender/[share]`}
+        href={`/sender/share/[main]`}
         // p/[receiver]?name=${name}&pw=${password}&id=${id}
-        as={`/sender/share?name=${name}&num=${num}`}
+        as={`/sender/share/main/?name=${name}&num=${num}`}
       >
         <Buttons content="공유하기" full={true} />
       </Link>
