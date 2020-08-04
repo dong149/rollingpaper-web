@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Layouts from '../../components/Layouts';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     flexDirection: 'column',
     background: '#FFF',
-  },
+  }, // TODO: 나중에 상황 보고 공통화 및 일괄 삭제
   card: {
     width: '317px',
     height: '426px',
@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   headerTitle: {
     fontSize: '26px',
   },
+  slider: {
+    alignSelf: 'normal',
+  },
   sender: {
     marginTop: '27px',
     textAlign: 'right',
@@ -57,8 +60,8 @@ const Detail = (props) => {
   const classes = useStyles();
   const router = useRouter();
   const customeSlider = useRef();
-  const currentIndex = router.query.index ?? 1;
-  const [sliderIndex, setSliderIndex] = useState(currentIndex);
+  const currentIndex = Number(router.query.index ?? 0);
+  const [sliderIndex, setSliderIndex] = useState(currentIndex + 1);
   const settings = {
     className: 'center',
     centerMode: true,
@@ -89,7 +92,7 @@ const Detail = (props) => {
         </div>
         <button className={classes.headerIcon}>다운받기</button>
       </header>
-      <Slider {...settings} ref={customeSlider}>
+      <Slider {...settings} ref={customeSlider} className={classes.slider}>
         {cardList.map((value, i) => (
           <div className={classes.card} key={i}>
             {value} {i}
