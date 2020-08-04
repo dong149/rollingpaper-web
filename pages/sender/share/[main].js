@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Layouts from '../../components/Layouts';
-import Buttons from '../../components/Buttons';
+import Layouts from '../../../components/Layouts';
+import Buttons from '../../../components/Buttons';
 
 const Share = (props) => {
   const { name, num } = props;
