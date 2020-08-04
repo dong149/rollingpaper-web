@@ -1,7 +1,8 @@
 import React from 'react';
+import Layouts from '../../components/Layouts';
 
 const EditorFont = () => {
-  return <div></div>;
+  return <Layouts></Layouts>;
 };
 
 export default EditorFont;

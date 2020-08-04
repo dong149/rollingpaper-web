@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Layouts from '../../components/Layouts';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Buttons from '../../components/Buttons';
 import Slider from 'react-slick';
@@ -81,7 +81,7 @@ const Detail = (props) => {
     customeSlider.current.slickPrev();
   };
   return (
-    <Container component="main" maxWidth="xs" className={classes.root}>
+    <Layouts className={classes.root}>
       <header className={classes.header}>
         <a className={classes.headerIcon}>뒤로가기</a>
         <div className={classes.headerTitle}>
@@ -109,7 +109,7 @@ const Detail = (props) => {
           </Grid>
         </Grid>
       </div>
-    </Container>
+    </Layouts>
   );
 };
 

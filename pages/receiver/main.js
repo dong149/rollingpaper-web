@@ -1,7 +1,7 @@
 import React from 'react';
+import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
-import Container from '@material-ui/core/Container';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 
@@ -46,7 +46,7 @@ const Main = () => {
   const classes = useStyles();
   const router = useRouter();
   return (
-    <Container component="main" maxWidth="xs" className={classes.root}>
+    <Layouts className={classes.root}>
       <div className={classes.header}>
         <div>
           <strong className={classes.title}>to. 류동훈님</strong>
@@ -63,7 +63,7 @@ const Main = () => {
       <div className={classes.boxWrapper}>
         <Buttons content="이미지 다운받기" full />
       </div>
-    </Container>
+    </Layouts>
   );
 };
 

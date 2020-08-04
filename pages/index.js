@@ -1,30 +1,64 @@
 // 스플래쉬 뷰
-import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
-import Paper from "../components/Post";
-import "../styles/home.scss";
-import "../styles/post.scss";
-import Head from "next/head";
-import ReactFullpage from "@fullpage/react-fullpage";
-import Start from "./start";
-import CountUp from "react-countup";
-import VisibilitySensor from "react-visibility-sensor";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
+import Buttons from '../components/Buttons';
+import Layouts from '../components/Layouts';
+import { makeStyles } from '@material-ui/core';
+import ReactFullpage from '@fullpage/react-fullpage';
+import AutosizeInput from 'react-input-autosize';
+import { isEmpty } from '../functions';
+import rollingService from '../services/rollingService';
+import CountUp from 'react-countup';
+import VisibilitySensor from 'react-visibility-sensor';
+const useStyles = makeStyles({
+  main: {
+    width: '100%',
+    textAlign: 'left',
+    fontSize: '32px',
+    fontWeight: 'bold',
+    lineHeight: '46px',
+  },
+  rolling: {
+    width: '100%',
+    marginTop: '48px',
+    marginBottom: '87px',
+  },
+});
 const Index = () => {
-  const [img1Load, setImg1Load] = useState(false);
-  const [img2Load, setImg2Load] = useState(false);
-  const [img3Load, setImg3Load] = useState(false);
-  const image1 = useRef();
-  const image2 = useRef();
-  const image3 = useRef();
-
-  useEffect(() => {
-    if (image1.current.complete) setImg1Load(true);
-    if (image2.current.complete) setImg2Load(true);
-    if (image3.current.complete) setImg3Load(true);
-  }, []);
-  // const afterLoad = (origin, destination, direction) => {
-  //   console.log("afterLoad", { origin, destination, direction });
-  // };
+  const classes = useStyles();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const onSubmit = async () => {
+    console.log(name);
+    console.log(password);
+    let temp = {};
+    try {
+      await rollingService
+        .getRollingByName(name, password)
+        .then(async (res) => {
+          console.log(res);
+          if (!isEmpty(res)) {
+            // alert('이미존재');
+            setError(1);
+            return;
+          }
+          await rollingService
+            .postRolling({
+              name: name,
+              color: '#f64c71',
+              password: password,
+            })
+            .then((res) => {
+              // alert('성공');
+              setError(2);
+            });
+        });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+  };
   return (
     <div>
       <Head>
@@ -40,61 +74,45 @@ const Index = () => {
         />
       </Head>
       <ReactFullpage
-        // anchors={["main", "intro", "input1", "input2", "input3", "finish"]}
-        // normalScrollElements="#input1 .layout"
-        v2compatible={true}
-        // interlockedSlides={["intro", "input1"]}
-        // scrollBar={true}
-        // navigation={true}
+        controlArrows={false}
         render={({ state, fullpageApi }) => {
-          console.log(fullpageApi);
-
           return (
             <ReactFullpage.Wrapper>
               <div className="section">
-                <div className="layout">
-                  <img
-                    className={img1Load ? `lefthanders` : `lefthanders-unload`}
-                    ref={image1}
-                    src="/images/lefthanders.jpeg"
-                    alt="왼손잡이들 로고"
-                    onLoad={() => {
-                      setImg1Load(true);
-                    }}
-                  />
-
-                  <img
-                    className={img2Load ? `logo` : `logo-unload`}
-                    src="/images/pen.jpeg"
-                    ref={image2}
-                    alt="롤링페이퍼 메인"
-                    onLoad={() => {
-                      setImg2Load(true);
-                    }}
-                  />
-                  <img
-                    className={img3Load ? `logo` : `logo-unload`}
-                    // className="logo"
-                    ref={image3}
-                    src="/images/rolling.jpeg"
-                    alt="롤링페이퍼 로고"
-                    onLoad={() => {
-                      setImg3Load(true);
-                    }}
-                  />
-
-                  <div
-                    className="start-btn"
-                    // onClick={() => fullpageApi.moveSectionDown()}
-                  >
-                    <span>▼</span>
+                <Layouts>
+                  <div className={classes.main}>
+                    <span>롤링페이퍼로</span>
+                    <br />
+                    <span>마음을 선물하세요.</span>
                   </div>
-                </div>
+                  <img
+                    className={classes.rolling}
+                    src="/images/pen.jpeg"
+                    alt="롤링페이퍼 메인 이미지"
+                  />
+                  <Buttons
+                    content="롤링페이퍼 시작하기"
+                    full={true}
+                    onClick={() => {
+                      fullpageApi.moveSectionDown();
+                      fullpageApi.moveSectionDown();
+                    }}
+                  />
+                  <br />
+                  <Buttons
+                    content="내 롤링페이퍼 찾기"
+                    full={true}
+                    light={true}
+                  />
+                </Layouts>
               </div>
               <div className="section">
-                <div className="layout">
-                  <div className="question-text">
-                    지금까지
+                <Layouts>
+                  <div
+                    className={classes.main}
+                    style={{ marginBottom: '16px' }}
+                  >
+                    <span>지금까지</span>
                     <br />
                     <CountUp end={3243} redraw={true}>
                       {({ countUpRef, start }) => (
@@ -103,7 +121,7 @@ const Index = () => {
                         </VisibilitySensor>
                       )}
                     </CountUp>
-                    명이 작성하고
+                    <span>명이 작성하고</span>
                     <br />
                     <CountUp end={132} redraw={true}>
                       {({ countUpRef, start }) => (
@@ -112,17 +130,94 @@ const Index = () => {
                         </VisibilitySensor>
                       )}
                     </CountUp>
-                    명이 축하를
+                    <span>명이 축하를</span>
                     <br />
-                    받았어요!
+                    <span>받았어요!</span>
                   </div>
-
-                  <div className="start-btn">
-                    <span>▼</span>
-                  </div>
-                </div>
+                  <Buttons
+                    content="다음"
+                    full={true}
+                    onClick={() => {
+                      fullpageApi.moveSectionDown();
+                    }}
+                  />
+                </Layouts>
               </div>
-              <Start fullpageApi={fullpageApi} />
+              <div className="section">
+                <Layouts>
+                  <div
+                    className={classes.main}
+                    style={{ marginBottom: '16px' }}
+                  >
+                    <span>받을 사람은</span>
+                    <AutosizeInput
+                      inputStyle={{
+                        border: 0,
+                        fontSize: 32,
+                        outline: 'none',
+                        display: 'inline-block',
+                        fontWeight: 'lighter',
+                        padding: '0',
+                      }}
+                      style={{
+                        borderBottom: '1px solid #333',
+                        display: 'inline-block',
+                      }}
+                      maxLength="10"
+                      value={name}
+                      placeholder="이름 혹은 애칭"
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                    />
+                    <br />
+                    <span>이에요.</span>
+                    <br />
+                    <span>우리만의 신호는</span>
+                    <br />
+                    <AutosizeInput
+                      type="password"
+                      inputStyle={{
+                        border: 0,
+                        fontSize: '32px',
+                        outline: 'none',
+                        display: 'inline-block',
+                        padding: '0',
+                        fontWeight: 'lighter',
+                      }}
+                      style={{
+                        borderBottom: '1px solid #333',
+                        // color: "#D5D5D5",
+                        display: 'inline-block',
+                      }}
+                      maxLength="10"
+                      value={password}
+                      placeholder="****"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                    <span>이에요.</span>
+                  </div>
+                  {!isEmpty(name) && !isEmpty(password) ? (
+                    <Link
+                      href={`/sender/[main]`}
+                      // p/[receiver]?name=${name}&pw=${password}&id=${id}
+                      as={`/sender/main?name=${name}&num=${password}`}
+                    >
+                      <Buttons
+                        content="생성하기"
+                        full={true}
+                        onClick={() => {
+                          onSubmit();
+                        }}
+                      />
+                    </Link>
+                  ) : (
+                    <Buttons content="모두 작성해주세요" full={true} />
+                  )}
+                </Layouts>
+              </div>
             </ReactFullpage.Wrapper>
           );
         }}

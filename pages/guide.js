@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Buttons from '../components/Buttons';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-	table: {
-		width: '100%',
-		'& th, & td': {
-			textAlign: 'left',
-			borderBottom: '1px solid #ccc',
-		}
-	},
-}))
+  table: {
+    width: '100%',
+    '& th, & td': {
+      textAlign: 'left',
+      borderBottom: '1px solid #ccc',
+    },
+  },
+}));
 
 const Guide = () => {
-	const classes = useStyles();
+  const classes = useStyles();
   return (
 		<>
 			<Typography variant="h3" gutterBottom>
