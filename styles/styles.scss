@@ -3,3 +3,13 @@
 *, body {
 	font-family: $nanum-square-round, 'Helvetica', 'Arial', sans-serif;
 }
+
+// TODO: 임시로 두는 중. 차후 옮길 예정
+.slick-slide {
+	margin-top: 35px;
+	padding: 0 10px;
+	transition: all .5s ease-in-out;
+}
+.slick-center {
+  margin-top: 0;
+}
