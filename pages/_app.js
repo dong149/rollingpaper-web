@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import '../styles/styles.scss'
+import '../styles/styles.scss';
 
 export default class RootApp extends App {
   constructor(props) {
@@ -39,9 +39,9 @@ export default class RootApp extends App {
       <>
         <ThemeProvider theme={theme}>
           <CssBaseline>
-            <Container maxWidth="sm">
-              <Component {...pageProps} />
-            </Container>
+            {/* <Container maxWidth="sm"> */}
+            <Component {...pageProps} />
+            {/* </Container> */}
           </CssBaseline>
         </ThemeProvider>
       </>
