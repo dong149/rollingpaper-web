@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import '../styles/styles.scss';
+import Head from 'next/head';
 
 export default class RootApp extends App {
   constructor(props) {
@@ -36,7 +37,19 @@ export default class RootApp extends App {
       },
     });
     return (
-      <>
+      <React.Fragment>
+        <Head>
+          <title>롤링 페이퍼 :: 특별한 온라인 선물</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1"
+          />
+          <meta name="description" content="롤링 페이퍼 쉽게 만들기" />
+          <meta
+            name="keywords"
+            content="롤링페이퍼,선물,생일,여자친구,100일,친구"
+          />
+        </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline>
             {/* <Container maxWidth="sm"> */}
@@ -44,7 +57,7 @@ export default class RootApp extends App {
             {/* </Container> */}
           </CssBaseline>
         </ThemeProvider>
-      </>
+      </React.Fragment>
     );
   }
 }

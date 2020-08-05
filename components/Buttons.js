@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, NoSsr } from '@material-ui/core';
 
@@ -29,23 +29,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Buttons = (props) => {
+const ButtonsLink = forwardRef(function ButtonsLink(props, ref) {
   const classes = useStyles();
   const { content, light, full, onClick } = props;
   return (
-    <NoSsr>
-      <Button
-        variant="contained"
-        fullWidth={full ? true : false}
-        className={
-          classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark)
-        }
-        onClick={onClick}
-      >
-        {content}
-      </Button>
-    </NoSsr>
+    // <NoSsr>
+    <Button
+      variant="contained"
+      fullWidth={full ? true : false}
+      className={
+        classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark)
+      }
+      onClick={onClick}
+    >
+      {content}
+    </Button>
+    // </NoSsr>
   );
-};
+});
 
-export default Buttons;
+export default ButtonsLink;
