@@ -29,23 +29,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ButtonsLink = forwardRef(function ButtonsLink(props, ref) {
+const Buttons = forwardRef(function Buttons(props, ref) {
   const classes = useStyles();
   const { content, light, full, onClick } = props;
   return (
-    // <NoSsr>
-    <Button
-      variant="contained"
-      fullWidth={full ? true : false}
-      className={
-        classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark)
-      }
-      onClick={onClick}
-    >
-      {content}
-    </Button>
-    // </NoSsr>
+    <NoSsr>
+      <Button
+        variant="contained"
+        fullWidth={full ? true : false}
+        className={
+          classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark)
+        }
+        onClick={onClick}
+      >
+        {content}
+      </Button>
+    </NoSsr>
   );
 });
 
-export default ButtonsLink;
+export default Buttons;

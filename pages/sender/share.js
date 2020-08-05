@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Layouts from '../../../components/Layouts';
-import Buttons from '../../../components/Buttons';
+import Layouts from '../../components/Layouts';
+import Buttons from '../../components/Buttons';
 import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles({
   main: {
