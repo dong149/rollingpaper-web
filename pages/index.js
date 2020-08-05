@@ -30,8 +30,8 @@ const Index = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const onSubmit = async () => {
-    console.log(name);
-    console.log(password);
+    console.log('index의 name : ', name);
+    console.log('index의 password : ', password);
     let temp = {};
     try {
       await rollingService
@@ -44,11 +44,7 @@ const Index = () => {
             return;
           }
           await rollingService
-            .postRolling({
-              name: name,
-              color: '#f64c71',
-              password: password,
-            })
+            .postRolling(name, password)
             .then((res) => {
               // alert('성공');
               setError(2);

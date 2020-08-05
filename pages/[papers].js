@@ -36,7 +36,7 @@ const Papers = (props) => {
       try {
         console.log(id);
         await rollingService.getRollingContent(id).then((res) => {
-          console.log(res);
+          console.log('테스트으으으으으 : ', res);
           setContents(res);
           if (!isEmpty(res)) {
             setCount(res.length);
@@ -130,13 +130,16 @@ const Papers = (props) => {
         return;
       }
       await rollingService
+        // .postRollingContent({
+        //   name: name,
+        //   content: content,
+        //   author: author,
+        //   password: password,
+        //   rolling_id: id,
+        //   color: color,
+        // })
         .postRollingContent({
-          name: name,
-          content: content,
-          author: author,
-          password: password,
-          rolling_id: id,
-          color: color,
+          image
         })
         .then((res) => {
           alert("성공적으로 등록되었습니다.");

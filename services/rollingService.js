@@ -1,14 +1,20 @@
 import axios from "axios";
 
-let BASE_URL = "https://donghoon.tk";
+// let BASE_URL = "https://donghoon.tk";
+let BASE_URL = "http://52.79.185.132:3000";
 
 const baseAPI = axios.create({
   baseURL: BASE_URL,
 });
 
 const rollingService = {
-  getRolling: async () => {
-    let res = await baseAPI.get(`/api/rolling`);
+  // getRolling: async () => {
+  //   let res = await baseAPI.get(`/api/rolling`);
+  //   return res.data || [];
+  // },
+  getRolling: async (rolling_id) => {
+    let res = await baseAPI.get(`/api/v1/rolling/${rolling_id}`);
+    console.log('getRolling : ', res.data);
     return res.data || [];
   },
   getRollingContent: async (rolling_id) => {
@@ -17,21 +23,45 @@ const rollingService = {
     return res.data || [];
   },
 
+  // getRollingByName: async (name, password) => {
+  //   // const name = "ddd";
+  //   // const password = "dd";
+  //   console.log(name, password);
+  //   let res = await baseAPI.get(
+  //     `/api/rolling?name=${encodeURI(name)}&password=${encodeURI(password)}`
+  //   );
+  //   return res.data || [];
+  // },
   getRollingByName: async (name, password) => {
-    // const name = "ddd";
-    // const password = "dd";
     console.log(name, password);
     let res = await baseAPI.get(
-      `/api/rolling?name=${encodeURI(name)}&password=${encodeURI(password)}`
+      `/api/v1/rolling?name=${encodeURI(name)}&password=${encodeURI(password)}`
     );
     return res.data || [];
   },
-  postRolling: async (object) => {
-    console.log("ddd");
+
+  // postRolling: async (object) => {
+  //   console.log("ddd");
+  //   await baseAPI
+  //     .post(`/api/rolling`, object)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       return 1;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       return 0;
+  //     });
+  // },
+  postRolling: async (receiver, password) => {
+    console.log('postRolling : ', receiver, password)
     await baseAPI
-      .post(`/api/rolling`, object)
+      .post(`/api/v1/rolling`, {
+        receiver,
+        password
+      })
       .then((res) => {
-        console.log(res.data);
+        console.log('postRolling : ', res.data);
         return 1;
       })
       .catch((err) => {
@@ -39,12 +69,27 @@ const rollingService = {
         return 0;
       });
   },
-  postRollingContent: async (object) => {
-    console.log("ddd");
+
+  // postRollingContent: async (object) => {
+  //   console.log("ddd");
+  //   await baseAPI
+  //     .post(`/api/rollingcontent`, object)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       return 1;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       return 0;
+  //     });
+  // },
+  postRollingContent: async (rolling_id, image) => {
     await baseAPI
-      .post(`/api/rollingcontent`, object)
+      .post(`/api/v1/rolling/${rolling_id}/content`, {
+        image
+      })
       .then((res) => {
-        console.log(res.data);
+        console.log('postRollingContent : ', res.data);
         return 1;
       })
       .catch((err) => {
