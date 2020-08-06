@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-
+// 에디터 페이지입니다.
+import React, { useState, useEffect, useRef } from 'react';
+import { exportComponentAsPNG } from 'react-component-export-image';
 import { makeStyles } from '@material-ui/core';
 
 import Link from 'next/link';
@@ -68,13 +69,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Editor = (props) => {
   const classes = useStyles();
+  const componentRef = useRef();
   const { name, num } = props;
   return (
     <Layouts className={classes.root}>
       <header className={classes.header}>
         <Link
-          href={`/sender/[main]`}
-          as={`/sender/main?name=${name}&num=${num}`}
+          href={{
+            pathname: '/sender/main',
+            query: { name: name, num: num },
+          }}
         >
           <button>
             <a>취소</a>
@@ -82,7 +86,7 @@ const Editor = (props) => {
         </Link>
       </header>
 
-      <div className={classes.textarea}>
+      <div className={classes.textarea} ref={componentRef}>
         <div contentEditable="true"></div>
       </div>
       <div className={classes.from}>
@@ -93,6 +97,9 @@ const Editor = (props) => {
       </div>
       <footer className={classes.footer}>
         <Buttons content="저장" />
+        <button onClick={() => exportComponentAsPNG(componentRef)}>
+          Export As PNG
+        </button>
       </footer>
     </Layouts>
   );
