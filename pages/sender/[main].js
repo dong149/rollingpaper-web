@@ -25,8 +25,9 @@ Main.getInitialProps = async (context) => {
   const name = context.query.name;
   const num = context.query.num;
   const res = await rollingService.getRollingByName(name, num);
+
   return {
-    rolling: res[0],
+    rolling: res.data,
     name: name,
     num: num,
   };

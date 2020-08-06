@@ -35,7 +35,7 @@ const rollingService = {
   getRollingByName: async (name, password) => {
     console.log(name, password);
     let res = await baseAPI.get(
-      `/api/v1/rolling?name=${encodeURI(name)}&password=${encodeURI(password)}`
+      `/api/v1/rolling?receiver=${encodeURI(name)}&password=${encodeURI(password)}`
     );
     return res.data || [];
   },
@@ -61,8 +61,12 @@ const rollingService = {
         password
       })
       .then((res) => {
-        console.log('postRolling : ', res.data);
-        return 1;
+        const { status, message } = res.data; 
+
+        console.log('postRolling : ', message);
+        console.log(status, message);
+
+        return { status, message };
       })
       .catch((err) => {
         console.log(err);

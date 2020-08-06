@@ -35,20 +35,9 @@ const Index = () => {
     let temp = {};
     try {
       await rollingService
-        .getRollingByName(name, password)
+        .postRolling(name, password)
         .then(async (res) => {
           console.log(res);
-          if (!isEmpty(res)) {
-            // alert('이미존재');
-            setError(1);
-            return;
-          }
-          await rollingService
-            .postRolling(name, password)
-            .then((res) => {
-              // alert('성공');
-              setError(2);
-            });
         });
     } catch (err) {
       console.log(err);
