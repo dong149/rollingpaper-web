@@ -5,7 +5,7 @@ import Buttons from '../../components/Buttons';
 import Link from 'next/link';
 const Main = (props) => {
   const { rolling, name, num } = props;
-  console.log(rolling, name, num);
+  console.log('rolling, name, num의 props 값 : ', rolling, name, num);
 
   return (
     <Layouts>

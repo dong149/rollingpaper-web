@@ -30,8 +30,6 @@ const Index = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const onSubmit = async () => {
-    console.log('index의 name : ', name);
-    console.log('index의 password : ', password);
     let temp = {};
     try {
       await rollingService
