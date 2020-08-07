@@ -5,17 +5,26 @@ import Buttons from '../../components/Buttons';
 import Link from 'next/link';
 const Main = (props) => {
   const { rolling, name, num } = props;
-  console.log(rolling, name, num);
+  console.log('rolling, name, num의 props 값 : ', rolling, name, num);
 
   return (
     <Layouts>
       준비자 페이지 메인 페이지입니다.
       <Link
-        href={`/sender/share/[main]`}
-        // p/[receiver]?name=${name}&pw=${password}&id=${id}
-        as={`/sender/share/main/?name=${name}&num=${num}`}
+        href={{
+          pathname: '/sender/share',
+          query: { name: name, num: num },
+        }}
       >
         <Buttons content="공유하기" full={true} />
+      </Link>
+      <Link
+        href={{
+          pathname: '/sender/editor',
+          query: { name: name, num: num },
+        }}
+      >
+        <Buttons content="에디터" full={true} />
       </Link>
     </Layouts>
   );

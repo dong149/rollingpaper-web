@@ -30,8 +30,6 @@ const Index = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const onSubmit = async () => {
-    console.log('index의 name : ', name);
-    console.log('index의 password : ', password);
     let temp = {};
     try {
       await rollingService
@@ -186,10 +184,17 @@ const Index = () => {
                   </div>
                   {!isEmpty(name) && !isEmpty(password) ? (
                     <Link
+                      href={{
+                        pathname: '/sender/main',
+                        query: { name: name, num: password },
+                      }}
+                    >
+                      {/*                   
+                    <Link
                       href={`/sender/[main]`}
                       // p/[receiver]?name=${name}&pw=${password}&id=${id}
                       as={`/sender/main?name=${name}&num=${password}`}
-                    >
+                    > */}
                       <Buttons
                         content="생성하기"
                         full={true}
