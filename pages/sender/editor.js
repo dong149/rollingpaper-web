@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core';
 import Link from 'next/link';
 import Layouts from '../../components/Layouts';
 import Buttons from '../../components/Buttons';
+import Modal from 'react-modal';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -66,11 +68,51 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '20px',
   },
 }));
+const customModalStyles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#666666',
+  },
+  content: {
+    top: '0',
+    left: '0',
+    right: '0',
+    bottom: '0',
+    // marginRight: '-50%',
+    width: '100%',
+    height: '100%',
+    background: '#666666',
+    // transform: 'translate(-50%, -50%)',
+  },
+};
 const Editor = (props) => {
   const classes = useStyles();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { name, num } = props;
+
   return (
     <Layouts className={classes.root}>
+      <Modal
+        isOpen={modalIsOpen}
+        ariaHideApp={false}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={() => setModalIsOpen(false)}
+        style={customModalStyles}
+        contentLabel="Example Modal"
+      >
+        <Layouts className={classes.root}>
+          <button onClick={() => setModalIsOpen(false)}>
+            <a>뒤로</a>
+          </button>
+          <button onClick={() => setModalIsOpen(false)}>
+            <a>완료</a>
+          </button>
+        </Layouts>
+      </Modal>
       <header className={classes.header}>
         <Link
           href={{
@@ -82,6 +124,9 @@ const Editor = (props) => {
             <a>취소</a>
           </button>
         </Link>
+        <button onClick={() => setModalIsOpen(true)}>
+          <a>모달</a>
+        </button>
       </header>
 
       <div className={classes.textarea}>
