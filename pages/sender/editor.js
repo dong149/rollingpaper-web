@@ -7,46 +7,7 @@ import Layouts from '../../components/Layouts';
 import Buttons from '../../components/Buttons';
 import Modal from 'react-modal';
 import dynamic from 'next/dynamic';
-import { saveAs } from 'file-saver';
-// import NanumBrush from '/fonts/NanumBrush.ttf';
-// const Nanum = {
-//   fontFamily: 'NanumBrush',
-//   fontStyle: 'normal',
-//   fontDisplay: 'swap',
-//   fontWeight: 400,
-//   src: `
-//     local('NanumBrush'),
-//     url(${NanumBrush}) format('ttf')
-//   `,
-//   unicodeRange:
-//     'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
-// };
-// import('html2canvas')
-//   .then((html2canvas) => {
-//     console.log(html2canvas);
-//     html2canvas
-//       .default(document.body)
-//       .then((canvas) => document.body.appendChild(canvas));
-//   })
-//   .catch((e) => {
-//     console('load failed');
-//   });
-// const html2canvas = dynamic(() => import('html2canvas'), {
-//   ssr: false,
-// });
-// const html2canvas = dynamic(
-//   () =>
-//     import('html2canvas').then((mod) => {
-//       console.log(mod);
-//       console.log(mod.html2canvas);
-//       return mod.html2canvas;
-//     }),
-//   {
-//     ssr: false,
-//   }
-// );
-// const { html2canvas } = dynamic(import('html2canvas'));
-import ReactDOM from 'react-dom';
+import { exportComponentAsPNG } from '../../functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -132,44 +93,7 @@ const customModalStyles = {
     // transform: 'translate(-50%, -50%)',
   },
 };
-const fileType = {
-  PNG: 'image/png',
-  JPEG: 'image/jpeg',
-  PDF: 'application/pdf',
-};
 
-const exportComponent = (node, fileName, backgroundColor, type) => {
-  const element = ReactDOM.findDOMNode(node.current);
-  import('html2canvas')
-    .then((html2canvas) => {
-      console.log(html2canvas);
-      html2canvas
-        .default(element, {
-          backgroundColor: backgroundColor,
-          // scrollY: -window.scrollY,
-          useCORS: true,
-        })
-        .then((canvas) => saveAs(canvas.toDataURL(type, 1.0), fileName));
-    })
-    .catch((e) => {
-      console('load failed');
-    });
-  // return html2canvas(element, {
-  //   backgroundColor: backgroundColor,
-  //   // scrollY: -window.scrollY,
-  //   useCORS: true,
-  // }).then((canvas) => {
-  //   saveAs(canvas.toDataURL(type, 1.0), fileName);
-  // });
-};
-const exportComponentAsPNG = (
-  node,
-  fileName = 'component.png',
-  backgroundColor = null,
-  type = fileType.PNG
-) => {
-  exportComponent(node, fileName, backgroundColor, type);
-};
 const Editor = (props) => {
   const classes = useStyles();
   const componentRef = useRef();

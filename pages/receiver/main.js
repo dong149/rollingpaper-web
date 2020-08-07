@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../../components/Header';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
-
-const cardList = Array(10).fill('카드'); // 임시 배열
+import { exportComponentAsPNG } from '../../functions';
+const cardList = Array(30).fill('카드'); // 임시 배열
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Main = () => {
   const classes = useStyles();
+  const componentRef = useRef();
   return (
     <Layouts className={classes.root} bgColor="#F7F7F7">
       <Header>
@@ -64,14 +65,17 @@ const Main = () => {
         {/* TODO: 주인공 페이지에서 공유하기 버튼 임시 삭제 */}
         {/* <button className={classes.buttonSmall}>공유하기</button> */}
       </Header>
-      <div className={classes.cardWrapper}>
+      <div className={classes.cardWrapper} ref={componentRef}>
         {cardList.length ? (
           <Cards content={cardList} linked />
         ) : (
           <div>더미</div>
         )}
       </div>
-      <div className={classes.boxWrapper}>
+      <div
+        className={classes.boxWrapper}
+        onClick={() => exportComponentAsPNG(componentRef)}
+      >
         <Buttons content="이미지 다운받기" full />
       </div>
     </Layouts>
