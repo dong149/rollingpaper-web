@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Buttons from '../../components/Buttons';
 import Slider from 'react-slick';
+import Header from '../../components/Header';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -19,10 +20,11 @@ const useStyles = makeStyles((theme) => ({
     background: '#FFF',
   }, // TODO: 나중에 상황 보고 공통화 및 일괄 삭제
   card: {
+    overflow: 'hidden',
     width: '317px',
     height: '426px',
-    background: '#FDFEB8',
-    border: '1px solid #666',
+    background: '#E8E6DC',
+    borderRadius: '13px',
   },
   boxWrapper: {
     position: 'fixed',
@@ -33,17 +35,15 @@ const useStyles = makeStyles((theme) => ({
     transform: 'translate(-50%, 0)',
     boxSizing: 'border-box',
   },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: '43px',
-    marginBottom: '50px',
-  },
-  headerTitle: {
+  title: {
     fontSize: '26px',
   },
+  iconBack: {},
+  iconSave: {},
   slider: {
+    width: 'calc(100% + 32px)',
+    marginTop: '75px',
+    marginLeft: '-16px',
     alignSelf: 'normal',
   },
   sender: {
@@ -66,7 +66,7 @@ const Detail = (props) => {
     className: 'center',
     centerMode: true,
     infinite: true,
-    centerPadding: '60px',
+    centerPadding: '30px',
     slidesToShow: 1,
     speed: 500,
     arrows: false,
@@ -85,13 +85,13 @@ const Detail = (props) => {
   };
   return (
     <Layouts className={classes.root}>
-      <header className={classes.header}>
-        <a className={classes.headerIcon}>뒤로가기</a>
-        <div className={classes.headerTitle}>
+      <Header>
+        <a className={classes.iconBack}>뒤로가기</a>
+        <div className={classes.title}>
           <strong>{sliderIndex}</strong> / {cardList.length}
         </div>
-        <button className={classes.headerIcon}>다운받기</button>
-      </header>
+        <button className={classes.iconSave}>다운받기</button>
+      </Header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>
         {cardList.map((value, i) => (
           <div className={classes.card} key={i}>

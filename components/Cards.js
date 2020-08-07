@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 'calc(100% + 48px)',
-    marginLeft: '-24px',
+    width: 'calc(100% + 32px)',
+    marginLeft: '-16px',
     padding: '25px 0 169px',
     overflow: 'hidden',
     background: '#fff',
@@ -43,17 +43,33 @@ const styledRandom = (i) => {
 
 const Cards = (props) => {
   const classes = useStyles();
-  const { content } = props;
+  const { content, linked } = props;
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
         {content.map((value, i) => (
           <Grid item xs={4} key={i}>
-            <Link href={{ pathname: '/receiver/detail', query: { index: i } }}>
-              <a elevation={0} className={classes.card} style={styledRandom(i)}>
+            {linked ? (
+              <Link
+                href={{ pathname: '/receiver/detail', query: { index: i } }}
+              >
+                <a
+                  elevation={0}
+                  className={classes.card}
+                  style={styledRandom(i)}
+                >
+                  {value} {i}
+                </a>
+              </Link>
+            ) : (
+              <div
+                elevation={0}
+                className={classes.card}
+                style={styledRandom(i)}
+              >
                 {value} {i}
-              </a>
-            </Link>
+              </div>
+            )}
           </Grid>
         ))}
       </Grid>

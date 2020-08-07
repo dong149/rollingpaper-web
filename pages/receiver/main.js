@@ -1,7 +1,7 @@
 import React from 'react';
 import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core/styles';
-import { useRouter } from 'next/router';
+import Header from '../../components/Header';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 
@@ -28,37 +28,48 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginTop: '45px',
+    width: '100%',
+    padding: '0 9px',
     marginBottom: '30px',
   },
   cardWrapper: {
+    marginTop: '14px',
     background: '#FFF',
   },
   title: {
+    margin: '0',
     fontSize: '28px',
+    fontWeight: 'bold',
   },
   subtitle: {
+    marginTop: '10px',
     fontSize: '16px',
+    fontWeight: 'bold',
   },
 }));
 
 const Main = () => {
   const classes = useStyles();
-  const router = useRouter();
   return (
-    <Layouts className={classes.root}>
-      <div className={classes.header}>
+    <Layouts className={classes.root} bgColor="#F7F7F7">
+      <Header>
         <div>
-          <strong className={classes.title}>to. 류동훈님</strong>
-          <br />
-          <span className={classes.subtitle}>
-            총 {cardList.length}명에게 축하를 받았어요!
-          </span>
+          <h2 className={classes.title}>to. 류동훈님</h2>
+          <p className={classes.subtitle}>
+            {cardList.length
+              ? `총 ${cardList.length}명에게 축하를 받았어요!`
+              : `아직 아무도 작성하지 않았어요!`}
+          </p>
         </div>
-        <button>공유하기</button>
-      </div>
+        {/* TODO: 주인공 페이지에서 공유하기 버튼 임시 삭제 */}
+        {/* <button className={classes.buttonSmall}>공유하기</button> */}
+      </Header>
       <div className={classes.cardWrapper}>
-        <Cards content={cardList} />
+        {cardList.length ? (
+          <Cards content={cardList} linked />
+        ) : (
+          <div>더미</div>
+        )}
       </div>
       <div className={classes.boxWrapper}>
         <Buttons content="이미지 다운받기" full />
