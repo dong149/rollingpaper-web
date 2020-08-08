@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 const Main = (props) => {
   const classes = useStyles();
   const { rolling, name, num } = props;
-  console.log(rolling, name, num);
+  console.log('rolling, name, num의 props 값 : ', rolling, name, num);
 
   return (
     <Layouts className={classes.root} bgColor="#F7F7F7">
@@ -110,8 +110,9 @@ Main.getInitialProps = async (context) => {
   const name = context.query.name;
   const num = context.query.num;
   const res = await rollingService.getRollingByName(name, num);
+
   return {
-    rolling: res[0],
+    rolling: res.data,
     name: name,
     num: num,
   };

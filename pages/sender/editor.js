@@ -157,7 +157,7 @@ Editor.getInitialProps = async (context) => {
   console.log(context);
   const name = context.query.name;
   const num = context.query.num;
-  console.log(name, num);
+  console.log('sender/editor.js에서의 name, num : ', name, num);
   return {
     name: name,
     num: num,
