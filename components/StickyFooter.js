@@ -5,6 +5,7 @@ const useStyles = makeStyles({
   root: {
     position: (props) => props.position ?? 'fixed',
     width: 'calc(100vw - 32px)',
+    minWidth: '396px',
     bottom: '16px',
     textAlign: (props) => props.align ?? 'left',
     boxSizing: 'border-box',
