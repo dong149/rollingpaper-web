@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Layouts from './Layouts';
 import Modal from 'react-modal';
@@ -36,7 +36,24 @@ const customModalStyles = {
 
 const FontModal = (props) => {
   const classes = useStyles(props);
-  const { fontModalIsOpen, setFontModalIsOpen } = props;
+  const {
+    fontModalIsOpen,
+    setFontModalIsOpen,
+    text,
+    setText,
+    font,
+    setFont,
+    sort,
+    setSort,
+    color,
+    setColor,
+  } = props;
+  //   const [text, setText] = useState('');
+  //   const [font, setFont] = useState('NanumBrush');
+  //   const [sort, setSort] = useState('center');
+  //   const [color, setColor] = useState('black');
+
+  const [editMode, setEditMode] = useState('text');
   return (
     <Modal
       isOpen={fontModalIsOpen}
@@ -51,6 +68,69 @@ const FontModal = (props) => {
         <button onClick={() => setFontModalIsOpen(false)}>
           <a>완료</a>
         </button>
+        <button onClick={() => setEditMode('text')}>
+          <a>텍스트</a>
+        </button>
+        <button onClick={() => setEditMode('sort')}>
+          <a>정렬</a>
+        </button>
+        <button onClick={() => setEditMode('color')}>
+          <a>색</a>
+        </button>
+        <textarea
+          className={classes.textInput}
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+          style={{
+            fontFamily: `${font}`,
+            fontSize: '25px',
+            // backgroundColor: 'transparent',
+            border: 'none',
+            color: `${color}`,
+            textAlign: `${sort}`,
+          }}
+        />
+        {editMode === 'text' && (
+          <>
+            <button onClick={() => setFont('NanumSquareRound')}>
+              <a>나눔스퀘어라운드</a>
+            </button>
+            <button onClick={() => setFont('NanumBrush')}>
+              <a>나눔브러쉬</a>
+            </button>
+            <button onClick={() => setFontModalIsOpen(false)}>
+              <a>손글씨체</a>
+            </button>
+          </>
+        )}
+        {editMode === 'sort' && (
+          <>
+            <button onClick={() => setSort('left')}>
+              <a>왼쪽</a>
+            </button>
+            <button onClick={() => setSort('center')}>
+              <a>중간</a>
+            </button>
+            <button onClick={() => setSort('right')}>
+              <a>오른쪽</a>
+            </button>
+          </>
+        )}
+        {editMode === 'color' && (
+          <>
+            <button onClick={() => setColor('red')}>
+              <a>빨간색</a>
+            </button>
+            <button onClick={() => setColor('black')}>
+              <a>검은색</a>
+            </button>
+            <button onClick={() => setColor('yellow')}>
+              <a>노란색</a>
+            </button>
+          </>
+        )}
       </Layouts>
     </Modal>
   );
