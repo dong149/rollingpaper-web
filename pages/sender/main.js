@@ -62,17 +62,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Main = (props) => {
   const classes = useStyles();
-  const { rolling, name, num } = props;
-  console.log('rolling, name, num의 props 값 : ', rolling, name, num);
+  const { posts, name, num } = props;
+  console.log('posts, name, num의 props 값 : ', posts, name, num);
 
   return (
     <Layouts className={classes.root} bgColor="#F7F7F7">
       <Header>
         <div>
-          <h2 className={classes.title}>to. 류동훈님</h2>
+          <h2 className={classes.title}>to. {name}님</h2>
           <p className={classes.subtitle}>
-            {cardList.length
-              ? `총 ${cardList.length}명에게 축하를 받았어요!`
+            {posts.length
+              ? `총 ${posts.length}명에게 축하를 받았어요!`
               : `아직 아무도 작성하지 않았어요!`}
           </p>
         </div>
@@ -87,7 +87,7 @@ const Main = (props) => {
       </Header>
       <div className={classes.cardWrapper}>
         {cardList.length ? (
-          <Cards content={cardList} linked={false} />
+          <Cards content={cardList} linked={false}/>
         ) : (
           <div>더미</div>
         )}
@@ -112,7 +112,7 @@ Main.getInitialProps = async (context) => {
   const res = await rollingService.getRollingByName(name, num);
 
   return {
-    rolling: res.data,
+    posts: res.data,
     name: name,
     num: num,
   };
