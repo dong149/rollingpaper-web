@@ -101,6 +101,21 @@ const rollingService = {
         return 0;
       });
   },
+
+  deleteRollingContent: async(rolling_id) => {
+    const response = await baseAPI.delete(`/api/v1/rolling/content/${rolling_id}`)
+    
+    console.log('deleteRollingContent' + response);
+    const { status, message} = response.data;
+    console.log(message);
+
+    if (status == 204) {
+      return response.message;
+    }
+
+    throw new Error("삭제 실패");
+    
+  }
 };
 
 export default rollingService;
