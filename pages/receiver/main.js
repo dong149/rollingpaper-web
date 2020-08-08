@@ -51,18 +51,17 @@ const useStyles = makeStyles((theme) => ({
 
 const Main = (props) => {
   const classes = useStyles();
-  const { rollingId, posts } = props;
-  console.log('rollingId props 값 : ', rollingId);
-  console.log('posts props 값 : ', posts);
+  const { posts, name, num } = props;
+  console.log('props 값 - ', 'posts :', posts, 'name : ', name, 'num : ', num);
   const componentRef = useRef();
   return (
     <Layouts className={classes.root} bgColor="#F7F7F7">
       <Header>
         <div>
-          <h2 className={classes.title}>to. 류동훈님</h2>
+          <h2 className={classes.title}>to. {name}님</h2>
           <p className={classes.subtitle}>
-            {cardList.length
-              ? `총 ${cardList.length}명에게 축하를 받았어요!`
+            {posts.length
+              ? `총 ${posts.length}명에게 축하를 받았어요!`
               : `아직 아무도 작성하지 않았어요!`}
           </p>
         </div>
@@ -87,12 +86,14 @@ const Main = (props) => {
 };
 
 Main.getInitialProps = async (context) => {
-  const rollingId = context.query.rollingId;
-  const res = await rollingService.getRolling(rollingId);
+  const name = context.query.name;
+  const num = context.query.num;
+  const res = await rollingService.getRollingByName(name, num);
 
   return {
-    rollingId: rollingId,
-    posts: res.data
+    posts: res.data,
+    name: name,
+    num: num
   };
 };
 
