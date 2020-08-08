@@ -71,7 +71,7 @@ const Main = (props) => {
         <Link
           href={{
             pathname: '/sender/share',
-            query: { name: name, num: num },
+            query: { name: name, num: num, id: rolling._id },
           }}
         >
           <button className={classes.buttonSmall}>공유하기</button>
