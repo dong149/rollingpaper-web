@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../../components/Header';
+import StickyFooter from '../../components/StickyFooter';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import { exportComponentAsPNG } from '../../functions';
@@ -14,15 +15,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     flexDirection: 'column',
     background: '#F6F6F6',
-  },
-  boxWrapper: {
-    position: 'fixed',
-    width: 'calc(100% - 32px)',
-    maxWidth: '412px',
-    bottom: '16px',
-    left: '50%',
-    transform: 'translate(-50%, 0)',
-    boxSizing: 'border-box',
   },
   header: {
     display: 'flex',
@@ -72,12 +64,11 @@ const Main = () => {
           <div>더미</div>
         )}
       </div>
-      <div
-        className={classes.boxWrapper}
-        onClick={() => exportComponentAsPNG(componentRef)}
-      >
-        <Buttons content="이미지 다운받기" full />
-      </div>
+      <StickyFooter>
+        <Buttons full onClick={() => exportComponentAsPNG(componentRef)}>
+          이미지 다운받기
+        </Buttons>
+      </StickyFooter>
     </Layouts>
   );
 };

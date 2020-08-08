@@ -1,9 +1,10 @@
 // 에디터 페이지입니다.
 import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core';
-
 import Link from 'next/link';
 import Layouts from '../../components/Layouts';
+import Header from '../../components/Header';
+import StickyFooter from '../../components/StickyFooter';
 import Buttons from '../../components/Buttons';
 import Modal from 'react-modal';
 import dynamic from 'next/dynamic';
@@ -16,15 +17,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     flexDirection: 'column',
     background: '#FFF',
-  },
-  header: {
-    width: '100%',
-    textAlign: 'left',
-    fontWeight: 'bold',
-    marginTop: '41px',
-    '& span': {
-      fontSize: '18px',
-    },
   },
   textarea: {
     display: 'table',
@@ -64,12 +56,6 @@ const useStyles = makeStyles((theme) => ({
         borderBottom: '1px solid grey',
       },
     },
-  },
-  footer: {
-    width: '375px',
-    textAlign: 'right',
-    marginTop: '30px',
-    marginRight: '20px',
   },
 }));
 const customModalStyles = {
@@ -119,7 +105,7 @@ const Editor = (props) => {
           </button>
         </Layouts>
       </Modal>
-      <header className={classes.header}>
+      <Header>
         <Link
           href={{
             pathname: '/sender/main',
@@ -133,8 +119,7 @@ const Editor = (props) => {
         <button onClick={() => setModalIsOpen(true)}>
           <a>모달</a>
         </button>
-      </header>
-
+      </Header>
       <div className={classes.textarea} ref={componentRef}>
         <div contentEditable="true"></div>
       </div>
@@ -144,12 +129,12 @@ const Editor = (props) => {
           <input type="text" placeholder="보내는이" />
         </div>
       </div>
-      <footer className={classes.footer}>
-        <Buttons content="저장" />
-      </footer>
       <button onClick={() => exportComponentAsPNG(componentRef)}>
         Export As PNG
       </button>
+      <StickyFooter align="right">
+        <Buttons>저장</Buttons>
+      </StickyFooter>
     </Layouts>
   );
 };

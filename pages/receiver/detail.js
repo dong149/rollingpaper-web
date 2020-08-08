@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Buttons from '../../components/Buttons';
 import Slider from 'react-slick';
 import Header from '../../components/Header';
+import StickyFooter from '../../components/StickyFooter';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -25,15 +26,6 @@ const useStyles = makeStyles((theme) => ({
     height: '426px',
     background: '#E8E6DC',
     borderRadius: '13px',
-  },
-  boxWrapper: {
-    position: 'fixed',
-    width: 'calc(100% - 32px)',
-    maxWidth: '412px',
-    bottom: '16px',
-    left: '50%',
-    transform: 'translate(-50%, 0)',
-    boxSizing: 'border-box',
   },
   title: {
     fontSize: '26px',
@@ -102,16 +94,20 @@ const Detail = (props) => {
       <div className={classes.sender}>
         from. <b>지현</b>
       </div>
-      <div className={classes.boxWrapper}>
+      <StickyFooter>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Buttons content="이전장" full light onClick={(e) => gotoPrev(e)} />
+            <Buttons full light onClick={(e) => gotoPrev(e)}>
+              이전장
+            </Buttons>
           </Grid>
           <Grid item xs={6}>
-            <Buttons content="다음장" full onClick={(e) => gotoNext(e)} />
+            <Buttons full onClick={(e) => gotoNext(e)}>
+              다음장
+            </Buttons>
           </Grid>
         </Grid>
-      </div>
+      </StickyFooter>
     </Layouts>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layouts from '../../components/Layouts';
 import Buttons from '../../components/Buttons';
+import StickyFooter from '../../components/StickyFooter';
 import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles({
   main: {
@@ -105,10 +106,14 @@ const Share = (props) => {
         src="/images/pen.jpeg"
         alt="롤링페이퍼 메인 이미지"
       />
-      <a id="kakao-link-btn" style={{ width: '100%', marginBottom: '16px' }}>
-        <Buttons content="준비하는 친구들에게 공유" full={true} />
-      </a>
-      <Buttons content="주인공에게 공유" full={true} light={true} />
+      <StickyFooter>
+        <a id="kakao-link-btn" style={{ width: '100%', marginBottom: '16px' }}>
+          <Buttons full={true}>준비하는 친구들에게 공유</Buttons>
+        </a>
+        <Buttons full={true} light={true}>
+          주인공에게 공유
+        </Buttons>
+      </StickyFooter>
     </Layouts>
   );
 };

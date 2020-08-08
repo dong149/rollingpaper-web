@@ -3,11 +3,12 @@ import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core/styles';
 import rollingService from '../../services/rollingService';
 import Header from '../../components/Header';
+import StickyFooter from '../../components/StickyFooter';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import Link from 'next/link';
 
-const cardList = Array(10).fill('카드'); // 임시 배열
+const cardList = Array(1).fill('카드'); // 임시 배열
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,15 +17,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     flexDirection: 'column',
     background: '#F6F6F6',
-  },
-  boxWrapper: {
-    position: 'fixed',
-    width: 'calc(100% - 32px)',
-    maxWidth: '412px',
-    bottom: '16px',
-    left: '50%',
-    transform: 'translate(-50%, 0)',
-    boxSizing: 'border-box',
   },
   header: {
     display: 'flex',
@@ -92,16 +84,16 @@ const Main = (props) => {
           <div>더미</div>
         )}
       </div>
-      <div className={classes.boxWrapper}>
+      <StickyFooter position="sticky">
         <Link
           href={{
             pathname: '/sender/editor',
             query: { name: name, num: num },
           }}
         >
-          <Buttons content="롤링페이퍼 작성하기" full={true} />
+          <Buttons full={true}>롤링페이퍼 작성하기</Buttons>
         </Link>
-      </div>
+      </StickyFooter>
     </Layouts>
   );
 };
