@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     fontWeight: 'bold',
   },
+  icon: {
+    width: '48px',
+    marginRight: '14px',
+  },
 }));
 
 const Main = () => {
@@ -66,6 +70,11 @@ const Main = () => {
       </div>
       <StickyFooter>
         <Buttons full onClick={() => exportComponentAsPNG(componentRef)}>
+          <img
+            src="/icons/download-light-icon.png"
+            alt=""
+            className={classes.icon}
+          />
           이미지 다운받기
         </Buttons>
       </StickyFooter>

@@ -7,6 +7,7 @@ import Buttons from '../../components/Buttons';
 import Slider from 'react-slick';
 import Header from '../../components/Header';
 import StickyFooter from '../../components/StickyFooter';
+import Link from 'next/link';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -20,18 +21,29 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     background: '#FFF',
   }, // TODO: 나중에 상황 보고 공통화 및 일괄 삭제
+  cardWrapper: {
+    padding: '0 10px',
+  },
   card: {
     overflow: 'hidden',
-    width: '317px',
+    // width: '317px',
+    height: '426px',
+    marginTop: '35px',
+    background: '#E8E6DC',
+    borderRadius: '13px',
+    transition: 'all .5s ease-in-out',
+  },
+  cardActive: {
+    marginTop: 0,
+    overflow: 'hidden',
     height: '426px',
     background: '#E8E6DC',
     borderRadius: '13px',
+    transition: 'all .5s ease-in-out',
   },
   title: {
     fontSize: '26px',
   },
-  iconBack: {},
-  iconSave: {},
   slider: {
     width: 'calc(100% + 32px)',
     marginTop: '75px',
@@ -39,12 +51,24 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'normal',
   },
   sender: {
-    marginTop: '27px',
-    textAlign: 'right',
+    zIndex: 10,
+    marginTop: '-33px',
+    marginLeft: '24px',
+    textAlign: 'left',
     fontSize: '24px',
   },
   cardCenter: {
     textAlign: 'center',
+  },
+  iconWrapper: {
+    display: 'block',
+    background: 'transparent',
+    border: 'none',
+    margin: '0',
+    padding: '0',
+  },
+  icons: {
+    width: '48px',
   },
 }));
 
@@ -78,21 +102,42 @@ const Detail = (props) => {
   return (
     <Layouts className={classes.root}>
       <Header>
-        <a className={classes.iconBack}>뒤로가기</a>
+        <Link href={{ pathname: '/receiver/main' }}>
+          <a className={classes.iconWrapper}>
+            <img
+              src="/icons/back-icon.png"
+              alt="뒤로가기"
+              className={classes.icons}
+            />
+          </a>
+        </Link>
         <div className={classes.title}>
           <strong>{sliderIndex}</strong> / {cardList.length}
         </div>
-        <button className={classes.iconSave}>다운받기</button>
+        <button className={classes.iconWrapper}>
+          <img
+            src="/icons/download-icon.png"
+            alt="다운받기"
+            className={classes.icons}
+          />
+        </button>
       </Header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>
         {cardList.map((value, i) => (
-          <div className={classes.card} key={i}>
-            {value} {i}
+          <div className={classes.cardWrapper}>
+            <div
+              key={i}
+              className={
+                i === sliderIndex - 1 ? classes.cardActive : classes.card
+              }
+            >
+              {value} {i}
+            </div>
           </div>
         ))}
       </Slider>
       <div className={classes.sender}>
-        from. <b>지현</b>
+        <b>From.</b> 지현 {sliderIndex}
       </div>
       <StickyFooter>
         <Grid container spacing={2}>

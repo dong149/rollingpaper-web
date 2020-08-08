@@ -1,18 +1,44 @@
 @import "./font.scss";
 
-*,
-body {
+* {
 	font-family: $nanum-square-round, 'Helvetica', 'Arial', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	max-width: 444px;
+}
+
+a {
+	display: inline-block;
+}
+
+button {
+	border: none;
+	background: transparent;
 }
 
 // TODO: 임시로 두는 중. 마지막과 첫 부분 간 연결 시 부자연스러움
-.slick-slide {
-	margin-top: 35px;
-	padding: 0 10px;
-	transition: all .5s ease-in-out;
-}
+// .slick-slide {
+// 	margin-top: 35px;
+// 	padding: 0 10px;
+// 	transition: all .5s ease-in-out;
+// }
 
-.slick-current {
-	margin-top: 0;
-	transition: all .5s ease-in-out;
+// .slick-active,
+// .slick-current,
+// .slick-active {
+// 	margin-top: 0;
+// 	transition: all .5s ease-in-out;
+// }
+
+@keyframes slideUp {
+	from {
+		margin-top: 35px;
+	}
+
+	to {
+		margin-top: 0;
+	}
 }
