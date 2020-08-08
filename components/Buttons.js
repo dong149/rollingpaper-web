@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
   btn: {
     minWidth: '125px',
     height: '61px',
+    marginTop: '7px',
     fontSize: '20px',
     fontWeight: 'bold',
     color: '#fff',
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Buttons = forwardRef(function Buttons(props, ref) {
   const classes = useStyles();
-  const { content, light, full, onClick } = props;
+  const { content, light, full, onClick, children } = props;
   return (
     <NoSsr>
       <Button
@@ -42,7 +43,7 @@ const Buttons = forwardRef(function Buttons(props, ref) {
         }
         onClick={onClick}
       >
-        {content}
+        {children}
       </Button>
     </NoSsr>
   );

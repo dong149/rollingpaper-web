@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     background: (props) => props.bgColor,
   },
   paper: {
+    position: 'relative',
     paddingTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',

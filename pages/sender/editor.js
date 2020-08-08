@@ -1,13 +1,16 @@
 // 에디터 페이지입니다.
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
-
 import Link from 'next/link';
 import Layouts from '../../components/Layouts';
+import Header from '../../components/Header';
+import StickyFooter from '../../components/StickyFooter';
 import Buttons from '../../components/Buttons';
 import Modal from 'react-modal';
 import dynamic from 'next/dynamic';
-import { exportComponentAsPNG } from '../../functions';
+import FontModal from '../../components/FontModal';
+import ColorModal from '../../components/ColorModal';
+import ContentEditable from 'react-contenteditable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,15 +19,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     flexDirection: 'column',
     background: '#FFF',
-  },
-  header: {
-    width: '100%',
-    textAlign: 'left',
-    fontWeight: 'bold',
-    marginTop: '41px',
-    '& span': {
-      fontSize: '18px',
-    },
   },
   textarea: {
     display: 'table',
@@ -65,12 +59,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  footer: {
-    width: '375px',
-    textAlign: 'right',
-    marginTop: '30px',
-    marginRight: '20px',
-  },
 }));
 const customModalStyles = {
   overlay: {
@@ -96,30 +84,49 @@ const customModalStyles = {
 
 const Editor = (props) => {
   const classes = useStyles();
-  const componentRef = useRef();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { name, num } = props;
+  const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
+  const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
+  const [content, setContent] = useState('');
+  const [font, setFont] = useState('NanumBrush');
+  const [sort, setSort] = useState('center');
+  const [color, setColor] = useState('black');
+  const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
+
+  const { name, num, id } = props;
+
+  const onSubmit = async () => {
+    try {
+      await rollingService.postRollingContent(id).then(async (res) => {
+        console.log(res);
+        alert('성공적으로 저장되었습니다.');
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+  };
 
   return (
     <Layouts className={classes.root}>
-      <Modal
-        isOpen={modalIsOpen}
-        ariaHideApp={false}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={() => setModalIsOpen(false)}
-        style={customModalStyles}
-        contentLabel="Example Modal"
-      >
-        <Layouts className={classes.root}>
-          <button onClick={() => setModalIsOpen(false)}>
-            <a>뒤로</a>
-          </button>
-          <button onClick={() => setModalIsOpen(false)}>
-            <a>완료</a>
-          </button>
-        </Layouts>
-      </Modal>
-      <header className={classes.header}>
+      <FontModal
+        fontModalIsOpen={fontModalIsOpen}
+        setFontModalIsOpen={setFontModalIsOpen}
+        content={content}
+        setContent={setContent}
+        font={font}
+        setFont={setFont}
+        sort={sort}
+        setSort={setSort}
+        color={color}
+        setColor={setColor}
+      />
+      <ColorModal
+        colorModalIsOpen={colorModalIsOpen}
+        setColorModalIsOpen={setColorModalIsOpen}
+        backgroundColor={backgroundColor}
+        setBackgroundColor={setBackgroundColor}
+      />
+      <Header>
         <Link
           href={{
             pathname: '/sender/main',
@@ -130,13 +137,36 @@ const Editor = (props) => {
             <a>취소</a>
           </button>
         </Link>
-        <button onClick={() => setModalIsOpen(true)}>
-          <a>모달</a>
+        <button onClick={() => setColorModalIsOpen(true)}>
+          <a>color모달</a>
         </button>
-      </header>
+        <button onClick={() => setFontModalIsOpen(true)}>
+          <a>font모달</a>
+        </button>
+      </Header>
 
-      <div className={classes.textarea} ref={componentRef}>
-        <div contentEditable="true"></div>
+      <div
+        className={classes.textarea}
+        style={{
+          fontFamily: `${font}`,
+          backgroundColor: `${backgroundColor}`,
+          border: 'none',
+          color: `${color}`,
+          textAlign: `${sort}`,
+        }}
+      >
+        <ContentEditable
+          contentEditable="true"
+          html={content}
+          onChange={(e) => {
+            setContent(e.target.value);
+          }}
+          style={{
+            fontFamily: `${font}`,
+            color: `${color}`,
+            textAlign: `${sort}`,
+          }}
+        />
       </div>
       <div className={classes.from}>
         <span>From.</span>
@@ -144,12 +174,9 @@ const Editor = (props) => {
           <input type="text" placeholder="보내는이" />
         </div>
       </div>
-      <footer className={classes.footer}>
-        <Buttons content="저장" />
-      </footer>
-      <button onClick={() => exportComponentAsPNG(componentRef)}>
-        Export As PNG
-      </button>
+      <StickyFooter align="right">
+        <Buttons onClick={() => onSubmit()}>저장</Buttons>
+      </StickyFooter>
     </Layouts>
   );
 };
@@ -157,10 +184,12 @@ Editor.getInitialProps = async (context) => {
   console.log(context);
   const name = context.query.name;
   const num = context.query.num;
+  const id = context.query.id || '';
   console.log('sender/editor.js에서의 name, num : ', name, num);
   return {
     name: name,
     num: num,
+    id: id,
   };
 };
 
