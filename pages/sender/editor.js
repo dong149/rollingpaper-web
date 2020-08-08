@@ -1,5 +1,5 @@
 // 에디터 페이지입니다.
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Link from 'next/link';
 import Layouts from '../../components/Layouts';
@@ -8,7 +8,8 @@ import StickyFooter from '../../components/StickyFooter';
 import Buttons from '../../components/Buttons';
 import Modal from 'react-modal';
 import dynamic from 'next/dynamic';
-import { exportComponentAsPNG } from '../../functions';
+import FontModal from '../../components/FontModal';
+import ColorModal from '../../components/ColorModal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,29 +83,20 @@ const customModalStyles = {
 
 const Editor = (props) => {
   const classes = useStyles();
-  const componentRef = useRef();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
+  const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const { name, num } = props;
 
   return (
     <Layouts className={classes.root}>
-      <Modal
-        isOpen={modalIsOpen}
-        ariaHideApp={false}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={() => setModalIsOpen(false)}
-        style={customModalStyles}
-        contentLabel="Example Modal"
-      >
-        <Layouts className={classes.root}>
-          <button onClick={() => setModalIsOpen(false)}>
-            <a>뒤로</a>
-          </button>
-          <button onClick={() => setModalIsOpen(false)}>
-            <a>완료</a>
-          </button>
-        </Layouts>
-      </Modal>
+      <FontModal
+        fontModalIsOpen={fontModalIsOpen}
+        setFontModalIsOpen={setFontModalIsOpen}
+      />
+      <ColorModal
+        colorModalIsOpen={colorModalIsOpen}
+        setColorModalIsOpen={setColorModalIsOpen}
+      />
       <Header>
         <Link
           href={{
@@ -116,11 +108,15 @@ const Editor = (props) => {
             <a>취소</a>
           </button>
         </Link>
-        <button onClick={() => setModalIsOpen(true)}>
-          <a>모달</a>
+        <button onClick={() => setColorModalIsOpen(true)}>
+          <a>color모달</a>
+        </button>
+        <button onClick={() => setFontModalIsOpen(true)}>
+          <a>font모달</a>
         </button>
       </Header>
-      <div className={classes.textarea} ref={componentRef}>
+
+      <div className={classes.textarea}>
         <div contentEditable="true"></div>
       </div>
       <div className={classes.from}>
@@ -129,9 +125,6 @@ const Editor = (props) => {
           <input type="text" placeholder="보내는이" />
         </div>
       </div>
-      <button onClick={() => exportComponentAsPNG(componentRef)}>
-        Export As PNG
-      </button>
       <StickyFooter align="right">
         <Buttons>저장</Buttons>
       </StickyFooter>
@@ -142,7 +135,7 @@ Editor.getInitialProps = async (context) => {
   console.log(context);
   const name = context.query.name;
   const num = context.query.num;
-  console.log(name, num);
+  console.log('sender/editor.js에서의 name, num : ', name, num);
   return {
     name: name,
     num: num,
