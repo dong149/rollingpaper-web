@@ -39,8 +39,8 @@ const FontModal = (props) => {
   const {
     fontModalIsOpen,
     setFontModalIsOpen,
-    text,
-    setText,
+    content,
+    setContent,
     font,
     setFont,
     sort,
@@ -79,9 +79,9 @@ const FontModal = (props) => {
         </button>
         <textarea
           className={classes.textInput}
-          value={text}
+          value={content}
           onChange={(e) => {
-            setText(e.target.value);
+            setContent(e.target.value);
           }}
           style={{
             fontFamily: `${font}`,

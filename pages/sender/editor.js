@@ -86,21 +86,33 @@ const Editor = (props) => {
   const classes = useStyles();
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
-  const [text, setText] = useState('');
+  const [content, setContent] = useState('');
   const [font, setFont] = useState('NanumBrush');
   const [sort, setSort] = useState('center');
   const [color, setColor] = useState('black');
   const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
 
-  const { name, num } = props;
+  const { name, num, id } = props;
+
+  const onSubmit = async () => {
+    try {
+      await rollingService.postRollingContent(id).then(async (res) => {
+        console.log(res);
+        alert('성공적으로 저장되었습니다.');
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+  };
 
   return (
     <Layouts className={classes.root}>
       <FontModal
         fontModalIsOpen={fontModalIsOpen}
         setFontModalIsOpen={setFontModalIsOpen}
-        text={text}
-        setText={setText}
+        content={content}
+        setContent={setContent}
         font={font}
         setFont={setFont}
         sort={sort}
@@ -145,9 +157,9 @@ const Editor = (props) => {
       >
         <ContentEditable
           contentEditable="true"
-          html={text}
+          html={content}
           onChange={(e) => {
-            setText(e.target.value);
+            setContent(e.target.value);
           }}
           style={{
             fontFamily: `${font}`,
@@ -163,7 +175,7 @@ const Editor = (props) => {
         </div>
       </div>
       <StickyFooter align="right">
-        <Buttons>저장</Buttons>
+        <Buttons onClick={() => onSubmit()}>저장</Buttons>
       </StickyFooter>
     </Layouts>
   );
@@ -172,10 +184,12 @@ Editor.getInitialProps = async (context) => {
   console.log(context);
   const name = context.query.name;
   const num = context.query.num;
+  const id = context.query.id || '';
   console.log('sender/editor.js에서의 name, num : ', name, num);
   return {
     name: name,
     num: num,
+    id: id,
   };
 };
 
