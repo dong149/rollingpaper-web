@@ -87,34 +87,36 @@ const rollingService = {
   //       return 0;
   //     });
   // },
-  postRollingContent: async (rolling_id, image) => {
-    await baseAPI
+  postRollingContent: async (rolling_id, font, sort, color, backgroundColor) => {
+    const res = await baseAPI
       .post(`/api/v1/rolling/${rolling_id}/content`, {
-        image
-      })
-      .then((res) => {
-        console.log('postRollingContent : ', res.data);
-        return 1;
-      })
-      .catch((err) => {
-        console.log(err);
-        return 0;
+        font,
+        sort,
+        color,
+        backgroundColor
       });
+
+      const { status, message } = res.data;
+      console.log('postRollingContent : ', message);
+
+      if(status == 201) {
+        return message;
+      } 
+
+      throw Error(message);
   },
 
   deleteRollingContent: async(rolling_id) => {
-    const response = await baseAPI.delete(`/api/v1/rolling/content/${rolling_id}`)
+    const res = await baseAPI.delete(`/api/v1/rolling/content/${rolling_id}`)
     
-    console.log('deleteRollingContent' + response);
-    const { status, message} = response.data;
+    const { status, message} = res.data;
     console.log(message);
 
     if (status == 204) {
-      return response.message;
+      return message;
     }
 
-    throw new Error("삭제 실패");
-    
+    throw new Error(message);
   }
 };
 

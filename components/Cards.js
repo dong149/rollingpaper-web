@@ -52,7 +52,7 @@ const Cards = (props) => {
           console.log('테스트 : ', value);
           console.log('테스트2 : ', value.id)
           return(
-          <Grid item xs={4} key={i} onClick={() => deletePost(i)}>
+          <Grid item xs={4} key={i} onClick={() => deletePost(value.id)}>
             {linked ? (
               <Link
                 href={{ pathname: '/receiver/detail', query: { index: i } }}
