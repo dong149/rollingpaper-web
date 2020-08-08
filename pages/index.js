@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Buttons from '../components/Buttons';
+import StickyFooter from '../components/StickyFooter';
 import Layouts from '../components/Layouts';
 import { makeStyles } from '@material-ui/core';
 import ReactFullpage from '@fullpage/react-fullpage';
@@ -18,6 +19,10 @@ const useStyles = makeStyles({
     fontSize: '32px',
     fontWeight: 'bold',
     lineHeight: '46px',
+  },
+  sectionWrapper: {
+    position: 'relative',
+    minHeight: '100vh',
   },
   rolling: {
     width: '100%',
@@ -61,7 +66,7 @@ const Index = () => {
         render={({ state, fullpageApi }) => {
           return (
             <ReactFullpage.Wrapper>
-              <div className="section">
+              <div className={`section ${classes.sectionWrapper}`}>
                 <Layouts>
                   <div className={classes.main}>
                     <span>롤링페이퍼로</span>
@@ -73,23 +78,23 @@ const Index = () => {
                     src="/images/pen.jpeg"
                     alt="롤링페이퍼 메인 이미지"
                   />
-                  <Buttons
-                    content="롤링페이퍼 시작하기"
-                    full={true}
-                    onClick={() => {
-                      fullpageApi.moveSectionDown();
-                      fullpageApi.moveSectionDown();
-                    }}
-                  />
-                  <br />
-                  <Buttons
-                    content="내 롤링페이퍼 찾기"
-                    full={true}
-                    light={true}
-                  />
+                  <StickyFooter position="absolute">
+                    <Buttons
+                      full={true}
+                      onClick={() => {
+                        fullpageApi.moveSectionDown();
+                        fullpageApi.moveSectionDown();
+                      }}
+                    >
+                      롤링페이퍼 시작하기
+                    </Buttons>
+                    <Buttons full={true} light={true}>
+                      내 롤링페이퍼 찾기
+                    </Buttons>
+                  </StickyFooter>
                 </Layouts>
               </div>
-              <div className="section">
+              <div className={`section ${classes.sectionWrapper}`}>
                 <Layouts>
                   <div
                     className={classes.main}
@@ -117,16 +122,19 @@ const Index = () => {
                     <br />
                     <span>받았어요!</span>
                   </div>
-                  <Buttons
-                    content="다음"
-                    full={true}
-                    onClick={() => {
-                      fullpageApi.moveSectionDown();
-                    }}
-                  />
+                  <StickyFooter position="absolute">
+                    <Buttons
+                      full={true}
+                      onClick={() => {
+                        fullpageApi.moveSectionDown();
+                      }}
+                    >
+                      다음
+                    </Buttons>
+                  </StickyFooter>
                 </Layouts>
               </div>
-              <div className="section">
+              <div className={`section ${classes.sectionWrapper}`}>
                 <Layouts>
                   <div
                     className={classes.main}
@@ -182,30 +190,33 @@ const Index = () => {
                     />
                     <span>이에요.</span>
                   </div>
-                  {!isEmpty(name) && !isEmpty(password) ? (
-                    <Link
-                      href={{
-                        pathname: '/sender/main',
-                        query: { name: name, num: password },
-                      }}
-                    >
-                      {/*                   
+                  <StickyFooter position="absolute">
+                    {!isEmpty(name) && !isEmpty(password) ? (
+                      <Link
+                        href={{
+                          pathname: '/sender/main',
+                          query: { name: name, num: password },
+                        }}
+                      >
+                        {/*                   
                     <Link
                       href={`/sender/[main]`}
                       // p/[receiver]?name=${name}&pw=${password}&id=${id}
                       as={`/sender/main?name=${name}&num=${password}`}
                     > */}
-                      <Buttons
-                        content="생성하기"
-                        full={true}
-                        onClick={() => {
-                          onSubmit();
-                        }}
-                      />
-                    </Link>
-                  ) : (
-                    <Buttons content="모두 작성해주세요" full={true} />
-                  )}
+                        <Buttons
+                          full={true}
+                          onClick={() => {
+                            onSubmit();
+                          }}
+                        >
+                          생성하기
+                        </Buttons>
+                      </Link>
+                    ) : (
+                      <Buttons full={true}>모두 작성해주세요</Buttons>
+                    )}
+                  </StickyFooter>
                 </Layouts>
               </div>
             </ReactFullpage.Wrapper>
