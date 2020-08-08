@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   textarea: {
     display: 'table',
     margin: '0 auto',
-    width: '335px',
+    width: '100%',
     height: '462px',
     marginTop: '30px',
     borderRadius: '13px',
@@ -44,8 +44,7 @@ const useStyles = makeStyles((theme) => ({
   from: {
     width: '100%',
     marginTop: '28px',
-    paddingRight: '20px',
-    textAlign: 'right',
+    textAlign: 'left',
     fontSize: '24px',
     fontWeight: 'lighter',
     '& div': {
@@ -151,6 +150,7 @@ const Editor = (props) => {
 
       <div
         className={classes.textarea}
+        onClick={() => setFontModalIsOpen(true)}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,

@@ -75,7 +75,10 @@ const ColorModal = (props) => {
           elevation={0}
           className={classes.paper}
           style={{ backgroundColor: color }}
-          onClick={() => setBackgroundColor(color)}
+          onClick={() => {
+            setBackgroundColor(color);
+            setColorModalIsOpen(false);
+          }}
         ></Paper>
       </Grid>
     );
