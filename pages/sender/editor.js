@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import dynamic from 'next/dynamic';
 import FontModal from '../../components/FontModal';
 import ColorModal from '../../components/ColorModal';
+import ContentEditable from 'react-contenteditable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,6 +100,12 @@ const Editor = (props) => {
   const classes = useStyles();
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
+  const [text, setText] = useState('');
+  const [font, setFont] = useState('NanumBrush');
+  const [sort, setSort] = useState('center');
+  const [color, setColor] = useState('black');
+  const [backgroundColor, setBackgroundColor] = useState('grey');
+
   const { name, num } = props;
 
   return (
@@ -106,6 +113,14 @@ const Editor = (props) => {
       <FontModal
         fontModalIsOpen={fontModalIsOpen}
         setFontModalIsOpen={setFontModalIsOpen}
+        text={text}
+        setText={setText}
+        font={font}
+        setFont={setFont}
+        sort={sort}
+        setSort={setSort}
+        color={color}
+        setColor={setColor}
       />
       <ColorModal
         colorModalIsOpen={colorModalIsOpen}
@@ -130,8 +145,28 @@ const Editor = (props) => {
         </button>
       </header>
 
-      <div className={classes.textarea}>
-        <div contentEditable="true"></div>
+      <div
+        className={classes.textarea}
+        style={{
+          fontFamily: `${font}`,
+          backgroundColor: `${backgroundColor}`,
+          border: 'none',
+          color: `${color}`,
+          textAlign: `${sort}`,
+        }}
+      >
+        <ContentEditable
+          contentEditable="true"
+          html={text}
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+          style={{
+            fontFamily: `${font}`,
+            color: `${color}`,
+            textAlign: `${sort}`,
+          }}
+        />
       </div>
       <div className={classes.from}>
         <span>From.</span>
