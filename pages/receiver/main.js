@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import { exportComponentAsPNG } from '../../functions';
+import rollingService from '../../services/rollingService';
 const cardList = Array(30).fill('카드'); // 임시 배열
 
 const useStyles = makeStyles((theme) => ({
@@ -48,8 +49,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = () => {
+const Main = (props) => {
   const classes = useStyles();
+  const { rollingId, posts } = props;
+  console.log('rollingId props 값 : ', rollingId);
+  console.log('posts props 값 : ', posts);
   const componentRef = useRef();
   return (
     <Layouts className={classes.root} bgColor="#F7F7F7">
@@ -80,6 +84,16 @@ const Main = () => {
       </div>
     </Layouts>
   );
+};
+
+Main.getInitialProps = async (context) => {
+  const rollingId = context.query.rollingId;
+  const res = await rollingService.getRolling(rollingId);
+
+  return {
+    rollingId: rollingId,
+    posts: res.data
+  };
 };
 
 export default Main;
