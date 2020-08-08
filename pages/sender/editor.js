@@ -104,7 +104,7 @@ const Editor = (props) => {
   const [font, setFont] = useState('NanumBrush');
   const [sort, setSort] = useState('center');
   const [color, setColor] = useState('black');
-  const [backgroundColor, setBackgroundColor] = useState('grey');
+  const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
 
   const { name, num } = props;
 
@@ -125,6 +125,8 @@ const Editor = (props) => {
       <ColorModal
         colorModalIsOpen={colorModalIsOpen}
         setColorModalIsOpen={setColorModalIsOpen}
+        backgroundColor={backgroundColor}
+        setBackgroundColor={setBackgroundColor}
       />
       <header className={classes.header}>
         <Link

@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    height: '300px'
+    height: '300px',
   },
   colorList: {
-    marginTop: '20px'
+    marginTop: '20px',
   },
 }));
 
@@ -49,32 +49,54 @@ const customModalStyles = {
 
 const ColorModal = (props) => {
   const classes = useStyles(props);
-
-  const availableColors = ["#FFFFFF", "#F4F4F4", "#DBE6EF", "#F2E5E5", "#FDFFB5", "#E6E4D9", "#B4D4F1", "#F1C0B5", "#AE9BF8", "#F3C982"];
-
+  const availableColors = [
+    '#FFFFFF',
+    '#F4F4F4',
+    '#DBE6EF',
+    '#F2E5E5',
+    '#FDFFB5',
+    '#E6E4D9',
+    '#B4D4F1',
+    '#F1C0B5',
+    '#AE9BF8',
+    '#F3C982',
+  ];
+  const {
+    colorModalIsOpen,
+    setColorModalIsOpen,
+    backgroundColor,
+    setBackgroundColor,
+  } = props;
   const colorCards = [];
   for (const color of availableColors) {
     colorCards.push(
       <Grid item xs={6}>
-        <Paper elevation={0} className={classes.paper} style={{backgroundColor: color}}></Paper>
+        <Paper
+          elevation={0}
+          className={classes.paper}
+          style={{ backgroundColor: color }}
+          onClick={() => setBackgroundColor(color)}
+        ></Paper>
       </Grid>
     );
   }
-
-  const { colorModalIsOpen, setColorModalIsOpen } = props;
 
   return (
     <Modal
       isOpen={colorModalIsOpen}
       style={customModalStyles}
-      contentLabel="Color Modal">
+      contentLabel="Color Modal"
+    >
       <Layouts className={classes.root}>
         <div>
           <span onClick={() => setColorModalIsOpen(false)}>
-            <img style={{width: "30px"}} src="/icons/back-icon.png" ></img>
+            <img style={{ width: '30px' }} src="/icons/back-icon.png"></img>
           </span>
-          <span onClick={() => setColorModalIsOpen(false)} style={{float: "right"}}>
-            <a style={{fontSize: "1.2em", color: "#FFFFFF"}}>완료</a>
+          <span
+            onClick={() => setColorModalIsOpen(false)}
+            style={{ float: 'right' }}
+          >
+            <a style={{ fontSize: '1.2em', color: '#FFFFFF' }}>완료</a>
           </span>
         </div>
         <Grid className={classes.colorList} container spacing={3}>
