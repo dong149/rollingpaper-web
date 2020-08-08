@@ -59,6 +59,10 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  menuButton: {
+    fontSize: "1.2em",
+    fontWeight: "600"
+  },
 }));
 const customModalStyles = {
   overlay: {
@@ -126,24 +130,24 @@ const Editor = (props) => {
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
       />
-      <Header>
+
+      <div>
         <Link
           href={{
             pathname: '/sender/main',
             query: { name: name, num: num },
-          }}
-        >
-          <button>
-            <a>취소</a>
-          </button>
+          }}>
+            <span><a className={classes.menuButton}>취소</a></span>
         </Link>
-        <button onClick={() => setColorModalIsOpen(true)}>
-          <a>color모달</a>
-        </button>
-        <button onClick={() => setFontModalIsOpen(true)}>
-          <a>font모달</a>
-        </button>
-      </Header>
+        <span style={{float: "right"}}>
+          <span onClick={() => setFontModalIsOpen(true)}>
+            <img style={{ width: '30px' }} src="/icons/text-icon.png"></img>
+          </span>
+          <span onClick={() => setColorModalIsOpen(true)}>
+            <img style={{ width: '30px' }} src="/icons/background-icon.png"></img>
+          </span>
+        </span>
+      </div>
 
       <div
         className={classes.textarea}

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    height: '300px',
+    height: '200px',
   },
   colorList: {
     marginTop: '20px',
