@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     fontWeight: 'bold',
   },
+  icon: {
+    width: '48px',
+    marginRight: '14px',
+  },
 }));
 
 const Main = (props) => {
@@ -53,15 +57,15 @@ const Main = (props) => {
     <>
       <Confetti width={layoutRef.width} height={layoutRef.height} />
       <Layouts className={classes.root} bgColor="#F7F7F7">
-      <Header>
-        <div>
-          <h2 className={classes.title}>to. {name}님</h2>
-          <p className={classes.subtitle}>
-            {posts.length
-              ? `총 ${posts.length}명에게 축하를 받았어요!`
-              : `아직 아무도 작성하지 않았어요!`}
-          </p>
-          </div>
+        <Header>
+          <div>
+            <h2 className={classes.title}>to. {name}님</h2>
+            <p className={classes.subtitle}>
+              {posts.length
+                ? `총 ${posts.length}명에게 축하를 받았어요!`
+                : `아직 아무도 작성하지 않았어요!`}
+            </p>
+            </div>
           {/* TODO: 주인공 페이지에서 공유하기 버튼 임시 삭제 */}
           {/* <button className={classes.buttonSmall}>공유하기</button> */}
         </Header>
@@ -74,6 +78,11 @@ const Main = (props) => {
         </div>
         <StickyFooter>
           <Buttons full onClick={() => exportComponentAsPNG(componentRef)}>
+            <img
+              src="/icons/download-light-icon.png"
+              alt=""
+              className={classes.icon}
+            />
             이미지 다운받기
           </Buttons>
         </StickyFooter>

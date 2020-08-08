@@ -7,11 +7,13 @@ import rollingService from '../services/rollingService';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 'calc(100% + 32px)',
+    minHeight: 'calc(100vh - 150px)',
     marginLeft: '-16px',
     padding: '25px 0 169px',
     overflow: 'hidden',
     background: '#fff',
-    borderRadius: '28px',
+    borderTopLeftRadius: '28px',
+    borderTopRightRadius: '28px',
   },
   card: {
     display: 'block',

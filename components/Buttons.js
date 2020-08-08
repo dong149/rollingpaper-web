@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     color: '#fff',
     background: '#222',
-    borderRadius: '20px',
+    borderRadius: '10px',
     boxShadow: 'none',
     '&:hover': {
       border: 'none',

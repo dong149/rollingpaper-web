@@ -51,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '10px',
     background: 'transparent',
   },
+  icon: {
+    width: '24px',
+    marginRight: '14px',
+  },
 }));
 const Main = (props) => {
   const classes = useStyles();
@@ -91,7 +95,14 @@ const Main = (props) => {
             query: { name: name, num: num },
           }}
         >
-          <Buttons full={true}>롤링페이퍼 작성하기</Buttons>
+          <Buttons full={true}>
+            <img
+              src="/icons/write-light-icon.png"
+              alt=""
+              className={classes.icon}
+            />
+            롤링페이퍼 작성하기
+          </Buttons>
         </Link>
       </StickyFooter>
     </Layouts>
