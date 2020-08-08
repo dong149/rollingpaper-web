@@ -47,7 +47,10 @@ const Cards = (props) => {
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        {content.map((value, i) => (
+        {content.map((value, i) =>{ 
+          console.log('테스트 : ', value);
+          console.log('테스트2 : ', value.id)
+          return(
           <Grid item xs={4} key={i}>
             {linked ? (
               <Link
@@ -58,7 +61,7 @@ const Cards = (props) => {
                   className={classes.card}
                   style={styledRandom(i)}
                 >
-                  {value} {i}
+                  카드 {i + 1}
                 </a>
               </Link>
             ) : (
@@ -67,11 +70,12 @@ const Cards = (props) => {
                 className={classes.card}
                 style={styledRandom(i)}
               >
-                {value} {i}
+                카드 {i + 1}
               </div>
             )}
           </Grid>
-        ))}
+        );
+        })}
       </Grid>
     </div>
   );

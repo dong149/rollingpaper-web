@@ -86,8 +86,8 @@ const Main = (props) => {
         </Link>
       </Header>
       <div className={classes.cardWrapper}>
-        {cardList.length ? (
-          <Cards content={cardList} linked={false}/>
+        {posts.length ? (
+          <Cards content={posts} linked={false}/>
         ) : (
           <div>더미</div>
         )}
