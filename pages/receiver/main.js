@@ -6,6 +6,9 @@ import StickyFooter from '../../components/StickyFooter';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import { exportComponentAsPNG } from '../../functions';
+import rollingService from '../../services/rollingService';
+
+import Confetti from 'react-confetti';
 const cardList = Array(30).fill('카드'); // 임시 배열
 
 const useStyles = makeStyles((theme) => ({
@@ -44,20 +47,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = () => {
+const Main = (props) => {
   const classes = useStyles();
+  const { posts, name, num } = props;
+  console.log('props 값 - ', 'posts :', posts, 'name : ', name, 'num : ', num);
   const componentRef = useRef();
+  const layoutRef = useRef();
   return (
-    <Layouts className={classes.root} bgColor="#F7F7F7">
+    <>
+      <Confetti width={layoutRef.width} height={layoutRef.height} />
+      <Layouts className={classes.root} bgColor="#F7F7F7">
       <Header>
         <div>
-          <h2 className={classes.title}>to. 류동훈님</h2>
+          <h2 className={classes.title}>to. {name}님</h2>
           <p className={classes.subtitle}>
-            {cardList.length
-              ? `총 ${cardList.length}명에게 축하를 받았어요!`
+            {posts.length
+              ? `총 ${posts.length}명에게 축하를 받았어요!`
               : `아직 아무도 작성하지 않았어요!`}
           </p>
-        </div>
+          </div>
         {/* TODO: 주인공 페이지에서 공유하기 버튼 임시 삭제 */}
         {/* <button className={classes.buttonSmall}>공유하기</button> */}
       </Header>
@@ -80,6 +88,18 @@ const Main = () => {
       </StickyFooter>
     </Layouts>
   );
+};
+
+Main.getInitialProps = async (context) => {
+  const name = context.query.name;
+  const num = context.query.num;
+  const res = await rollingService.getRollingByName(name, num);
+
+  return {
+    posts: res.data,
+    name: name,
+    num: num
+  };
 };
 
 export default Main;

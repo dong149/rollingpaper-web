@@ -11,6 +11,19 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     background: '#FFF',
   },
+  menuButton: {
+    fontSize: "1.2em",
+    color: "#FFFFFF"
+  },
+  stylePropButton: {
+    fontSize: "1.2em",
+    color: "#FFFFFF",
+    borderStyle: "solid",
+    borderColor: "#FFFFFF",
+    padding: "10px",
+    borderRadius: "5%",
+    borderWidth: "1px"
+  }
 });
 const customModalStyles = {
   overlay: {
@@ -39,8 +52,8 @@ const FontModal = (props) => {
   const {
     fontModalIsOpen,
     setFontModalIsOpen,
-    text,
-    setText,
+    content,
+    setContent,
     font,
     setFont,
     sort,
@@ -58,79 +71,88 @@ const FontModal = (props) => {
     <Modal
       isOpen={fontModalIsOpen}
       style={customModalStyles}
-      contentLabel="Example Modal"
-    >
+      contentLabel="Example Modal">
       <Layouts className={classes.root}>
-        <span>font모달입니다.</span>
-        <button onClick={() => setFontModalIsOpen(false)}>
-          <a>뒤로</a>
-        </button>
-        <button onClick={() => setFontModalIsOpen(false)}>
-          <a>완료</a>
-        </button>
-        <button onClick={() => setEditMode('text')}>
-          <a>텍스트</a>
-        </button>
-        <button onClick={() => setEditMode('sort')}>
-          <a>정렬</a>
-        </button>
-        <button onClick={() => setEditMode('color')}>
-          <a>색</a>
-        </button>
+        <div>
+          <span style={{float: "left"}} onClick={() => setFontModalIsOpen(false)}>
+            <img style={{width: "30px"}} src="/icons/back-icon.png" ></img>
+          </span>
+
+          <span style={{float: "right"}} onClick={() => setFontModalIsOpen(false)}>
+            <a className={classes.menuButton}>완료</a>
+          </span>
+
+          <p style={{textAlign: "center", margin: 0}}>
+            <span style={{margin: "0 10px 0 0"}} onClick={() => setEditMode('text')}>
+              <a className={classes.menuButton}>텍스트</a>
+            </span>
+            <span style={{margin: "0 10px 0 10px"}} onClick={() => setEditMode('sort')}>
+              <a className={classes.menuButton}>정렬</a>
+            </span>
+            <span style={{margin: "0 0 0 10px"}} onClick={() => setEditMode('color')}>
+              <a className={classes.menuButton}>색</a>
+            </span>
+          </p>
+        </div>
+
         <textarea
           className={classes.textInput}
-          value={text}
+          value={content}
           onChange={(e) => {
-            setText(e.target.value);
+            setContent(e.target.value);
           }}
           style={{
             fontFamily: `${font}`,
             fontSize: '25px',
-            // backgroundColor: 'transparent',
+            backgroundColor: 'transparent',
             border: 'none',
             color: `${color}`,
             textAlign: `${sort}`,
+            height: "600px"
           }}
         />
-        {editMode === 'text' && (
-          <>
-            <button onClick={() => setFont('NanumSquareRound')}>
-              <a>나눔스퀘어라운드</a>
-            </button>
-            <button onClick={() => setFont('NanumBrush')}>
-              <a>나눔브러쉬</a>
-            </button>
-            <button onClick={() => setFontModalIsOpen(false)}>
-              <a>손글씨체</a>
-            </button>
-          </>
-        )}
-        {editMode === 'sort' && (
-          <>
-            <button onClick={() => setSort('left')}>
-              <a>왼쪽</a>
-            </button>
-            <button onClick={() => setSort('center')}>
-              <a>중간</a>
-            </button>
-            <button onClick={() => setSort('right')}>
-              <a>오른쪽</a>
-            </button>
-          </>
-        )}
-        {editMode === 'color' && (
-          <>
-            <button onClick={() => setColor('red')}>
-              <a>빨간색</a>
-            </button>
-            <button onClick={() => setColor('black')}>
-              <a>검은색</a>
-            </button>
-            <button onClick={() => setColor('yellow')}>
-              <a>노란색</a>
-            </button>
-          </>
-        )}
+
+        <div style={{ marginTop: "30px" }}>
+          {editMode === 'text' && (
+            <>
+              <span style={{margin: "0 10px 0 0"}} onClick={() => setFont('NanumSquareRound')}>
+                <a className={classes.stylePropButton}>나눔스퀘어라운드</a>
+              </span>
+              <span style={{margin: "0 10px 0 10px"}} onClick={() => setFont('NanumBrush')}>
+                <a className={classes.stylePropButton}>나눔브러쉬</a>
+              </span>
+              <span style={{margin: "0 0 0 10px"}} onClick={() => setFontModalIsOpen(false)}>
+                <a className={classes.stylePropButton}>손글씨체</a>
+              </span>
+            </>
+          )}
+          {editMode === 'sort' && (
+            <>
+              <span style={{margin: "0 10px 0 0"}} onClick={() => setSort('left')}>
+                <a className={classes.stylePropButton}>왼쪽</a>
+              </span>
+              <span style={{margin: "0 10px 0 10px"}} onClick={() => setSort('center')}>
+                <a className={classes.stylePropButton}>중간</a>
+              </span>
+              <span style={{margin: "0 0 0 10px"}} onClick={() => setSort('right')}>
+                <a className={classes.stylePropButton}>오른쪽</a>
+              </span>
+            </>
+          )}
+          {editMode === 'color' && (
+            <>
+              <span style={{margin: "0 10px 0 0"}} onClick={() => setColor('red')}>
+                <a className={classes.stylePropButton}>빨간색</a>
+              </span>
+              <span style={{margin: "0 10px 0 10px"}} onClick={() => setColor('black')}>
+                <a className={classes.stylePropButton}>검은색</a>
+              </span>
+              <span style={{margin: "0 0 0 10px"}} onClick={() => setColor('yellow')}>
+                <a className={classes.stylePropButton}>노란색</a>
+              </span>
+            </>
+          )}
+        </div>
       </Layouts>
     </Modal>
   );

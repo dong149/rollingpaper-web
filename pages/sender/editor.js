@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   textarea: {
     display: 'table',
     margin: '0 auto',
-    width: '335px',
+    width: '100%',
     height: '462px',
     marginTop: '30px',
     borderRadius: '13px',
@@ -44,8 +44,7 @@ const useStyles = makeStyles((theme) => ({
   from: {
     width: '100%',
     marginTop: '28px',
-    paddingRight: '20px',
-    textAlign: 'right',
+    textAlign: 'left',
     fontSize: '24px',
     fontWeight: 'lighter',
     '& div': {
@@ -58,6 +57,10 @@ const useStyles = makeStyles((theme) => ({
         borderBottom: '1px solid grey',
       },
     },
+  },
+  menuButton: {
+    fontSize: "1.2em",
+    fontWeight: "600"
   },
 }));
 const customModalStyles = {
@@ -86,21 +89,33 @@ const Editor = (props) => {
   const classes = useStyles();
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
-  const [text, setText] = useState('');
+  const [content, setContent] = useState('');
   const [font, setFont] = useState('NanumBrush');
   const [sort, setSort] = useState('center');
   const [color, setColor] = useState('black');
   const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
 
-  const { name, num } = props;
+  const { name, num, id } = props;
+
+  const onSubmit = async () => {
+    try {
+      await rollingService.postRollingContent(id).then(async (res) => {
+        console.log(res);
+        alert('성공적으로 저장되었습니다.');
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+  };
 
   return (
     <Layouts className={classes.root}>
       <FontModal
         fontModalIsOpen={fontModalIsOpen}
         setFontModalIsOpen={setFontModalIsOpen}
-        text={text}
-        setText={setText}
+        content={content}
+        setContent={setContent}
         font={font}
         setFont={setFont}
         sort={sort}
@@ -114,27 +129,28 @@ const Editor = (props) => {
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
       />
-      <Header>
+
+      <div>
         <Link
           href={{
             pathname: '/sender/main',
             query: { name: name, num: num },
-          }}
-        >
-          <button>
-            <a>취소</a>
-          </button>
+          }}>
+            <span><a className={classes.menuButton}>취소</a></span>
         </Link>
-        <button onClick={() => setColorModalIsOpen(true)}>
-          <a>color모달</a>
-        </button>
-        <button onClick={() => setFontModalIsOpen(true)}>
-          <a>font모달</a>
-        </button>
-      </Header>
+        <span style={{float: "right"}}>
+          <span onClick={() => setFontModalIsOpen(true)}>
+            <img style={{ width: '30px' }} src="/icons/text-icon.png"></img>
+          </span>
+          <span onClick={() => setColorModalIsOpen(true)}>
+            <img style={{ width: '30px' }} src="/icons/background-icon.png"></img>
+          </span>
+        </span>
+      </div>
 
       <div
         className={classes.textarea}
+        onClick={() => setFontModalIsOpen(true)}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
@@ -145,9 +161,9 @@ const Editor = (props) => {
       >
         <ContentEditable
           contentEditable="true"
-          html={text}
+          html={content}
           onChange={(e) => {
-            setText(e.target.value);
+            setContent(e.target.value);
           }}
           style={{
             fontFamily: `${font}`,
@@ -163,7 +179,7 @@ const Editor = (props) => {
         </div>
       </div>
       <StickyFooter align="right">
-        <Buttons>저장</Buttons>
+        <Buttons onClick={() => onSubmit()}>저장</Buttons>
       </StickyFooter>
     </Layouts>
   );
@@ -172,10 +188,12 @@ Editor.getInitialProps = async (context) => {
   console.log(context);
   const name = context.query.name;
   const num = context.query.num;
+  const id = context.query.id || '';
   console.log('sender/editor.js에서의 name, num : ', name, num);
   return {
     name: name,
     num: num,
+    id: id,
   };
 };
 

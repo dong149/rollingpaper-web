@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    height: '300px',
+    height: '200px',
   },
   colorList: {
     marginTop: '20px',
@@ -75,7 +75,10 @@ const ColorModal = (props) => {
           elevation={0}
           className={classes.paper}
           style={{ backgroundColor: color }}
-          onClick={() => setBackgroundColor(color)}
+          onClick={() => {
+            setBackgroundColor(color);
+            setColorModalIsOpen(false);
+          }}
         ></Paper>
       </Grid>
     );
