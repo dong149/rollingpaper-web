@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
+import rollingService from '../services/rollingService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,8 +48,11 @@ const Cards = (props) => {
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        {content.map((value, i) => (
-          <Grid item xs={4} key={i}>
+        {content.map((value, i) =>{ 
+          console.log('테스트 : ', value);
+          console.log('테스트2 : ', value.id)
+          return(
+          <Grid item xs={4} key={i} onClick={() => deletePost(value.id)}>
             {linked ? (
               <Link
                 href={{ pathname: '/receiver/detail', query: { index: i } }}
@@ -58,7 +62,7 @@ const Cards = (props) => {
                   className={classes.card}
                   style={styledRandom(i)}
                 >
-                  {value} {i}
+                  카드 {i + 1}
                 </a>
               </Link>
             ) : (
@@ -67,14 +71,26 @@ const Cards = (props) => {
                 className={classes.card}
                 style={styledRandom(i)}
               >
-                {value} {i}
+                카드 {i + 1}
               </div>
             )}
           </Grid>
-        ))}
+        );
+        })}
       </Grid>
     </div>
   );
 };
+
+const deletePost = async (rolling_id) => {
+  console.log(rolling_id);
+
+  try {
+    const res = await rollingService.deleteRollingContent(rolling_id);
+    return res;
+  } catch (error) {
+    alert(error.message);
+  }
+}
 
 export default Cards;
