@@ -12,7 +12,7 @@ import FontModal from '../../components/FontModal';
 import ColorModal from '../../components/ColorModal';
 import ContentEditable from 'react-contenteditable';
 import rollingService from '../../services/rollingService';
-
+import { isEmpty } from '../../functions';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   from: {
     width: '100%',
     marginTop: '28px',
-    textAlign: 'left',
+    textAlign: 'right',
     fontSize: '24px',
     fontWeight: 'lighter',
     '& div': {
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    fontSize: '1.2em',
+    fontSize: '1.6em',
     fontWeight: '600',
   },
 }));
@@ -95,14 +95,24 @@ const Editor = (props) => {
   const [sort, setSort] = useState('center');
   const [color, setColor] = useState('black');
   const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
-
+  const [author, setAuthor] = useState('');
   const { name, num, id } = props;
   const onSubmit = async () => {
     try {
       await rollingService
-        .postRollingContent(id, font, sort, color, backgroundColor)
+        .postRollingContent(
+          id,
+          content,
+          author,
+          font,
+          sort,
+          color,
+          backgroundColor
+        )
         .then(async (res) => {
           console.log(res);
+          setContent('');
+          setAuthor('');
           alert('성공적으로 저장되었습니다.');
         });
     } catch (err) {
@@ -145,11 +155,11 @@ const Editor = (props) => {
         </Link>
         <span style={{ float: 'right' }}>
           <span onClick={() => setFontModalIsOpen(true)}>
-            <img style={{ width: '30px' }} src="/icons/text-icon.png"></img>
+            <img style={{ width: '35px' }} src="/icons/text-icon.png"></img>
           </span>
           <span onClick={() => setColorModalIsOpen(true)}>
             <img
-              style={{ width: '30px' }}
+              style={{ width: '35px' }}
               src="/icons/background-icon.png"
             ></img>
           </span>
@@ -183,12 +193,32 @@ const Editor = (props) => {
       <div className={classes.from}>
         <span>From.</span>
         <div>
-          <input type="text" placeholder="보내는이" />
+          <input
+            type="text"
+            value={author}
+            placeholder="보내는이"
+            onChange={(e) => setAuthor(e.target.value)}
+          />
         </div>
       </div>
-      <StickyFooter align="right">
-        <Buttons onClick={() => onSubmit()}>저장</Buttons>
-      </StickyFooter>
+      {!isEmpty(content) && !isEmpty(author) ? (
+        <StickyFooter align="right">
+          {/* <Link
+            href={{
+              pathname: '/sender/main',
+              query: { name: name, num: num },
+            }}
+          > */}
+          <Buttons onClick={() => onSubmit()}>저장</Buttons>
+          {/* </Link> */}
+        </StickyFooter>
+      ) : (
+        <StickyFooter align="right">
+          <Buttons onClick={() => onSubmit()}>
+            글과 작성자를 입력해주세요.
+          </Buttons>
+        </StickyFooter>
+      )}
     </Layouts>
   );
 };

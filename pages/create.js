@@ -62,6 +62,7 @@ const Index = () => {
         <Layouts>
           <div className={classes.main} style={{ marginBottom: '16px' }}>
             <span>받을 사람은</span>
+            <br />
             <AutosizeInput
               inputStyle={{
                 border: 0,
@@ -84,6 +85,7 @@ const Index = () => {
             />
             <br />
             <span>이에요.</span>
+            <br />
             <br />
             <span>우리만의 신호는</span>
             <br />

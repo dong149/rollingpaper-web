@@ -91,12 +91,16 @@ const rollingService = {
   // },
   postRollingContent: async (
     rolling_id,
+    content,
+    author,
     font,
     sort,
     color,
     backgroundColor
   ) => {
     const res = await baseAPI.post(`/api/v1/rolling/${rolling_id}/content`, {
+      content,
+      author,
       font,
       sort,
       color,
