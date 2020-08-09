@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import rollingService from '../services/rollingService';
+import DeleteModal from './DeleteModal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,14 +55,25 @@ const styledRandom = (i, font, sort, color, bgColor) => {
 const Cards = (props) => {
   const classes = useStyles();
   const { content, linked } = props;
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   return (
     <div className={classes.root}>
+      <DeleteModal
+        deleteModalIsOpen={deleteModalIsOpen}
+        setDeleteModalIsOpen={setDeleteModalIsOpen}
+      />
       <Grid container spacing={2}>
         {content.map((value, i) => {
-          console.log('테스트 : ', value);
-          console.log('테스트2 : ', value.id);
           return (
-            <Grid item xs={4} key={i} onClick={() => deletePost(value.id)}>
+            <Grid
+              item
+              xs={4}
+              key={i}
+              onClick={() => {
+                setDeleteModalIsOpen(true);
+                // deletePost(value.id);
+              }}
+            >
               {linked ? (
                 <Link
                   href={{ pathname: '/receiver/detail', query: { index: i } }}
