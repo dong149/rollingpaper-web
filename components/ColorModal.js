@@ -93,14 +93,17 @@ const ColorModal = (props) => {
       <Layouts className={classes.root}>
         <div>
           <span onClick={() => setColorModalIsOpen(false)}>
-            <img style={{ width: '30px' }} src="/icons/back-icon.png"></img>
+            <img
+              style={{ width: '30px', marginBottom: ' 30px' }}
+              src="/icons/back-icon.png"
+            ></img>
           </span>
-          <span
+          {/* <span
             onClick={() => setColorModalIsOpen(false)}
             style={{ float: 'right' }}
           >
-            <a style={{ fontSize: '1.2em', color: '#FFFFFF' }}>완료</a>
-          </span>
+            <a style={{ fontSize: '1.4em', color: '#FFFFFF' }}>완료</a>
+          </span> */}
         </div>
         <Grid className={classes.colorList} container spacing={3}>
           {colorCards}

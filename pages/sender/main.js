@@ -67,7 +67,7 @@ const Main = (props) => {
         <div>
           <h2 className={classes.title}>to. {name}님</h2>
           <p className={classes.subtitle}>
-            {posts.length
+            {posts.contents.length
               ? `총 ${posts.contents.length}명에게 축하를 받았어요!`
               : `아직 아무도 작성하지 않았어요!`}
           </p>
@@ -88,7 +88,7 @@ const Main = (props) => {
           <div>더미</div>
         )}
       </div>
-      <StickyFooter position="sticky">
+      <StickyFooter position="absolute">
         <Link
           href={{
             pathname: '/sender/editor',
