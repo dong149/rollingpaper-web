@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // let BASE_URL = "https://donghoon.tk";
-let BASE_URL = 'http://52.79.185.132:3000';
+
+let BASE_URL = 'https://api.rollingpaper.site';
 
 const baseAPI = axios.create({
   baseURL: BASE_URL,
