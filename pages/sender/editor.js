@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic';
 import FontModal from '../../components/FontModal';
 import ColorModal from '../../components/ColorModal';
 import ContentEditable from 'react-contenteditable';
+import rollingService from '../../services/rollingService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    fontSize: "1.2em",
-    fontWeight: "600"
+    fontSize: '1.2em',
+    fontWeight: '600',
   },
 }));
 const customModalStyles = {
@@ -96,13 +97,14 @@ const Editor = (props) => {
   const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
 
   const { name, num, id } = props;
-
   const onSubmit = async () => {
     try {
-      await rollingService.postRollingContent(id).then(async (res) => {
-        console.log(res);
-        alert('성공적으로 저장되었습니다.');
-      });
+      await rollingService
+        .postRollingContent(id, font, sort, color, backgroundColor)
+        .then(async (res) => {
+          console.log(res);
+          alert('성공적으로 저장되었습니다.');
+        });
     } catch (err) {
       console.log(err);
       return;
@@ -135,15 +137,21 @@ const Editor = (props) => {
           href={{
             pathname: '/sender/main',
             query: { name: name, num: num },
-          }}>
-            <span><a className={classes.menuButton}>취소</a></span>
+          }}
+        >
+          <span>
+            <a className={classes.menuButton}>취소</a>
+          </span>
         </Link>
-        <span style={{float: "right"}}>
+        <span style={{ float: 'right' }}>
           <span onClick={() => setFontModalIsOpen(true)}>
             <img style={{ width: '30px' }} src="/icons/text-icon.png"></img>
           </span>
           <span onClick={() => setColorModalIsOpen(true)}>
-            <img style={{ width: '30px' }} src="/icons/background-icon.png"></img>
+            <img
+              style={{ width: '30px' }}
+              src="/icons/background-icon.png"
+            ></img>
           </span>
         </span>
       </div>
