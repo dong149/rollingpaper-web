@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     width: '123px',
     height: '169px',
-    background: '#FDFEB8',
+    // background: (props) => props.bgColor,
     border: '1px solid #666',
   },
 }));
 
-const styledRandom = (i) => {
+const styledRandom = (i, font, sort, color, bgColor) => {
   // TODO: 좀 더 자연스러운 랜덤 화면 구현
   let hashKey = (13 / (i + 1) + 0.2) % 1;
   let x = Math.floor(hashKey * 40);
@@ -41,6 +41,13 @@ const styledRandom = (i) => {
       ' translateY(' +
       y +
       'px)',
+    backgroundColor: `${bgColor}`,
+    border: 0,
+    borderRadius: '20px',
+    padding: '10px',
+    color: `${color}`,
+    fontFamily: `${font}`,
+    textAlign: `${sort}`,
   };
 };
 
@@ -50,34 +57,40 @@ const Cards = (props) => {
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        {content.map((value, i) =>{ 
+        {content.map((value, i) => {
           console.log('테스트 : ', value);
-          console.log('테스트2 : ', value.id)
-          return(
-          <Grid item xs={4} key={i} onClick={() => deletePost(value.id)}>
-            {linked ? (
-              <Link
-                href={{ pathname: '/receiver/detail', query: { index: i } }}
-              >
-                <a
+          console.log('테스트2 : ', value.id);
+          return (
+            <Grid item xs={4} key={i} onClick={() => deletePost(value.id)}>
+              {linked ? (
+                <Link
+                  href={{ pathname: '/receiver/detail', query: { index: i } }}
+                >
+                  <a
+                    elevation={0}
+                    className={classes.card}
+                    style={styledRandom(i)}
+                  >
+                    카드 {i + 1}
+                  </a>
+                </Link>
+              ) : (
+                <div
                   elevation={0}
                   className={classes.card}
-                  style={styledRandom(i)}
+                  style={styledRandom(
+                    i,
+                    value.font,
+                    value.sort,
+                    value.color,
+                    value.backgroundColor
+                  )}
                 >
-                  카드 {i + 1}
-                </a>
-              </Link>
-            ) : (
-              <div
-                elevation={0}
-                className={classes.card}
-                style={styledRandom(i)}
-              >
-                카드 {i + 1}
-              </div>
-            )}
-          </Grid>
-        );
+                  {value.content}
+                </div>
+              )}
+            </Grid>
+          );
         })}
       </Grid>
     </div>
@@ -93,6 +106,6 @@ const deletePost = async (rolling_id) => {
   } catch (error) {
     alert(error.message);
   }
-}
+};
 
 export default Cards;
