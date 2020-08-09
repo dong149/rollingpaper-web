@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 // let BASE_URL = "https://donghoon.tk";
-let BASE_URL = "http://52.79.185.132:3000";
+let BASE_URL = 'http://52.79.185.132:3000';
 
 const baseAPI = axios.create({
   baseURL: BASE_URL,
@@ -35,7 +35,9 @@ const rollingService = {
   getRollingByName: async (name, password) => {
     console.log(name, password);
     let res = await baseAPI.get(
-      `/api/v1/rolling?receiver=${encodeURI(name)}&password=${encodeURI(password)}`
+      `/api/v1/rolling?receiver=${encodeURI(name)}&password=${encodeURI(
+        password
+      )}`
     );
     return res.data || [];
   },
@@ -54,14 +56,14 @@ const rollingService = {
   //     });
   // },
   postRolling: async (receiver, password) => {
-    console.log('postRolling : ', receiver, password)
+    console.log('postRolling : ', receiver, password);
     await baseAPI
       .post(`/api/v1/rolling`, {
         receiver,
-        password
+        password,
       })
       .then((res) => {
-        const { status, message } = res.data; 
+        const { status, message } = res.data;
 
         console.log('postRolling : ', message);
         console.log(status, message);
@@ -87,29 +89,34 @@ const rollingService = {
   //       return 0;
   //     });
   // },
-  postRollingContent: async (rolling_id, font, sort, color, backgroundColor) => {
-    const res = await baseAPI
-      .post(`/api/v1/rolling/${rolling_id}/content`, {
-        font,
-        sort,
-        color,
-        backgroundColor
-      });
+  postRollingContent: async (
+    rolling_id,
+    font,
+    sort,
+    color,
+    backgroundColor
+  ) => {
+    const res = await baseAPI.post(`/api/v1/rolling/${rolling_id}/content`, {
+      font,
+      sort,
+      color,
+      backgroundColor,
+    });
 
-      const { status, message } = res.data;
-      console.log('postRollingContent : ', message);
+    const { status, message } = res.data;
+    console.log('postRollingContent : ', message);
 
-      if(status == 201) {
-        return message;
-      } 
+    if (status == 201) {
+      return message;
+    }
 
-      throw Error(message);
+    throw Error(message);
   },
 
-  deleteRollingContent: async(rolling_id) => {
-    const res = await baseAPI.delete(`/api/v1/rolling/content/${rolling_id}`)
-    
-    const { status, message} = res.data;
+  deleteRollingContent: async (rolling_id) => {
+    const res = await baseAPI.delete(`/api/v1/rolling/content/${rolling_id}`);
+
+    const { status, message } = res.data;
     console.log(message);
 
     if (status == 204) {
@@ -117,7 +124,7 @@ const rollingService = {
     }
 
     throw new Error(message);
-  }
+  },
 };
 
 export default rollingService;

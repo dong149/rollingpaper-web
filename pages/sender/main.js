@@ -68,22 +68,22 @@ const Main = (props) => {
           <h2 className={classes.title}>to. {name}님</h2>
           <p className={classes.subtitle}>
             {posts.length
-              ? `총 ${posts.length}명에게 축하를 받았어요!`
+              ? `총 ${posts.contents.length}명에게 축하를 받았어요!`
               : `아직 아무도 작성하지 않았어요!`}
           </p>
         </div>
         <Link
           href={{
             pathname: '/sender/share',
-            query: { name: name, num: num, id: rolling._id },
+            query: { name: name, num: num, id: posts.rollingpaperId },
           }}
         >
           <button className={classes.buttonSmall}>공유하기</button>
         </Link>
       </Header>
       <div className={classes.cardWrapper}>
-        {posts.length ? (
-          <Cards content={posts} linked={false}/>
+        {posts.contents.length ? (
+          <Cards content={posts.contents} linked={false} />
         ) : (
           <div>더미</div>
         )}
@@ -92,7 +92,7 @@ const Main = (props) => {
         <Link
           href={{
             pathname: '/sender/editor',
-            query: { name: name, num: num },
+            query: { name: name, num: num, id: posts.rollingpaperId },
           }}
         >
           <Buttons full={true}>
