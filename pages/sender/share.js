@@ -57,43 +57,44 @@ const Share = (props) => {
       fail: function (error) {
         console.log(error);
       },
-      //   window.Kakao.Link.createDefaultButton({
-      //     container: '#kakao-link-btn-receiver',
-      //     objectType: 'feed',
-      //     content: {
-      //       title: `${name}님 생일 축하드립니다!`,
-      //       description: '당신만을 위한 세상에 하나 뿐인 롤링 페이퍼.',
-      //       imageUrl:
-      //         'https://github.com/dong149/image_resources/blob/master/rollingpaper/present.png?raw=true',
+    }),
+      window.Kakao.Link.createDefaultButton({
+        container: '#kakao-link-btn-receiver',
+        objectType: 'feed',
+        content: {
+          title: `${name}님 생일 축하드립니다!`,
+          description: '당신만을 위한 세상에 하나 뿐인 롤링 페이퍼.',
+          imageUrl:
+            'https://github.com/dong149/image_resources/blob/master/rollingpaper/present.png?raw=true',
 
-      //       link: {
-      //         webUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
-      //         mobileWebUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
-      //       },
-      //     },
-      //     social: {
-      //       likeCount: 100,
-      //       commentCount: 202,
-      //       sharedCount: 303,
-      //     },
-      //     buttons: [
-      //       {
-      //         title: '열어보기',
-      //         link: {
-      //           webUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
-      //           mobileWebUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
-      //         },
-      //       },
-      //     ],
-      //     success: function (response) {
-      //       console.log(response);
-      //     },
-      //     fail: function (error) {
-      //       console.log(error);
-      //     },
-      //   });
-    });
+          link: {
+            webUrl: `https://rollingpaper.site/receiver/main?name=${name}&num=${num}`,
+            mobileWebUrl: `https://rollingpaper.site/receiver/main?name=${name}&num=${num}`,
+          },
+        },
+        social: {
+          likeCount: 100,
+          commentCount: 202,
+          sharedCount: 303,
+        },
+        buttons: [
+          {
+            title: '열어보기',
+            link: {
+              webUrl: `https://rollingpaper.site/receiver/main?name=${name}&num=${num}`,
+              mobileWebUrl: `https://rollingpaper.site/receiver/main?name=${name}&num=${num}`,
+            },
+          },
+        ],
+        success: function (response) {
+          console.log(response);
+        },
+        fail: function (error) {
+          console.log(error);
+        },
+      });
   });
+
   return (
     <Layouts>
       <div className={classes.main}>
@@ -110,9 +111,14 @@ const Share = (props) => {
         <a id="kakao-link-btn" style={{ width: '100%', marginBottom: '16px' }}>
           <Buttons full={true}>준비하는 친구들에게 공유</Buttons>
         </a>
-        <Buttons full={true} light={true}>
-          주인공에게 공유
-        </Buttons>
+        <a
+          id="kakao-link-btn-receiver"
+          style={{ width: '100%', marginBottom: '16px' }}
+        >
+          <Buttons full={true} light={true}>
+            주인공에게 공유
+          </Buttons>
+        </a>
       </StickyFooter>
     </Layouts>
   );
@@ -121,9 +127,7 @@ const Share = (props) => {
 Share.getInitialProps = async (context) => {
   const name = context.query.name;
   const num = context.query.num;
-  // const res = await rollingService.getRollingByName(name, num);
   return {
-    // rolling: res[0],
     name: name,
     num: num,
   };
