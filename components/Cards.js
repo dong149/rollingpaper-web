@@ -56,16 +56,6 @@ const styledRandom = (i, bgColor) => {
       y +
       'px)',
     backgroundColor: `${bgColor}`,
-<<<<<<< HEAD
-    border: 0,
-    borderRadius: '20px',
-    padding: '10px',
-    color: `${color}`,
-    fontFamily: `${font}`,
-    textAlign: `${sort}`,
-    textDecoration: 'none',
-=======
->>>>>>> feat: Card 글자수 넘칠 때 깨지는 이슈 수정 (#68)
   };
 };
 
@@ -101,17 +91,6 @@ const Cards = (props) => {
                   <a
                     elevation={0}
                     className={classes.card}
-<<<<<<< HEAD
-                    style={styledRandom(
-                      i,
-                      value.font,
-                      value.sort,
-                      value.color,
-                      value.backgroundColor
-                    )}
-                  >
-                    {value.content}
-=======
                     style={styledRandom(i, value.backgroundColor)}
                   >
                     <p
@@ -124,7 +103,6 @@ const Cards = (props) => {
                     >
                       {value.content}
                     </p>
->>>>>>> feat: Card 글자수 넘칠 때 깨지는 이슈 수정 (#68)
                   </a>
                 </Link>
               ) : (
