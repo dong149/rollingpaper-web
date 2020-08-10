@@ -54,7 +54,7 @@ const Main = (props) => {
   const componentRef = useRef();
   const layoutRef = useRef();
   return (
-    <>
+    <body style={{ backgroundColor: '#F6F6F6' }}>
       <Confetti width={layoutRef.width} height={layoutRef.height} />
       <Layouts className={classes.root} bgColor="#F7F7F7">
         <Header>
@@ -65,7 +65,7 @@ const Main = (props) => {
                 ? `총 ${posts.length}명에게 축하를 받았어요!`
                 : `아직 아무도 작성하지 않았어요!`}
             </p>
-            </div>
+          </div>
           {/* TODO: 주인공 페이지에서 공유하기 버튼 임시 삭제 */}
           {/* <button className={classes.buttonSmall}>공유하기</button> */}
         </Header>
@@ -87,7 +87,7 @@ const Main = (props) => {
           </Buttons>
         </StickyFooter>
       </Layouts>
-    </>
+    </body>
   );
 };
 
@@ -99,7 +99,7 @@ Main.getInitialProps = async (context) => {
   return {
     posts: res.data,
     name: name,
-    num: num
+    num: num,
   };
 };
 
