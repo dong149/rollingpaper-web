@@ -7,24 +7,45 @@
   "license": "MIT",
   "dependencies": {
     "@fullpage/react-fullpage": "0.1.17",
+    "@material-ui/core": "^4.11.0",
+    "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "1.0.1",
     "axios": "0.19.2",
+    "file-saver": "2.0.2",
+    "html2canvas": "1.0.0-rc.5",
     "next": "9.4.4",
+    "next-fonts": "1.4.0",
     "nextjs-fonts": "0.22.0",
     "node-sass": "4.14.1",
     "particles-bg": "2.5.0",
     "react": "16.13.1",
+    "react-confetti": "6.0.0",
+    "react-contenteditable": "3.3.5",
     "react-copy-to-clipboard": "5.0.2",
     "react-countup": "4.3.3",
     "react-dom": "16.13.1",
     "react-input-autosize": "2.2.2",
+    "react-modal": "3.11.2",
+    "react-slick": "^0.27.2-beta-1",
     "react-textarea-autosize": "8.2.0",
     "react-visibility-sensor": "5.1.1",
+    "slick-carousel": "^1.8.1",
     "wired-elements": "2.1.2"
   },
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "css-loader": "^4.2.0",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.5",
+    "file-loader": "^6.0.0",
+    "prettier": "2.0.5",
+    "url-loader": "^4.1.0"
   }
 }

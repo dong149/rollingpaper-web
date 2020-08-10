@@ -11,7 +11,7 @@ import "../styles/post.scss";
 import Head from "next/head";
 import ReactFullpage from "@fullpage/react-fullpage";
 const Papers = (props) => {
-  const { rolling } = props;
+  const { rolling, name, password } = props;
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
   const [error, setError] = useState("");
@@ -23,29 +23,22 @@ const Papers = (props) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const router = useRouter();
   const [test, setTest] = useState();
-  // console.log(rolling);
-  const id = rolling._id;
-  const name = rolling.name;
-  const password = rolling.password;
-  console.log("id", id);
+
   let encName = encodeURI(name);
-  // console.log(encName);
-  // console.log(name);
+
   useEffect(() => {
     const getContents = async () => {
       try {
-        console.log(id);
-        await rollingService.getRollingContent(id).then((res) => {
-          console.log(res);
-          setContents(res);
-          if (!isEmpty(res)) {
-            setCount(res.length);
-          }
-        });
+        setContents(rolling);
+
+        if (!isEmpty(rolling)) {
+          setCount(rolling.length);
+        }
       } catch (err) {
         console.log(err);
       }
     };
+    
     getContents();
   }, [isSubmit]);
   useEffect(() => {
@@ -97,8 +90,8 @@ const Papers = (props) => {
           "https://github.com/dong149/image_resources/blob/master/rollingpaper/present.png?raw=true",
 
         link: {
-          webUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
-          mobileWebUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
+          webUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}`,
+          mobileWebUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}`,
         },
       },
       social: {
@@ -110,8 +103,8 @@ const Papers = (props) => {
         {
           title: "열어보기",
           link: {
-            webUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
-            mobileWebUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}&id=${id}`,
+            webUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}`,
+            mobileWebUrl: `https://rollingpaper.site/p/[receiver]?name=${name}&pw=${password}`,
           },
         },
       ],
@@ -130,13 +123,16 @@ const Papers = (props) => {
         return;
       }
       await rollingService
+        // .postRollingContent({
+        //   name: name,
+        //   content: content,
+        //   author: author,
+        //   password: password,
+        //   rolling_id: id,
+        //   color: color,
+        // })
         .postRollingContent({
-          name: name,
-          content: content,
-          author: author,
-          password: password,
-          rolling_id: id,
-          color: color,
+          image
         })
         .then((res) => {
           alert("성공적으로 등록되었습니다.");
@@ -173,18 +169,7 @@ const Papers = (props) => {
             <ReactFullpage.Wrapper>
               <div className="section">
                 <div className="layout">
-                  <a href="https://rollingpaper.site">
-                    <img
-                      src="/r.png"
-                      alt="롤링페이퍼 파비콘"
-                      className="rolling-home-btn"
-                    />
-                  </a>
-                  <div className="question-text">
-                    {name}님
-                    <br />
-                    롤링페이퍼
-                  </div>
+                  <div className="question-text">to. {name}님</div>
                   <br />
                   <div className="question-text">현재까지 {count}명 작성</div>
                   <div
@@ -210,8 +195,8 @@ const Papers = (props) => {
                     <span>작성페이지 링크 복사</span>
                   </CopyToClipboard>
                   <Link
-                    href={`/p/[receiver]?name=${name}&pw=${password}&id=${id}`}
-                    as={`/p/[receiver]?name=${name}&pw=${password}&id=${id}`}
+                    href={`/p/[receiver]?name=${name}&pw=${password}`}
+                    as={`/p/[receiver]?name=${name}&pw=${password}`}
                   >
                     <div className="create-btn" name={name}>
                       <span>롤링페이지 현황 보기</span>
@@ -548,7 +533,9 @@ Papers.getInitialProps = async (context) => {
   const res = await rollingService.getRollingByName(name, password);
   console.log(res);
   return {
-    rolling: res[0],
+    rolling: res.data,
+    name: name,
+    password: password
   };
 };
 

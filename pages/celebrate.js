@@ -46,29 +46,40 @@ const Index = () => {
           content="롤링페이퍼,선물,생일,여자친구,100일,친구"
         />
       </Head>
+
       <div className={`section ${classes.sectionWrapper}`}>
         <Layouts>
-          <div className={classes.main}>
-            <span>롤링페이퍼로</span>
+          <div className={classes.main} style={{ marginBottom: '16px' }}>
+            <span>지금까지</span>
             <br />
-            <span>마음을 선물하세요.</span>
+            <CountUp end={3243} redraw={true}>
+              {({ countUpRef, start }) => (
+                <VisibilitySensor onChange={start} delayedCall>
+                  <span ref={countUpRef} />
+                </VisibilitySensor>
+              )}
+            </CountUp>
+            <span>명이 작성하고</span>
+            <br />
+            <CountUp end={132} redraw={true}>
+              {({ countUpRef, start }) => (
+                <VisibilitySensor onChange={start} delayedCall>
+                  <span ref={countUpRef} />
+                </VisibilitySensor>
+              )}
+            </CountUp>
+            <span>명이 축하를</span>
+            <br />
+            <span>받았어요!</span>
           </div>
-          <img
-            className={classes.rolling}
-            src="/images/pen.jpeg"
-            alt="롤링페이퍼 메인 이미지"
-          />
           <StickyFooter position="absolute">
             <Link
               href={{
-                pathname: '/celebrate',
+                pathname: '/create',
               }}
             >
-              <Buttons full={true}>롤링페이퍼 생성 및 조회하기</Buttons>
+              <Buttons full={true}>다음</Buttons>
             </Link>
-            {/* <Buttons full={true} light={true}>
-              내 롤링페이퍼 찾기
-            </Buttons> */}
           </StickyFooter>
         </Layouts>
       </div>
