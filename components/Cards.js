@@ -17,15 +17,28 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: '28px',
   },
   card: {
-    display: 'block',
+    display: '-webkit-box',
+    overflow: 'hidden',
     width: '123px',
     height: '169px',
     // background: (props) => props.bgColor,
-    border: '1px solid #666',
+    padding: '10px',
+    borderRadius: '13px',
+    lineHeight: '1.5em',
+    wordBreak: 'break-all',
+    textOverflow: 'ellipsis',
+    lineClamp: 7,
+    boxOrient: 'vertical',
+  },
+  cardInner: {
+    flex: 1,
+    overflow: 'hidden',
+    fontSize: '13px',
+    textOverflow: 'ellipsis',
   },
 }));
 
-const styledRandom = (i, font, sort, color, bgColor) => {
+const styledRandom = (i, bgColor) => {
   // TODO: 좀 더 자연스러운 랜덤 화면 구현
   let hashKey = (13 / (i + 1) + 0.2) % 1;
   let x = Math.floor(hashKey * 40);
@@ -43,6 +56,7 @@ const styledRandom = (i, font, sort, color, bgColor) => {
       y +
       'px)',
     backgroundColor: `${bgColor}`,
+<<<<<<< HEAD
     border: 0,
     borderRadius: '20px',
     padding: '10px',
@@ -50,6 +64,8 @@ const styledRandom = (i, font, sort, color, bgColor) => {
     fontFamily: `${font}`,
     textAlign: `${sort}`,
     textDecoration: 'none',
+=======
+>>>>>>> feat: Card 글자수 넘칠 때 깨지는 이슈 수정 (#68)
   };
 };
 
@@ -85,6 +101,7 @@ const Cards = (props) => {
                   <a
                     elevation={0}
                     className={classes.card}
+<<<<<<< HEAD
                     style={styledRandom(
                       i,
                       value.font,
@@ -94,21 +111,38 @@ const Cards = (props) => {
                     )}
                   >
                     {value.content}
+=======
+                    style={styledRandom(i, value.backgroundColor)}
+                  >
+                    <p
+                      className={classes.cardInner}
+                      style={{
+                        color: value.color,
+                        fontFamily: value.font,
+                        textAlign: value.sort,
+                      }}
+                    >
+                      {value.content}
+                    </p>
+>>>>>>> feat: Card 글자수 넘칠 때 깨지는 이슈 수정 (#68)
                   </a>
                 </Link>
               ) : (
                 <div
                   elevation={0}
                   className={classes.card}
-                  style={styledRandom(
-                    i,
-                    value.font,
-                    value.sort,
-                    value.color,
-                    value.backgroundColor
-                  )}
+                  style={styledRandom(i, value.backgroundColor)}
                 >
-                  {value.content}
+                  <p
+                    className={classes.cardInner}
+                    style={{
+                      color: value.color,
+                      fontFamily: value.font,
+                      textAlign: value.sort,
+                    }}
+                  >
+                    {value.content}
+                  </p>
                 </div>
               )}
             </Grid>
