@@ -26,13 +26,23 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 10px',
   },
   card: {
+    display: 'flex',
     overflow: 'hidden',
     // width: '317px',
     height: '426px',
     marginTop: '35px',
+    padding: '16px',
+    textAlign: 'center',
+    wordBreak: 'break-all',
     background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
+  },
+  cardInner: {
+    overflow: 'scroll',
+    flex: 1,
+    fontSize: '20px',
+    lineHeight: '1.5em',
   },
   cardActive: {
     marginTop: 0,
@@ -53,9 +63,9 @@ const useStyles = makeStyles((theme) => ({
   },
   sender: {
     zIndex: 10,
-    marginTop: '-33px',
-    marginLeft: '24px',
-    textAlign: 'left',
+    marginTop: '10px',
+    marginRight: '10px',
+    textAlign: 'right',
     fontSize: '24px',
   },
   cardCenter: {
@@ -135,11 +145,11 @@ const Detail = (props) => {
             <div className={classes.cardWrapper}>
               <div
                 key={i}
-                className={
-                  i === sliderIndex - 1 ? classes.cardActive : classes.card
-                }
+                className={`
+                ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
+                `}
               >
-                {value.content}
+                <p className={classes.cardInner}>{value.content}</p>
               </div>
             </div>
             <div className={classes.sender}>

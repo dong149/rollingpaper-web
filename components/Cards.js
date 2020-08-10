@@ -17,15 +17,28 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: '28px',
   },
   card: {
-    display: 'block',
+    display: '-webkit-box',
+    overflow: 'hidden',
     width: '123px',
     height: '169px',
     // background: (props) => props.bgColor,
-    border: '1px solid #666',
+    padding: '10px',
+    borderRadius: '13px',
+    lineHeight: '1.5em',
+    wordBreak: 'break-all',
+    textOverflow: 'ellipsis',
+    lineClamp: 7,
+    boxOrient: 'vertical',
+  },
+  cardInner: {
+    flex: 1,
+    overflow: 'hidden',
+    fontSize: '13px',
+    textOverflow: 'ellipsis',
   },
 }));
 
-const styledRandom = (i, font, sort, color, bgColor) => {
+const styledRandom = (i, bgColor) => {
   // TODO: 좀 더 자연스러운 랜덤 화면 구현
   let hashKey = (13 / (i + 1) + 0.2) % 1;
   let x = Math.floor(hashKey * 40);
@@ -43,13 +56,6 @@ const styledRandom = (i, font, sort, color, bgColor) => {
       y +
       'px)',
     backgroundColor: `${bgColor}`,
-    border: 0,
-    borderRadius: '20px',
-    padding: '10px',
-    color: `${color}`,
-    fontFamily: `${font}`,
-    textAlign: `${sort}`,
-    textDecoration: 'none',
   };
 };
 
@@ -85,30 +91,36 @@ const Cards = (props) => {
                   <a
                     elevation={0}
                     className={classes.card}
-                    style={styledRandom(
-                      i,
-                      value.font,
-                      value.sort,
-                      value.color,
-                      value.backgroundColor
-                    )}
+                    style={styledRandom(i, value.backgroundColor)}
                   >
-                    {value.content}
+                    <p
+                      className={classes.cardInner}
+                      style={{
+                        color: value.color,
+                        fontFamily: value.font,
+                        textAlign: value.sort,
+                      }}
+                    >
+                      {value.content}
+                    </p>
                   </a>
                 </Link>
               ) : (
                 <div
                   elevation={0}
                   className={classes.card}
-                  style={styledRandom(
-                    i,
-                    value.font,
-                    value.sort,
-                    value.color,
-                    value.backgroundColor
-                  )}
+                  style={styledRandom(i, value.backgroundColor)}
                 >
-                  {value.content}
+                  <p
+                    className={classes.cardInner}
+                    style={{
+                      color: value.color,
+                      fontFamily: value.font,
+                      textAlign: value.sort,
+                    }}
+                  >
+                    {value.content}
+                  </p>
                 </div>
               )}
             </Grid>
