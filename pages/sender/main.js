@@ -7,6 +7,7 @@ import StickyFooter from '../../components/StickyFooter';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import Link from 'next/link';
+import { Head } from 'next/document';
 
 const cardList = Array(1).fill('카드'); // 임시 배열
 
@@ -62,50 +63,55 @@ const Main = (props) => {
   console.log('posts, name, num의 props 값 : ', posts, name, num);
 
   return (
-    <Layouts className={classes.root} bgColor="#F7F7F7">
-      <Header>
-        <div>
-          <h2 className={classes.title}>to. {name}님</h2>
-          <p className={classes.subtitle}>
-            {posts.contents.length
-              ? `총 ${posts.contents.length}명에게 축하를 받았어요!`
-              : `아직 아무도 작성하지 않았어요!`}
-          </p>
+    <body style={{ backgroundColor: '#F6F6F6' }}>
+      <Layouts className={classes.root} bgColor="#F7F7F7">
+        {/* <Head>
+        <style>{'body { background-color: red; }'}</style>
+      </Head> */}
+        <Header>
+          <div>
+            <h2 className={classes.title}>to. {name}님</h2>
+            <p className={classes.subtitle}>
+              {posts.contents.length
+                ? `총 ${posts.contents.length}명에게 축하를 받았어요!`
+                : `아직 아무도 작성하지 않았어요!`}
+            </p>
+          </div>
+          <Link
+            href={{
+              pathname: '/sender/share',
+              query: { name: name, num: num, id: posts.rollingpaperId },
+            }}
+          >
+            <button className={classes.buttonSmall}>공유하기</button>
+          </Link>
+        </Header>
+        <div className={classes.cardWrapper}>
+          {posts.contents.length ? (
+            <Cards content={posts.contents} linked={false} />
+          ) : (
+            <div>더미</div>
+          )}
         </div>
-        <Link
-          href={{
-            pathname: '/sender/share',
-            query: { name: name, num: num, id: posts.rollingpaperId },
-          }}
-        >
-          <button className={classes.buttonSmall}>공유하기</button>
-        </Link>
-      </Header>
-      <div className={classes.cardWrapper}>
-        {posts.contents.length ? (
-          <Cards content={posts.contents} linked={false} />
-        ) : (
-          <div>더미</div>
-        )}
-      </div>
-      <StickyFooter position="absolute">
-        <Link
-          href={{
-            pathname: '/sender/editor',
-            query: { name: name, num: num, id: posts.rollingpaperId },
-          }}
-        >
-          <Buttons full={true}>
-            <img
-              src="/icons/write-light-icon.png"
-              alt=""
-              className={classes.icon}
-            />
-            롤링페이퍼 작성하기
-          </Buttons>
-        </Link>
-      </StickyFooter>
-    </Layouts>
+        <StickyFooter position="absolute">
+          <Link
+            href={{
+              pathname: '/sender/editor',
+              query: { name: name, num: num, id: posts.rollingpaperId },
+            }}
+          >
+            <Buttons full={true}>
+              <img
+                src="/icons/write-light-icon.png"
+                alt=""
+                className={classes.icon}
+              />
+              롤링페이퍼 작성하기
+            </Buttons>
+          </Link>
+        </StickyFooter>
+      </Layouts>
+    </body>
   );
 };
 
