@@ -10,6 +10,7 @@ import StickyFooter from '../../components/StickyFooter';
 import Link from 'next/link';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import rollingService from '../../services/rollingService';
 
 const cardList = Array(10).fill('카드'); // 임시 배열
 
@@ -76,7 +77,8 @@ const Detail = (props) => {
   const classes = useStyles();
   const router = useRouter();
   const customeSlider = useRef();
-  const currentIndex = Number(router.query.index ?? 0);
+  const { posts, name, num, index } = props;
+  const currentIndex = Number(index ?? 0);
   const [sliderIndex, setSliderIndex] = useState(currentIndex + 1);
   const settings = {
     className: 'center',
@@ -102,7 +104,12 @@ const Detail = (props) => {
   return (
     <Layouts className={classes.root}>
       <Header>
-        <Link href={{ pathname: '/receiver/main' }}>
+        <Link
+          href={{
+            pathname: '/receiver/main',
+            query: { name: name, num: num },
+          }}
+        >
           <a className={classes.iconWrapper}>
             <img
               src="/icons/back-icon.png"
@@ -112,7 +119,7 @@ const Detail = (props) => {
           </a>
         </Link>
         <div className={classes.title}>
-          <strong>{sliderIndex}</strong> / {cardList.length}
+          <strong>{sliderIndex}</strong> / {posts.contents.length}
         </div>
         <button className={classes.iconWrapper}>
           <img
@@ -123,22 +130,26 @@ const Detail = (props) => {
         </button>
       </Header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>
-        {cardList.map((value, i) => (
-          <div className={classes.cardWrapper}>
-            <div
-              key={i}
-              className={
-                i === sliderIndex - 1 ? classes.cardActive : classes.card
-              }
-            >
-              {value} {i}
+        {posts.contents.map((value, i) => (
+          <>
+            <div className={classes.cardWrapper}>
+              <div
+                key={i}
+                className={
+                  i === sliderIndex - 1 ? classes.cardActive : classes.card
+                }
+              >
+                {value.content}
+              </div>
             </div>
-          </div>
+            <div className={classes.sender}>
+              <b>From.</b>
+              {value.author} {sliderIndex}
+            </div>
+          </>
         ))}
       </Slider>
-      <div className={classes.sender}>
-        <b>From.</b> 지현 {sliderIndex}
-      </div>
+
       <StickyFooter>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -155,6 +166,20 @@ const Detail = (props) => {
       </StickyFooter>
     </Layouts>
   );
+};
+
+Detail.getInitialProps = async (context) => {
+  const name = context.query.name;
+  const num = context.query.num;
+  const index = context.query.index;
+  const res = await rollingService.getRollingByName(name, num);
+
+  return {
+    posts: res.data,
+    name: name,
+    num: num,
+    index: index,
+  };
 };
 
 export default Detail;

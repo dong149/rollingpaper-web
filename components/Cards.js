@@ -49,12 +49,13 @@ const styledRandom = (i, font, sort, color, bgColor) => {
     color: `${color}`,
     fontFamily: `${font}`,
     textAlign: `${sort}`,
+    textDecoration: 'none',
   };
 };
 
 const Cards = (props) => {
   const classes = useStyles();
-  const { content, linked } = props;
+  const { name, num, content, linked } = props;
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   return (
     <div className={classes.root}>
@@ -76,14 +77,23 @@ const Cards = (props) => {
             >
               {linked ? (
                 <Link
-                  href={{ pathname: '/receiver/detail', query: { index: i } }}
+                  href={{
+                    pathname: '/receiver/detail',
+                    query: { name: name, num: num, index: i },
+                  }}
                 >
                   <a
                     elevation={0}
                     className={classes.card}
-                    style={styledRandom(i)}
+                    style={styledRandom(
+                      i,
+                      value.font,
+                      value.sort,
+                      value.color,
+                      value.backgroundColor
+                    )}
                   >
-                    카드 {i + 1}
+                    {value.content}
                   </a>
                 </Link>
               ) : (
