@@ -61,8 +61,8 @@ const Main = (props) => {
           <div>
             <h2 className={classes.title}>to. {name}님</h2>
             <p className={classes.subtitle}>
-              {posts.length
-                ? `총 ${posts.length}명에게 축하를 받았어요!`
+              {posts.contents.length
+                ? `총 ${posts.contents.length}명에게 축하를 받았어요!`
                 : `아직 아무도 작성하지 않았어요!`}
             </p>
           </div>
@@ -70,8 +70,8 @@ const Main = (props) => {
           {/* <button className={classes.buttonSmall}>공유하기</button> */}
         </Header>
         <div className={classes.cardWrapper} ref={componentRef}>
-          {cardList.length ? (
-            <Cards content={cardList} linked />
+          {posts.contents.length ? (
+            <Cards name={name} num={num} content={posts.contents} linked />
           ) : (
             <div>더미</div>
           )}
