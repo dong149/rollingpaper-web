@@ -55,7 +55,7 @@ const Index = () => {
           </div>
           <img
             className={classes.rolling}
-            src="/images/pen.jpeg"
+            src="/images/main.jpg"
             alt="롤링페이퍼 메인 이미지"
           />
           <StickyFooter position="absolute">

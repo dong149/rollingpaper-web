@@ -27,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
   cardWrapper: {
     marginTop: '14px',
     background: '#FFF',
+    borderTopLeftRadius: '28px',
+    borderTopRightRadius: '28px',
   },
   title: {
     margin: '0',
@@ -97,9 +99,15 @@ const Main = (props) => {
               content={posts.contents}
               linked={false}
               setIsPostsUpdated={setIsPostsUpdated}
+              name={name}
+              num={num}
             />
           ) : (
-            <div>더미</div>
+            <div
+              style={{
+                minHeight: 'calc(100vh - 150px)',
+              }}
+            ></div>
           )}
         </div>
         <StickyFooter position="absolute">

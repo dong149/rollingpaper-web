@@ -16,9 +16,10 @@ const useStyles = makeStyles({
   main: {
     width: '100%',
     textAlign: 'left',
-    fontSize: '32px',
+    fontSize: '34px',
     fontWeight: 'bold',
-    lineHeight: '46px',
+    lineHeight: '60px',
+    marginTop: '155px',
   },
   sectionWrapper: {
     position: 'relative',
@@ -66,7 +67,7 @@ const Index = () => {
             <AutosizeInput
               inputStyle={{
                 border: 0,
-                fontSize: 32,
+                fontSize: 34,
                 outline: 'none',
                 display: 'inline-block',
                 fontWeight: 'lighter',
@@ -85,15 +86,14 @@ const Index = () => {
             />
             <br />
             <span>이에요.</span>
-            <br />
-            <br />
+            <div style={{ height: '52px', width: '100%' }}></div>
             <span>우리만의 신호는</span>
             <br />
             <AutosizeInput
               type="password"
               inputStyle={{
                 border: 0,
-                fontSize: '32px',
+                fontSize: '34px',
                 outline: 'none',
                 display: 'inline-block',
                 padding: '0',
