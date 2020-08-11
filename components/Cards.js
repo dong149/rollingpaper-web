@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: 'ellipsis',
     lineClamp: 7,
     boxOrient: 'vertical',
+    textDecoration: 'none',
   },
   cardInner: {
     flex: 1,
@@ -114,9 +115,9 @@ const Cards = (props) => {
                 item
                 xs={4}
                 key={i}
-                onClick={() => {
-                  setModalIsOpen(true);
-                }}
+                // onClick={() => {
+                //   setModalIsOpen(true);
+                // }}
               >
                 {linked ? (
                   <Link
@@ -143,22 +144,29 @@ const Cards = (props) => {
                     </a>
                   </Link>
                 ) : (
-                  <div
-                    elevation={0}
-                    className={classes.card}
-                    style={styledRandom(i, value.backgroundColor)}
+                  <Link
+                    href={{
+                      pathname: '/sender/detail',
+                      query: { name: name, num: num, index: i },
+                    }}
                   >
-                    <p
-                      className={classes.cardInner}
-                      style={{
-                        color: value.color,
-                        fontFamily: value.font,
-                        textAlign: value.sort,
-                      }}
+                    <a
+                      elevation={0}
+                      className={classes.card}
+                      style={styledRandom(i, value.backgroundColor)}
                     >
-                      {value.content}
-                    </p>
-                  </div>
+                      <p
+                        className={classes.cardInner}
+                        style={{
+                          color: value.color,
+                          fontFamily: value.font,
+                          textAlign: value.sort,
+                        }}
+                      >
+                        {value.content}
+                      </p>
+                    </a>
+                  </Link>
                 )}
               </Grid>
             </>

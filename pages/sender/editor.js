@@ -6,13 +6,17 @@ import Layouts from '../../components/Layouts';
 import Header from '../../components/Header';
 import StickyFooter from '../../components/StickyFooter';
 import Buttons from '../../components/Buttons';
-import Modal from 'react-modal';
 import dynamic from 'next/dynamic';
 import FontModal from '../../components/FontModal';
 import ColorModal from '../../components/ColorModal';
 import ContentEditable from 'react-contenteditable';
 import rollingService from '../../services/rollingService';
 import { isEmpty } from '../../functions';
+import Modal, {
+  ModalTitie,
+  ModalFullButton,
+  ModalButtonWrapper,
+} from '../../components/Modal';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -98,6 +102,7 @@ const Editor = (props) => {
   const classes = useStyles();
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
+  const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const [content, setContent] = useState('');
   const [font, setFont] = useState('NanumBrush');
   const [sort, setSort] = useState('center');
@@ -117,15 +122,16 @@ const Editor = (props) => {
           color,
           backgroundColor
         )
-        .then(async (res) => {
+        .then((res) => {
           console.log(res);
+          setSuccessModalIsOpen(true);
           setContent('');
           setAuthor('');
-          alert('성공적으로 저장되었습니다.');
+          return 200;
         });
     } catch (err) {
       console.log(err);
-      return;
+      return 400;
     }
   };
 
@@ -149,7 +155,21 @@ const Editor = (props) => {
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
       />
-
+      <Modal
+        modalIsOpen={successModalIsOpen}
+        setModalIsOpen={setSuccessModalIsOpen}
+      >
+        <ModalTitie>
+          성공적으로
+          <br />
+          저장되었습니다.
+        </ModalTitie>
+        <ModalButtonWrapper>
+          <ModalFullButton onClick={() => setSuccessModalIsOpen(false)}>
+            확인
+          </ModalFullButton>
+        </ModalButtonWrapper>
+      </Modal>
       <div>
         <Link
           href={{
