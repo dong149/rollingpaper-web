@@ -7,9 +7,6 @@ import StickyFooter from '../../components/StickyFooter';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import Link from 'next/link';
-import { Head } from 'next/document';
-
-const cardList = Array(1).fill('카드'); // 임시 배열
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,9 +62,6 @@ const Main = (props) => {
   return (
     <body style={{ backgroundColor: '#F6F6F6' }}>
       <Layouts className={classes.root} bgColor="#F7F7F7">
-        {/* <Head>
-        <style>{'body { background-color: red; }'}</style>
-      </Head> */}
         <Header>
           <div>
             <h2 className={classes.title}>to. {name}님</h2>

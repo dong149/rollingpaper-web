@@ -47,6 +47,15 @@ const useStyles = makeStyles({
     textAlign: 'center',
     border: '1px solid #f6f6f6',
   },
+  modalFullButton: {
+    flex: '0 0 100%',
+    height: '56px',
+    fontSize: '18px',
+    fontWeight: (props) => (props.focus ? 'bold' : 'normal'),
+    color: (props) => (props.focus ? '#000' : '#666'),
+    textAlign: 'center',
+    border: '1px solid #f6f6f6',
+  },
 });
 const customModalStyles = {
   overlay: {
@@ -98,6 +107,15 @@ export const ModalButton = (props) => {
   const classes = useStyles(props);
   return (
     <button onClick={onClick} className={classes.modalButton}>
+      {children}
+    </button>
+  );
+};
+export const ModalFullButton = (props) => {
+  const { children, onClick, focus } = props;
+  const classes = useStyles(props);
+  return (
+    <button onClick={onClick} className={classes.modalFullButton}>
       {children}
     </button>
   );
