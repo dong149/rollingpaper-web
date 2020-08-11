@@ -22,24 +22,32 @@ const useStyles = makeStyles((theme) => ({
     background: '#FFF',
   },
   textarea: {
-    display: 'table',
+    display: 'flex',
     margin: '0 auto',
     width: '100%',
     height: '462px',
     marginTop: '30px',
+    padding: '16px',
     borderRadius: '13px',
     backgroundColor: '#f2f2f2',
     textAlign: 'center',
-
+    wordBreak: 'break-all',
     '& div': {
-      maxWidth: '100%',
-      display: 'table-cell',
-      verticalAlign: 'middle',
-      fontSize: '30px',
+      flex: '1',
+      overflow: 'scroll',
+      // scrollbarWidth: 'none',
+      // overflowStyle: 'none',
+      wordBreak: 'break-all',
+      fontSize: '20px',
       fontFamily: 'NanumBrush',
+      lineHeight: '1.5em',
       '&:focus': {
         outline: 'none',
       },
+      // TODO: 스크롤바 문제는 의견 물어보고 정할 것
+      // '&::-webkit-scrollbar': {
+      //   display: 'none',
+      // },
     },
   },
   from: {
@@ -191,7 +199,7 @@ const Editor = (props) => {
         />
       </div>
       <div className={classes.from}>
-        <span>From.</span>
+        <span>From. </span>
         <div>
           <input
             type="text"

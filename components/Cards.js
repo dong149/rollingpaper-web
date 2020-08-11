@@ -3,7 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import rollingService from '../services/rollingService';
-import DeleteModal from './DeleteModal';
+import Modal, {
+  ModalTitie,
+  ModalButtonWrapper,
+  ModalButton,
+  ModalFullButton,
+} from './Modal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,15 +22,28 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: '28px',
   },
   card: {
-    display: 'block',
+    display: '-webkit-box',
+    overflow: 'hidden',
     width: '123px',
     height: '169px',
     // background: (props) => props.bgColor,
-    border: '1px solid #666',
+    padding: '10px',
+    borderRadius: '13px',
+    lineHeight: '1.5em',
+    wordBreak: 'break-all',
+    textOverflow: 'ellipsis',
+    lineClamp: 7,
+    boxOrient: 'vertical',
+  },
+  cardInner: {
+    flex: 1,
+    overflow: 'hidden',
+    fontSize: '13px',
+    textOverflow: 'ellipsis',
   },
 }));
 
-const styledRandom = (i, font, sort, color, bgColor) => {
+const styledRandom = (i, bgColor) => {
   // TODO: 좀 더 자연스러운 랜덤 화면 구현
   let hashKey = (13 / (i + 1) + 0.2) % 1;
   let x = Math.floor(hashKey * 40);
@@ -43,75 +61,107 @@ const styledRandom = (i, font, sort, color, bgColor) => {
       y +
       'px)',
     backgroundColor: `${bgColor}`,
-    border: 0,
-    borderRadius: '20px',
-    padding: '10px',
-    color: `${color}`,
-    fontFamily: `${font}`,
-    textAlign: `${sort}`,
-    textDecoration: 'none',
   };
 };
 
 const Cards = (props) => {
   const classes = useStyles();
-  const { name, num, content, linked } = props;
-  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const { name, num, content, linked, setIsPostsUpdated } = props;
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   return (
     <div className={classes.root}>
-      <DeleteModal
-        deleteModalIsOpen={deleteModalIsOpen}
-        setDeleteModalIsOpen={setDeleteModalIsOpen}
-      />
       <Grid container spacing={2}>
         {content.map((value, i) => {
           return (
-            <Grid
-              item
-              xs={4}
-              key={i}
-              onClick={() => {
-                setDeleteModalIsOpen(true);
-                // deletePost(value.id);
-              }}
-            >
-              {linked ? (
-                <Link
-                  href={{
-                    pathname: '/receiver/detail',
-                    query: { name: name, num: num, index: i },
-                  }}
-                >
-                  <a
+            <>
+              <Modal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+                <ModalTitie>
+                  롤링페이퍼를
+                  <br />
+                  정말 삭제하실 건가요?
+                </ModalTitie>
+                <ModalButtonWrapper>
+                  <ModalButton onClick={() => setModalIsOpen(false)}>
+                    취소
+                  </ModalButton>
+                  <ModalButton
+                    onClick={() => {
+                      deletePost(value.id).then((res) => {
+                        setModalIsOpen(false);
+                        if (res === 200) setSuccessModalIsOpen(true);
+                        setIsPostsUpdated(true);
+                      });
+                    }}
+                    focus
+                  >
+                    삭제
+                  </ModalButton>
+                </ModalButtonWrapper>
+              </Modal>
+              <Modal
+                modalIsOpen={successModalIsOpen}
+                setModalIsOpen={setSuccessModalIsOpen}
+              >
+                <ModalTitie>삭제되었습니다.</ModalTitie>
+                <ModalButtonWrapper>
+                  <ModalFullButton onClick={() => setSuccessModalIsOpen(false)}>
+                    확인
+                  </ModalFullButton>
+                </ModalButtonWrapper>
+              </Modal>
+              <Grid
+                item
+                xs={4}
+                key={i}
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
+              >
+                {linked ? (
+                  <Link
+                    href={{
+                      pathname: '/receiver/detail',
+                      query: { name: name, num: num, index: i },
+                    }}
+                  >
+                    <a
+                      elevation={0}
+                      className={classes.card}
+                      style={styledRandom(i, value.backgroundColor)}
+                    >
+                      <p
+                        className={classes.cardInner}
+                        style={{
+                          color: value.color,
+                          fontFamily: value.font,
+                          textAlign: value.sort,
+                        }}
+                      >
+                        {value.content}
+                      </p>
+                    </a>
+                  </Link>
+                ) : (
+                  <div
                     elevation={0}
                     className={classes.card}
-                    style={styledRandom(
-                      i,
-                      value.font,
-                      value.sort,
-                      value.color,
-                      value.backgroundColor
-                    )}
+                    style={styledRandom(i, value.backgroundColor)}
                   >
-                    {value.content}
-                  </a>
-                </Link>
-              ) : (
-                <div
-                  elevation={0}
-                  className={classes.card}
-                  style={styledRandom(
-                    i,
-                    value.font,
-                    value.sort,
-                    value.color,
-                    value.backgroundColor
-                  )}
-                >
-                  {value.content}
-                </div>
-              )}
-            </Grid>
+                    <p
+                      className={classes.cardInner}
+                      style={{
+                        color: value.color,
+                        fontFamily: value.font,
+                        textAlign: value.sort,
+                      }}
+                    >
+                      {value.content}
+                    </p>
+                  </div>
+                )}
+              </Grid>
+            </>
           );
         })}
       </Grid>
@@ -123,10 +173,10 @@ const deletePost = async (rolling_id) => {
   console.log(rolling_id);
 
   try {
-    const res = await rollingService.deleteRollingContent(rolling_id);
-    return res;
+    await rollingService.deleteRollingContent(rolling_id);
+    return 200;
   } catch (error) {
-    alert(error.message);
+    return 400;
   }
 };
 
