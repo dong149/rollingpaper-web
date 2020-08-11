@@ -16,9 +16,10 @@ const useStyles = makeStyles({
   main: {
     width: '100%',
     textAlign: 'left',
-    fontSize: '32px',
+    fontSize: '34px',
     fontWeight: 'bold',
-    lineHeight: '46px',
+    lineHeight: '60px',
+    marginTop: '224px',
   },
   sectionWrapper: {
     position: 'relative',

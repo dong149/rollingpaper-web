@@ -104,7 +104,7 @@ const Share = (props) => {
       </div>
       <img
         className={classes.rolling}
-        src="/images/pen.jpeg"
+        src="/images/share.jpeg"
         alt="롤링페이퍼 메인 이미지"
       />
       <StickyFooter>
