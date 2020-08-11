@@ -56,8 +56,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Main = (props) => {
   const classes = useStyles();
-  const { posts, name, num } = props;
-  console.log('posts, name, num의 props 값 : ', posts, name, num);
+  const { name, num } = props;
+  console.log('name, num의 props 값 : ', name, num);
+  const [posts, setPosts] = useState({ contents: [] });
+  const [isPostsUpdated, setIsPostsUpdated] = useState(false);
+  useEffect(() => {
+    const getPosts = async () => {
+      await rollingService.getRollingByName(name, num).then((res) => {
+        setPosts(res.data);
+      });
+    };
+    getPosts();
+    setIsPostsUpdated(false);
+  }, [isPostsUpdated]);
 
   return (
     <body style={{ backgroundColor: '#F6F6F6' }}>
@@ -82,7 +93,11 @@ const Main = (props) => {
         </Header>
         <div className={classes.cardWrapper}>
           {posts.contents.length ? (
-            <Cards content={posts.contents} linked={false} />
+            <Cards
+              content={posts.contents}
+              linked={false}
+              setIsPostsUpdated={setIsPostsUpdated}
+            />
           ) : (
             <div>더미</div>
           )}
@@ -112,10 +127,10 @@ const Main = (props) => {
 Main.getInitialProps = async (context) => {
   const name = context.query.name;
   const num = context.query.num;
-  const res = await rollingService.getRollingByName(name, num);
+  // const res = await rollingService.getRollingByName(name, num);
 
   return {
-    posts: res.data,
+    // posts: res.data,
     name: name,
     num: num,
   };

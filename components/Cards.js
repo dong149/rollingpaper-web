@@ -66,7 +66,7 @@ const styledRandom = (i, bgColor) => {
 
 const Cards = (props) => {
   const classes = useStyles();
-  const { name, num, content, linked } = props;
+  const { name, num, content, linked, setIsPostsUpdated } = props;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   return (
@@ -90,6 +90,7 @@ const Cards = (props) => {
                       deletePost(value.id).then((res) => {
                         setModalIsOpen(false);
                         if (res === 200) setSuccessModalIsOpen(true);
+                        setIsPostsUpdated(true);
                       });
                     }}
                     focus
