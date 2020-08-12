@@ -13,20 +13,32 @@ const useStyles = makeStyles((theme) => ({
     background: '#222',
     borderRadius: '10px',
     boxShadow: 'none',
-    '&:hover': {
-      border: 'none',
-      background: '#C4C4C4',
-      boxShadow: 'none',
-    },
   },
   btnDark: {
     color: '#fff',
     background: '#342F2F',
+    '&:focus': {
+      border: 'none',
+      backgroundColor: '#342F2F',
+      boxShadow: 'none',
+    },
+    '&:active': {
+      background: '#A3A3A3',
+    },
   },
   btnLight: {
     color: '#000',
     border: '1px solid #A3A3A3',
     background: '#fff',
+    '&:focus': {
+      border: '1px solid #A3A3A3',
+      backgroundColor: '#fff',
+      boxShadow: 'none',
+    },
+    '&:active': {
+      border: '1px solid #A3A3A3',
+      background: '#342f2f',
+    },
   },
 }));
 

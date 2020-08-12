@@ -3,12 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import rollingService from '../services/rollingService';
-import Modal, {
-  ModalTitie,
-  ModalButtonWrapper,
-  ModalButton,
-  ModalFullButton,
-} from './Modal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,49 +62,12 @@ const styledRandom = (i, bgColor) => {
 const Cards = (props) => {
   const classes = useStyles();
   const { name, num, content, linked, setIsPostsUpdated } = props;
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
         {content.map((value, i) => {
           return (
             <div key={i}>
-              <Modal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
-                <ModalTitie>
-                  롤링페이퍼를
-                  <br />
-                  정말 삭제하실 건가요?
-                </ModalTitie>
-                <ModalButtonWrapper>
-                  <ModalButton onClick={() => setModalIsOpen(false)}>
-                    취소
-                  </ModalButton>
-                  <ModalButton
-                    onClick={() => {
-                      deletePost(value.id).then((res) => {
-                        setModalIsOpen(false);
-                        if (res === 200) setSuccessModalIsOpen(true);
-                        setIsPostsUpdated(true);
-                      });
-                    }}
-                    focus
-                  >
-                    삭제
-                  </ModalButton>
-                </ModalButtonWrapper>
-              </Modal>
-              <Modal
-                modalIsOpen={successModalIsOpen}
-                setModalIsOpen={setSuccessModalIsOpen}
-              >
-                <ModalTitie>삭제되었습니다.</ModalTitie>
-                <ModalButtonWrapper>
-                  <ModalFullButton onClick={() => setSuccessModalIsOpen(false)}>
-                    확인
-                  </ModalFullButton>
-                </ModalButtonWrapper>
-              </Modal>
               <Grid
                 item
                 xs={4}
