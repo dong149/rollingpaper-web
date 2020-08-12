@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     position: 'relative',
-    paddingTop: theme.spacing(8),
+    paddingTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
