@@ -106,8 +106,18 @@ const Main = (props) => {
             <div
               style={{
                 minHeight: 'calc(100vh - 150px)',
+                textAlign: 'center',
+                paddingTop: '90px',
               }}
-            ></div>
+            >
+              <img
+                style={{
+                  width: '80%',
+                }}
+                src="/icons/empty.png"
+                alt="아무도 작성하지 않은 경우"
+              />
+            </div>
           )}
         </div>
         <StickyFooter position="absolute">

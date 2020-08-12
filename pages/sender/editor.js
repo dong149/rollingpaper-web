@@ -28,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
   textarea: {
     display: 'flex',
     margin: '0 auto',
-    width: '100%',
-    height: '462px',
+    width: '312px',
+    height: '340px',
     marginTop: '30px',
-    padding: '16px',
+    // padding: '16px',
     borderRadius: '13px',
-    backgroundColor: '#f2f2f2',
+    // backgroundColor: '#f2f2f2',
     textAlign: 'center',
     wordBreak: 'break-all',
     '& div': {
@@ -72,8 +72,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    fontSize: '1.6em',
-    fontWeight: '600',
+    fontSize: '18px',
+    lineHeight: '26px',
+    fontWeight: 'bold',
   },
 }));
 const customModalStyles = {
@@ -148,6 +149,8 @@ const Editor = (props) => {
         setSort={setSort}
         color={color}
         setColor={setColor}
+        backgroundColor={backgroundColor}
+        setBackgroundColor={setBackgroundColor}
       />
       <ColorModal
         colorModalIsOpen={colorModalIsOpen}
@@ -170,7 +173,16 @@ const Editor = (props) => {
           </ModalFullButton>
         </ModalButtonWrapper>
       </Modal>
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+          padding: '0 9px',
+          height: '57px',
+        }}
+      >
         <Link
           href={{
             pathname: '/sender/main',
@@ -181,17 +193,17 @@ const Editor = (props) => {
             <a className={classes.menuButton}>취소</a>
           </span>
         </Link>
-        <span style={{ float: 'right' }}>
+        <div style={{ float: 'right' }}>
           <span onClick={() => setFontModalIsOpen(true)}>
-            <img style={{ width: '35px' }} src="/icons/text-icon.png"></img>
+            <img style={{ width: '38px' }} src="/icons/text-icon.png"></img>
           </span>
           <span onClick={() => setColorModalIsOpen(true)}>
             <img
-              style={{ width: '35px' }}
+              style={{ width: '38px' }}
               src="/icons/background-icon.png"
             ></img>
           </span>
-        </span>
+        </div>
       </div>
 
       <div
@@ -200,6 +212,11 @@ const Editor = (props) => {
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
+          backgroundImage: `url('/icons/f6f6f6.png')`,
+          backgroundPosition: 'center center',
+          backgroundBlendMode: 'multiply',
+          backgroundRepeat: 'no-repeat',
+          // backgroundAttachment: 'fixed',
           border: 'none',
           color: `${color}`,
           textAlign: `${sort}`,
@@ -212,9 +229,14 @@ const Editor = (props) => {
             setContent(e.target.value);
           }}
           style={{
+            display: 'flex',
+            alignItems: 'center',
             fontFamily: `${font}`,
             color: `${color}`,
             textAlign: `${sort}`,
+            padding: '14px',
+            fontSize: '24px',
+            lineHeight: '38px',
           }}
         />
       </div>

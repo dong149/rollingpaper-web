@@ -15,13 +15,17 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    height: '200px',
+    width: '141px',
+    height: '141px',
   },
   colorList: {
     marginTop: '20px',
+  },
+  confirmButton: {
+    fontSize: '18px',
+    lineHeight: '26px',
+    fontWeight: 'bold',
+    color: 'white',
   },
 }));
 
@@ -39,11 +43,10 @@ const customModalStyles = {
     left: '0',
     right: '0',
     bottom: '0',
-    // marginRight: '-50%',
     width: '100%',
     height: '100%',
     background: '#666666',
-    // transform: 'translate(-50%, -50%)',
+    padding: '0',
   },
 };
 
@@ -70,7 +73,15 @@ const ColorModal = (props) => {
   const colorCards = [];
   for (const color of availableColors) {
     colorCards.push(
-      <Grid item xs={6}>
+      <Grid
+        item
+        xs={6}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Paper
           elevation={0}
           className={classes.paper}
@@ -91,18 +102,23 @@ const ColorModal = (props) => {
       contentLabel="Color Modal"
     >
       <Layouts className={classes.root}>
-        <div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+            padding: '0 9px',
+          }}
+        >
           <span onClick={() => setColorModalIsOpen(false)}>
             <img
-              style={{ width: '30px', marginBottom: ' 30px' }}
-              src="/icons/back-icon.png"
+              style={{ width: '16px' }}
+              src="/icons/back-light-icon.png"
             ></img>
           </span>
-          {/* <span
-            onClick={() => setColorModalIsOpen(false)}
-            style={{ float: 'right' }}
-          >
-            <a style={{ fontSize: '1.4em', color: '#FFFFFF' }}>완료</a>
+          {/* <span>
+            <a className={classes.confirmButton}>완료</a>
           </span> */}
         </div>
         <Grid className={classes.colorList} container spacing={3}>
