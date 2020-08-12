@@ -83,7 +83,7 @@ const Main = (props) => {
               alt=""
               className={classes.icon}
             />
-            이미지 다운받기
+            전체화면 다운받기
           </Buttons>
         </StickyFooter>
       </Layouts>

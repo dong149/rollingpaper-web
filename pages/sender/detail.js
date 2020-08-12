@@ -18,8 +18,6 @@ import Modal, {
   ModalFullButton,
 } from '../../components/Modal';
 
-const cardList = Array(10).fill('카드'); // 임시 배열
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -67,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
   slider: {
     width: 'calc(100% + 32px)',
-    marginTop: '75px',
+    marginTop: '30px',
     marginLeft: '-16px',
     alignSelf: 'normal',
   },
@@ -89,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '0',
   },
   icons: {
-    width: '40px',
+    width: '16px',
   },
   btnWrapper: {
     fontSize: '18px',
@@ -192,7 +190,7 @@ const Detail = (props) => {
         >
           <a className={classes.iconWrapper}>
             <img
-              src="/icons/back-icon.png"
+              src="/icons/back-icon-small.png"
               alt="뒤로가기"
               className={classes.icons}
             />
