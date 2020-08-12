@@ -19,15 +19,18 @@ const useStyles = makeStyles({
     fontSize: '32px',
     fontWeight: 'bold',
     lineHeight: '46px',
+    marginTop: '90px',
   },
   sectionWrapper: {
     position: 'relative',
     minHeight: '100vh',
   },
   rolling: {
-    width: '100%',
-    marginTop: '48px',
-    marginBottom: '87px',
+    width: '322px',
+    height: '379px',
+    margin: '0 auto',
+    marginTop: '3px',
+    // marginBottom: '87px',
   },
 });
 const Index = () => {

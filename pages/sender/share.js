@@ -3,18 +3,29 @@ import Layouts from '../../components/Layouts';
 import Buttons from '../../components/Buttons';
 import StickyFooter from '../../components/StickyFooter';
 import { makeStyles } from '@material-ui/core';
+import Link from 'next/link';
 const useStyles = makeStyles({
   main: {
-    width: '100%',
     textAlign: 'left',
-    fontSize: '32px',
+    fontSize: '30px',
     fontWeight: 'bold',
-    lineHeight: '46px',
+    lineHeight: '48px',
+    marginTop: '25px',
   },
   rolling: {
-    width: '100%',
-    marginTop: '48px',
-    marginBottom: '87px',
+    width: '315px',
+    margin: '0 auto',
+    marginTop: '24px',
+  },
+  iconWrapper: {
+    display: 'block',
+    background: 'transparent',
+    border: 'none',
+    margin: '0',
+    padding: '0',
+  },
+  icons: {
+    width: '16px',
   },
 });
 const Share = (props) => {
@@ -97,6 +108,20 @@ const Share = (props) => {
 
   return (
     <Layouts>
+      <Link
+        href={{
+          pathname: '/sender/main',
+          query: { name: name, num: num },
+        }}
+      >
+        <a className={classes.iconWrapper}>
+          <img
+            src="/icons/back-icon-small.png"
+            alt="뒤로가기"
+            className={classes.icons}
+          />
+        </a>
+      </Link>
       <div className={classes.main}>
         <span>누구에게</span>
         <br />
@@ -104,20 +129,20 @@ const Share = (props) => {
       </div>
       <img
         className={classes.rolling}
-        src="/images/share.jpeg"
+        src="/images/share.jpg"
         alt="롤링페이퍼 메인 이미지"
       />
       <StickyFooter>
         <a id="kakao-link-btn" style={{ width: '100%', marginBottom: '16px' }}>
-          <Buttons full={true}>준비하는 친구들에게 공유</Buttons>
+          <Buttons full={true} light={true}>
+            준비하는 친구들에게 공유
+          </Buttons>
         </a>
         <a
           id="kakao-link-btn-receiver"
           style={{ width: '100%', marginBottom: '16px' }}
         >
-          <Buttons full={true} light={true}>
-            주인공에게 공유
-          </Buttons>
+          <Buttons full={true}>주인공에게 공유</Buttons>
         </a>
       </StickyFooter>
     </Layouts>

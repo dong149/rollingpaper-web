@@ -13,7 +13,6 @@ const useStyles = makeStyles({
 });
 const StickyFooter = (props) => {
   const classes = useStyles(props);
-  console.log(props.align);
   return <div className={classes.root}>{props.children}</div>;
 };
 

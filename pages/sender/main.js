@@ -73,7 +73,7 @@ const Main = (props) => {
   }, [isPostsUpdated]);
 
   return (
-    <body style={{ backgroundColor: '#F6F6F6' }}>
+    <div style={{ backgroundColor: '#F6F6F6' }}>
       <Layouts className={classes.root} bgColor="#F7F7F7">
         <Header>
           <div>
@@ -128,7 +128,7 @@ const Main = (props) => {
           </Link>
         </StickyFooter>
       </Layouts>
-    </body>
+    </div>
   );
 };
 
