@@ -11,8 +11,12 @@ import Link from 'next/link';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import rollingService from '../../services/rollingService';
-
-const cardList = Array(10).fill('카드'); // 임시 배열
+import Modal, {
+  ModalTitie,
+  ModalButtonWrapper,
+  ModalButton,
+  ModalFullButton,
+} from '../../components/Modal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,30 +38,34 @@ const useStyles = makeStyles((theme) => ({
     padding: '16px',
     textAlign: 'center',
     wordBreak: 'break-all',
-    background: '#E8E6DC',
+    // background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
   },
   cardInner: {
     overflow: 'scroll',
     flex: 1,
-    fontSize: '20px',
-    lineHeight: '1.5em',
+    fontSize: '32px',
+    lineHeight: '45px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cardActive: {
     marginTop: 0,
     overflow: 'hidden',
     height: '426px',
-    background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
+    boxShadow: '0px 1px 10px rgba(0, 0, 0, 0.25)',
   },
   title: {
-    fontSize: '26px',
+    fontSize: '28px',
+    lineHeight: '53px',
   },
   slider: {
     width: 'calc(100% + 32px)',
-    marginTop: '75px',
+    marginTop: '30px',
     marginLeft: '-16px',
     alignSelf: 'normal',
   },
@@ -79,7 +87,12 @@ const useStyles = makeStyles((theme) => ({
     padding: '0',
   },
   icons: {
-    width: '48px',
+    width: '16px',
+  },
+  btnWrapper: {
+    fontSize: '18px',
+    lineHeight: '53px',
+    fontWeight: 'bold',
   },
 }));
 
@@ -113,7 +126,15 @@ const Detail = (props) => {
   };
   return (
     <Layouts className={classes.root}>
-      <Header>
+      <header
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+          padding: '0 9px',
+        }}
+      >
         <Link
           href={{
             pathname: '/receiver/main',
@@ -122,7 +143,7 @@ const Detail = (props) => {
         >
           <a className={classes.iconWrapper}>
             <img
-              src="/icons/back-icon.png"
+              src="/icons/back-icon-small.png"
               alt="뒤로가기"
               className={classes.icons}
             />
@@ -131,33 +152,40 @@ const Detail = (props) => {
         <div className={classes.title}>
           <strong>{sliderIndex}</strong> / {posts.contents.length}
         </div>
-        <button className={classes.iconWrapper}>
-          <img
-            src="/icons/download-icon.png"
-            alt="다운받기"
-            className={classes.icons}
-          />
-        </button>
-      </Header>
+        <button
+          className={classes.btnWrapper}
+          // onClick={() => {
+          //   setModalIsOpen(true);
+          // }}
+        ></button>
+      </header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>
-        {posts.contents.map((value, i) => (
-          <>
-            <div className={classes.cardWrapper}>
-              <div
-                key={i}
-                className={`
+        {posts.contents.map((value, i) => {
+          return (
+            <div key={i}>
+              <div className={classes.cardWrapper}>
+                <div
+                  key={i}
+                  className={`
                 ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
                 `}
-              >
-                <p className={classes.cardInner}>{value.content}</p>
+                  style={{
+                    backgroundColor: value.backgroundColor,
+                    color: value.color,
+                    fontFamily: value.font,
+                    textAlign: value.sort,
+                  }}
+                >
+                  <p className={classes.cardInner}>{value.content}</p>
+                </div>
+              </div>
+              <div className={classes.sender}>
+                <b>From.</b>
+                {value.author}
               </div>
             </div>
-            <div className={classes.sender}>
-              <b>From.</b>
-              {value.author} {sliderIndex}
-            </div>
-          </>
-        ))}
+          );
+        })}
       </Slider>
 
       <StickyFooter>

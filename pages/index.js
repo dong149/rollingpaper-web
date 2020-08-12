@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     fontSize: '32px',
     fontWeight: 'bold',
     lineHeight: '46px',
-    marginTop: '90px',
+    marginTop: '30px',
   },
   sectionWrapper: {
     position: 'relative',
