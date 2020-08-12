@@ -17,28 +17,28 @@ const useStyles = makeStyles((theme) => ({
   btnDark: {
     color: '#fff',
     background: '#342F2F',
-    '&:focus': {
-      border: 'none',
-      backgroundColor: '#342F2F',
-      boxShadow: 'none',
-    },
-    '&:active': {
-      background: '#A3A3A3',
-    },
+    // '&:focus': {
+    //   border: 'none',
+    //   backgroundColor: '#342F2F',
+    //   boxShadow: 'none',
+    // },
+    // '&:active': {
+    //   background: '#A3A3A3',
+    // },
   },
   btnLight: {
     color: '#000',
     border: '1px solid #A3A3A3',
     background: '#fff',
-    '&:focus': {
-      border: '1px solid #A3A3A3',
-      backgroundColor: '#fff',
-      boxShadow: 'none',
-    },
-    '&:active': {
-      border: '1px solid #A3A3A3',
-      background: '#342f2f',
-    },
+    // '&:focus': {
+    //   border: '1px solid #A3A3A3',
+    //   backgroundColor: '#fff',
+    //   boxShadow: 'none',
+    // },
+    // '&:active': {
+    //   border: '1px solid #A3A3A3',
+    //   background: '#342f2f',
+    // },
   },
 }));
 
