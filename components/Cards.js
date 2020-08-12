@@ -75,7 +75,7 @@ const Cards = (props) => {
       <Grid container spacing={2}>
         {content.map((value, i) => {
           return (
-            <>
+            <div key={i}>
               <Modal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
                 <ModalTitie>
                   롤링페이퍼를
@@ -169,7 +169,7 @@ const Cards = (props) => {
                   </Link>
                 )}
               </Grid>
-            </>
+            </div>
           );
         })}
       </Grid>

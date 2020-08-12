@@ -242,9 +242,7 @@ const Editor = (props) => {
         </StickyFooter>
       ) : (
         <StickyFooter align="right">
-          <Buttons onClick={() => onSubmit()}>
-            글과 작성자를 입력해주세요.
-          </Buttons>
+          <Buttons>글과 작성자를 입력해주세요.</Buttons>
         </StickyFooter>
       )}
     </Layouts>
