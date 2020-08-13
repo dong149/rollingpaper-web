@@ -67,6 +67,7 @@ const useStyles = makeStyles({
     height: '24px',
     borderRadius: '12px',
     border: '2px solid #ffffff',
+    width: 'max-content'
   },
   confirmButton: {
     fontSize: '18px',
@@ -211,6 +212,12 @@ const FontModal = (props) => {
             display: 'flex',
             marginTop: '30px',
             width: '100%',
+            overflowX: 'scroll',
+            '&::-webkit-scrollbar': {
+              display: 'none !important',
+            },
+            scrollbarWidth: 'none',
+            overflowStyle: 'none',
           }}
         >
           {editMode === 'text' && (
