@@ -168,6 +168,7 @@ const FontModal = (props) => {
               padding: '14px',
               fontSize: '24px',
               lineHeight: '38px',
+              overflow: 'hidden',
             }}
           />
         </div>
