@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Layouts from './Layouts';
 import Modal from 'react-modal';
 import ContentEditable from 'react-contenteditable';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -49,18 +52,35 @@ const useStyles = makeStyles({
     },
   },
   fontPropButton: {
-    fontSize: '16px',
+    fontSize: '15px',
+    width: 'calc(100%)',
     lineHeight: '32px',
     color: '#FFFFFF',
     border: '1px solid #fff',
     padding: '4px 10px 4px 10px',
     borderRadius: '6px',
+    marginLeft: '5px',
+    marginRight: '5px',
+  },
+  colorPropButton: {
+    width: '24px',
+    height: '24px',
+    borderRadius: '12px',
+    border: '2px solid #ffffff',
   },
   confirmButton: {
     fontSize: '18px',
     lineHeight: '26px',
     fontWeight: 'bold',
     color: 'white',
+  },
+  slider: {
+    width: '100%',
+    textAlign: 'center',
+    padding: 0,
+    // marginTop: '30px',
+    // marginLeft: '-16px',
+    // alignSelf: 'normal',
   },
 });
 const customModalStyles = {
@@ -88,6 +108,19 @@ const customModalStyles = {
 
 const FontModal = (props) => {
   const classes = useStyles(props);
+  const settings = {
+    className: 'slider variable-width',
+    centerMode: true,
+    infinite: true,
+    // slidesToShow: 2,
+    speed: 500,
+    arrows: false,
+    initialSlide: 1,
+    variableWidth: true,
+    // beforeChange: (current, next) => {
+    //   setSliderIndex(next + 1);
+    // },
+  };
   const {
     fontModalIsOpen,
     setFontModalIsOpen,
@@ -182,24 +215,20 @@ const FontModal = (props) => {
         >
           {editMode === 'text' && (
             <>
-              <span
-                style={{ margin: '0 10px 0 0' }}
-                onClick={() => setFont('NanumSquareRound')}
-              >
-                <a className={classes.fontPropButton}>나눔스퀘어라운드</a>
-              </span>
-              <span
-                style={{ margin: '0 10px 0 10px' }}
-                onClick={() => setFont('NanumBrush')}
-              >
-                <a className={classes.fontPropButton}>나눔브러쉬</a>
-              </span>
-              <span
-                style={{ margin: '0 0 0 10px' }}
-                onClick={() => setFontModalIsOpen(false)}
-              >
-                <a className={classes.fontPropButton}>손글씨체</a>
-              </span>
+              <Slider {...settings} className={classes.slider}>
+                <div style={{}} onClick={() => setFont('NanumSquareRound')}>
+                  <span className={classes.fontPropButton}>나눔스퀘어</span>
+                </div>
+                <div style={{}} onClick={() => setFont('NanumSquareRound')}>
+                  <span className={classes.fontPropButton}>나눔스퀘어</span>
+                </div>
+                <div style={{}} onClick={() => setFont('NanumBrush')}>
+                  <span className={classes.fontPropButton}>나눔브러쉬</span>
+                </div>
+                <div style={{}} onClick={() => setFontModalIsOpen(false)}>
+                  <span className={classes.fontPropButton}>손글씨체</span>
+                </div>
+              </Slider>
             </>
           )}
           {editMode === 'sort' && (
@@ -225,26 +254,62 @@ const FontModal = (props) => {
             </>
           )}
           {editMode === 'color' && (
-            <>
-              <span
-                style={{ margin: '0 10px 0 0' }}
+            <div style={{ width: '100%', textAlign: 'center' }}>
+              <div
+                style={{
+                  margin: '0 10px 0 0',
+                  backgroundColor: 'black',
+                  display: 'inline-block',
+                }}
                 onClick={() => setColor('red')}
-              >
-                <a className={classes.stylePropButton}>빨간색</a>
-              </span>
-              <span
-                style={{ margin: '0 10px 0 10px' }}
-                onClick={() => setColor('black')}
-              >
-                <a className={classes.stylePropButton}>검은색</a>
-              </span>
-              <span
-                style={{ margin: '0 0 0 10px' }}
+                className={classes.colorPropButton}
+              ></div>
+              <div
+                style={{
+                  margin: '0 10px 0 0',
+                  backgroundColor: 'orange',
+                  display: 'inline-block',
+                }}
+                onClick={() => setColor('orange')}
+                className={classes.colorPropButton}
+              ></div>
+              <div
+                style={{
+                  margin: '0 10px 0 0',
+                  backgroundColor: 'pink',
+                  display: 'inline-block',
+                }}
+                onClick={() => setColor('pink')}
+                className={classes.colorPropButton}
+              ></div>
+              <div
+                style={{
+                  margin: '0 10px 0 0',
+                  backgroundColor: 'red',
+                  display: 'inline-block',
+                }}
+                onClick={() => setColor('red')}
+                className={classes.colorPropButton}
+              ></div>
+              <div
+                style={{
+                  margin: '0 10px 0 0',
+                  backgroundColor: 'yellow',
+                  display: 'inline-block',
+                }}
                 onClick={() => setColor('yellow')}
-              >
-                <a className={classes.stylePropButton}>노란색</a>
-              </span>
-            </>
+                className={classes.colorPropButton}
+              ></div>
+              <div
+                style={{
+                  margin: '0 10px 0 0',
+                  backgroundColor: 'blue',
+                  display: 'inline-block',
+                }}
+                onClick={() => setColor('blue')}
+                className={classes.colorPropButton}
+              ></div>
+            </div>
           )}
         </div>
         <p style={{ textAlign: 'center' }}>
