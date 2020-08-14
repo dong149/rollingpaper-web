@@ -105,7 +105,7 @@ const Editor = (props) => {
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const [content, setContent] = useState('');
-  const [font, setFont] = useState('NanumBrush');
+  const [font, setFont] = useState('NanumSquareRound');
   const [sort, setSort] = useState('center');
   const [color, setColor] = useState('black');
   const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
@@ -233,8 +233,8 @@ const Editor = (props) => {
             alignItems: 'center',
             fontFamily: `${font}`,
             color: `${color}`,
-            textAlign: `${sort}`,
-            padding: '14px',
+            justifyContent: `${sort}`,
+            padding: '15px',
             fontSize: '24px',
             lineHeight: '38px',
             overflow: 'hidden',

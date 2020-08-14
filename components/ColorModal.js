@@ -81,6 +81,7 @@ const ColorModal = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
+        key={color}
       >
         <Paper
           elevation={0}
@@ -100,6 +101,7 @@ const ColorModal = (props) => {
       isOpen={colorModalIsOpen}
       style={customModalStyles}
       contentLabel="Color Modal"
+      ariaHideApp={false}
     >
       <Layouts className={classes.root}>
         <div
