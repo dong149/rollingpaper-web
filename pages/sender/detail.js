@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     // background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
+    backgroundImage: `url('/icons/f6f6f6.png')`,
+    backgroundPosition: 'center center',
+    backgroundBlendMode: 'multiply',
+    backgroundRepeat: 'no-repeat',
   },
   cardInner: {
     overflow: 'scroll',

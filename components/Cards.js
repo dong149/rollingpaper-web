@@ -18,17 +18,23 @@ const useStyles = makeStyles((theme) => ({
   card: {
     display: '-webkit-box',
     overflow: 'hidden',
-    width: '123px',
-    height: '169px',
+    display: 'flex',
+    width: '113px',
+    height: '120px',
     // background: (props) => props.bgColor,
     padding: '10px',
     borderRadius: '13px',
     lineHeight: '1.5em',
+    alignItems: 'center',
     wordBreak: 'break-all',
     textOverflow: 'ellipsis',
     lineClamp: 7,
     boxOrient: 'vertical',
     textDecoration: 'none',
+    backgroundImage: `url('/icons/f6f6f6.png')`,
+    backgroundPosition: 'center center',
+    backgroundBlendMode: 'multiply',
+    backgroundRepeat: 'no-repeat',
   },
   cardInner: {
     flex: 1,
@@ -93,7 +99,7 @@ const Cards = (props) => {
                         style={{
                           color: value.color,
                           fontFamily: value.font,
-                          textAlign: value.sort,
+                          justifyContent: value.sort,
                         }}
                       >
                         {value.content}
@@ -117,7 +123,7 @@ const Cards = (props) => {
                         style={{
                           color: value.color,
                           fontFamily: value.font,
-                          textAlign: value.sort,
+                          justifyContent: value.sort,
                         }}
                       >
                         {value.content}
