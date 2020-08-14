@@ -20,11 +20,12 @@ const useStyles = makeStyles({
   stylePropButton: {
     fontSize: '1.2em',
     color: '#FFFFFF',
-    borderStyle: 'solid',
+    // borderStyle: 'solid',
     borderColor: '#FFFFFF',
-    padding: '10px',
+    // padding: '10px',
     borderRadius: '5%',
     borderWidth: '1px',
+    width: '48px'
   },
   textarea: {
     display: 'flex',
@@ -67,6 +68,7 @@ const useStyles = makeStyles({
     height: '24px',
     borderRadius: '12px',
     border: '2px solid #ffffff',
+    width: 'max-content'
   },
   confirmButton: {
     fontSize: '18px',
@@ -82,6 +84,26 @@ const useStyles = makeStyles({
     // marginLeft: '-16px',
     // alignSelf: 'normal',
   },
+  editButtonBar: {
+    textAlign: 'center',
+    position: 'absolute',
+    padding: '5px',
+    bottom: '0%',
+    background: 'rgba(0, 0, 0, 0.3)',
+    width: 'calc(100% + 32px)',
+    marginLeft: '-16px',
+  },
+  propButton: {
+    display: 'flex',
+    marginTop: '30px',
+    width: '100%',
+    overflowX: 'scroll',
+    '&::-webkit-scrollbar': {
+      display: 'none !important',
+    },
+    scrollbarWidth: 'none',
+    overflowStyle: 'none',
+  }
 });
 const customModalStyles = {
   overlay: {
@@ -206,13 +228,7 @@ const FontModal = (props) => {
           />
         </div>
 
-        <div
-          style={{
-            display: 'flex',
-            marginTop: '30px',
-            width: '100%',
-          }}
-        >
+        <div className={classes.propButton}>
           {editMode === 'text' && (
             <>
               <Slider {...settings} className={classes.slider}>
@@ -237,19 +253,19 @@ const FontModal = (props) => {
                 style={{ margin: '0 10px 0 0' }}
                 onClick={() => setSort('left')}
               >
-                <a className={classes.stylePropButton}>왼쪽</a>
+                <img className={classes.stylePropButton} src='/icons/text_left-icon.png'></img>
               </span>
               <span
                 style={{ margin: '0 10px 0 10px' }}
                 onClick={() => setSort('center')}
               >
-                <a className={classes.stylePropButton}>중간</a>
+                <img className={classes.stylePropButton} src='/icons/text_center-icon.png'></img>
               </span>
               <span
                 style={{ margin: '0 0 0 10px' }}
                 onClick={() => setSort('right')}
               >
-                <a className={classes.stylePropButton}>오른쪽</a>
+                <img className={classes.stylePropButton} src='/icons/text_right-icon.png'></img>
               </span>
             </>
           )}
@@ -312,7 +328,7 @@ const FontModal = (props) => {
             </div>
           )}
         </div>
-        <p style={{ textAlign: 'center' }}>
+        <div className={classes.editButtonBar}>
           <span
             style={{ margin: '0 10px 0 0' }}
             onClick={() => setEditMode('text')}
@@ -334,7 +350,7 @@ const FontModal = (props) => {
           >
             <img src="/icons/edit-color.png" className={classes.menuButton} />
           </span>
-        </p>
+        </div>
       </Layouts>
     </Modal>
   );
