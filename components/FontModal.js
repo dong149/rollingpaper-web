@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     // padding: '10px',
     borderRadius: '5%',
     borderWidth: '1px',
-    width: '48px'
+    width: '48px',
   },
   textarea: {
     display: 'flex',
@@ -53,11 +53,23 @@ const useStyles = makeStyles({
     },
   },
   fontPropButton: {
-    fontSize: '15px',
+    fontSize: '23px',
     width: 'calc(100%)',
-    lineHeight: '32px',
+    lineHeight: '50px',
     color: '#FFFFFF',
     border: '1px solid #fff',
+    padding: '4px 10px 4px 10px',
+    borderRadius: '6px',
+    marginLeft: '5px',
+    marginRight: '5px',
+  },
+  clickedFontPropButton: {
+    fontSize: '23px',
+    width: 'calc(100%)',
+    lineHeight: '50px',
+    color: '#000',
+    border: '1px solid #fff',
+    backgroundColor: '#fff',
     padding: '4px 10px 4px 10px',
     borderRadius: '6px',
     marginLeft: '5px',
@@ -68,7 +80,14 @@ const useStyles = makeStyles({
     height: '24px',
     borderRadius: '12px',
     border: '2px solid #ffffff',
-    width: 'max-content'
+    transition: '1s all',
+  },
+  clickedColorPropButton: {
+    width: '36px',
+    height: '36px',
+    borderRadius: '18px',
+    border: '2px solid #ffffff',
+    transition: '1s all',
   },
   confirmButton: {
     fontSize: '18px',
@@ -79,10 +98,6 @@ const useStyles = makeStyles({
   slider: {
     width: '100%',
     textAlign: 'center',
-    padding: 0,
-    // marginTop: '30px',
-    // marginLeft: '-16px',
-    // alignSelf: 'normal',
   },
   editButtonBar: {
     textAlign: 'center',
@@ -103,7 +118,18 @@ const useStyles = makeStyles({
     },
     scrollbarWidth: 'none',
     overflowStyle: 'none',
-  }
+  },
+  fontPropButtonWrap: {
+    display: 'flex',
+    marginTop: '30px',
+    width: '100%',
+    overflowX: 'scroll',
+    '&::-webkit-scrollbar': {
+      display: 'none !important',
+    },
+    scrollbarWidth: 'none',
+    overflowStyle: 'none',
+  },
 });
 const customModalStyles = {
   overlay: {
@@ -130,7 +156,7 @@ const customModalStyles = {
 
 const FontModal = (props) => {
   const classes = useStyles(props);
-  const settings = {
+  const fontSettings = {
     className: 'slider variable-width',
     centerMode: true,
     infinite: true,
@@ -163,6 +189,7 @@ const FontModal = (props) => {
       isOpen={fontModalIsOpen}
       style={customModalStyles}
       contentLabel="Example Modal"
+      ariaHideApp={false}
     >
       <Layouts className={classes.root}>
         <div
@@ -219,8 +246,8 @@ const FontModal = (props) => {
               alignItems: 'center',
               fontFamily: `${font}`,
               color: `${color}`,
-              textAlign: `${sort}`,
-              padding: '14px',
+              justifyContent: `${sort}`,
+              padding: '15px',
               fontSize: '24px',
               lineHeight: '38px',
               overflow: 'hidden',
@@ -228,57 +255,125 @@ const FontModal = (props) => {
           />
         </div>
 
-        <div className={classes.propButton}>
+        <div className={classes.fontPropButtonWrap}>
           {editMode === 'text' && (
             <>
-              <Slider {...settings} className={classes.slider}>
-                <div style={{}} onClick={() => setFont('NanumSquareRound')}>
-                  <span className={classes.fontPropButton}>나눔스퀘어</span>
+              <Slider {...fontSettings} className={classes.slider}>
+                <div onClick={() => setFont('NanumSquareRound')}>
+                  <span
+                    style={{ fontFamily: 'NanumSquareRound' }}
+                    className={`${
+                      font === 'NanumSquareRound'
+                        ? classes.clickedFontPropButton
+                        : classes.fontPropButton
+                    }`}
+                  >
+                    기본서체
+                  </span>
                 </div>
-                <div style={{}} onClick={() => setFont('NanumSquareRound')}>
-                  <span className={classes.fontPropButton}>나눔스퀘어</span>
+                <div
+                  style={{ fontFamily: '강부장님체' }}
+                  onClick={() => setFont('강부장님체')}
+                >
+                  <span
+                    style={{ fontFamily: '강부장님체' }}
+                    className={`${
+                      font === '강부장님체'
+                        ? classes.clickedFontPropButton
+                        : classes.fontPropButton
+                    }`}
+                  >
+                    강부장님체
+                  </span>
                 </div>
-                <div style={{}} onClick={() => setFont('NanumBrush')}>
-                  <span className={classes.fontPropButton}>나눔브러쉬</span>
+                <div onClick={() => setFont('사랑해아들체')}>
+                  <span
+                    style={{ fontFamily: '사랑해아들체' }}
+                    className={`${
+                      font === '사랑해아들체'
+                        ? classes.clickedFontPropButton
+                        : classes.fontPropButton
+                    }`}
+                  >
+                    사랑해아들체
+                  </span>
                 </div>
-                <div style={{}} onClick={() => setFontModalIsOpen(false)}>
-                  <span className={classes.fontPropButton}>손글씨체</span>
+                <div onClick={() => setFont('NanumBrush')}>
+                  <span
+                    style={{ fontFamily: 'NanumBrush' }}
+                    className={`${
+                      font === 'NanumBrush'
+                        ? classes.clickedFontPropButton
+                        : classes.fontPropButton
+                    }`}
+                  >
+                    나눔브러쉬체
+                  </span>
                 </div>
               </Slider>
             </>
           )}
           {editMode === 'sort' && (
-            <>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                textAlign: 'center',
+              }}
+            >
               <span
                 style={{ margin: '0 10px 0 0' }}
-                onClick={() => setSort('left')}
+                onClick={() => setSort('flex-start')}
               >
-                <img className={classes.stylePropButton} src='/icons/text_left-icon.png'></img>
+                <img
+                  className={classes.stylePropButton}
+                  src="/icons/text_left-icon.png"
+                ></img>
               </span>
               <span
                 style={{ margin: '0 10px 0 10px' }}
                 onClick={() => setSort('center')}
               >
-                <img className={classes.stylePropButton} src='/icons/text_center-icon.png'></img>
+                <img
+                  className={classes.stylePropButton}
+                  src="/icons/text_center-icon.png"
+                ></img>
               </span>
               <span
                 style={{ margin: '0 0 0 10px' }}
-                onClick={() => setSort('right')}
+                onClick={() => setSort('flex-end')}
               >
-                <img className={classes.stylePropButton} src='/icons/text_right-icon.png'></img>
+                <img
+                  className={classes.stylePropButton}
+                  src="/icons/text_right-icon.png"
+                ></img>
               </span>
-            </>
+            </div>
           )}
           {editMode === 'color' && (
-            <div style={{ width: '100%', textAlign: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                textAlign: 'center',
+              }}
+            >
               <div
                 style={{
                   margin: '0 10px 0 0',
                   backgroundColor: 'black',
                   display: 'inline-block',
                 }}
-                onClick={() => setColor('red')}
-                className={classes.colorPropButton}
+                onClick={() => setColor('black')}
+                className={`${
+                  color === 'black'
+                    ? classes.clickedColorPropButton
+                    : classes.colorPropButton
+                }`}
               ></div>
               <div
                 style={{
@@ -287,7 +382,11 @@ const FontModal = (props) => {
                   display: 'inline-block',
                 }}
                 onClick={() => setColor('orange')}
-                className={classes.colorPropButton}
+                className={`${
+                  color === 'orange'
+                    ? classes.clickedColorPropButton
+                    : classes.colorPropButton
+                }`}
               ></div>
               <div
                 style={{
@@ -296,7 +395,11 @@ const FontModal = (props) => {
                   display: 'inline-block',
                 }}
                 onClick={() => setColor('pink')}
-                className={classes.colorPropButton}
+                className={`${
+                  color === 'pink'
+                    ? classes.clickedColorPropButton
+                    : classes.colorPropButton
+                }`}
               ></div>
               <div
                 style={{
@@ -305,7 +408,11 @@ const FontModal = (props) => {
                   display: 'inline-block',
                 }}
                 onClick={() => setColor('red')}
-                className={classes.colorPropButton}
+                className={`${
+                  color === 'red'
+                    ? classes.clickedColorPropButton
+                    : classes.colorPropButton
+                }`}
               ></div>
               <div
                 style={{
@@ -314,7 +421,11 @@ const FontModal = (props) => {
                   display: 'inline-block',
                 }}
                 onClick={() => setColor('yellow')}
-                className={classes.colorPropButton}
+                className={`${
+                  color === 'yellow'
+                    ? classes.clickedColorPropButton
+                    : classes.colorPropButton
+                }`}
               ></div>
               <div
                 style={{
@@ -323,7 +434,11 @@ const FontModal = (props) => {
                   display: 'inline-block',
                 }}
                 onClick={() => setColor('blue')}
-                className={classes.colorPropButton}
+                className={`${
+                  color === 'blue'
+                    ? classes.clickedColorPropButton
+                    : classes.colorPropButton
+                }`}
               ></div>
             </div>
           )}
