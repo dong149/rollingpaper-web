@@ -228,6 +228,12 @@ const Editor = (props) => {
           onChange={(e) => {
             setContent(e.target.value);
           }}
+          onKeyDown={(event) => {
+            if(event.key === 'Enter') {
+              event.preventDefault();
+              document.execCommand('insertLineBreak');
+            }
+          }}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -272,7 +278,6 @@ const Editor = (props) => {
   );
 };
 Editor.getInitialProps = async (context) => {
-  console.log(context);
   const name = context.query.name;
   const num = context.query.num;
   const id = context.query.id || '';
