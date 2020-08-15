@@ -4,6 +4,7 @@ import Layouts from './Layouts';
 import Modal from 'react-modal';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { isEmpty } from '../functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  input: {
+    display: 'none',
+  },
 }));
 
 const customModalStyles = {
@@ -101,11 +105,13 @@ const ColorModal = (props) => {
     setColorModalIsOpen,
     backgroundColor,
     setBackgroundColor,
+    backgroundImage,
+    setBackgroundImage,
   } = props;
   const colorCards = [];
   const [editPaperIsOpen, setEditPaperIsOpen] = useState(true);
   const [editPhotoIsOpen, setEditPhotoIsOpen] = useState(false);
-
+  // const [selectedFile, setSelectedFile] = useState(null);
   for (const color of availableColors) {
     colorCards.push(
       <Grid
@@ -206,40 +212,73 @@ const ColorModal = (props) => {
           </Grid>
         )}
         {editPhotoIsOpen && (
-          <div
-            className={classes.photoArea}
-            style={{
-              backgroundColor: 'grey',
-              backgroundPosition: 'center center',
-              border: 'none',
-              color: 'white',
-              textAlign: 'center',
-            }}
-          >
-            <img
-              src="/icons/edit-photo-add.png"
-              style={{ width: '104px', height: '104px' }}
+          <>
+            <input
+              accept="image/*"
+              className={classes.input}
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={(e) => {
+                var file = e.target.files[0];
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                  setBackgroundImage([reader.result]);
+                  console.log(reader.result);
+                };
+              }}
             />
+            <label
+              className={classes.photoArea}
+              htmlFor="contained-button-file"
+              style={{
+                backgroundColor: 'grey',
+                backgroundPosition: 'center center',
+                border: 'none',
+                color: 'white',
+                textAlign: 'center',
+              }}
+            >
+              {isEmpty(backgroundImage) ? (
+                <>
+                  <img
+                    src="/icons/edit-photo-add.png"
+                    style={{ width: '104px', height: '104px' }}
+                  />
 
-            <p
-              style={{
-                fontSize: '18px',
-                lineHeight: '32px',
-                fontWeight: 'bold',
-              }}
-            >
-              이곳을 클릭해
-            </p>
-            <p
-              style={{
-                fontSize: '18px',
-                lineHeight: '32px',
-                fontWeight: 'bold',
-              }}
-            >
-              앨범에서 배경을 추가하세요.
-            </p>
-          </div>
+                  <p
+                    style={{
+                      fontSize: '18px',
+                      lineHeight: '32px',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    이곳을 클릭해
+                  </p>
+                  <p
+                    style={{
+                      fontSize: '18px',
+                      lineHeight: '32px',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    앨범에서 배경을 추가하세요.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <img
+                    src={backgroundImage}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  />
+                </>
+              )}
+            </label>
+          </>
         )}
       </Layouts>
     </Modal>
