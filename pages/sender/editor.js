@@ -36,6 +36,46 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: '#f2f2f2',
     textAlign: 'center',
     wordBreak: 'break-all',
+    backgroundImage: `url('/icons/f6f6f6.png')`,
+    backgroundPosition: 'center center',
+    backgroundBlendMode: 'multiply',
+    backgroundRepeat: 'no-repeat',
+    '& div': {
+      flex: '1',
+      overflow: 'scroll',
+      // scrollbarWidth: 'none',
+      // overflowStyle: 'none',
+      wordBreak: 'break-all',
+      fontSize: '20px',
+      fontFamily: 'NanumBrush',
+      lineHeight: '1.5em',
+      '&:focus': {
+        outline: 'none',
+      },
+      // TODO: 스크롤바 문제는 의견 물어보고 정할 것
+      // '&::-webkit-scrollbar': {
+      //   display: 'none',
+      // },
+
+      margin: '0 auto 0 auto',
+      height: '56vmax',
+      minHeight: '340px',
+      overflow: 'auto',
+    },
+  },
+  textareaImage: {
+    display: 'flex',
+    margin: '0 auto',
+    width: '90%',
+    // height: '340px',
+    marginTop: '30px',
+    // padding: '16px',
+    borderRadius: '13px',
+    // backgroundColor: '#f2f2f2',
+    textAlign: 'center',
+    wordBreak: 'break-all',
+    backgroundImage: (theme) => theme.backgroundImage,
+    backgroundSize: '100% 100%',
     '& div': {
       flex: '1',
       overflow: 'scroll',
@@ -105,7 +145,6 @@ const customModalStyles = {
 };
 
 const Editor = (props) => {
-  const classes = useStyles();
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
@@ -114,8 +153,10 @@ const Editor = (props) => {
   const [sort, setSort] = useState('center');
   const [color, setColor] = useState('black');
   const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
+  const [backgroundImage, setBackgroundImage] = useState('');
   const [author, setAuthor] = useState('');
   const { name, num, id } = props;
+  const classes = useStyles({ backgroundImage: backgroundImage });
   const onSubmit = async () => {
     try {
       await rollingService
@@ -162,6 +203,8 @@ const Editor = (props) => {
         setColorModalIsOpen={setColorModalIsOpen}
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
+        backgroundImage={backgroundImage}
+        setBackgroundImage={setBackgroundImage}
       />
       <Modal
         modalIsOpen={successModalIsOpen}
@@ -212,16 +255,20 @@ const Editor = (props) => {
       </div>
 
       <div
-        className={classes.textarea}
+        className={`${
+          isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
+        }`}
         onClick={() => setFontModalIsOpen(true)}
+        // style={`${
+        //   isEmpty(backgroundImage) &&
+        //   'backgroundImage: url(`${backgroundImage}`),'
+        // }`}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
-          backgroundImage: `url('/icons/f6f6f6.png')`,
-          backgroundPosition: 'center center',
-          backgroundBlendMode: 'multiply',
-          backgroundRepeat: 'no-repeat',
-          // backgroundAttachment: 'fixed',
+          backgroundImage: `${
+            !isEmpty(backgroundImage) && `url(${backgroundImage})`
+          }`,
           border: 'none',
           color: `${color}`,
           textAlign: `${sort}`,

@@ -7,6 +7,7 @@ import StickyFooter from '../../components/StickyFooter';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import Link from 'next/link';
+import { isEmpty } from '../../functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,19 +59,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Main = (props) => {
   const classes = useStyles();
-  const { name, num } = props;
-  console.log('name, num의 props 값 : ', name, num);
-  const [posts, setPosts] = useState({ contents: [] });
+  const { data, name, num } = props;
+  console.log('name, num의 props 값 : ', data, name, num);
+  const [posts, setPosts] = useState(data);
   const [isPostsUpdated, setIsPostsUpdated] = useState(false);
-  useEffect(() => {
-    const getPosts = async () => {
-      await rollingService.getRollingByName(name, num).then((res) => {
-        setPosts(res.data);
-      });
-    };
-    getPosts();
-    setIsPostsUpdated(false);
-  }, [isPostsUpdated]);
+  // useEffect(() => {
+  //   const getPosts = async () => {
+  //     await rollingService.getRollingByName(name, num).then((res) => {
+  //       setPosts(res.data);
+  //     });
+  //   };
+  //   if (isEmpty(data)) {
+  //     getPosts();
+  //   }
+  //   setIsPostsUpdated(false);
+  // }, [isPostsUpdated]);
 
   return (
     <div style={{ backgroundColor: '#F6F6F6' }}>
@@ -79,7 +82,7 @@ const Main = (props) => {
           <div>
             <h2 className={classes.title}>to. {name}님</h2>
             <p className={classes.subtitle}>
-              {posts.contents.length
+              {!isEmpty(posts)
                 ? `총 ${posts.contents.length}명에게 축하를 받았어요!`
                 : `아직 아무도 작성하지 않았어요!`}
             </p>
@@ -145,10 +148,10 @@ const Main = (props) => {
 Main.getInitialProps = async (context) => {
   const name = context.query.name;
   const num = context.query.num;
-  // const res = await rollingService.getRollingByName(name, num);
+  const res = await rollingService.getRollingByName(name, num);
 
   return {
-    // posts: res.data,
+    data: res.data,
     name: name,
     num: num,
   };
