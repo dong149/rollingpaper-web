@@ -342,7 +342,7 @@ const FontModal = (props) => {
               >
                 <img
                   className={classes.stylePropButton}
-                  src="/icons/text_left-icon.png"
+                  src={sort === "flex-start" ? "/icons/detail_text1_focus.png" : "/icons/detail_text1_normal.png"}
                 ></img>
               </span>
               <span
@@ -351,7 +351,7 @@ const FontModal = (props) => {
               >
                 <img
                   className={classes.stylePropButton}
-                  src="/icons/text_center-icon.png"
+                  src={sort === "center" ? "/icons/detail_text2_focus.png" : "/icons/detail_text2_normal.png"}
                 ></img>
               </span>
               <span
@@ -360,7 +360,7 @@ const FontModal = (props) => {
               >
                 <img
                   className={classes.stylePropButton}
-                  src="/icons/text_right-icon.png"
+                  src={sort === "flex-end" ? "/icons/detail_text3_focus.png" : "/icons/detail_text3_normal.png"}
                 ></img>
               </span>
             </div>
@@ -462,7 +462,7 @@ const FontModal = (props) => {
             onClick={() => setEditMode('text')}
           >
             <img
-              src="/icons/edit-text-focus.png"
+              src={editMode === "text" ? "/icons/option_icon_font1_focus.png" :  "/icons/option_icon_font1_normal.png"}
               className={classes.menuButton}
             />
           </span>
@@ -470,13 +470,17 @@ const FontModal = (props) => {
             style={{ margin: '0 10px 0 10px' }}
             onClick={() => setEditMode('sort')}
           >
-            <img src="/icons/edit-sort.png" className={classes.menuButton} />
+            <img
+              src={editMode === "sort" ? "/icons/option_icon_text2_focus.png" :  "/icons/option_icon_text2_normal.png"}
+              className={classes.menuButton} />
           </span>
           <span
             style={{ margin: '0 0 0 10px' }}
             onClick={() => setEditMode('color')}
           >
-            <img src="/icons/edit-color.png" className={classes.menuButton} />
+            <img
+              src={editMode === "color" ? "/icons/option_icon_color3_focus.png" :  "/icons/option_icon_color3_normal.png"}
+              className={classes.menuButton} />
           </span>
         </div>
       </Layouts>
