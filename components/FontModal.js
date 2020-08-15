@@ -134,6 +134,8 @@ const useStyles = makeStyles({
     },
     scrollbarWidth: 'none',
     overflowStyle: 'none',
+    position: 'absolute',
+    bottom: '70px'
   },
 });
 const customModalStyles = {
