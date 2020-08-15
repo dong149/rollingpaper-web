@@ -79,8 +79,8 @@ const Share = (props) => {
             'https://github.com/dong149/image_resources/blob/master/rollingpaper/present.png?raw=true',
 
           link: {
-            webUrl: `https://rollingpaper.site/receiver/main?name=${name}&num=${num}`,
-            mobileWebUrl: `https://rollingpaper.site/receiver/main?name=${name}&num=${num}`,
+            webUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
+            mobileWebUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
           },
         },
         social: {
@@ -92,8 +92,8 @@ const Share = (props) => {
           {
             title: '열어보기',
             link: {
-              webUrl: `https://rollingpaper.site/receiver/main?name=${name}&num=${num}`,
-              mobileWebUrl: `https://rollingpaper.site/receiver/main?name=${name}&num=${num}`,
+              webUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
+              mobileWebUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
             },
           },
         ],

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Layouts from './Layouts';
 import Modal from 'react-modal';
@@ -17,6 +17,13 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '141px',
     height: '141px',
+    backgroundImage: `url('/icons/f6f6f6.png')`,
+    backgroundPosition: 'center center',
+    backgroundBlendMode: 'multiply',
+    backgroundRepeat: 'no-repeat',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   colorList: {
     marginTop: '20px',
@@ -26,6 +33,31 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '26px',
     fontWeight: 'bold',
     color: 'white',
+  },
+  photoArea: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 auto',
+    width: '312px',
+    height: '340px',
+    marginTop: '30px',
+    borderRadius: '13px',
+    textAlign: 'center',
+    wordBreak: 'break-all',
+
+    '& div': {
+      flex: '1',
+      overflow: 'scroll',
+      wordBreak: 'break-all',
+      fontSize: '20px',
+      fontFamily: 'NanumBrush',
+      lineHeight: '1.5em',
+      '&:focus': {
+        outline: 'none',
+      },
+    },
   },
 }));
 
@@ -71,6 +103,9 @@ const ColorModal = (props) => {
     setBackgroundColor,
   } = props;
   const colorCards = [];
+  const [editPaperIsOpen, setEditPaperIsOpen] = useState(true);
+  const [editPhotoIsOpen, setEditPhotoIsOpen] = useState(false);
+
   for (const color of availableColors) {
     colorCards.push(
       <Grid
@@ -91,7 +126,11 @@ const ColorModal = (props) => {
             setBackgroundColor(color);
             setColorModalIsOpen(false);
           }}
-        ></Paper>
+        >
+          {color === backgroundColor && (
+            <img src="/icons/edit-active-icon.png" style={{ width: '60px' }} />
+          )}
+        </Paper>
       </Grid>
     );
   }
@@ -119,13 +158,89 @@ const ColorModal = (props) => {
               src="/icons/back-light-icon.png"
             ></img>
           </span>
-          {/* <span>
-            <a className={classes.confirmButton}>완료</a>
-          </span> */}
+          <div>
+            <span
+              onClick={() => {
+                setEditPaperIsOpen(true);
+                setEditPhotoIsOpen(false);
+              }}
+            >
+              {editPaperIsOpen ? (
+                <img
+                  style={{ width: '48px' }}
+                  src="/icons/edit-paper-focus.png"
+                ></img>
+              ) : (
+                <img
+                  style={{ width: '48px' }}
+                  src="/icons/edit-paper.png"
+                ></img>
+              )}
+            </span>
+            <span
+              onClick={() => {
+                setEditPhotoIsOpen(true);
+                setEditPaperIsOpen(false);
+              }}
+            >
+              {editPhotoIsOpen ? (
+                <img
+                  style={{ width: '48px' }}
+                  src="/icons/edit-photo-focus.png"
+                ></img>
+              ) : (
+                <img
+                  style={{ width: '48px' }}
+                  src="/icons/edit-photo.png"
+                ></img>
+              )}
+            </span>
+          </div>
+          <span>
+            <a className={classes.confirmButton}></a>
+          </span>
         </div>
-        <Grid className={classes.colorList} container spacing={3}>
-          {colorCards}
-        </Grid>
+        {editPaperIsOpen && (
+          <Grid className={classes.colorList} container spacing={3}>
+            {colorCards}
+          </Grid>
+        )}
+        {editPhotoIsOpen && (
+          <div
+            className={classes.photoArea}
+            style={{
+              backgroundColor: 'grey',
+              backgroundPosition: 'center center',
+              border: 'none',
+              color: 'white',
+              textAlign: 'center',
+            }}
+          >
+            <img
+              src="/icons/edit-photo-add.png"
+              style={{ width: '104px', height: '104px' }}
+            />
+
+            <p
+              style={{
+                fontSize: '18px',
+                lineHeight: '32px',
+                fontWeight: 'bold',
+              }}
+            >
+              이곳을 클릭해
+            </p>
+            <p
+              style={{
+                fontSize: '18px',
+                lineHeight: '32px',
+                fontWeight: 'bold',
+              }}
+            >
+              앨범에서 배경을 추가하세요.
+            </p>
+          </div>
+        )}
       </Layouts>
     </Modal>
   );
