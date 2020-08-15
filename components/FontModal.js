@@ -30,8 +30,8 @@ const useStyles = makeStyles({
   textarea: {
     display: 'flex',
     margin: '0 auto',
-    width: '312px',
-    height: '340px',
+    width: '90%',
+    // height: '340px',
     marginTop: '30px',
     // padding: '16px',
     borderRadius: '13px',
@@ -50,6 +50,11 @@ const useStyles = makeStyles({
       '&:focus': {
         outline: 'none',
       },
+
+      margin: '0 auto 0 auto',
+      height: '56vmax',
+      minHeight: '340px',
+      overflow: 'auto',
     },
   },
   fontPropButton: {
