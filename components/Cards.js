@@ -101,8 +101,8 @@ const Cards = (props) => {
                           fontFamily: value.font,
                           justifyContent: value.sort,
                         }}
+                        dangerouslySetInnerHTML = {{ __html: value.content}}
                       >
-                        {value.content}
                       </p>
                     </a>
                   </Link>
@@ -125,8 +125,8 @@ const Cards = (props) => {
                           fontFamily: value.font,
                           justifyContent: value.sort,
                         }}
+                        dangerouslySetInnerHTML = {{ __html: value.content}}
                       >
-                        {value.content}
                       </p>
                     </a>
                   </Link>
