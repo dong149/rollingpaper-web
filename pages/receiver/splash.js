@@ -6,6 +6,7 @@ import Buttons from '../../components/Buttons';
 import StickyFooter from '../../components/StickyFooter';
 import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core';
+import rollingService from '../../services/rollingService';
 const useStyles = makeStyles({
   main: {
     width: '100%',
@@ -27,8 +28,9 @@ const useStyles = makeStyles({
     // marginBottom: '87px',
   },
 });
-const Splash = () => {
+const Splash = (props) => {
   const classes = useStyles();
+  const { posts, name, num } = props;
   return (
     <div>
       <Head>
@@ -46,7 +48,7 @@ const Splash = () => {
       <div className={`section ${classes.sectionWrapper}`}>
         <Layouts>
           <div className={classes.main}>
-            <span>16명이 작성한</span>
+            <span>{posts.contents.length}명이 작성한</span>
             <br />
             <span>소중한 롤링페이퍼가</span>
             <br />
@@ -60,7 +62,8 @@ const Splash = () => {
           <StickyFooter position="absolute">
             <Link
               href={{
-                pathname: '/celebrate',
+                pathname: '/receiver/main',
+                query: { name: name, num: num },
               }}
             >
               <Buttons full={true}>롤링페이퍼 확인하기</Buttons>
@@ -73,6 +76,16 @@ const Splash = () => {
       </div>
     </div>
   );
+};
+Splash.getInitialProps = async (context) => {
+  const name = context.query.name;
+  const num = context.query.num;
+  const res = await rollingService.getRollingByName(name, num);
+  return {
+    posts: res.data,
+    name: name,
+    num: num,
+  };
 };
 
 export default Splash;

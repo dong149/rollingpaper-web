@@ -30,9 +30,9 @@ const useStyles = makeStyles({
   textarea: {
     display: 'flex',
     margin: '0 auto',
-    width: '312px',
-    height: '340px',
-    marginTop: '30px',
+    width: '90%',
+    // height: '340px',
+    marginTop: '7vh',
     // padding: '16px',
     borderRadius: '13px',
     // backgroundColor: '#f2f2f2',
@@ -50,6 +50,11 @@ const useStyles = makeStyles({
       '&:focus': {
         outline: 'none',
       },
+
+      margin: '0 auto 0 auto',
+      height: '58vh',
+      minHeight: '340px',
+      overflow: 'auto',
     },
   },
   fontPropButton: {
@@ -129,6 +134,8 @@ const useStyles = makeStyles({
     },
     scrollbarWidth: 'none',
     overflowStyle: 'none',
+    position: 'absolute',
+    bottom: '70px'
   },
 });
 const customModalStyles = {
