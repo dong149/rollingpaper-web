@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
     background: '#FFF',
     borderTopLeftRadius: '28px',
     borderTopRightRadius: '28px',
+    width: 'calc(100% + 32px)',
+    marginLeft: '-16px',
   },
   title: {
     margin: '0',

@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     width: '90%',
     // height: '340px',
-    marginTop: '7vh',
+    marginTop: '6vh',
     // padding: '16px',
     borderRadius: '13px',
     // backgroundColor: '#f2f2f2',
@@ -57,10 +57,7 @@ const useStyles = makeStyles((theme) => ({
       //   display: 'none',
       // },
 
-      margin: '0 auto 0 auto',
-      height: '56vmax',
-      minHeight: '340px',
-      overflow: 'auto',
+      height: '340px',
     },
   },
   textareaImage: {
@@ -93,10 +90,7 @@ const useStyles = makeStyles((theme) => ({
       //   display: 'none',
       // },
 
-      margin: '0 auto 0 auto',
-      height: '58vh',
-      minHeight: '340px',
-      overflow: 'auto',
+      height: '340px',
     },
   },
   from: {
@@ -216,7 +210,10 @@ const Editor = (props) => {
           저장되었습니다.
         </ModalTitie>
         <ModalButtonWrapper>
-          <ModalFullButton onClick={() => setSuccessModalIsOpen(false)}>
+          <ModalFullButton onClick={() => {
+            setSuccessModalIsOpen(false);
+            window.location.href = `/sender/main?name=${name}&num=${num}`;
+          }}>
             확인
           </ModalFullButton>
         </ModalButtonWrapper>
