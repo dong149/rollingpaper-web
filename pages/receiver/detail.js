@@ -176,7 +176,7 @@ const Detail = (props) => {
                     textAlign: value.sort,
                   }}
                 >
-                  <p className={classes.cardInner}>{value.content}</p>
+                  <p className={classes.cardInner} dangerouslySetInnerHTML={{__html: value.content}} />
                 </div>
               </div>
               <div className={classes.sender}>

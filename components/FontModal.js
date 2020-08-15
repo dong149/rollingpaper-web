@@ -248,6 +248,12 @@ const FontModal = (props) => {
             onChange={(e) => {
               setContent(e.target.value);
             }}
+            onKeyDown={(event) => {
+              if(event.key === 'Enter') {
+                event.preventDefault();
+                document.execCommand('insertLineBreak');
+              }
+            }}
             style={{
               display: 'flex',
               alignItems: 'center',
