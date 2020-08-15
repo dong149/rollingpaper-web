@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     margin: '0 auto',
     width: '90%',
     // height: '340px',
-    marginTop: '30px',
+    marginTop: '7vh',
     // padding: '16px',
     borderRadius: '13px',
     // backgroundColor: '#f2f2f2',
@@ -52,7 +52,7 @@ const useStyles = makeStyles({
       },
 
       margin: '0 auto 0 auto',
-      height: '56vmax',
+      height: '58vh',
       minHeight: '340px',
       overflow: 'auto',
     },
