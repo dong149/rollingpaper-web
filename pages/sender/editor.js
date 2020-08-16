@@ -167,11 +167,13 @@ const Editor = (props) => {
           font,
           sort,
           color,
-          backgroundColor
+          backgroundColor,
+          backgroundImage
         )
         .then((res) => {
           console.log(res);
           setSuccessModalIsOpen(true);
+          setBackgroundImage('');
           setContent('');
           setAuthor('');
           return 200;
