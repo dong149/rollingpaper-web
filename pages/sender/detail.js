@@ -224,12 +224,17 @@ const Detail = (props) => {
                 `}
                   style={{
                     backgroundColor: value.backgroundColor,
-                    color: value.color,
-                    fontFamily: value.font,
-                    textAlign: value.sort,
                   }}
                 >
-                  <p className={classes.cardInner} dangerouslySetInnerHTML={{__html: value.content}} />
+                  <p 
+                    className={classes.cardInner} 
+                    style={{
+                      color: value.color,
+                      fontFamily: value.font,
+                      textAlign: value.sort,
+                    }} 
+                    dangerouslySetInnerHTML={{__html: value.content}} 
+                  />
                 </div>
               </div>
               <div className={classes.sender}>

@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     // background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
+    backgroundImage: `url('/icons/f6f6f6.png')`,
+    backgroundPosition: 'center center',
+    backgroundBlendMode: 'multiply',
+    backgroundRepeat: 'no-repeat',
   },
   cardInner: {
     overflow: 'scroll',
@@ -171,12 +175,17 @@ const Detail = (props) => {
                 `}
                   style={{
                     backgroundColor: value.backgroundColor,
-                    color: value.color,
-                    fontFamily: value.font,
-                    textAlign: value.sort,
                   }}
                 >
-                  <p className={classes.cardInner} dangerouslySetInnerHTML={{__html: value.content}} />
+                  <p 
+                    className={classes.cardInner} 
+                    dangerouslySetInnerHTML={{__html: value.content}} 
+                    style={{
+                      color: value.color,
+                      fontFamily: value.font,
+                      textAlign: value.sort,
+                    }} 
+                  />
                 </div>
               </div>
               <div className={classes.sender}>
