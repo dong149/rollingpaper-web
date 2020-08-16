@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     background: '#FFF',
   }, // TODO: 나중에 상황 보고 공통화 및 일괄 삭제
   cardWrapper: {
-    padding: '0 10px',
+    padding: '10px 10px 0',
   },
   card: {
     display: 'flex',
@@ -41,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
     // background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
-    backgroundImage: `url('/icons/f6f6f6.png')`,
-    backgroundPosition: 'center center',
-    backgroundBlendMode: 'multiply',
+    backgroundImage: `url('/images/bg_card.png')`,
+    backgroundSize: 'cover',
+    backgroundBlendMode: 'color-burn',
     backgroundRepeat: 'no-repeat',
   },
   cardInner: {
@@ -226,14 +226,14 @@ const Detail = (props) => {
                     backgroundColor: value.backgroundColor,
                   }}
                 >
-                  <p 
-                    className={classes.cardInner} 
+                  <p
+                    className={classes.cardInner}
                     style={{
                       color: value.color,
                       fontFamily: value.font,
                       textAlign: value.sort,
-                    }} 
-                    dangerouslySetInnerHTML={{__html: value.content}} 
+                    }}
+                    dangerouslySetInnerHTML={{ __html: value.content }}
                   />
                 </div>
               </div>
