@@ -42,7 +42,51 @@ const rollingService = {
     );
     return res.data || [];
   },
+  getRollingSticker: async (rolling_id) => {
+    let res = await baseAPI.get(`/api/v1/sticker?rollingpaperId=${rolling_id}`);
+    console.log('getRollingSticker : ', res.data);
+    return res.data || [];
+  },
+  postRollingSticker: async (rollingpaperId, x, y, url) => {
+    console.log(rollingpaperId, x, y, url);
+    const res = await baseAPI.post(`/api/v1/sticker/`, {
+      rollingpaperId,
+      x,
+      y,
+      url,
+    });
 
+    const { status, message } = res.data;
+    console.log('postRollingSticker : ', message);
+
+    if (status == 201) {
+      return message;
+    }
+
+    throw Error(message);
+  },
+  deleteRollingSticker: async (stickerId) => {
+    console.log(stickerId);
+    // const res = await baseAPI.delete(`/api/v1/sticker`, {
+    //   stickerId,
+    // });
+    const res = await baseAPI({
+      method: 'delete',
+      url: '/api/v1/sticker',
+      data: {
+        stickerId,
+      },
+    });
+    console.log('테스트 : ', res);
+    const { status, message } = res.data;
+
+    if (status == 204) {
+      console.log('stickerId : ', stickerId);
+      return message;
+    }
+
+    throw new Error(message);
+  },
   // postRolling: async (object) => {
   //   console.log("ddd");
   //   await baseAPI

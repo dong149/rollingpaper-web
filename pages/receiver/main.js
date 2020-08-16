@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../../components/Header';
@@ -7,9 +7,9 @@ import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import { exportComponentAsPNG } from '../../functions';
 import rollingService from '../../services/rollingService';
+import StickerList from '../../components/StickerList';
 
 import Confetti from 'react-confetti';
-const cardList = Array(30).fill('카드'); // 임시 배열
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,8 +28,15 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '30px',
   },
   cardWrapper: {
+    overflow: 'hidden',
+    position: 'relative',
     marginTop: '14px',
+    width: 'calc(100% + 32px)',
+    minHeight: 'calc(100vh - 104px)',
+    marginLeft: '-16px',
     background: '#FFF',
+    borderTopLeftRadius: '28px',
+    borderTopRightRadius: '28px',
   },
   title: {
     margin: '0',
@@ -53,6 +60,7 @@ const Main = (props) => {
   console.log('props 값 - ', 'posts :', posts, 'name : ', name, 'num : ', num);
   const componentRef = useRef();
   const layoutRef = useRef();
+  const [isStickerUpdated, setIsStickerUpdated] = useState(true);
   return (
     <body style={{ backgroundColor: '#F6F6F6' }}>
       <Confetti width={layoutRef.width} height={layoutRef.height} />
@@ -70,10 +78,32 @@ const Main = (props) => {
           {/* <button className={classes.buttonSmall}>공유하기</button> */}
         </Header>
         <div className={classes.cardWrapper} ref={componentRef}>
+          {posts.rollingpaperId && (
+            <StickerList
+              rollingId={posts.rollingpaperId}
+              isStickerUpdated={isStickerUpdated}
+              setIsStickerUpdated={setIsStickerUpdated}
+              isReceiverPage={true}
+            />
+          )}
           {posts.contents.length ? (
             <Cards name={name} num={num} content={posts.contents} linked />
           ) : (
-            <div>더미</div>
+            <div
+              style={{
+                minHeight: 'calc(100vh - 150px)',
+                textAlign: 'center',
+                paddingTop: '90px',
+              }}
+            >
+              <img
+                style={{
+                  width: '80%',
+                }}
+                src="/icons/empty.png"
+                alt="아무도 작성하지 않은 경우"
+              />
+            </div>
           )}
         </div>
         <StickyFooter>
