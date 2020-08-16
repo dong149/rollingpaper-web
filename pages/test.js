@@ -1,3 +1,4 @@
+// 이미지 업로드 테스트를 위함입니다.
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -29,11 +30,11 @@ const Test = () => {
   return (
     <div>
       <input
-        accept="image/*"
-        className={classes.input}
+        // accept="image/*"
+        // className={classes.input}
         id="contained-button-file"
         multiple
-        type="file"
+        type="img"
         onChange={onChange}
       />
       <label htmlFor="contained-button-file">dkdkdkdk</label>

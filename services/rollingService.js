@@ -134,6 +134,7 @@ const rollingService = {
   //       return 0;
   //     });
   // },
+
   postRollingContent: async (
     rolling_id,
     content,
@@ -141,15 +142,37 @@ const rollingService = {
     font,
     sort,
     color,
-    backgroundColor
+    backgroundColor,
+    backgroundImage
   ) => {
-    const res = await baseAPI.post(`/api/v1/rolling/${rolling_id}/content`, {
-      content,
-      author,
-      font,
-      sort,
-      color,
-      backgroundColor,
+    // const res = await baseAPI.post(`/api/v1/rolling/${rolling_id}/content`, {
+    //   content,
+    //   author,
+    //   font,
+    //   sort,
+    //   color,
+    //   backgroundColor,
+    //   backgroundImage,
+    // });
+    const formData = new FormData();
+    formData.append('content', content);
+    formData.append('author', author);
+    formData.append('font', font);
+    formData.append('sort', sort);
+    formData.append('color', color);
+    formData.append('backgroundColor', backgroundColor);
+    formData.append('backgroundImage', backgroundImage);
+    for (var value of formData.values()) {
+      console.log(value);
+    }
+    const res = await baseAPI({
+      method: 'post',
+      url: `/api/v1/rolling/${rolling_id}/content`,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
+      },
+      data: formData,
     });
 
     const { status, message } = res.data;
