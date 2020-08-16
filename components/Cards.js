@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import rollingService from '../services/rollingService';
+import { motion } from 'framer-motion';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +65,12 @@ const styledRandom = (i, bgColor) => {
     backgroundColor: `${bgColor}`,
   };
 };
-
+const spring = {
+  type: 'spring',
+  damping: 20,
+  stiffness: 100,
+  when: 'afterChildren',
+};
 const Cards = (props) => {
   const classes = useStyles();
   const { name, num, content, linked, setIsPostsUpdated } = props;
@@ -73,14 +79,11 @@ const Cards = (props) => {
       <Grid container spacing={2}>
         {content.map((value, i) => {
           return (
-            <div key={i}>
-              <Grid
-                item
-                xs={4}
-                key={i}
-                // onClick={() => {
-                //   setModalIsOpen(true);
-                // }}
+            <Grid item xs={4} key={value.id}>
+              <motion.div
+                transition={{ ...spring, delay: i * 0.2 }}
+                initial={{ y: 60, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
               >
                 {linked ? (
                   <Link
@@ -101,9 +104,8 @@ const Cards = (props) => {
                           fontFamily: value.font,
                           justifyContent: value.sort,
                         }}
-                        dangerouslySetInnerHTML = {{ __html: value.content}}
-                      >
-                      </p>
+                        dangerouslySetInnerHTML={{ __html: value.content }}
+                      ></p>
                     </a>
                   </Link>
                 ) : (
@@ -125,14 +127,13 @@ const Cards = (props) => {
                           fontFamily: value.font,
                           justifyContent: value.sort,
                         }}
-                        dangerouslySetInnerHTML = {{ __html: value.content}}
-                      >
-                      </p>
+                        dangerouslySetInnerHTML={{ __html: value.content }}
+                      ></p>
                     </a>
                   </Link>
                 )}
-              </Grid>
-            </div>
+              </motion.div>
+            </Grid>
           );
         })}
       </Grid>

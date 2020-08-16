@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import rollingService from '../services/rollingService';
 import { Button } from '@material-ui/core';
+import { motion } from 'framer-motion';
 
 const useStyles = makeStyles((props) => ({
   sticker: {
@@ -50,7 +51,6 @@ const useStyles = makeStyles((props) => ({
     },
   },
 }));
-
 const StickerList = (props) => {
   const [stickerList, setStickerList] = useState([]);
   const {
@@ -80,11 +80,23 @@ const StickerList = (props) => {
       return 400;
     }
   };
+  const spring = {
+    type: 'spring',
+    damping: 20,
+    stiffness: 100,
+    when: 'afterChildren',
+  };
   return (
     <>
       {stickerList &&
-        stickerList.map((sticker) => {
+        stickerList.map((sticker, i) => {
           return (
+            // <motion.div
+            //   transition={{ ...spring }}
+            //   initial={{ opacity: 0 }}
+            //   animate={{ opacity: 1 }}
+            // >
+            // TODO: 하면 좋은데, Cards와 싱크가 안맞아 보류
             <span
               key={sticker.id}
               className={classes.sticker}
@@ -109,6 +121,7 @@ const StickerList = (props) => {
                 <img src={sticker.url} />
               </span>
             </span>
+            // </motion.div>
           );
         })}
     </>

@@ -4,6 +4,7 @@ import Layouts from './Layouts';
 import Modal from 'react-modal';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,18 +63,6 @@ const customModalStyles = {
 
 const StickerModal = (props) => {
   const classes = useStyles(props);
-  const availableColors = [
-    '#FFFFFF',
-    '#F4F4F4',
-    '#DBE6EF',
-    '#F2E5E5',
-    '#FDFFB5',
-    '#E6E4D9',
-    '#B4D4F1',
-    '#F1C0B5',
-    '#AE9BF8',
-    '#F3C982',
-  ];
   const {
     stickerModalIsOpen,
     setStickerModalIsOpen,
@@ -105,35 +94,49 @@ const StickerModal = (props) => {
       </Grid>
     );
   }
-
+  const spring = {
+    type: 'spring',
+    damping: 20,
+    stiffness: 100,
+    when: 'afterChildren',
+  };
   return (
-    <Modal
-      isOpen={stickerModalIsOpen}
-      style={customModalStyles}
-      contentLabel="Color Modal"
-    >
-      <Layouts className={classes.root}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-            padding: '0 9px',
-          }}
+    <AnimatePresence exitBeforeEnter>
+      <Modal
+        isOpen={stickerModalIsOpen}
+        style={customModalStyles}
+        contentLabel="Color Modal"
+      >
+        <motion.div
+          transition={spring}
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -100, opacity: 0 }}
         >
-          <span onClick={() => setStickerModalIsOpen(false)}>
-            <img
-              style={{ width: '16px' }}
-              src="/icons/back-light-icon.png"
-            ></img>
-          </span>
-        </div>
-        <Grid className={classes.colorList} container spacing={3}>
-          {stickerCards}
-        </Grid>
-      </Layouts>
-    </Modal>
+          <Layouts className={classes.root}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%',
+                padding: '0 9px',
+              }}
+            >
+              <span onClick={() => setStickerModalIsOpen(false)}>
+                <img
+                  style={{ width: '16px' }}
+                  src="/icons/back-light-icon.png"
+                ></img>
+              </span>
+            </div>
+            <Grid className={classes.colorList} container spacing={3}>
+              {stickerCards}
+            </Grid>
+          </Layouts>
+        </motion.div>
+      </Modal>
+    </AnimatePresence>
   );
 };
 
