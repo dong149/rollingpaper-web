@@ -96,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     color: '#fff',
     cursor: 'pointer',
+    zIndex: 100,
   },
   btnSquare: {
     flexBasis: '56px',
@@ -220,12 +221,13 @@ const Main = (props) => {
                 <span className={classes.stickerImage}>
                   <img src={stickerURL} />
                 </span>
-                <button
+                {/* <button
                   className={classes.stickerButton}
                   onClick={() => onCreateSticker()}
                 >
                   완료
-                </button>
+                </button> */}
+                {/* TODO: mobile에서는 버튼이 안먹는 이슈로 삭제 */}
               </div>
             </Draggable>
           )}
@@ -257,31 +259,39 @@ const Main = (props) => {
         </div>
         <StickyFooter>
           <Grid container spacing={2}>
-            <Grid item className={classes.btnSquare}>
-              <Button
-                variant="contained"
-                onClick={() => setStickerModalIsOpen(true)}
-              >
-                <img src="/icons/sticker-icon.png" alt="스티커 붙이기" />
-              </Button>
-            </Grid>
-            <Grid item className={classes.btnfull}>
-              <Link
-                href={{
-                  pathname: '/sender/editor',
-                  query: { name: name, num: num, id: posts.rollingpaperId },
-                }}
-              >
-                <Buttons full={true}>
-                  <img
-                    src="/icons/write-light-icon.png"
-                    alt=""
-                    className={classes.icon}
-                  />
-                  롤링페이퍼 작성하기
-                </Buttons>
-              </Link>
-            </Grid>
+            {stickerURL ? (
+              <Buttons onClick={onCreateSticker} full>
+                완료
+              </Buttons>
+            ) : (
+              <>
+                <Grid item className={classes.btnSquare}>
+                  <button
+                    variant="contained"
+                    onClick={() => setStickerModalIsOpen(true)}
+                  >
+                    <img src="/icons/sticker-icon.png" alt="스티커 붙이기" />
+                  </button>
+                </Grid>
+                <Grid item className={classes.btnfull}>
+                  <Link
+                    href={{
+                      pathname: '/sender/editor',
+                      query: { name: name, num: num, id: posts.rollingpaperId },
+                    }}
+                  >
+                    <Buttons full={true}>
+                      <img
+                        src="/icons/write-light-icon.png"
+                        alt=""
+                        className={classes.icon}
+                      />
+                      롤링페이퍼 작성하기
+                    </Buttons>
+                  </Link>
+                </Grid>
+              </>
+            )}
           </Grid>
         </StickyFooter>
       </Layouts>
