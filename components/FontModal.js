@@ -231,9 +231,9 @@ const FontModal = (props) => {
           style={{
             fontFamily: `${font}`,
             backgroundColor: `${backgroundColor}`,
-            backgroundImage: `url('/icons/f6f6f6.png')`,
-            backgroundPosition: 'center center',
-            backgroundBlendMode: 'multiply',
+            backgroundImage: `url('/images/bg_card.png')`,
+            backgroundSize: 'cover',
+            backgroundBlendMode: 'color-burn',
             backgroundRepeat: 'no-repeat',
             // backgroundAttachment: 'fixed',
             border: 'none',

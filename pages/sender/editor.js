@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: '#f2f2f2',
     textAlign: 'center',
     wordBreak: 'break-all',
-    backgroundImage: `url('/icons/f6f6f6.png')`,
-    backgroundPosition: 'center center',
-    backgroundBlendMode: 'multiply',
+    backgroundImage: `url('/images/bg_card.png')`,
+    backgroundSize: 'cover',
+    backgroundBlendMode: 'color-burn',
     backgroundRepeat: 'no-repeat',
     '& div': {
       flex: '1',
@@ -210,10 +210,12 @@ const Editor = (props) => {
           저장되었습니다.
         </ModalTitie>
         <ModalButtonWrapper>
-          <ModalFullButton onClick={() => {
-            setSuccessModalIsOpen(false);
-            window.location.href = `/sender/main?name=${name}&num=${num}`;
-          }}>
+          <ModalFullButton
+            onClick={() => {
+              setSuccessModalIsOpen(false);
+              window.location.href = `/sender/main?name=${name}&num=${num}`;
+            }}
+          >
             확인
           </ModalFullButton>
         </ModalButtonWrapper>
@@ -278,7 +280,7 @@ const Editor = (props) => {
             setContent(e.target.value);
           }}
           onKeyDown={(event) => {
-            if(event.key === 'Enter') {
+            if (event.key === 'Enter') {
               event.preventDefault();
               document.execCommand('insertLineBreak');
             }
@@ -303,6 +305,7 @@ const Editor = (props) => {
             type="text"
             value={author}
             placeholder="보내는이"
+            maxlength="6"
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>

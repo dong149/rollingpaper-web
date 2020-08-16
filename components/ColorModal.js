@@ -19,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '141px',
     height: '141px',
-    backgroundImage: `url('/icons/f6f6f6.png')`,
-    backgroundPosition: 'center center',
-    backgroundBlendMode: 'multiply',
+    backgroundImage: `url('/images/bg_card.png')`,
+    backgroundSize: 'cover',
+    backgroundBlendMode: 'color-burn',
     backgroundRepeat: 'no-repeat',
     display: 'flex',
     justifyContent: 'center',
