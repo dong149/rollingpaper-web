@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     minHeight: '100vh',
     flexDirection: 'column',
     background: '#FFF',
+    zIndex: 100,
   },
   menuButton: {
     width: '48px',
@@ -132,7 +133,7 @@ const useStyles = makeStyles({
     scrollbarWidth: 'none',
     overflowStyle: 'none',
     position: 'absolute',
-    bottom: '70px'
+    bottom: '70px',
   },
 });
 const customModalStyles = {
@@ -143,6 +144,7 @@ const customModalStyles = {
     right: 0,
     bottom: 0,
     backgroundColor: '#666666',
+    zIndex: 100,
   },
   content: {
     top: '0',
@@ -246,7 +248,7 @@ const FontModal = (props) => {
               setContent(e.target.value);
             }}
             onKeyDown={(event) => {
-              if(event.key === 'Enter') {
+              if (event.key === 'Enter') {
                 event.preventDefault();
                 document.execCommand('insertLineBreak');
               }
@@ -339,7 +341,11 @@ const FontModal = (props) => {
               >
                 <img
                   className={classes.stylePropButton}
-                  src={sort === "flex-start" ? "/icons/detail_text1_focus.png" : "/icons/detail_text1_normal.png"}
+                  src={
+                    sort === 'flex-start'
+                      ? '/icons/detail_text1_focus.png'
+                      : '/icons/detail_text1_normal.png'
+                  }
                 ></img>
               </span>
               <span
@@ -348,7 +354,11 @@ const FontModal = (props) => {
               >
                 <img
                   className={classes.stylePropButton}
-                  src={sort === "center" ? "/icons/detail_text2_focus.png" : "/icons/detail_text2_normal.png"}
+                  src={
+                    sort === 'center'
+                      ? '/icons/detail_text2_focus.png'
+                      : '/icons/detail_text2_normal.png'
+                  }
                 ></img>
               </span>
               <span
@@ -357,7 +367,11 @@ const FontModal = (props) => {
               >
                 <img
                   className={classes.stylePropButton}
-                  src={sort === "flex-end" ? "/icons/detail_text3_focus.png" : "/icons/detail_text3_normal.png"}
+                  src={
+                    sort === 'flex-end'
+                      ? '/icons/detail_text3_focus.png'
+                      : '/icons/detail_text3_normal.png'
+                  }
                 ></img>
               </span>
             </div>
@@ -459,7 +473,11 @@ const FontModal = (props) => {
             onClick={() => setEditMode('text')}
           >
             <img
-              src={editMode === "text" ? "/icons/option_icon_font1_focus.png" :  "/icons/option_icon_font1_normal.png"}
+              src={
+                editMode === 'text'
+                  ? '/icons/option_icon_font1_focus.png'
+                  : '/icons/option_icon_font1_normal.png'
+              }
               className={classes.menuButton}
             />
           </span>
@@ -468,16 +486,26 @@ const FontModal = (props) => {
             onClick={() => setEditMode('sort')}
           >
             <img
-              src={editMode === "sort" ? "/icons/option_icon_text2_focus.png" :  "/icons/option_icon_text2_normal.png"}
-              className={classes.menuButton} />
+              src={
+                editMode === 'sort'
+                  ? '/icons/option_icon_text2_focus.png'
+                  : '/icons/option_icon_text2_normal.png'
+              }
+              className={classes.menuButton}
+            />
           </span>
           <span
             style={{ margin: '0 0 0 10px' }}
             onClick={() => setEditMode('color')}
           >
             <img
-              src={editMode === "color" ? "/icons/option_icon_color3_focus.png" :  "/icons/option_icon_color3_normal.png"}
-              className={classes.menuButton} />
+              src={
+                editMode === 'color'
+                  ? '/icons/option_icon_color3_focus.png'
+                  : '/icons/option_icon_color3_normal.png'
+              }
+              className={classes.menuButton}
+            />
           </span>
         </div>
       </Layouts>

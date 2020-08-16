@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     background: '#FFF',
     flexGrow: 1,
+    zIndex: 100,
   },
   paper: {
     width: '141px',
@@ -73,6 +74,7 @@ const customModalStyles = {
     right: 0,
     bottom: 0,
     backgroundColor: '#666666',
+    zIndex: 100,
   },
   content: {
     top: '0',
