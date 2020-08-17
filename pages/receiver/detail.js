@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '45px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   cardActive: {
     marginTop: 0,
@@ -105,8 +105,8 @@ const cardStyle = (bgColor, bgImage) => {
   return {
     backgroundColor: `${bgColor}`,
     backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
-    backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
-    backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
+    backgroundSize: `${!isEmpty(bgImage) && 'cover '}`,
+    backgroundPosition: `${!isEmpty(bgImage) && 'center center '}`,
   };
 };
 
@@ -194,7 +194,7 @@ const Detail = (props) => {
                     style={{
                       color: value.color,
                       fontFamily: value.font,
-                      textAlign: value.sort,
+                      justifyContent: value.sort,
                     }}
                   />
                 </div>

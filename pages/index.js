@@ -20,10 +20,10 @@ const useStyles = makeStyles({
     minHeight: '100vh',
   },
   rolling: {
-    width: '322px',
-    height: '379px',
+    width: '343px',
+    // height: '379px',
     margin: '0 auto',
-    marginTop: '3px',
+    marginTop: '30px',
     // marginBottom: '87px',
   },
 });
@@ -52,7 +52,7 @@ const Index = () => {
           </div>
           <img
             className={classes.rolling}
-            src="/images/main.jpg"
+            src="/gif/main.gif"
             alt="롤링페이퍼 메인 이미지"
           />
           <StickyFooter position="absolute">
