@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import rollingService from '../services/rollingService';
+import { motion } from 'framer-motion';
+import { isEmpty } from '../functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,32 +20,41 @@ const useStyles = makeStyles((theme) => ({
   card: {
     display: '-webkit-box',
     overflow: 'hidden',
-    width: '123px',
-    height: '169px',
+    display: 'flex',
+    width: '113px',
+    height: '120px',
     // background: (props) => props.bgColor,
     padding: '10px',
     borderRadius: '13px',
     lineHeight: '1.5em',
+    alignItems: 'center',
     wordBreak: 'break-all',
     textOverflow: 'ellipsis',
-    lineClamp: 7,
+    lineClamp: 6,
     boxOrient: 'vertical',
     textDecoration: 'none',
+    // backgroundImage: `url('/images/bg_card.png')`,
+    backgroundSize: 'cover',
+    // backgroundBlendMode: 'color-burn',
+    backgroundRepeat: 'no-repeat',
+    // backgroundPosition: 'center center',
+    // backgroundBlendMode: 'multiply',
   },
   cardInner: {
     flex: 1,
     overflow: 'hidden',
-    fontSize: '13px',
+    fontSize: '11px',
     textOverflow: 'ellipsis',
   },
 }));
 
-const styledRandom = (i, bgColor) => {
+const styledRandom = (i, bgColor, bgImage) => {
   // TODO: 좀 더 자연스러운 랜덤 화면 구현
   let hashKey = (13 / (i + 1) + 0.2) % 1;
   let x = Math.floor(hashKey * 40);
   let y = Math.floor(hashKey * 40);
   let rotate = Math.floor(hashKey * (i % 2 === 0 ? 30 : -30));
+  console.log(bgImage);
   return {
     transform:
       'rotate(' +
@@ -56,9 +67,20 @@ const styledRandom = (i, bgColor) => {
       y +
       'px)',
     backgroundColor: `${bgColor}`,
+    // backgroundColor: `${isEmpty(bgImage) ? bgColor : '#FFFFFF'}`,
+    backgroundImage: `${
+      isEmpty(bgImage) ? `url('/images/bg_card.png')` : `url('${bgImage}')`
+    }`,
+    backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
+    backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
   };
 };
-
+const spring = {
+  type: 'spring',
+  damping: 20,
+  stiffness: 100,
+  when: 'afterChildren',
+};
 const Cards = (props) => {
   const classes = useStyles();
   const { name, num, content, linked, setIsPostsUpdated } = props;
@@ -67,14 +89,11 @@ const Cards = (props) => {
       <Grid container spacing={2}>
         {content.map((value, i) => {
           return (
-            <div key={i}>
-              <Grid
-                item
-                xs={4}
-                key={i}
-                // onClick={() => {
-                //   setModalIsOpen(true);
-                // }}
+            <Grid item xs={4} key={value.id}>
+              <motion.div
+                transition={{ ...spring, delay: i * 0.2 }}
+                initial={{ y: 60, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
               >
                 {linked ? (
                   <Link
@@ -86,18 +105,21 @@ const Cards = (props) => {
                     <a
                       elevation={0}
                       className={classes.card}
-                      style={styledRandom(i, value.backgroundColor)}
+                      style={styledRandom(
+                        i,
+                        value.backgroundColor,
+                        value.backgroundImage
+                      )}
                     >
                       <p
                         className={classes.cardInner}
                         style={{
                           color: value.color,
                           fontFamily: value.font,
-                          textAlign: value.sort,
+                          justifyContent: value.sort,
                         }}
-                      >
-                        {value.content}
-                      </p>
+                        dangerouslySetInnerHTML={{ __html: value.content }}
+                      ></p>
                     </a>
                   </Link>
                 ) : (
@@ -110,23 +132,26 @@ const Cards = (props) => {
                     <a
                       elevation={0}
                       className={classes.card}
-                      style={styledRandom(i, value.backgroundColor)}
+                      style={styledRandom(
+                        i,
+                        value.backgroundColor,
+                        value.backgroundImage
+                      )}
                     >
                       <p
                         className={classes.cardInner}
                         style={{
                           color: value.color,
                           fontFamily: value.font,
-                          textAlign: value.sort,
+                          justifyContent: value.sort,
                         }}
-                      >
-                        {value.content}
-                      </p>
+                        dangerouslySetInnerHTML={{ __html: value.content }}
+                      ></p>
                     </a>
                   </Link>
                 )}
-              </Grid>
-            </div>
+              </motion.div>
+            </Grid>
           );
         })}
       </Grid>

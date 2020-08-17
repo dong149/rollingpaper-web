@@ -4,34 +4,45 @@
 // @import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
 // 나눔 펜 스크립트
 @font-face {
-  font-family: "Nanum Pen Script", cursive;
-  src: url("/public/fonts/NanumPenScript-Regular.ttf");
+  font-family: 'Nanum Pen Script', cursive;
+  src: url('/fonts/NanumPenScript-Regular.ttf');
+}
+
+//나눔 손글씨 강부장님체
+@font-face {
+  font-family: '강부장님체';
+  src: url('/fonts/강부장님체.ttf');
+}
+//나눔 손글씨 사랑해 아들체
+@font-face {
+  font-family: '사랑해아들체';
+  src: url('/fonts/사랑해아들체.ttf');
 }
 
 // 나눔 스퀘어 라운드 맥용
 @font-face {
-  font-family: "NanumSquareRound";
-  src: url("/public/fonts/NanumSquareRoundR.ttf");
+  font-family: 'NanumSquareRound';
+  src: url('/public/fonts/NanumSquareRoundR.ttf');
   font-weight: normal;
 }
 @font-face {
-  font-family: "NanumSquareRound";
-  src: url("/public/fonts/NanumSquareRoundL.ttf");
+  font-family: 'NanumSquareRound';
+  src: url('/fonts/NanumSquareRoundL.ttf');
   font-weight: lighter;
 }
 @font-face {
-  font-family: "NanumSquareRound";
-  src: url("/public/fonts/NanumSquareRoundB.ttf");
+  font-family: 'NanumSquareRound';
+  src: url('/fonts/NanumSquareRoundB.ttf');
   font-weight: bold;
 }
 // 나눔 브러쉬
 @font-face {
-  font-family: "NanumBrush";
-  src: url("/public/fonts/NanumBrush.ttf");
+  font-family: 'NanumBrush';
+  src: url('/fonts/NanumBrush.ttf');
 }
 // $black-han-sans: "Black Han Sans", sans-serif;
 // $spoqa-han-sans: "Spoqa Han Sans", "Spoqa Han Sans JP", "Sans-serif";
-$nanum-square: "NanumSquare", sans-serif !important;
-$nanum-square-round: "NanumSquareRond";
-$nanum-pen: "Nanum Pen Script", cursive;
-$nanum-brush: "NanumBrush";
+$nanum-square: 'NanumSquare', sans-serif !important;
+$nanum-square-round: 'NanumSquareRond';
+$nanum-pen: 'Nanum Pen Script', cursive;
+$nanum-brush: 'NanumBrush';

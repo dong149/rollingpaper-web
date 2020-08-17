@@ -6,6 +6,7 @@ import { createMuiTheme } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import '../styles/styles.scss';
 import Head from 'next/head';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default class RootApp extends App {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class RootApp extends App {
     return { pageProps };
   }
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, router } = this.props;
     const theme = createMuiTheme({
       palette: {
         background: {
@@ -36,6 +37,31 @@ export default class RootApp extends App {
         },
       },
     });
+    const spring = {
+      type: 'spring',
+      damping: 20,
+      stiffness: 100,
+      when: 'afterChildren',
+    };
+    const container = {
+      hidden: { opacity: 0 },
+      show: {
+        opacity: 1,
+        transition: {
+          delayChildren: 0.5,
+        },
+      },
+    };
+
+    const item = {
+      hidden: { opacity: 0 },
+      show: {
+        opacity: 1,
+        transition: {
+          delayChildren: 0.5,
+        },
+      },
+    };
     return (
       <React.Fragment>
         <Head>
@@ -52,9 +78,17 @@ export default class RootApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline>
-            {/* <Container maxWidth="sm"> */}
-            <Component {...pageProps} />
-            {/* </Container> */}
+            {/* <AnimatePresence exitBeforeEnter> */}
+            <motion.div
+              transition={spring}
+              key={router.pathname}
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -100, opacity: 0 }}
+            >
+              <Component {...pageProps} />
+            </motion.div>
+            {/* </AnimatePresence> */}
           </CssBaseline>
         </ThemeProvider>
       </React.Fragment>

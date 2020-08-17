@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     bottom: '16px',
     textAlign: (props) => props.align ?? 'left',
     boxSizing: 'border-box',
+    zIndex: 50,
   },
 });
 const StickyFooter = (props) => {

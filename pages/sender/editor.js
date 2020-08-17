@@ -28,14 +28,18 @@ const useStyles = makeStyles((theme) => ({
   textarea: {
     display: 'flex',
     margin: '0 auto',
-    width: '100%',
-    height: '462px',
-    marginTop: '30px',
-    padding: '16px',
+    width: '90%',
+    // height: '340px',
+    marginTop: '6vh',
+    // padding: '16px',
     borderRadius: '13px',
-    backgroundColor: '#f2f2f2',
+    // backgroundColor: '#f2f2f2',
     textAlign: 'center',
     wordBreak: 'break-all',
+    backgroundImage: `url('/images/bg_card.png')`,
+    backgroundSize: 'cover',
+    backgroundBlendMode: 'color-burn',
+    backgroundRepeat: 'no-repeat',
     '& div': {
       flex: '1',
       overflow: 'scroll',
@@ -52,6 +56,41 @@ const useStyles = makeStyles((theme) => ({
       // '&::-webkit-scrollbar': {
       //   display: 'none',
       // },
+
+      height: '340px',
+    },
+  },
+  textareaImage: {
+    display: 'flex',
+    margin: '0 auto',
+    width: '90%',
+    // height: '340px',
+    marginTop: '30px',
+    // padding: '16px',
+    borderRadius: '13px',
+    // backgroundColor: '#f2f2f2',
+    textAlign: 'center',
+    wordBreak: 'break-all',
+    backgroundImage: (theme) => theme.backgroundImage,
+    backgroundSize: '100% 100%',
+    '& div': {
+      flex: '1',
+      overflow: 'scroll',
+      // scrollbarWidth: 'none',
+      // overflowStyle: 'none',
+      wordBreak: 'break-all',
+      fontSize: '20px',
+      fontFamily: 'NanumBrush',
+      lineHeight: '1.5em',
+      '&:focus': {
+        outline: 'none',
+      },
+      // TODO: 스크롤바 문제는 의견 물어보고 정할 것
+      // '&::-webkit-scrollbar': {
+      //   display: 'none',
+      // },
+
+      height: '340px',
     },
   },
   from: {
@@ -72,8 +111,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    fontSize: '1.6em',
-    fontWeight: '600',
+    fontSize: '18px',
+    lineHeight: '26px',
+    fontWeight: 'bold',
   },
 }));
 const customModalStyles = {
@@ -99,17 +139,19 @@ const customModalStyles = {
 };
 
 const Editor = (props) => {
-  const classes = useStyles();
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const [content, setContent] = useState('');
-  const [font, setFont] = useState('NanumBrush');
+  const [font, setFont] = useState('NanumSquareRound');
   const [sort, setSort] = useState('center');
   const [color, setColor] = useState('black');
   const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
+  const [backgroundImage, setBackgroundImage] = useState('');
+  const [imageFile, setImageFile] = useState();
   const [author, setAuthor] = useState('');
   const { name, num, id } = props;
+  const classes = useStyles({ backgroundImage: backgroundImage });
   const onSubmit = async () => {
     try {
       await rollingService
@@ -120,11 +162,13 @@ const Editor = (props) => {
           font,
           sort,
           color,
-          backgroundColor
+          backgroundColor,
+          imageFile
         )
         .then((res) => {
           console.log(res);
           setSuccessModalIsOpen(true);
+          setBackgroundImage('');
           setContent('');
           setAuthor('');
           return 200;
@@ -148,12 +192,18 @@ const Editor = (props) => {
         setSort={setSort}
         color={color}
         setColor={setColor}
+        backgroundColor={backgroundColor}
+        setBackgroundColor={setBackgroundColor}
       />
       <ColorModal
         colorModalIsOpen={colorModalIsOpen}
         setColorModalIsOpen={setColorModalIsOpen}
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
+        backgroundImage={backgroundImage}
+        setBackgroundImage={setBackgroundImage}
+        imageFile={imageFile}
+        setImageFile={setImageFile}
       />
       <Modal
         modalIsOpen={successModalIsOpen}
@@ -165,12 +215,26 @@ const Editor = (props) => {
           저장되었습니다.
         </ModalTitie>
         <ModalButtonWrapper>
-          <ModalFullButton onClick={() => setSuccessModalIsOpen(false)}>
+          <ModalFullButton
+            onClick={() => {
+              setSuccessModalIsOpen(false);
+              window.location.href = `/sender/main?name=${name}&num=${num}`;
+            }}
+          >
             확인
           </ModalFullButton>
         </ModalButtonWrapper>
       </Modal>
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+          padding: '0 9px',
+          height: '57px',
+        }}
+      >
         <Link
           href={{
             pathname: '/sender/main',
@@ -181,25 +245,34 @@ const Editor = (props) => {
             <a className={classes.menuButton}>취소</a>
           </span>
         </Link>
-        <span style={{ float: 'right' }}>
+        <div style={{ float: 'right' }}>
           <span onClick={() => setFontModalIsOpen(true)}>
-            <img style={{ width: '35px' }} src="/icons/text-icon.png"></img>
+            <img style={{ width: '38px' }} src="/icons/text-icon.png"></img>
           </span>
           <span onClick={() => setColorModalIsOpen(true)}>
             <img
-              style={{ width: '35px' }}
+              style={{ width: '38px' }}
               src="/icons/background-icon.png"
             ></img>
           </span>
-        </span>
+        </div>
       </div>
 
       <div
-        className={classes.textarea}
+        className={`${
+          isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
+        }`}
         onClick={() => setFontModalIsOpen(true)}
+        // style={`${
+        //   isEmpty(backgroundImage) &&
+        //   'backgroundImage: url(`${backgroundImage}`),'
+        // }`}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
+          backgroundImage: `${
+            !isEmpty(backgroundImage) && `url(${backgroundImage})`
+          }`,
           border: 'none',
           color: `${color}`,
           textAlign: `${sort}`,
@@ -211,10 +284,22 @@ const Editor = (props) => {
           onChange={(e) => {
             setContent(e.target.value);
           }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              document.execCommand('insertLineBreak');
+            }
+          }}
           style={{
+            display: 'flex',
+            alignItems: 'center',
             fontFamily: `${font}`,
             color: `${color}`,
-            textAlign: `${sort}`,
+            justifyContent: `${sort}`,
+            padding: '15px',
+            fontSize: '24px',
+            lineHeight: '38px',
+            overflow: 'hidden',
           }}
         />
       </div>
@@ -225,6 +310,7 @@ const Editor = (props) => {
             type="text"
             value={author}
             placeholder="보내는이"
+            maxlength="6"
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
@@ -249,7 +335,6 @@ const Editor = (props) => {
   );
 };
 Editor.getInitialProps = async (context) => {
-  console.log(context);
   const name = context.query.name;
   const num = context.query.num;
   const id = context.query.id || '';

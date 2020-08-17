@@ -5,7 +5,7 @@ import { Button, NoSsr } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   btn: {
     minWidth: '125px',
-    height: '61px',
+    height: '56px',
     marginTop: '7px',
     fontSize: '20px',
     fontWeight: 'bold',

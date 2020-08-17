@@ -17,6 +17,7 @@ import Modal, {
   ModalButton,
   ModalFullButton,
 } from '../../components/Modal';
+import { isEmpty } from '../../functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     background: '#FFF',
   }, // TODO: 나중에 상황 보고 공통화 및 일괄 삭제
   cardWrapper: {
-    padding: '0 10px',
+    padding: '10px 10px 0',
   },
   card: {
     display: 'flex',
@@ -41,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
     // background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
+    // backgroundImage: `url('/images/bg_card.png')`,
+    // backgroundSize: 'cover',
+    // backgroundBlendMode: 'color-burn',
+    backgroundRepeat: 'no-repeat',
   },
   cardInner: {
     overflow: 'scroll',
@@ -95,6 +100,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
 }));
+const cardStyle = (bgColor, bgImage) => {
+  // console.log(bgImage);
+  return {
+    backgroundColor: `${bgColor}`,
+    backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
+    backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
+    backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
+  };
+};
 
 const Detail = (props) => {
   const classes = useStyles();
@@ -218,14 +232,20 @@ const Detail = (props) => {
                   className={`
                 ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
                 `}
-                  style={{
-                    backgroundColor: value.backgroundColor,
-                    color: value.color,
-                    fontFamily: value.font,
-                    textAlign: value.sort,
-                  }}
+                  style={cardStyle(
+                    value.backgroundColor,
+                    value.backgroundImage
+                  )}
                 >
-                  <p className={classes.cardInner}>{value.content}</p>
+                  <p
+                    className={classes.cardInner}
+                    style={{
+                      color: value.color,
+                      fontFamily: value.font,
+                      textAlign: value.sort,
+                    }}
+                    dangerouslySetInnerHTML={{ __html: value.content }}
+                  />
                 </div>
               </div>
               <div className={classes.sender}>
