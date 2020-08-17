@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     minHeight: '100vh',
   },
   rolling: {
-    width: '322px',
+    width: '343px',
     height: '379px',
     margin: '0 auto',
     marginTop: '3px',
@@ -56,8 +56,8 @@ const Splash = (props) => {
           </div>
           <img
             className={classes.rolling}
-            src="/images/main.jpg"
-            alt="롤링페이퍼 메인 이미지"
+            src="/gif/receiver.gif"
+            alt="롤링페이퍼 메인"
           />
           <StickyFooter position="absolute">
             <Link

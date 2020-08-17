@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     marginTop: '25px',
   },
   rolling: {
-    width: '315px',
+    width: '343px',
     margin: '0 auto',
     marginTop: '24px',
   },
@@ -129,7 +129,7 @@ const Share = (props) => {
       </div>
       <img
         className={classes.rolling}
-        src="/images/share.jpg"
+        src="/gif/share.gif"
         alt="롤링페이퍼 메인 이미지"
       />
       <StickyFooter>
