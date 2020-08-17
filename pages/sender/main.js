@@ -212,6 +212,7 @@ const Main = (props) => {
           )}
           {stickerURL && (
             <Draggable
+              bounds="parent"
               onStart={onStart}
               onDrag={handleDrag}
               onStop={onStop}

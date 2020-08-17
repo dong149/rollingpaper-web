@@ -78,17 +78,17 @@ export default class RootApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline>
-            <AnimatePresence exitBeforeEnter>
-              <motion.div
-                transition={spring}
-                key={router.pathname}
-                initial={{ x: -100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -100, opacity: 0 }}
-              >
-                <Component {...pageProps} />
-              </motion.div>
-            </AnimatePresence>
+            {/* <AnimatePresence exitBeforeEnter> */}
+            <motion.div
+              transition={spring}
+              key={router.pathname}
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -100, opacity: 0 }}
+            >
+              <Component {...pageProps} />
+            </motion.div>
+            {/* </AnimatePresence> */}
           </CssBaseline>
         </ThemeProvider>
       </React.Fragment>
