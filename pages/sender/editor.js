@@ -30,16 +30,16 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     width: '90%',
     // height: '340px',
-    marginTop: '6vh',
+    marginTop: '30px',
     // padding: '16px',
     borderRadius: '13px',
     // backgroundColor: '#f2f2f2',
     textAlign: 'center',
     wordBreak: 'break-all',
-    backgroundImage: `url('/images/bg_card.png')`,
-    backgroundSize: 'cover',
-    backgroundBlendMode: 'color-burn',
-    backgroundRepeat: 'no-repeat',
+    // backgroundImage: `url('/images/bg_card.png')`,
+    // backgroundSize: 'cover',
+    // backgroundBlendMode: 'color-burn',
+    // backgroundRepeat: 'no-repeat',
     '& div': {
       flex: '1',
       overflow: 'scroll',
@@ -71,13 +71,9 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: '#f2f2f2',
     textAlign: 'center',
     wordBreak: 'break-all',
-    backgroundImage: (theme) => theme.backgroundImage,
-    backgroundSize: '100% 100%',
     '& div': {
       flex: '1',
       overflow: 'scroll',
-      // scrollbarWidth: 'none',
-      // overflowStyle: 'none',
       wordBreak: 'break-all',
       fontSize: '20px',
       fontFamily: 'NanumBrush',
@@ -194,6 +190,7 @@ const Editor = (props) => {
         setColor={setColor}
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
+        backgroundImage={backgroundImage}
       />
       <ColorModal
         colorModalIsOpen={colorModalIsOpen}
@@ -263,16 +260,13 @@ const Editor = (props) => {
           isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
         }`}
         onClick={() => setFontModalIsOpen(true)}
-        // style={`${
-        //   isEmpty(backgroundImage) &&
-        //   'backgroundImage: url(`${backgroundImage}`),'
-        // }`}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
           backgroundImage: `${
             !isEmpty(backgroundImage) && `url(${backgroundImage})`
           }`,
+          backgroundSize: 'cover',
           border: 'none',
           color: `${color}`,
           textAlign: `${sort}`,

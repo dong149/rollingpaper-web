@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     margin: '0 auto',
-    width: '312px',
+    width: '90%',
     height: '340px',
     marginTop: '30px',
     borderRadius: '13px',
@@ -239,13 +239,19 @@ const ColorModal = (props) => {
               htmlFor="contained-button-file"
               style={{
                 backgroundColor: 'grey',
-                backgroundPosition: 'center center',
+                // backgroundPosition: 'center center',
                 border: 'none',
                 color: 'white',
                 textAlign: 'center',
+                cursor: 'pointer',
+                backgroundImage: `${
+                  !isEmpty(backgroundImage) && `url(${backgroundImage})`
+                }`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
               }}
             >
-              {isEmpty(backgroundImage) ? (
+              {isEmpty(backgroundImage) && (
                 <>
                   <img
                     src="/icons/edit-photo-add.png"
@@ -270,16 +276,6 @@ const ColorModal = (props) => {
                   >
                     앨범에서 배경을 추가하세요.
                   </p>
-                </>
-              ) : (
-                <>
-                  <img
-                    src={backgroundImage}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                    }}
-                  />
                 </>
               )}
             </label>

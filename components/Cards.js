@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundBlendMode: 'multiply',
   },
   cardInner: {
+    display: 'flex',
     flex: 1,
     overflow: 'hidden',
     fontSize: '11px',
@@ -71,7 +72,7 @@ const styledRandom = (i, bgColor, bgImage) => {
     backgroundImage: `${
       isEmpty(bgImage) ? `url('/images/bg_card.png')` : `url('${bgImage}')`
     }`,
-    backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
+    backgroundSize: `${!isEmpty(bgImage) && 'cover '}`,
     backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
   };
 };
@@ -88,6 +89,7 @@ const Cards = (props) => {
     <div className={classes.root}>
       <Grid container spacing={2}>
         {content.map((value, i) => {
+          console.log(value);
           return (
             <Grid item xs={4} key={value.id}>
               <motion.div
