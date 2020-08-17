@@ -31,15 +31,17 @@ const useStyles = makeStyles((props) => ({
     alignItems: 'center',
     width: '110px',
     height: '110px',
-    border: (props) => !props.isReceiverPage && '2px solid #E53935',
     '& img': {
       width: '85px',
       height: '85px',
     },
   },
+  focusedSticker: {
+    border: '2px solid #E53935',
+  },
   stickerButton: {
     position: 'absolute',
-    right: '-18px',
+    left: '-18px',
     top: '-18px',
     width: '36px',
     height: '36px',
@@ -53,6 +55,7 @@ const useStyles = makeStyles((props) => ({
 }));
 const StickerList = (props) => {
   const [stickerList, setStickerList] = useState([]);
+  const [isEditableKey, setIsEditableKey] = useState(null);
   const {
     rollingId,
     isStickerUpdated,
@@ -103,8 +106,14 @@ const StickerList = (props) => {
               style={{
                 transform: `translate(${sticker.x}px, ${sticker.y}px)`,
               }}
+              onClick={(e) =>
+                isReceiverPage
+                  ? e.preventDefault()
+                  : setIsEditableKey(sticker.id)
+              }
+              onBlur={(e) => console.log('touchcancel')}
             >
-              {!isReceiverPage && (
+              {isEditableKey === sticker.id && (
                 <button
                   className={classes.stickerButton}
                   onClick={(e) => {
@@ -114,10 +123,14 @@ const StickerList = (props) => {
                     });
                   }}
                 >
-                  <img src="/icons/icon-delete.png" />
+                  <img src="/icons/icon-delete.png" alt="스티커 삭제하기" />
                 </button>
               )}
-              <span className={classes.stickerImage}>
+              <span
+                className={`${classes.stickerImage} ${
+                  isEditableKey === sticker.id && classes.focusedSticker
+                }`}
+              >
                 <img src={sticker.url} />
               </span>
             </span>
