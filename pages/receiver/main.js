@@ -63,7 +63,7 @@ const Main = (props) => {
   const [isStickerUpdated, setIsStickerUpdated] = useState(true);
   return (
     <body style={{ backgroundColor: '#F6F6F6' }}>
-      <Confetti width={layoutRef.width} height={layoutRef.height} />
+      {/* <Confetti width={layoutRef.width} height={layoutRef.height} /> */}
       <Layouts className={classes.root} bgColor="#F7F7F7">
         <Header>
           <div>

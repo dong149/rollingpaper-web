@@ -148,6 +148,7 @@ const Editor = (props) => {
   const [color, setColor] = useState('black');
   const [backgroundColor, setBackgroundColor] = useState('#F4F4F4');
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [imageFile, setImageFile] = useState();
   const [author, setAuthor] = useState('');
   const { name, num, id } = props;
   const classes = useStyles({ backgroundImage: backgroundImage });
@@ -162,7 +163,7 @@ const Editor = (props) => {
           sort,
           color,
           backgroundColor,
-          backgroundImage
+          imageFile
         )
         .then((res) => {
           console.log(res);
@@ -201,6 +202,8 @@ const Editor = (props) => {
         setBackgroundColor={setBackgroundColor}
         backgroundImage={backgroundImage}
         setBackgroundImage={setBackgroundImage}
+        imageFile={imageFile}
+        setImageFile={setImageFile}
       />
       <Modal
         modalIsOpen={successModalIsOpen}

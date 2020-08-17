@@ -17,6 +17,7 @@ import Modal, {
   ModalButton,
   ModalFullButton,
 } from '../../components/Modal';
+import { isEmpty } from '../../functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,9 +42,9 @@ const useStyles = makeStyles((theme) => ({
     // background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
-    backgroundImage: `url('/images/bg_card.png')`,
-    backgroundSize: 'cover',
-    backgroundBlendMode: 'color-burn',
+    // backgroundImage: `url('/images/bg_card.png')`,
+    // backgroundSize: 'cover',
+    // backgroundBlendMode: 'color-burn',
     backgroundRepeat: 'no-repeat',
   },
   cardInner: {
@@ -99,6 +100,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
 }));
+const cardStyle = (bgColor, bgImage) => {
+  // console.log(bgImage);
+  return {
+    backgroundColor: `${bgColor}`,
+    backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
+    backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
+    backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
+  };
+};
 
 const Detail = (props) => {
   const classes = useStyles();
@@ -222,9 +232,10 @@ const Detail = (props) => {
                   className={`
                 ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
                 `}
-                  style={{
-                    backgroundColor: value.backgroundColor,
-                  }}
+                  style={cardStyle(
+                    value.backgroundColor,
+                    value.backgroundImage
+                  )}
                 >
                   <p
                     className={classes.cardInner}

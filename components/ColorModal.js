@@ -109,6 +109,8 @@ const ColorModal = (props) => {
     setBackgroundColor,
     backgroundImage,
     setBackgroundImage,
+    imageFile,
+    setImageFile,
   } = props;
   const colorCards = [];
   const [editPaperIsOpen, setEditPaperIsOpen] = useState(true);
@@ -223,6 +225,7 @@ const ColorModal = (props) => {
               type="file"
               onChange={(e) => {
                 var file = e.target.files[0];
+                setImageFile(file);
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onloadend = () => {
