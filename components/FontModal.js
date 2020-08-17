@@ -6,6 +6,7 @@ import ContentEditable from 'react-contenteditable';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { isEmpty } from '../functions';
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -32,18 +33,13 @@ const useStyles = makeStyles({
     display: 'flex',
     margin: '0 auto',
     width: '90%',
-    // height: '340px',
-    marginTop: '6vh',
-    // padding: '16px',
+    marginTop: '30px',
     borderRadius: '13px',
-    // backgroundColor: '#f2f2f2',
     textAlign: 'center',
     wordBreak: 'break-all',
     '& div': {
       flex: '1',
       overflow: 'scroll',
-      // scrollbarWidth: 'none',
-      // overflowStyle: 'none',
       wordBreak: 'break-all',
       fontSize: '20px',
       fontFamily: 'NanumBrush',
@@ -159,7 +155,15 @@ const customModalStyles = {
     // transform: 'translate(-50%, -50%)',
   },
 };
-
+const cardStyle = (bgColor, bgImage) => {
+  // console.log(bgImage);
+  return {
+    backgroundColor: `${bgColor}`,
+    backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
+    backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
+    backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
+  };
+};
 const FontModal = (props) => {
   const classes = useStyles(props);
   const fontSettings = {
@@ -188,6 +192,7 @@ const FontModal = (props) => {
     setColor,
     backgroundColor,
     setBackgroundColor,
+    backgroundImage,
   } = props;
   const [editMode, setEditMode] = useState('text');
   return (
@@ -228,14 +233,19 @@ const FontModal = (props) => {
         <div
           className={classes.textarea}
           onClick={() => setFontModalIsOpen(true)}
+          // style={cardStyle(backgroundColor, backgroundImage)}
           style={{
             fontFamily: `${font}`,
+            // backgroundImage: `url('/images/bg_card.png')`,
+            // backgroundSize: 'cover',
+            // backgroundBlendMode: 'color-burn',
             backgroundColor: `${backgroundColor}`,
-            backgroundImage: `url('/images/bg_card.png')`,
-            backgroundSize: 'cover',
-            backgroundBlendMode: 'color-burn',
+            backgroundImage: `${
+              !isEmpty(backgroundImage) && `url('${backgroundImage}')`
+            }`,
+            backgroundSize: `${!isEmpty(backgroundImage) && 'cover '}`,
+            backgroundBlendMode: `${isEmpty(backgroundImage) && 'color-burn'}`,
             backgroundRepeat: 'no-repeat',
-            // backgroundAttachment: 'fixed',
             border: 'none',
             color: `${color}`,
             textAlign: `${sort}`,
