@@ -155,6 +155,7 @@ const rollingService = {
     //   backgroundImage,
     // });
     const formData = new FormData();
+
     formData.append('content', content);
     formData.append('author', author);
     formData.append('font', font);
@@ -174,7 +175,7 @@ const rollingService = {
       },
       data: formData,
     });
-
+    console.log(res);
     const { status, message } = res.data;
     console.log('postRollingContent : ', message);
 

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import rollingService from '../services/rollingService';
 import { motion } from 'framer-motion';
+import { isEmpty } from '../functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,25 +33,28 @@ const useStyles = makeStyles((theme) => ({
     lineClamp: 6,
     boxOrient: 'vertical',
     textDecoration: 'none',
-    backgroundImage: `url('/images/bg_card.png')`,
+    // backgroundImage: `url('/images/bg_card.png')`,
     backgroundSize: 'cover',
-    backgroundBlendMode: 'color-burn',
+    // backgroundBlendMode: 'color-burn',
     backgroundRepeat: 'no-repeat',
+    // backgroundPosition: 'center center',
+    // backgroundBlendMode: 'multiply',
   },
   cardInner: {
     flex: 1,
     overflow: 'hidden',
-    fontSize: '13px',
+    fontSize: '11px',
     textOverflow: 'ellipsis',
   },
 }));
 
-const styledRandom = (i, bgColor) => {
+const styledRandom = (i, bgColor, bgImage) => {
   // TODO: 좀 더 자연스러운 랜덤 화면 구현
   let hashKey = (13 / (i + 1) + 0.2) % 1;
   let x = Math.floor(hashKey * 40);
   let y = Math.floor(hashKey * 40);
   let rotate = Math.floor(hashKey * (i % 2 === 0 ? 30 : -30));
+  console.log(bgImage);
   return {
     transform:
       'rotate(' +
@@ -63,6 +67,12 @@ const styledRandom = (i, bgColor) => {
       y +
       'px)',
     backgroundColor: `${bgColor}`,
+    // backgroundColor: `${isEmpty(bgImage) ? bgColor : '#FFFFFF'}`,
+    backgroundImage: `${
+      isEmpty(bgImage) ? `url('/images/bg_card.png')` : `url('${bgImage}')`
+    }`,
+    backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
+    backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
   };
 };
 const spring = {
@@ -95,7 +105,11 @@ const Cards = (props) => {
                     <a
                       elevation={0}
                       className={classes.card}
-                      style={styledRandom(i, value.backgroundColor)}
+                      style={styledRandom(
+                        i,
+                        value.backgroundColor,
+                        value.backgroundImage
+                      )}
                     >
                       <p
                         className={classes.cardInner}
@@ -118,7 +132,11 @@ const Cards = (props) => {
                     <a
                       elevation={0}
                       className={classes.card}
-                      style={styledRandom(i, value.backgroundColor)}
+                      style={styledRandom(
+                        i,
+                        value.backgroundColor,
+                        value.backgroundImage
+                      )}
                     >
                       <p
                         className={classes.cardInner}
