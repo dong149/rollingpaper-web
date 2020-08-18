@@ -33,6 +33,10 @@ const rollingService = {
   //   );
   //   return res.data || [];
   // },
+  getRolling: async () => {
+    let res = await baseAPI.get(`/api/v1/count`);
+    return res.data || [];
+  },
   getRollingByName: async (name, password) => {
     console.log(name, password);
     let res = await baseAPI.get(
