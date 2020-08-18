@@ -7,6 +7,52 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { isEmpty } from '../functions';
+
+// static variables
+const FONT_FAMILY = [
+  {
+    family: 'NanumSquareRound',
+    name: '기본서체',
+  },
+  {
+    family: '강부장님체',
+    name: '강부장님체',
+  },
+  {
+    family: '사랑해아들체',
+    name: '사랑해아들체',
+  },
+  {
+    family: 'NanumBrush',
+    name: '나눔브러쉬체',
+  },
+];
+const FONT_COLORS = [
+  '#000000',
+  '#FFFFFF',
+  '#F4511E',
+  '#FBC02D',
+  '#00C853',
+  '#0091EA',
+  '#00B8D4',
+  '#00695C',
+  '#AA00FF',
+  '#7B1FA2',
+];
+const FONT_ALIGN = [
+  {
+    align: 'flex-start',
+    imgURL: 'detail_text1',
+  },
+  {
+    align: 'center',
+    imgURL: 'detail_text2',
+  },
+  {
+    align: 'flex-end',
+    imgURL: 'detail_text3',
+  },
+];
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -20,14 +66,19 @@ const useStyles = makeStyles({
     width: '48px',
   },
   stylePropButton: {
+    margin: '0 5px',
     fontSize: '1.2em',
     color: '#FFFFFF',
-    // borderStyle: 'solid',
     borderColor: '#FFFFFF',
-    // padding: '10px',
     borderRadius: '5%',
     borderWidth: '1px',
     width: '48px',
+    '&:focus': {
+      outline: 'none',
+    },
+    '& img': {
+      width: '100%',
+    },
   },
   textarea: {
     display: 'flex',
@@ -52,41 +103,38 @@ const useStyles = makeStyles({
     },
   },
   fontPropButton: {
-    fontSize: '23px',
-    width: 'calc(100%)',
-    lineHeight: '50px',
+    fontSize: '18px',
     color: '#FFFFFF',
     border: '1px solid #fff',
-    padding: '4px 10px 4px 10px',
+    padding: '6px 15px 6px 15px',
     borderRadius: '6px',
-    marginLeft: '5px',
-    marginRight: '5px',
+    margin: '0 5px 8px',
+    whiteSpace: 'nowrap',
+    scrollBehavior: 'smooth',
+    '&:focus': {
+      outline: 'none',
+    },
   },
   clickedFontPropButton: {
-    fontSize: '23px',
-    width: 'calc(100%)',
-    lineHeight: '50px',
     color: '#000',
-    border: '1px solid #fff',
     backgroundColor: '#fff',
-    padding: '4px 10px 4px 10px',
-    borderRadius: '6px',
-    marginLeft: '5px',
-    marginRight: '5px',
   },
   colorPropButton: {
     width: '24px',
     height: '24px',
     borderRadius: '12px',
     border: '2px solid #ffffff',
-    transition: '1s all',
+    margin: '0 5px',
+    backgroundColor: (props) => props.currentColor,
+    display: 'inline-block',
+    '&:focus': {
+      outline: 'none',
+    },
   },
   clickedColorPropButton: {
     width: '36px',
     height: '36px',
     borderRadius: '18px',
-    border: '2px solid #ffffff',
-    transition: '1s all',
   },
   confirmButton: {
     fontSize: '18px',
@@ -120,8 +168,12 @@ const useStyles = makeStyles({
   },
   fontPropButtonWrap: {
     display: 'flex',
-    marginTop: '30px',
-    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'calc(100% + 32px)',
+    textAlign: 'center',
+    marginLeft: '-16px',
+    height: '56px',
     overflowX: 'scroll',
     '&::-webkit-scrollbar': {
       display: 'none !important',
@@ -130,6 +182,10 @@ const useStyles = makeStyles({
     overflowStyle: 'none',
     position: 'absolute',
     bottom: '70px',
+  },
+  fontPropButtonFont: {
+    justifyContent: 'flex-start',
+    padding: '0 20px',
   },
 });
 const customModalStyles = {
@@ -156,13 +212,57 @@ const customModalStyles = {
   },
 };
 const cardStyle = (bgColor, bgImage) => {
-  // console.log(bgImage);
   return {
     backgroundColor: `${bgColor}`,
     backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
     backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
     backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
   };
+};
+const FontFamilyButton = (props) => {
+  const { currentFont, font, setFont } = props;
+  const classes = useStyles({ currentFont });
+  return (
+    <button
+      onClick={() => setFont(currentFont.family)}
+      style={{ fontFamily: currentFont.family }}
+      className={`${classes.fontPropButton} ${
+        font === currentFont.family && classes.clickedFontPropButton
+      }`}
+    >
+      {currentFont.name}
+    </button>
+  );
+};
+const ColorButton = (props) => {
+  const { currentColor, color, setColor } = props;
+  const classes = useStyles({ currentColor });
+  return (
+    <button
+      onClick={() => setColor(currentColor)}
+      className={`${classes.colorPropButton} ${
+        color === currentColor && classes.clickedColorPropButton
+      }`}
+    ></button>
+  );
+};
+const AlignButton = (props) => {
+  const { currentSort, sort, setSort } = props;
+  const classes = useStyles();
+  return (
+    <button
+      className={classes.stylePropButton}
+      onClick={() => setSort(currentSort.align)}
+    >
+      <img
+        src={
+          sort === currentSort.align
+            ? `/icons/${currentSort.imgURL}_focus.png`
+            : `/icons/${currentSort.imgURL}_normal.png`
+        }
+      ></img>
+    </button>
+  );
 };
 const FontModal = (props) => {
   const classes = useStyles(props);
@@ -276,207 +376,50 @@ const FontModal = (props) => {
             }}
           />
         </div>
-
-        <div className={classes.fontPropButtonWrap}>
-          {editMode === 'text' && (
-            <>
-              <Slider {...fontSettings} className={classes.slider}>
-                <div onClick={() => setFont('NanumSquareRound')}>
-                  <span
-                    style={{ fontFamily: 'NanumSquareRound' }}
-                    className={`${
-                      font === 'NanumSquareRound'
-                        ? classes.clickedFontPropButton
-                        : classes.fontPropButton
-                    }`}
-                  >
-                    기본서체
-                  </span>
-                </div>
-                <div
-                  style={{ fontFamily: '강부장님체' }}
-                  onClick={() => setFont('강부장님체')}
-                >
-                  <span
-                    style={{ fontFamily: '강부장님체' }}
-                    className={`${
-                      font === '강부장님체'
-                        ? classes.clickedFontPropButton
-                        : classes.fontPropButton
-                    }`}
-                  >
-                    강부장님체
-                  </span>
-                </div>
-                <div onClick={() => setFont('사랑해아들체')}>
-                  <span
-                    style={{ fontFamily: '사랑해아들체' }}
-                    className={`${
-                      font === '사랑해아들체'
-                        ? classes.clickedFontPropButton
-                        : classes.fontPropButton
-                    }`}
-                  >
-                    사랑해아들체
-                  </span>
-                </div>
-                <div onClick={() => setFont('NanumBrush')}>
-                  <span
-                    style={{ fontFamily: 'NanumBrush' }}
-                    className={`${
-                      font === 'NanumBrush'
-                        ? classes.clickedFontPropButton
-                        : classes.fontPropButton
-                    }`}
-                  >
-                    나눔브러쉬체
-                  </span>
-                </div>
-              </Slider>
-            </>
-          )}
-          {editMode === 'sort' && (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                textAlign: 'center',
-              }}
-            >
-              <span
-                style={{ margin: '0 10px 0 0' }}
-                onClick={() => setSort('flex-start')}
-              >
-                <img
-                  className={classes.stylePropButton}
-                  src={
-                    sort === 'flex-start'
-                      ? '/icons/detail_text1_focus.png'
-                      : '/icons/detail_text1_normal.png'
-                  }
-                ></img>
-              </span>
-              <span
-                style={{ margin: '0 10px 0 10px' }}
-                onClick={() => setSort('center')}
-              >
-                <img
-                  className={classes.stylePropButton}
-                  src={
-                    sort === 'center'
-                      ? '/icons/detail_text2_focus.png'
-                      : '/icons/detail_text2_normal.png'
-                  }
-                ></img>
-              </span>
-              <span
-                style={{ margin: '0 0 0 10px' }}
-                onClick={() => setSort('flex-end')}
-              >
-                <img
-                  className={classes.stylePropButton}
-                  src={
-                    sort === 'flex-end'
-                      ? '/icons/detail_text3_focus.png'
-                      : '/icons/detail_text3_normal.png'
-                  }
-                ></img>
-              </span>
-            </div>
-          )}
-          {editMode === 'color' && (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  margin: '0 10px 0 0',
-                  backgroundColor: 'black',
-                  display: 'inline-block',
-                }}
-                onClick={() => setColor('black')}
-                className={`${
-                  color === 'black'
-                    ? classes.clickedColorPropButton
-                    : classes.colorPropButton
-                }`}
-              ></div>
-              <div
-                style={{
-                  margin: '0 10px 0 0',
-                  backgroundColor: 'orange',
-                  display: 'inline-block',
-                }}
-                onClick={() => setColor('orange')}
-                className={`${
-                  color === 'orange'
-                    ? classes.clickedColorPropButton
-                    : classes.colorPropButton
-                }`}
-              ></div>
-              <div
-                style={{
-                  margin: '0 10px 0 0',
-                  backgroundColor: 'pink',
-                  display: 'inline-block',
-                }}
-                onClick={() => setColor('pink')}
-                className={`${
-                  color === 'pink'
-                    ? classes.clickedColorPropButton
-                    : classes.colorPropButton
-                }`}
-              ></div>
-              <div
-                style={{
-                  margin: '0 10px 0 0',
-                  backgroundColor: 'red',
-                  display: 'inline-block',
-                }}
-                onClick={() => setColor('red')}
-                className={`${
-                  color === 'red'
-                    ? classes.clickedColorPropButton
-                    : classes.colorPropButton
-                }`}
-              ></div>
-              <div
-                style={{
-                  margin: '0 10px 0 0',
-                  backgroundColor: 'yellow',
-                  display: 'inline-block',
-                }}
-                onClick={() => setColor('yellow')}
-                className={`${
-                  color === 'yellow'
-                    ? classes.clickedColorPropButton
-                    : classes.colorPropButton
-                }`}
-              ></div>
-              <div
-                style={{
-                  margin: '0 10px 0 0',
-                  backgroundColor: 'blue',
-                  display: 'inline-block',
-                }}
-                onClick={() => setColor('blue')}
-                className={`${
-                  color === 'blue'
-                    ? classes.clickedColorPropButton
-                    : classes.colorPropButton
-                }`}
-              ></div>
-            </div>
-          )}
-        </div>
+        {editMode === 'text' && (
+          <div
+            className={`${classes.fontPropButtonWrap} ${classes.fontPropButtonFont}`}
+          >
+            {FONT_FAMILY.map((value, idx) => {
+              return (
+                <FontFamilyButton
+                  key={idx}
+                  currentFont={value}
+                  font={font}
+                  setFont={setFont}
+                />
+              );
+            })}
+          </div>
+        )}
+        {editMode === 'sort' && (
+          <div className={classes.fontPropButtonWrap}>
+            {FONT_ALIGN.map((value, idx) => {
+              return (
+                <AlignButton
+                  key={idx}
+                  currentSort={value}
+                  sort={sort}
+                  setSort={setSort}
+                />
+              );
+            })}
+          </div>
+        )}
+        {editMode === 'color' && (
+          <div className={classes.fontPropButtonWrap}>
+            {FONT_COLORS.map((value, idx) => {
+              return (
+                <ColorButton
+                  key={idx}
+                  currentColor={value}
+                  color={color}
+                  setColor={setColor}
+                />
+              );
+            })}
+          </div>
+        )}
         <div className={classes.editButtonBar}>
           <span
             style={{ margin: '0 10px 0 0' }}

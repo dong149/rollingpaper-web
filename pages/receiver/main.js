@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../../components/Header';
@@ -61,9 +61,39 @@ const Main = (props) => {
   const componentRef = useRef();
   const layoutRef = useRef();
   const [isStickerUpdated, setIsStickerUpdated] = useState(true);
+  const [bodyWidth, setBodyWidth] = useState(0);
+  const [bodyHeight, setBodyHeight] = useState(0);
+  useEffect(() => {
+    setBodyWidth(layoutRef.scrollWidth);
+    setBodyHeight(layoutRef.current.scrollHeight);
+  }, []);
   return (
-    <body style={{ backgroundColor: '#F6F6F6' }}>
-      {/* <Confetti width={layoutRef.width} height={layoutRef.height} /> */}
+    <div style={{ backgroundColor: '#F6F6F6' }} ref={layoutRef}>
+      <Confetti
+        width={bodyWidth}
+        height={bodyHeight}
+        numberOfPieces={100}
+        colors={[
+          '#f44336',
+          '#e91e63',
+          '#9c27b0',
+          '#673ab7',
+          '#3f51b5',
+          '#2196f3',
+          '#03a9f4',
+          '#00bcd4',
+          '#009688',
+          '#4CAF50',
+          '#8BC34A',
+          '#CDDC39',
+          '#FFEB3B',
+          '#FFC107',
+          '#FF9800',
+          '#FF5722',
+          '#795548',
+        ]}
+        opacity={0.4}
+      />
       <Layouts className={classes.root} bgColor="#F7F7F7">
         <Header>
           <div>
@@ -117,7 +147,7 @@ const Main = (props) => {
           </Buttons>
         </StickyFooter>
       </Layouts>
-    </body>
+    </div>
   );
 };
 
