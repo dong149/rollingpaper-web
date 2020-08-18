@@ -136,7 +136,7 @@ const Main = (props) => {
             </div>
           )}
         </div>
-        <StickyFooter>
+        {/* <StickyFooter>
           <Buttons full onClick={() => exportComponentAsPNG(componentRef)}>
             <img
               src="/icons/download-light-icon.png"
@@ -145,7 +145,7 @@ const Main = (props) => {
             />
             전체화면 다운받기
           </Buttons>
-        </StickyFooter>
+        </StickyFooter> */}
       </Layouts>
     </div>
   );
