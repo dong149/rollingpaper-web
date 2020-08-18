@@ -127,7 +127,7 @@ const Index = () => {
                     onSubmit();
                   }}
                 >
-                  생성하기
+                  생성 및 조회하기
                 </Buttons>
               </Link>
             ) : (

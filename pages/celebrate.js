@@ -31,8 +31,11 @@ const useStyles = makeStyles({
     marginBottom: '87px',
   },
 });
-const Index = () => {
+const Index = (props) => {
   const classes = useStyles();
+  const { posts } = props;
+  const rollingPaperContent = posts.rollingPaperContent + 500;
+  const rollingPaper = posts.rollingPaper + 50;
   return (
     <div>
       <Head>
@@ -53,7 +56,7 @@ const Index = () => {
           <div className={classes.main} style={{ marginBottom: '16px' }}>
             <span>지금까지</span>
             <br />
-            <CountUp end={3243} redraw={true}>
+            <CountUp end={rollingPaperContent} redraw={true}>
               {({ countUpRef, start }) => (
                 <VisibilitySensor onChange={start} delayedCall>
                   <span ref={countUpRef} />
@@ -62,7 +65,7 @@ const Index = () => {
             </CountUp>
             <span>명이 작성하고</span>
             <br />
-            <CountUp end={132} redraw={true}>
+            <CountUp end={rollingPaper} redraw={true}>
               {({ countUpRef, start }) => (
                 <VisibilitySensor onChange={start} delayedCall>
                   <span ref={countUpRef} />
@@ -88,4 +91,11 @@ const Index = () => {
   );
 };
 
+Index.getInitialProps = async () => {
+  const res = await rollingService.getRolling();
+
+  return {
+    posts: res.data,
+  };
+};
 export default Index;

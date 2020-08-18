@@ -42,7 +42,7 @@ const Share = (props) => {
         title: `${name}님을 위한 롤링페이퍼입니다!`,
         description: '1분으로 친구에게 감동을 선물해주세요',
         imageUrl:
-          'https://github.com/dong149/image_resources/blob/master/rollingpaper/present.png?raw=true',
+          'https://github.com/dong149/image_resources/blob/master/rollingpaper/write.png?raw=true',
         link: {
           webUrl: `https://rollingpaper.site/sender/main?name=${name}&num=${num}`,
           mobileWebUrl: `https://rollingpaper.site/sender/main?name=${name}&num=${num}`,
@@ -73,10 +73,10 @@ const Share = (props) => {
         container: '#kakao-link-btn-receiver',
         objectType: 'feed',
         content: {
-          title: `${name}님 생일 축하드립니다!`,
-          description: '당신만을 위한 세상에 하나 뿐인 롤링 페이퍼.',
+          title: `${name}님에게 롤링페이퍼가 도착했어요!`,
+          description: `오직 ${name}님만을 위한 롤링페이퍼에요`,
           imageUrl:
-            'https://github.com/dong149/image_resources/blob/master/rollingpaper/present.png?raw=true',
+            'https://github.com/dong149/image_resources/blob/master/rollingpaper/receiver.png?raw=true',
 
           link: {
             webUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
