@@ -304,7 +304,7 @@ const Editor = (props) => {
             type="text"
             value={author}
             placeholder="보내는이"
-            maxlength="6"
+            maxLength="6"
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
