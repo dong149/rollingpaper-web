@@ -189,7 +189,7 @@ const Main = (props) => {
             <h2 className={classes.title}>to. {name}님</h2>
             <p className={classes.subtitle}>
               {!isEmpty(posts)
-                ? `총 ${posts.contents.length}명에게 축하를 받았어요!`
+                ? `지금까지 총 ${posts.contents.length}명이 작성했어요!`
                 : `아직 아무도 작성하지 않았어요!`}
             </p>
           </div>
