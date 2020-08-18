@@ -135,7 +135,7 @@ const Share = (props) => {
       <StickyFooter>
         <a id="kakao-link-btn" style={{ width: '100%', marginBottom: '16px' }}>
           <Buttons full={true} light={true}>
-            준비하는 친구들에게 공유
+            함께 준비하는 사람들에게 공유
           </Buttons>
         </a>
         <a
