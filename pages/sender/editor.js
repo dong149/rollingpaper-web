@@ -1,5 +1,6 @@
 // 에디터 페이지입니다.
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Router from "next/router";
 import { makeStyles } from '@material-ui/core';
 import Link from 'next/link';
 import Layouts from '../../components/Layouts';
@@ -16,6 +17,7 @@ import Modal, {
   ModalTitie,
   ModalFullButton,
   ModalButtonWrapper,
+  ModalButton
 } from '../../components/Modal';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -138,6 +140,7 @@ const Editor = (props) => {
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [exitModalIsOpen, setExitModalIsOpen] = useState(false);
   const [content, setContent] = useState('');
   const [font, setFont] = useState('NanumSquareRound');
   const [sort, setSort] = useState('center');
@@ -146,8 +149,11 @@ const Editor = (props) => {
   const [backgroundImage, setBackgroundImage] = useState('');
   const [imageFile, setImageFile] = useState();
   const [author, setAuthor] = useState('');
-  const { name, num, id } = props;
+  const [goAway, setGoAway] = useState('');
+  const [nextPath, setNextPath] = useState('');
+  const { name, num, id, asPath } = props;
   const classes = useStyles({ backgroundImage: backgroundImage });
+  const textBox = useRef(null);
   const onSubmit = async () => {
     try {
       await rollingService
@@ -174,6 +180,20 @@ const Editor = (props) => {
       return 400;
     }
   };
+
+  useEffect(() => {
+    return () => {
+      Router.beforePopState((param) => {
+        const {url, as, options} = param;
+        if (textBox.current && textBox.current.props.html) {
+          setExitModalIsOpen(true);
+          setNextPath(url);
+          return false;
+        }
+        return true;
+      });
+    };
+  });
 
   return (
     <Layouts className={classes.root}>
@@ -222,6 +242,27 @@ const Editor = (props) => {
           </ModalFullButton>
         </ModalButtonWrapper>
       </Modal>
+      <Modal
+        modalIsOpen={exitModalIsOpen}
+        setModalIsOpen={setExitModalIsOpen}>
+        <ModalTitie>
+          이 화면을 나갈 경우,
+          <br />
+          소중한 메세지가 사라집니다
+        </ModalTitie>
+        <ModalButtonWrapper>
+          <ModalButton onClick={() => {
+              setExitModalIsOpen(false);
+            }}>안나갈래요</ModalButton>
+          <ModalButton onClick={() => {
+              setExitModalIsOpen(false);
+              window.location.href = nextPath;
+            }}
+            focus>
+            나갈래요
+          </ModalButton>
+        </ModalButtonWrapper>
+      </Modal>
       <div
         style={{
           display: 'flex',
@@ -232,16 +273,16 @@ const Editor = (props) => {
           height: '57px',
         }}
       >
-        <Link
-          href={{
-            pathname: '/sender/main',
-            query: { name: name, num: num },
-          }}
-        >
-          <span>
-            <a className={classes.menuButton}>취소</a>
-          </span>
-        </Link>
+        <span onClick={() => {
+          if (textBox.current && textBox.current.props.html) {
+            setExitModalIsOpen(true);
+            setNextPath(`/sender/main?name=${name}&num=${num}`);
+          } else {
+            window.location.href = `/sender/main?name=${name}&num=${num}`;
+          }
+        }}>
+          <a className={classes.menuButton}>취소</a>
+        </span>
         <div style={{ float: 'right' }}>
           <span onClick={() => setFontModalIsOpen(true)}>
             <img style={{ width: '38px' }} src="/icons/text-icon.png"></img>
@@ -278,6 +319,7 @@ const Editor = (props) => {
           onChange={(e) => {
             setContent(e.target.value);
           }}
+          ref={textBox}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               event.preventDefault();
@@ -337,6 +379,7 @@ Editor.getInitialProps = async (context) => {
     name: name,
     num: num,
     id: id,
+    asPath: context.asPath
   };
 };
 
