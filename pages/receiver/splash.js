@@ -48,11 +48,13 @@ const Splash = (props) => {
       <div className={`section ${classes.sectionWrapper}`}>
         <Layouts>
           <div className={classes.main}>
-            <span>{posts.contents.length}명이 작성한</span>
+            <span>{name}님!</span>
+            <br />
+            <span>{posts.contents.length}명이 준비한</span>
             <br />
             <span>소중한 롤링페이퍼가</span>
             <br />
-            <span>도착했어요!</span>
+            <span>도착했어요</span>
           </div>
           <img
             className={classes.rolling}
