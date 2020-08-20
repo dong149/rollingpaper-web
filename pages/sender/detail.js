@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }, // TODO: 나중에 상황 보고 공통화 및 일괄 삭제
   cardWrapper: {
     // padding: '10px 10px 0',
-    padding: '0 10px 0 10px'
+    padding: '0 10px 0 10px',
   },
   card: {
     display: 'flex',
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     // height: '426px',
     padding: '0 32px',
     // paddingBottom: '32px',
-    display: 'flex',
+    // display: 'flex',
     alignItems: 'center',
     fontSize: '32px',
     lineHeight: '45px',
@@ -235,25 +235,30 @@ const Detail = (props) => {
       </header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>
         {posts.contents.map((value, i) => {
+          let letterFlag = false;
+          if (value.content.length > 100) {
+            letterFlag = true;
+          }
           return (
             <div key={i}>
               <div className={classes.cardWrapper}>
                 <div
                   key={i}
                   className={`
-                ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
-                `}
+              ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
+              `}
                   style={cardStyle(
                     value.backgroundColor,
                     value.backgroundImage
                   )}
                 >
-                  <div
+                  <p
                     className={classes.cardInner}
                     style={{
                       color: value.color,
                       fontFamily: value.font,
                       justifyContent: value.sort,
+                      display: `${!letterFlag && 'flex'}`,
                     }}
                     dangerouslySetInnerHTML={{ __html: value.content }}
                   />
@@ -267,7 +272,7 @@ const Detail = (props) => {
           );
         })}
       </Slider>
-ㅔ
+      ㅔ
       <StickyFooter>
         <Grid container spacing={2}>
           <Grid item xs={6}>
