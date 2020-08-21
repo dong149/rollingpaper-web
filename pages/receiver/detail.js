@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     fontSize: '32px',
     lineHeight: '45px',
-    display: 'flex',
+    // display: 'flex',
     alignItems: 'center',
     // justifyContent: 'center',
   },
@@ -175,6 +175,10 @@ const Detail = (props) => {
       </header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>
         {posts.contents.map((value, i) => {
+          let letterFlag = false;
+          if (value.content.length > 100) {
+            letterFlag = true;
+          }
           return (
             <div key={i}>
               <div className={classes.cardWrapper}>
@@ -195,6 +199,7 @@ const Detail = (props) => {
                       color: value.color,
                       fontFamily: value.font,
                       justifyContent: value.sort,
+                      display: `${!letterFlag && 'flex'}`,
                     }}
                   />
                 </div>
