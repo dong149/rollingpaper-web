@@ -196,12 +196,12 @@ const ColorModal = (props) => {
               {editPhotoIsOpen ? (
                 <img
                   style={{ width: '48px' }}
-                  src="/icons/edit-photo-focus.png"
+                  src="/icons/edit_option_focus.png"
                 ></img>
               ) : (
                 <img
                   style={{ width: '48px' }}
-                  src="/icons/edit-photo.png"
+                  src="/icons/edit_option_normal.png"
                 ></img>
               )}
             </span>
