@@ -113,6 +113,15 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '26px',
     fontWeight: 'bold',
   },
+  contenteditable: {
+    '&:empty:before': {
+      content: "attr(placeholder)",
+      color: "grey",
+      width: '140px',
+      marginRight: '100px',
+      textAlign: 'left'
+    }
+  }
 }));
 const customModalStyles = {
   overlay: {
@@ -326,6 +335,8 @@ const Editor = (props) => {
               document.execCommand('insertLineBreak');
             }
           }}
+          placeholder={"이곳을 클릭해 소중한 마음을 적어 주세요"}
+          className={classes.contenteditable}
           style={{
             display: 'flex',
             alignItems: 'center',
