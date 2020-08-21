@@ -272,7 +272,6 @@ const Detail = (props) => {
           );
         })}
       </Slider>
-      ㅔ
       <StickyFooter>
         <Grid container spacing={2}>
           <Grid item xs={6}>
