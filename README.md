@@ -1,13 +1,10 @@
 # 👨‍👩‍👦‍👦Rollingpaper Client👨‍👩‍👦‍👦
-> 한 사람을 위해 마음을 전달하는 온라인 롤링페이퍼. 👉  https://rollingpaper.site/
+
+> 한 사람을 위해 마음을 전달하는 온라인 롤링페이퍼! 👉 https://rollingpaper.site/
 
 ![badge](https://img.shields.io/badge/Part-Front--end-brightgreen) ![lang](https://img.shields.io/badge/Language-JavaScript-blue) ![react](https://img.shields.io/badge/Tech--stack-React-orange) ![realease](https://img.shields.io/badge/release-v1.0.0-yellow)
 
-
-
 ![](https://user-images.githubusercontent.com/38487811/90950455-85d36700-e48c-11ea-9b79-72b5dcb6c6d6.png)
-
-
 
 ## 🎁 Description
 
@@ -17,16 +14,12 @@
 
 다양한 종류의 편지지와 스티커로 화면을 꾸미고, 소중한 사람에게 뜻깊은 경험을 선물하세요!
 
-
-
 ## 🔧 Credit
 
-- **Language**:  JavaScript
+- **Language**: JavaScript
 - **Library & Framework** : React.js, Next.js, Maretirl-ui
 - **Linter**: ESLint, Prettier
 - **Deploy**: vercel
-
-
 
 ## 💻 Develop
 
@@ -36,7 +29,3 @@ $ cd [project-name]
 $ npm install
 $ npm run dev
 ```
-
-
-
-

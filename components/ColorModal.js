@@ -207,7 +207,12 @@ const ColorModal = (props) => {
             </span>
           </div>
           <span>
-            <a className={classes.confirmButton}></a>
+            <a
+              className={classes.confirmButton}
+              onClick={() => setColorModalIsOpen(false)}
+            >
+              완료
+            </a>
           </span>
         </div>
         {editPaperIsOpen && (
@@ -221,7 +226,6 @@ const ColorModal = (props) => {
               accept="image/*"
               className={classes.input}
               id="contained-button-file"
-              multiple
               type="file"
               onChange={(e) => {
                 var file = e.target.files[0];
@@ -274,7 +278,7 @@ const ColorModal = (props) => {
                       fontWeight: 'bold',
                     }}
                   >
-                    앨범에서 배경을 추가하세요.
+                    사진을 추가하세요.
                   </p>
                 </>
               )}
