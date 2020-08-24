@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
   subtitle: {
-    marginTop: '10px',
+    marginTop: '5px',
     fontSize: '16px',
     fontWeight: 'bold',
   },
