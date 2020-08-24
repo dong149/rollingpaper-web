@@ -10,8 +10,7 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import AutosizeInput from 'react-input-autosize';
 import { isEmpty } from '../functions';
 import rollingService from '../services/rollingService';
-import CountUp from 'react-countup';
-import VisibilitySensor from 'react-visibility-sensor';
+
 const useStyles = makeStyles({
   main: {
     width: '100%',
@@ -39,6 +38,7 @@ const Index = () => {
     try {
       await rollingService.postRolling(name, password).then(async (res) => {
         console.log(res);
+        window.location.href = `/sender/main?name=${name}&num=${password}`;
       });
     } catch (err) {
       console.log(err);
@@ -59,6 +59,7 @@ const Index = () => {
           content="롤링페이퍼,선물,생일,여자친구,100일,친구"
         />
       </Head>
+
       <div className={`section ${classes.sectionWrapper}`}>
         <Layouts>
           <div className={classes.main} style={{ marginBottom: '16px' }}>
@@ -115,21 +116,14 @@ const Index = () => {
           </div>
           <StickyFooter position="absolute">
             {!isEmpty(name) && !isEmpty(password) ? (
-              <Link
-                href={{
-                  pathname: '/sender/main',
-                  query: { name: name, num: password },
+              <Buttons
+                full={true}
+                onClick={() => {
+                  onSubmit();
                 }}
               >
-                <Buttons
-                  full={true}
-                  onClick={() => {
-                    onSubmit();
-                  }}
-                >
-                  생성 및 조회하기
-                </Buttons>
-              </Link>
+                생성 및 조회하기
+              </Buttons>
             ) : (
               <Buttons full={true}>모두 작성해주세요</Buttons>
             )}
