@@ -123,9 +123,7 @@ const Share = (props) => {
         </a>
       </Link>
       <div className={classes.main}>
-        <span>누구에게</span>
-        <br />
-        <span>공유하세요?</span>
+        <span>누구에게 공유하세요?</span>
       </div>
       <img
         className={classes.rolling}

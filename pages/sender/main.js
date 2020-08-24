@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { isEmpty } from '../../functions';
 import Draggable from 'react-draggable';
 import StickerList from '../../components/StickerList';
+import { motion } from 'framer-motion';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,8 +83,8 @@ const useStyles = makeStyles((theme) => ({
     height: '110px',
     border: '2px solid #000',
     '& img': {
-      width: '85px',
-      height: '85px',
+      width: '110px',
+      height: '110px',
     },
   },
   stickerButton: {
@@ -109,13 +110,25 @@ const useStyles = makeStyles((theme) => ({
       border: '1px solid #232323',
       background: '#fff',
       '& img': {
-        width: '56px',
-        height: '56px',
+        width: '48px',
+        height: '48px',
       },
     },
   },
   btnfull: {
     flexGrow: 1,
+  },
+  iconWrapper: {
+    minHeight: '72px',
+  },
+  icons: {
+    width: '16px',
+  },
+  tooltip: {
+    position: 'absolute',
+    bottom: '48px',
+    left: '0',
+    width: '179px',
   },
 }));
 const Main = (props) => {
@@ -161,8 +174,8 @@ const Main = (props) => {
       await rollingService
         .postRollingSticker(
           posts.rollingpaperId,
-          position.x ?? 1,
-          position.y ?? 1,
+          position.x && position.x !== 0 ? position.x : 1,
+          position.y && position.y !== 0 ? position.y : 1,
           stickerURL
         )
         .then((res) => {
@@ -184,24 +197,40 @@ const Main = (props) => {
           stickerURL={stickerURL}
           setStickerURL={setStickerURL}
         />
-        <Header>
-          <div>
-            <h2 className={classes.title}>to. {name}님</h2>
-            <p className={classes.subtitle}>
-              {!isEmpty(posts)
-                ? `지금까지 총 ${posts.contents.length}명이 작성했어요!`
-                : `아직 아무도 작성하지 않았어요!`}
-            </p>
-          </div>
-          <Link
-            href={{
-              pathname: '/sender/share',
-              query: { name: name, num: num, id: posts.rollingpaperId },
-            }}
-          >
-            <button className={classes.buttonSmall}>공유하기</button>
-          </Link>
+        <Header className={classes.header}>
+          {!stickerURL ? (
+            <>
+              <div>
+                <h2 className={classes.title}>to. {name}님</h2>
+                <p className={classes.subtitle}>
+                  {!isEmpty(posts)
+                    ? `지금까지 총 ${posts.contents.length}명이 작성했어요!`
+                    : `아직 아무도 작성하지 않았어요!`}
+                </p>
+              </div>
+              <Link
+                href={{
+                  pathname: '/sender/share',
+                  query: { name: name, num: num, id: posts.rollingpaperId },
+                }}
+              >
+                <button className={classes.buttonSmall}>공유하기</button>
+              </Link>
+            </>
+          ) : (
+            <a
+              className={classes.iconWrapper}
+              onClick={() => setStickerURL(null)}
+            >
+              <img
+                src="/icons/back-icon-small.png"
+                alt="스티커 취소하기"
+                className={classes.icons}
+              />
+            </a>
+          )}
         </Header>
+
         <div className={classes.cardWrapper}>
           {posts.rollingpaperId && (
             <StickerList
@@ -222,13 +251,6 @@ const Main = (props) => {
                 <span className={classes.stickerImage}>
                   <img src={stickerURL} />
                 </span>
-                {/* <button
-                  className={classes.stickerButton}
-                  onClick={() => onCreateSticker()}
-                >
-                  완료
-                </button> */}
-                {/* TODO: mobile에서는 버튼이 안먹는 이슈로 삭제 */}
               </div>
             </Draggable>
           )}
@@ -267,6 +289,23 @@ const Main = (props) => {
             ) : (
               <>
                 <Grid item className={classes.btnSquare}>
+                  <motion.div
+                    transition={{
+                      type: 'spring',
+                      stiffness: 100,
+                      damping: 20,
+                      duration: 3,
+                      delay: 3.5,
+                    }}
+                    initial={{ y: 0, opacity: 0 }}
+                    animate={{ y: 65, opacity: [0, 1, 1, 1, 0] }}
+                  >
+                    <img
+                      className={classes.tooltip}
+                      src="/images/img_tooltip.png"
+                      alt="스티커로 롤링페이퍼를 꾸며보세요!"
+                    />
+                  </motion.div>
                   <button
                     variant="contained"
                     onClick={() => setStickerModalIsOpen(true)}

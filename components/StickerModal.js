@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
   imageButton: {
-    width: '83px',
-    height: '83px',
+    width: '110px',
+    height: '110px',
     cursor: 'pointer',
     '& img': {
       width: '100%',
@@ -70,7 +70,7 @@ const StickerModal = (props) => {
     setStickerURL,
   } = props;
   const stickerCards = [];
-  for (let i = 1; i <= 28; i++) {
+  for (let i = 1; i <= 60; i++) {
     const stickerURL = `/images/main_sticker_${i < 10 ? `0${i}` : i}.png`;
     stickerCards.push(
       <Grid
