@@ -28,16 +28,21 @@ const useStyles = makeStyles((theme) => ({
     background: '#FFF',
   }, // TODO: 나중에 상황 보고 공통화 및 일괄 삭제
   cardWrapper: {
-    padding: '10px 10px 0',
+    // padding: '10px 10px 0',
+    padding: '0 10px 0 10px',
   },
   card: {
     display: 'flex',
-    overflow: 'hidden',
+    // overflow: 'hidden',
+    // overflow: 'scroll',
+    // padding: 16,
     // width: '317px',
     height: '426px',
     marginTop: '35px',
-    padding: '16px',
-    textAlign: 'center',
+    // padding: '16px',
+    // textAlign: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     wordBreak: 'break-all',
     // background: '#E8E6DC',
     borderRadius: '13px',
@@ -50,10 +55,16 @@ const useStyles = makeStyles((theme) => ({
   cardInner: {
     overflow: 'scroll',
     flex: 1,
+    // height: '426px',
+    padding: '0 32px',
+    // paddingBottom: '32px',
+    // display: 'flex',
+    alignItems: 'center',
     fontSize: '32px',
     lineHeight: '45px',
-    display: 'flex',
-    alignItems: 'center',
+    // display: 'flex',
+    // alignItems: 'center',
+    // textAlign: 'center',
     // justifyContent: 'center',
   },
   cardActive: {
@@ -224,14 +235,18 @@ const Detail = (props) => {
       </header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>
         {posts.contents.map((value, i) => {
+          let letterFlag = false;
+          if (value.content.length > 100) {
+            letterFlag = true;
+          }
           return (
             <div key={i}>
               <div className={classes.cardWrapper}>
                 <div
                   key={i}
                   className={`
-                ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
-                `}
+              ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
+              `}
                   style={cardStyle(
                     value.backgroundColor,
                     value.backgroundImage
@@ -243,6 +258,7 @@ const Detail = (props) => {
                       color: value.color,
                       fontFamily: value.font,
                       justifyContent: value.sort,
+                      display: `${!letterFlag && 'flex'}`,
                     }}
                     dangerouslySetInnerHTML={{ __html: value.content }}
                   />
@@ -256,7 +272,6 @@ const Detail = (props) => {
           );
         })}
       </Slider>
-
       <StickyFooter>
         <Grid container spacing={2}>
           <Grid item xs={6}>
