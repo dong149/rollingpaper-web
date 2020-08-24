@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
     '& div': {
       display: 'inline',
       '& input': {
-        width: '81px',
+        width: '94px',
         fontSize: '22px',
         outline: 'none',
         border: '0',
@@ -363,12 +363,12 @@ const Editor = (props) => {
             type="text"
             value={author}
             placeholder="보내는이"
-            maxLength="6"
+            maxLength="10"
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
       </div>
-      {!isEmpty(content) && !isEmpty(author) ? (
+      {(!isEmpty(content) || !isEmpty(backgroundImage)) && !isEmpty(author) ? (
         <StickyFooter align="right">
           {/* <Link
             href={{

@@ -40,7 +40,7 @@ const Share = (props) => {
       objectType: 'feed',
       content: {
         title: `${name}님을 위한 롤링페이퍼입니다!`,
-        description: '1분으로 친구에게 감동을 선물해주세요',
+        description: '함께 메시지를 작성해 감동을 선물하세요',
         imageUrl:
           'https://github.com/dong149/image_resources/blob/master/rollingpaper/write.png?raw=true',
         link: {
@@ -74,7 +74,7 @@ const Share = (props) => {
         objectType: 'feed',
         content: {
           title: `${name}님에게 롤링페이퍼가 도착했어요!`,
-          description: `오직 ${name}님만을 위한 롤링페이퍼에요`,
+          description: `정성이 담긴 특별한 선물을 확인해보세요`,
           imageUrl:
             'https://github.com/dong149/image_resources/blob/master/rollingpaper/receiver.png?raw=true',
 
