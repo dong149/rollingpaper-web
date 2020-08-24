@@ -1,6 +1,6 @@
 // 에디터 페이지입니다.
 import React, { useState, useEffect, useRef } from 'react';
-import Router from "next/router";
+import Router from 'next/router';
 import { makeStyles } from '@material-ui/core';
 import Link from 'next/link';
 import Layouts from '../../components/Layouts';
@@ -17,7 +17,7 @@ import Modal, {
   ModalTitie,
   ModalFullButton,
   ModalButtonWrapper,
-  ModalButton
+  ModalButton,
 } from '../../components/Modal';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -115,13 +115,13 @@ const useStyles = makeStyles((theme) => ({
   },
   contenteditable: {
     '&:empty:before': {
-      content: "attr(placeholder)",
-      color: "grey",
+      content: 'attr(placeholder)',
+      color: 'grey',
       width: '140px',
       marginRight: '100px',
-      textAlign: 'left'
-    }
-  }
+      textAlign: 'left',
+    },
+  },
 }));
 const customModalStyles = {
   overlay: {
@@ -193,7 +193,7 @@ const Editor = (props) => {
   useEffect(() => {
     return () => {
       Router.beforePopState((param) => {
-        const {url, as, options} = param;
+        const { url, as, options } = param;
         if (textBox.current && textBox.current.props.html) {
           setExitModalIsOpen(true);
           setNextPath(url);
@@ -251,23 +251,27 @@ const Editor = (props) => {
           </ModalFullButton>
         </ModalButtonWrapper>
       </Modal>
-      <Modal
-        modalIsOpen={exitModalIsOpen}
-        setModalIsOpen={setExitModalIsOpen}>
+      <Modal modalIsOpen={exitModalIsOpen} setModalIsOpen={setExitModalIsOpen}>
         <ModalTitie>
           이 화면을 나갈 경우,
           <br />
           소중한 메세지가 사라집니다
         </ModalTitie>
         <ModalButtonWrapper>
-          <ModalButton onClick={() => {
+          <ModalButton
+            onClick={() => {
               setExitModalIsOpen(false);
-            }}>안나갈래요</ModalButton>
-          <ModalButton onClick={() => {
+            }}
+          >
+            안나갈래요
+          </ModalButton>
+          <ModalButton
+            onClick={() => {
               setExitModalIsOpen(false);
               window.location.href = nextPath;
             }}
-            focus>
+            focus
+          >
             나갈래요
           </ModalButton>
         </ModalButtonWrapper>
@@ -282,14 +286,16 @@ const Editor = (props) => {
           height: '57px',
         }}
       >
-        <span onClick={() => {
-          if (textBox.current && textBox.current.props.html) {
-            setExitModalIsOpen(true);
-            setNextPath(`/sender/main?name=${name}&num=${num}`);
-          } else {
-            window.location.href = `/sender/main?name=${name}&num=${num}`;
-          }
-        }}>
+        <span
+          onClick={() => {
+            if (textBox.current && textBox.current.props.html) {
+              setExitModalIsOpen(true);
+              setNextPath(`/sender/main?name=${name}&num=${num}`);
+            } else {
+              window.location.href = `/sender/main?name=${name}&num=${num}`;
+            }
+          }}
+        >
           <a className={classes.menuButton}>취소</a>
         </span>
         <div style={{ float: 'right' }}>
@@ -335,7 +341,7 @@ const Editor = (props) => {
               document.execCommand('insertLineBreak');
             }
           }}
-          placeholder={"이곳을 클릭해 소중한 마음을 적어 주세요"}
+          // placeholder={"이곳을 클릭해 소중한 마음을 적어 주세요"}
           className={classes.contenteditable}
           style={{
             display: 'flex',
@@ -390,7 +396,7 @@ Editor.getInitialProps = async (context) => {
     name: name,
     num: num,
     id: id,
-    asPath: context.asPath
+    asPath: context.asPath,
   };
 };
 
