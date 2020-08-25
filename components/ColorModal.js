@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 100,
   },
   paper: {
-    width: '141px',
+    width: '90%',
     height: '141px',
     backgroundImage: `url('/images/bg_card.png')`,
     backgroundSize: 'cover',
@@ -101,6 +101,12 @@ const ColorModal = (props) => {
     '#F1C0B5',
     '#AE9BF8',
     '#F3C982',
+    '#F66DD3',
+    '#FD785C',
+    '#74F0A3',
+    '#6FA6EF',
+    '#8E4FEB',
+    '#232323',
   ];
   const {
     colorModalIsOpen,
