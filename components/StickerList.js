@@ -40,6 +40,9 @@ const useStyles = makeStyles((props) => ({
     border: '2px solid #E53935',
   },
   stickerButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
     left: '-18px',
     top: '-18px',
