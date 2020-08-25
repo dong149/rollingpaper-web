@@ -20,8 +20,6 @@ const useStyles = makeStyles({
     minHeight: '100vh',
   },
   rolling: {
-    position: 'absolute',
-    bottom: '88px',
     width: '343px',
     // height: '379px',
     margin: '0 auto',

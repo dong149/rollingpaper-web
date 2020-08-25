@@ -16,8 +16,8 @@ const useStyles = makeStyles({
     marginLeft: '9px',
   },
   rolling: {
-    position: 'absolute',
-    bottom: '144px',
+    // position: 'absolute',
+    // bottom: '144px',
     width: '343px',
     margin: '0 auto',
     marginTop: '24px',
