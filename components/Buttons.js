@@ -6,8 +6,8 @@ const useStyles = makeStyles((theme) => ({
   btn: {
     minWidth: '125px',
     height: '56px',
-    marginTop: '7px',
-    fontSize: '20px',
+    marginTop: '8px',
+    fontSize: '18px',
     fontWeight: 'bold',
     color: '#fff',
     background: '#222',

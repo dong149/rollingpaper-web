@@ -58,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
       // '&::-webkit-scrollbar': {
       //   display: 'none',
       // },
-
       height: '340px',
     },
   },
@@ -149,6 +148,7 @@ const Editor = (props) => {
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [isEmptyModalIsOpen, setIsEmptyModalIsOpen] = useState(false);
   const [exitModalIsOpen, setExitModalIsOpen] = useState(false);
   const [content, setContent] = useState('');
   const [font, setFont] = useState('NanumSquareRound');
@@ -164,29 +164,34 @@ const Editor = (props) => {
   const classes = useStyles({ backgroundImage: backgroundImage });
   const textBox = useRef(null);
   const onSubmit = async () => {
-    try {
-      await rollingService
-        .postRollingContent(
-          id,
-          content,
-          author,
-          font,
-          sort,
-          color,
-          backgroundColor,
-          imageFile
-        )
-        .then((res) => {
-          console.log(res);
-          setSuccessModalIsOpen(true);
-          setBackgroundImage('');
-          setContent('');
-          setAuthor('');
-          return 200;
-        });
-    } catch (err) {
-      console.log(err);
-      return 400;
+    if ((!isEmpty(content) || !isEmpty(backgroundImage)) && !isEmpty(author)) {
+      try {
+        await rollingService
+          .postRollingContent(
+            id,
+            content,
+            author,
+            font,
+            sort,
+            color,
+            backgroundColor,
+            imageFile
+          )
+          .then((res) => {
+            console.log(res);
+            setSuccessModalIsOpen(true);
+            setBackgroundImage('');
+            setContent('');
+            setAuthor('');
+            return 200;
+          });
+      } catch (err) {
+        console.log(err);
+        return 400;
+      }
+    } else {
+      setIsEmptyModalIsOpen(true);
+      return false;
     }
   };
 
@@ -231,6 +236,25 @@ const Editor = (props) => {
         imageFile={imageFile}
         setImageFile={setImageFile}
       />
+      <Modal
+        modalIsOpen={isEmptyModalIsOpen}
+        setModalIsOpen={setIsEmptyModalIsOpen}
+      >
+        <ModalTitie>
+          내용과 보내는 이를
+          <br />
+          작성해주세요.
+        </ModalTitie>
+        <ModalButtonWrapper>
+          <ModalFullButton
+            onClick={() => {
+              setIsEmptyModalIsOpen(false);
+            }}
+          >
+            확인
+          </ModalFullButton>
+        </ModalButtonWrapper>
+      </Modal>
       <Modal
         modalIsOpen={successModalIsOpen}
         setModalIsOpen={setSuccessModalIsOpen}
@@ -368,22 +392,9 @@ const Editor = (props) => {
           />
         </div>
       </div>
-      {(!isEmpty(content) || !isEmpty(backgroundImage)) && !isEmpty(author) ? (
-        <StickyFooter align="right">
-          {/* <Link
-            href={{
-              pathname: '/sender/main',
-              query: { name: name, num: num },
-            }}
-          > */}
-          <Buttons onClick={() => onSubmit()}>저장</Buttons>
-          {/* </Link> */}
-        </StickyFooter>
-      ) : (
-        <StickyFooter align="right">
-          <Buttons>글과 작성자를 입력해주세요.</Buttons>
-        </StickyFooter>
-      )}
+      <StickyFooter align="right">
+        <Buttons onClick={() => onSubmit()}>저장</Buttons>
+      </StickyFooter>
     </Layouts>
   );
 };
