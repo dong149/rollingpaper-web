@@ -1,6 +1,6 @@
 # 👨‍👩‍👦‍👦Rollingpaper Client👨‍👩‍👦‍👦
 
-> 감동을 주는 데 걸리는 시간 단 1분! 온라인 롤링페이퍼. 👉 https://rollingpaper.site/
+> 한 사람을 위해 마음을 전달하는 온라인 롤링페이퍼! 👉 https://rollingpaper.site/
 
 ![badge](https://img.shields.io/badge/Part-Front--end-brightgreen) ![lang](https://img.shields.io/badge/Language-JavaScript-blue) ![react](https://img.shields.io/badge/Tech--stack-React-orange) ![realease](https://img.shields.io/badge/release-v1.0.0-yellow)
 

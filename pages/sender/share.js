@@ -4,6 +4,8 @@ import Buttons from '../../components/Buttons';
 import StickyFooter from '../../components/StickyFooter';
 import { makeStyles } from '@material-ui/core';
 import Link from 'next/link';
+import Header from '../../components/Header';
+
 const useStyles = makeStyles({
   main: {
     textAlign: 'left',
@@ -11,8 +13,11 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     lineHeight: '48px',
     marginTop: '25px',
+    marginLeft: '9px',
   },
   rolling: {
+    // position: 'absolute',
+    // bottom: '144px',
     width: '343px',
     margin: '0 auto',
     marginTop: '24px',
@@ -40,7 +45,7 @@ const Share = (props) => {
       objectType: 'feed',
       content: {
         title: `${name}님을 위한 롤링페이퍼입니다!`,
-        description: '1분으로 친구에게 감동을 선물해주세요',
+        description: '함께 메시지를 작성해 감동을 선물하세요',
         imageUrl:
           'https://github.com/dong149/image_resources/blob/master/rollingpaper/write.png?raw=true',
         link: {
@@ -74,7 +79,7 @@ const Share = (props) => {
         objectType: 'feed',
         content: {
           title: `${name}님에게 롤링페이퍼가 도착했어요!`,
-          description: `오직 ${name}님만을 위한 롤링페이퍼에요`,
+          description: `정성이 담긴 특별한 선물을 확인해보세요`,
           imageUrl:
             'https://github.com/dong149/image_resources/blob/master/rollingpaper/receiver.png?raw=true',
 
@@ -108,20 +113,22 @@ const Share = (props) => {
 
   return (
     <Layouts>
-      <Link
-        href={{
-          pathname: '/sender/main',
-          query: { name: name, num: num },
-        }}
-      >
-        <a className={classes.iconWrapper}>
-          <img
-            src="/icons/back-icon-small.png"
-            alt="뒤로가기"
-            className={classes.icons}
-          />
-        </a>
-      </Link>
+      <Header className={classes.header}>
+        <Link
+          href={{
+            pathname: '/sender/main',
+            query: { name: name, num: num },
+          }}
+        >
+          <a className={classes.iconWrapper}>
+            <img
+              src="/icons/back-icon-small.png"
+              alt="뒤로가기"
+              className={classes.icons}
+            />
+          </a>
+        </Link>
+      </Header>
       <div className={classes.main}>
         <span>누구에게 공유하세요?</span>
       </div>
@@ -131,15 +138,12 @@ const Share = (props) => {
         alt="롤링페이퍼 메인 이미지"
       />
       <StickyFooter>
-        <a id="kakao-link-btn" style={{ width: '100%', marginBottom: '16px' }}>
+        <a id="kakao-link-btn" style={{ display: 'block' }}>
           <Buttons full={true} light={true}>
             함께 준비하는 사람들에게 공유
           </Buttons>
         </a>
-        <a
-          id="kakao-link-btn-receiver"
-          style={{ width: '100%', marginBottom: '16px' }}
-        >
+        <a id="kakao-link-btn-receiver" style={{ display: 'block' }}>
           <Buttons full={true}>주인공에게 공유</Buttons>
         </a>
       </StickyFooter>

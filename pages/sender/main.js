@@ -8,7 +8,6 @@ import StickerModal from '../../components/StickerModal';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
 import Grid from '@material-ui/core/Grid';
-import { Button } from '@material-ui/core';
 import Link from 'next/link';
 import { isEmpty } from '../../functions';
 import Draggable from 'react-draggable';
@@ -50,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
   subtitle: {
-    marginTop: '10px',
+    marginTop: '5px',
     fontSize: '16px',
     fontWeight: 'bold',
   },
@@ -143,17 +142,6 @@ const Main = (props) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [stickerURL, setStickerURL] = useState(null);
   const [isStickerUpdated, setIsStickerUpdated] = useState(true);
-  // useEffect(() => {
-  //   const getPosts = async () => {
-  //     await rollingService.getRollingByName(name, num).then((res) => {
-  //       setPosts(res.data);
-  //     });
-  //   };
-  //   if (isEmpty(data)) {
-  //     getPosts();
-  //   }
-  //   setIsPostsUpdated(false);
-  // }, [isPostsUpdated]);
   const handleDrag = (e, ui) => {
     e.preventDefault();
     const { x, y } = deltaPosition;
@@ -174,8 +162,8 @@ const Main = (props) => {
       await rollingService
         .postRollingSticker(
           posts.rollingpaperId,
-          position.x && position.x !== 0 ? position.x : 1,
-          position.y && position.y !== 0 ? position.y : 1,
+          position.x ?? 0,
+          position.y ?? 0,
           stickerURL
         )
         .then((res) => {
@@ -245,6 +233,7 @@ const Main = (props) => {
               onStart={onStart}
               onDrag={handleDrag}
               onStop={onStop}
+              defaultPosition={{ x: 100, y: 200 }}
               style={{ position: 'absolute', bottom: '100px', right: '100px' }}
             >
               <div className={classes.sticker}>
@@ -281,58 +270,56 @@ const Main = (props) => {
           )}
         </div>
         <StickyFooter>
-          <Grid container spacing={2}>
-            {stickerURL ? (
-              <Buttons onClick={onCreateSticker} full>
-                완료
-              </Buttons>
-            ) : (
-              <>
-                <Grid item className={classes.btnSquare}>
-                  <motion.div
-                    transition={{
-                      type: 'spring',
-                      stiffness: 100,
-                      damping: 20,
-                      duration: 3,
-                      delay: 3.5,
-                    }}
-                    initial={{ y: 0, opacity: 0 }}
-                    animate={{ y: 65, opacity: [0, 1, 1, 1, 0] }}
-                  >
+          {stickerURL ? (
+            <Buttons onClick={onCreateSticker} full>
+              완료
+            </Buttons>
+          ) : (
+            <Grid container spacing={2}>
+              <Grid item className={classes.btnSquare}>
+                <motion.div
+                  transition={{
+                    type: 'spring',
+                    stiffness: 100,
+                    damping: 20,
+                    duration: 3,
+                    delay: 3.5,
+                  }}
+                  initial={{ y: 0, opacity: 0 }}
+                  animate={{ y: 65, opacity: [0, 1, 1, 1, 0] }}
+                >
+                  <img
+                    className={classes.tooltip}
+                    src="/images/img_tooltip.png"
+                    alt="스티커로 롤링페이퍼를 꾸며보세요!"
+                  />
+                </motion.div>
+                <button
+                  variant="contained"
+                  onClick={() => setStickerModalIsOpen(true)}
+                >
+                  <img src="/icons/sticker-icon.png" alt="스티커 붙이기" />
+                </button>
+              </Grid>
+              <Grid item className={classes.btnfull}>
+                <Link
+                  href={{
+                    pathname: '/sender/editor',
+                    query: { name: name, num: num, id: posts.rollingpaperId },
+                  }}
+                >
+                  <Buttons full={true}>
                     <img
-                      className={classes.tooltip}
-                      src="/images/img_tooltip.png"
-                      alt="스티커로 롤링페이퍼를 꾸며보세요!"
+                      src="/icons/write-light-icon.png"
+                      alt=""
+                      className={classes.icon}
                     />
-                  </motion.div>
-                  <button
-                    variant="contained"
-                    onClick={() => setStickerModalIsOpen(true)}
-                  >
-                    <img src="/icons/sticker-icon.png" alt="스티커 붙이기" />
-                  </button>
-                </Grid>
-                <Grid item className={classes.btnfull}>
-                  <Link
-                    href={{
-                      pathname: '/sender/editor',
-                      query: { name: name, num: num, id: posts.rollingpaperId },
-                    }}
-                  >
-                    <Buttons full={true}>
-                      <img
-                        src="/icons/write-light-icon.png"
-                        alt=""
-                        className={classes.icon}
-                      />
-                      롤링페이퍼 작성하기
-                    </Buttons>
-                  </Link>
-                </Grid>
-              </>
-            )}
-          </Grid>
+                    롤링페이퍼 작성하기
+                  </Buttons>
+                </Link>
+              </Grid>
+            </Grid>
+          )}
         </StickyFooter>
       </Layouts>
     </div>

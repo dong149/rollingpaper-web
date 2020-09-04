@@ -1,6 +1,6 @@
 // 에디터 페이지입니다.
 import React, { useState, useEffect, useRef } from 'react';
-import Router from "next/router";
+import Router from 'next/router';
 import { makeStyles } from '@material-ui/core';
 import Link from 'next/link';
 import Layouts from '../../components/Layouts';
@@ -17,7 +17,7 @@ import Modal, {
   ModalTitie,
   ModalFullButton,
   ModalButtonWrapper,
-  ModalButton
+  ModalButton,
 } from '../../components/Modal';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
       // '&::-webkit-scrollbar': {
       //   display: 'none',
       // },
-
       height: '340px',
     },
   },
@@ -100,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     '& div': {
       display: 'inline',
       '& input': {
-        width: '81px',
+        width: '94px',
         fontSize: '22px',
         outline: 'none',
         border: '0',
@@ -115,13 +114,13 @@ const useStyles = makeStyles((theme) => ({
   },
   contenteditable: {
     '&:empty:before': {
-      content: "attr(placeholder)",
-      color: "grey",
+      content: 'attr(placeholder)',
+      color: 'grey',
       width: '140px',
       marginRight: '100px',
-      textAlign: 'left'
-    }
-  }
+      textAlign: 'left',
+    },
+  },
 }));
 const customModalStyles = {
   overlay: {
@@ -149,6 +148,7 @@ const Editor = (props) => {
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [isEmptyModalIsOpen, setIsEmptyModalIsOpen] = useState(false);
   const [exitModalIsOpen, setExitModalIsOpen] = useState(false);
   const [content, setContent] = useState('');
   const [font, setFont] = useState('NanumSquareRound');
@@ -164,36 +164,41 @@ const Editor = (props) => {
   const classes = useStyles({ backgroundImage: backgroundImage });
   const textBox = useRef(null);
   const onSubmit = async () => {
-    try {
-      await rollingService
-        .postRollingContent(
-          id,
-          content,
-          author,
-          font,
-          sort,
-          color,
-          backgroundColor,
-          imageFile
-        )
-        .then((res) => {
-          console.log(res);
-          setSuccessModalIsOpen(true);
-          setBackgroundImage('');
-          setContent('');
-          setAuthor('');
-          return 200;
-        });
-    } catch (err) {
-      console.log(err);
-      return 400;
+    if ((!isEmpty(content) || !isEmpty(backgroundImage)) && !isEmpty(author)) {
+      try {
+        await rollingService
+          .postRollingContent(
+            id,
+            content,
+            author,
+            font,
+            sort,
+            color,
+            backgroundColor,
+            imageFile
+          )
+          .then((res) => {
+            console.log(res);
+            setSuccessModalIsOpen(true);
+            setBackgroundImage('');
+            setContent('');
+            setAuthor('');
+            return 200;
+          });
+      } catch (err) {
+        console.log(err);
+        return 400;
+      }
+    } else {
+      setIsEmptyModalIsOpen(true);
+      return false;
     }
   };
 
   useEffect(() => {
     return () => {
       Router.beforePopState((param) => {
-        const {url, as, options} = param;
+        const { url, as, options } = param;
         if (textBox.current && textBox.current.props.html) {
           setExitModalIsOpen(true);
           setNextPath(url);
@@ -232,6 +237,25 @@ const Editor = (props) => {
         setImageFile={setImageFile}
       />
       <Modal
+        modalIsOpen={isEmptyModalIsOpen}
+        setModalIsOpen={setIsEmptyModalIsOpen}
+      >
+        <ModalTitie>
+          내용과 보내는 이를
+          <br />
+          작성해주세요.
+        </ModalTitie>
+        <ModalButtonWrapper>
+          <ModalFullButton
+            onClick={() => {
+              setIsEmptyModalIsOpen(false);
+            }}
+          >
+            확인
+          </ModalFullButton>
+        </ModalButtonWrapper>
+      </Modal>
+      <Modal
         modalIsOpen={successModalIsOpen}
         setModalIsOpen={setSuccessModalIsOpen}
       >
@@ -251,23 +275,27 @@ const Editor = (props) => {
           </ModalFullButton>
         </ModalButtonWrapper>
       </Modal>
-      <Modal
-        modalIsOpen={exitModalIsOpen}
-        setModalIsOpen={setExitModalIsOpen}>
+      <Modal modalIsOpen={exitModalIsOpen} setModalIsOpen={setExitModalIsOpen}>
         <ModalTitie>
           이 화면을 나갈 경우,
           <br />
           소중한 메세지가 사라집니다
         </ModalTitie>
         <ModalButtonWrapper>
-          <ModalButton onClick={() => {
+          <ModalButton
+            onClick={() => {
               setExitModalIsOpen(false);
-            }}>안나갈래요</ModalButton>
-          <ModalButton onClick={() => {
+            }}
+          >
+            안나갈래요
+          </ModalButton>
+          <ModalButton
+            onClick={() => {
               setExitModalIsOpen(false);
               window.location.href = nextPath;
             }}
-            focus>
+            focus
+          >
             나갈래요
           </ModalButton>
         </ModalButtonWrapper>
@@ -282,14 +310,16 @@ const Editor = (props) => {
           height: '57px',
         }}
       >
-        <span onClick={() => {
-          if (textBox.current && textBox.current.props.html) {
-            setExitModalIsOpen(true);
-            setNextPath(`/sender/main?name=${name}&num=${num}`);
-          } else {
-            window.location.href = `/sender/main?name=${name}&num=${num}`;
-          }
-        }}>
+        <span
+          onClick={() => {
+            if (textBox.current && textBox.current.props.html) {
+              setExitModalIsOpen(true);
+              setNextPath(`/sender/main?name=${name}&num=${num}`);
+            } else {
+              window.location.href = `/sender/main?name=${name}&num=${num}`;
+            }
+          }}
+        >
           <a className={classes.menuButton}>취소</a>
         </span>
         <div style={{ float: 'right' }}>
@@ -335,7 +365,7 @@ const Editor = (props) => {
               document.execCommand('insertLineBreak');
             }
           }}
-          placeholder={"이곳을 클릭해 소중한 마음을 적어 주세요"}
+          // placeholder={"이곳을 클릭해 소중한 마음을 적어 주세요"}
           className={classes.contenteditable}
           style={{
             display: 'flex',
@@ -357,27 +387,14 @@ const Editor = (props) => {
             type="text"
             value={author}
             placeholder="보내는이"
-            maxLength="6"
+            maxLength="10"
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
       </div>
-      {!isEmpty(content) && !isEmpty(author) ? (
-        <StickyFooter align="right">
-          {/* <Link
-            href={{
-              pathname: '/sender/main',
-              query: { name: name, num: num },
-            }}
-          > */}
-          <Buttons onClick={() => onSubmit()}>저장</Buttons>
-          {/* </Link> */}
-        </StickyFooter>
-      ) : (
-        <StickyFooter align="right">
-          <Buttons>글과 작성자를 입력해주세요.</Buttons>
-        </StickyFooter>
-      )}
+      <StickyFooter align="right">
+        <Buttons onClick={() => onSubmit()}>저장</Buttons>
+      </StickyFooter>
     </Layouts>
   );
 };
@@ -390,7 +407,7 @@ Editor.getInitialProps = async (context) => {
     name: name,
     num: num,
     id: id,
-    asPath: context.asPath
+    asPath: context.asPath,
   };
 };
 
