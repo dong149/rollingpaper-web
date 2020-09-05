@@ -2,9 +2,9 @@
 const withSass = require('@zeit/next-sass');
 const withFonts = require('nextjs-fonts');
 const withCSS = require('@zeit/next-css');
-const withTypescript = require('next');
+// const withTypescript = require('next');
 
-module.exports = withTypescript(withFonts(
+module.exports = withFonts(
   withSass(
     withCSS({
       webpack: function(config) {
@@ -23,5 +23,5 @@ module.exports = withTypescript(withFonts(
       },
     }),
   ),
-),
 );
+

@@ -2,7 +2,7 @@ import { Button, NoSsr } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { forwardRef } from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   btn: {
     minWidth: '125px',
     height: '56px',
@@ -30,7 +30,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Buttons = forwardRef(function Buttons(props, ref) {
+interface Props {
+  content?: any;
+  light?: any;
+  full: boolean | any;
+  onClick?: any;
+  children: React.ReactNode;
+}
+
+const Buttons = forwardRef(function Buttons(props: Props, ref) {
   const classes = useStyles();
   const { content, light, full, onClick, children } = props;
 

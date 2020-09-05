@@ -64,7 +64,11 @@ const Index = () => {
                 pathname: '/celebrate',
               }}
             >
-              <Buttons full={ true }>롤링페이퍼 생성 및 조회하기</Buttons>
+              <Buttons
+                full={ true }
+              >
+                롤링페이퍼 생성 및 조회하기
+              </Buttons>
             </Link>
             { /* <Buttons full={true} light={true}>
               내 롤링페이퍼 찾기
