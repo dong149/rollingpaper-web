@@ -8,8 +8,8 @@ import Layouts from '../components/Layouts';
 import { makeStyles } from '@material-ui/core';
 import ReactFullpage from '@fullpage/react-fullpage';
 import AutosizeInput from 'react-input-autosize';
-import { isEmpty } from '../functions';
-import rollingService from '../services/rollingService';
+import { isEmpty } from '../utils';
+import rollingService from '../api/rollingService';
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
 const useStyles = makeStyles({

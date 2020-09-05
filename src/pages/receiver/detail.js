@@ -10,14 +10,14 @@ import StickyFooter from '../../components/StickyFooter';
 import Link from 'next/link';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import rollingService from '../../services/rollingService';
+import rollingService from '../../api/rollingService';
 import Modal, {
   ModalTitie,
   ModalButtonWrapper,
   ModalButton,
   ModalFullButton,
 } from '../../components/Modal';
-import { isEmpty } from '../../functions';
+import { isEmpty } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -168,9 +168,9 @@ const Detail = (props) => {
         </div>
         <button
           className={classes.btnWrapper}
-          // onClick={() => {
-          //   setModalIsOpen(true);
-          // }}
+        // onClick={() => {
+        //   setModalIsOpen(true);
+        // }}
         ></button>
       </header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>

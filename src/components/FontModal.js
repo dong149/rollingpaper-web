@@ -6,7 +6,7 @@ import ContentEditable from 'react-contenteditable';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { isEmpty } from '../functions';
+import { isEmpty } from '../utils';
 
 // static variables
 const FONT_FAMILY = [
@@ -228,7 +228,7 @@ const FontFamilyButton = (props) => {
       style={{ fontFamily: currentFont.family }}
       className={`${classes.fontPropButton} ${
         font === currentFont.family && classes.clickedFontPropButton
-      }`}
+        }`}
     >
       {currentFont.name}
     </button>
@@ -242,7 +242,7 @@ const ColorButton = (props) => {
       onClick={() => setColor(currentColor)}
       className={`${classes.colorPropButton} ${
         color === currentColor && classes.clickedColorPropButton
-      }`}
+        }`}
     ></button>
   );
 };
@@ -342,7 +342,7 @@ const FontModal = (props) => {
             backgroundColor: `${backgroundColor}`,
             backgroundImage: `${
               !isEmpty(backgroundImage) && `url('${backgroundImage}')`
-            }`,
+              }`,
             backgroundSize: `${!isEmpty(backgroundImage) && 'cover '}`,
             backgroundBlendMode: `${isEmpty(backgroundImage) && 'color-burn'}`,
             backgroundRepeat: 'no-repeat',

@@ -8,8 +8,8 @@ import Layouts from '../components/Layouts';
 import { makeStyles } from '@material-ui/core';
 import ReactFullpage from '@fullpage/react-fullpage';
 import AutosizeInput from 'react-input-autosize';
-import { isEmpty } from '../functions';
-import rollingService from '../services/rollingService';
+import { isEmpty } from '../utils';
+import rollingService from '../api/rollingService';
 
 const useStyles = makeStyles({
   main: {
@@ -125,8 +125,8 @@ const Index = () => {
                 생성 및 조회하기
               </Buttons>
             ) : (
-              <Buttons full={true}>모두 작성해주세요</Buttons>
-            )}
+                <Buttons full={true}>모두 작성해주세요</Buttons>
+              )}
           </StickyFooter>
         </Layouts>
       </div>

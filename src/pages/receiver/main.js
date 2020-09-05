@@ -5,8 +5,8 @@ import Header from '../../components/Header';
 import StickyFooter from '../../components/StickyFooter';
 import Cards from '../../components/Cards';
 import Buttons from '../../components/Buttons';
-import { exportComponentAsPNG } from '../../functions';
-import rollingService from '../../services/rollingService';
+import { exportComponentAsPNG } from '../../utils';
+import rollingService from '../../api/rollingService';
 import StickerList from '../../components/StickerList';
 
 import Confetti from 'react-confetti';
@@ -119,22 +119,22 @@ const Main = (props) => {
           {posts.contents.length ? (
             <Cards name={name} num={num} content={posts.contents} linked />
           ) : (
-            <div
-              style={{
-                minHeight: 'calc(100vh - 150px)',
-                textAlign: 'center',
-                paddingTop: '90px',
-              }}
-            >
-              <img
+              <div
                 style={{
-                  width: '80%',
+                  minHeight: 'calc(100vh - 150px)',
+                  textAlign: 'center',
+                  paddingTop: '90px',
                 }}
-                src="/icons/empty.png"
-                alt="아무도 작성하지 않은 경우"
-              />
-            </div>
-          )}
+              >
+                <img
+                  style={{
+                    width: '80%',
+                  }}
+                  src="/icons/empty.png"
+                  alt="아무도 작성하지 않은 경우"
+                />
+              </div>
+            )}
         </div>
         {/* <StickyFooter>
           <Buttons full onClick={() => exportComponentAsPNG(componentRef)}>

@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Post from "../components/Post";
 import { useRouter } from "next/router";
-import { isEmpty } from "../functions";
+import { isEmpty } from "../utils";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import rollingService from "../services/rollingService";
+import rollingService from "../api/rollingService";
 import "../styles/home.scss";
 import "../styles/post.scss";
 import Head from "next/head";
@@ -38,7 +38,7 @@ const Papers = (props) => {
         console.log(err);
       }
     };
-    
+
     getContents();
   }, [isSubmit]);
   useEffect(() => {
@@ -247,21 +247,21 @@ const Papers = (props) => {
                         <span>제출하기</span>
                       </div>
                     ) : (
+                        <div
+                          style={{ backgroundColor: "#222222", color: "#fffeef" }}
+                          className="preview-btn"
+                        >
+                          <span>※작성자도 입력해주세요!</span>
+                        </div>
+                      )
+                  ) : (
                       <div
                         style={{ backgroundColor: "#222222", color: "#fffeef" }}
                         className="preview-btn"
                       >
-                        <span>※작성자도 입력해주세요!</span>
+                        <span>제출하기</span>
                       </div>
-                    )
-                  ) : (
-                    <div
-                      style={{ backgroundColor: "#222222", color: "#fffeef" }}
-                      className="preview-btn"
-                    >
-                      <span>제출하기</span>
-                    </div>
-                  )}
+                    )}
                 </div>
                 <div className="slide">
                   <div className="layout">
@@ -398,10 +398,10 @@ const Papers = (props) => {
                         <span>제출하기</span>
                       </div>
                     ) : (
-                      <div className="inactive-create-btn" name={name}>
-                        <span>위 내용을 작성해주세요!</span>
-                      </div>
-                    )}
+                        <div className="inactive-create-btn" name={name}>
+                          <span>위 내용을 작성해주세요!</span>
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>
@@ -514,14 +514,14 @@ export const Color = (props) => {
           }}
         ></div>
       ) : (
-        <div
-          onClick={() => {
-            chooseColor(boxColor);
-          }}
-          className="color-box"
-          style={{ backgroundColor: `${boxColor}` }}
-        ></div>
-      )}
+          <div
+            onClick={() => {
+              chooseColor(boxColor);
+            }}
+            className="color-box"
+            style={{ backgroundColor: `${boxColor}` }}
+          ></div>
+        )}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import rollingService from '../services/rollingService';
+import rollingService from '../api/rollingService';
 import { Button } from '@material-ui/core';
 import { motion } from 'framer-motion';
 
@@ -147,7 +147,7 @@ const StickerList = (props) => {
               <span
                 className={`${classes.stickerImage} ${
                   isEditableKey === sticker.id && classes.focusedSticker
-                }`}
+                  }`}
               >
                 <img src={sticker.url} />
               </span>

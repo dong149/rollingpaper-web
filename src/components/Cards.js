@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
-import rollingService from '../services/rollingService';
+import rollingService from '../api/rollingService';
 import { motion } from 'framer-motion';
-import { isEmpty } from '../functions';
+import { isEmpty } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,7 +71,7 @@ const styledRandom = (i, bgColor, bgImage) => {
     // backgroundColor: `${isEmpty(bgImage) ? bgColor : '#FFFFFF'}`,
     backgroundImage: `${
       isEmpty(bgImage) ? `url('/images/bg_card.png')` : `url('${bgImage}')`
-    }`,
+      }`,
     backgroundSize: `${!isEmpty(bgImage) && 'cover '}`,
     backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
   };
@@ -125,33 +125,33 @@ const Cards = (props) => {
                     </a>
                   </Link>
                 ) : (
-                  <Link
-                    href={{
-                      pathname: '/sender/detail',
-                      query: { name: name, num: num, index: i },
-                    }}
-                  >
-                    <a
-                      elevation={0}
-                      className={classes.card}
-                      style={styledRandom(
-                        i,
-                        value.backgroundColor,
-                        value.backgroundImage
-                      )}
+                    <Link
+                      href={{
+                        pathname: '/sender/detail',
+                        query: { name: name, num: num, index: i },
+                      }}
                     >
-                      <p
-                        className={classes.cardInner}
-                        style={{
-                          color: value.color,
-                          fontFamily: value.font,
-                          justifyContent: value.sort,
-                        }}
-                        dangerouslySetInnerHTML={{ __html: value.content }}
-                      ></p>
-                    </a>
-                  </Link>
-                )}
+                      <a
+                        elevation={0}
+                        className={classes.card}
+                        style={styledRandom(
+                          i,
+                          value.backgroundColor,
+                          value.backgroundImage
+                        )}
+                      >
+                        <p
+                          className={classes.cardInner}
+                          style={{
+                            color: value.color,
+                            fontFamily: value.font,
+                            justifyContent: value.sort,
+                          }}
+                          dangerouslySetInnerHTML={{ __html: value.content }}
+                        ></p>
+                      </a>
+                    </Link>
+                  )}
               </motion.div>
             </Grid>
           );

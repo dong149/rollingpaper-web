@@ -6,7 +6,7 @@ import Buttons from '../../components/Buttons';
 import StickyFooter from '../../components/StickyFooter';
 import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core';
-import rollingService from '../../services/rollingService';
+import rollingService from '../../api/rollingService';
 const useStyles = makeStyles({
   main: {
     width: '100%',

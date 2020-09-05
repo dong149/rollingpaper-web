@@ -11,8 +11,8 @@ import dynamic from 'next/dynamic';
 import FontModal from '../../components/FontModal';
 import ColorModal from '../../components/ColorModal';
 import ContentEditable from 'react-contenteditable';
-import rollingService from '../../services/rollingService';
-import { isEmpty } from '../../functions';
+import rollingService from '../../api/rollingService';
+import { isEmpty } from '../../utils';
 import Modal, {
   ModalTitie,
   ModalFullButton,
@@ -338,14 +338,14 @@ const Editor = (props) => {
       <div
         className={`${
           isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
-        }`}
+          }`}
         onClick={() => setFontModalIsOpen(true)}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
           backgroundImage: `${
             !isEmpty(backgroundImage) && `url(${backgroundImage})`
-          }`,
+            }`,
           backgroundSize: 'cover',
           border: 'none',
           color: `${color}`,
