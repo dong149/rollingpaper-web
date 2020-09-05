@@ -1,22 +1,24 @@
-import React, { useState, useRef, useEffect } from 'react';
-import Layouts from '../../components/Layouts';
-import { useRouter } from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Buttons from '../../components/Buttons';
-import Slider from 'react-slick';
-import Header from '../../components/Header';
-import StickyFooter from '../../components/StickyFooter';
-import Link from 'next/link';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
+import Slider from 'react-slick';
+
 import rollingService from '../../api/rollingService';
+import Buttons from '../../components/Buttons';
+import Header from '../../components/Header';
+import Layouts from '../../components/Layouts';
 import Modal, {
-  ModalTitie,
-  ModalButtonWrapper,
   ModalButton,
+  ModalButtonWrapper,
   ModalFullButton,
+  ModalTitie,
 } from '../../components/Modal';
+import StickyFooter from '../../components/StickyFooter';
 import { isEmpty } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -163,24 +165,25 @@ const Detail = (props) => {
     e.preventDefault();
     customeSlider.current.slickPrev();
   };
+
   return (
-    <Layouts className={classes.root}>
-      <Modal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+    <Layouts className={ classes.root }>
+      <Modal modalIsOpen={ modalIsOpen } setModalIsOpen={ setModalIsOpen }>
         <ModalTitie>
           롤링페이퍼를
           <br />
           정말 삭제하실 건가요?
         </ModalTitie>
         <ModalButtonWrapper>
-          <ModalButton onClick={() => setModalIsOpen(false)}>취소</ModalButton>
+          <ModalButton onClick={ () => setModalIsOpen(false) }>취소</ModalButton>
           <ModalButton
-            onClick={() => {
+            onClick={ () => {
               deletePost(posts.contents[sliderIndex - 1].id).then((res) => {
                 setModalIsOpen(false);
                 if (res === 200) setSuccessModalIsOpen(true);
                 setIsPostsUpdated(true);
               });
-            }}
+            } }
             focus
           >
             삭제
@@ -188,12 +191,12 @@ const Detail = (props) => {
         </ModalButtonWrapper>
       </Modal>
       <Modal
-        modalIsOpen={successModalIsOpen}
-        setModalIsOpen={setSuccessModalIsOpen}
+        modalIsOpen={ successModalIsOpen }
+        setModalIsOpen={ setSuccessModalIsOpen }
       >
         <ModalTitie>삭제되었습니다.</ModalTitie>
         <ModalButtonWrapper>
-          <ModalFullButton onClick={() => setSuccessModalIsOpen(false)}>
+          <ModalFullButton onClick={ () => setSuccessModalIsOpen(false) }>
             확인
           </ModalFullButton>
         </ModalButtonWrapper>
@@ -213,47 +216,48 @@ const Detail = (props) => {
             query: { name: name, num: num },
           }}
         >
-          <a className={classes.iconWrapper}>
+          <a className={ classes.iconWrapper }>
             <img
-              src="/icons/back-icon-small.png"
-              alt="뒤로가기"
-              className={classes.icons}
+              src='/icons/back-icon-small.png'
+              alt='뒤로가기'
+              className={ classes.icons }
             />
           </a>
         </Link>
-        <div className={classes.title}>
-          <strong>{sliderIndex}</strong> / {posts.contents.length}
+        <div className={ classes.title }>
+          <strong>{ sliderIndex }</strong> / { posts.contents.length }
         </div>
         <button
-          className={classes.btnWrapper}
-          onClick={() => {
+          className={ classes.btnWrapper }
+          onClick={ () => {
             setModalIsOpen(true);
-          }}
+          } }
         >
           삭제
         </button>
       </header>
-      <Slider {...settings} ref={customeSlider} className={classes.slider}>
-        {posts.contents.map((value, i) => {
+      <Slider { ...settings } ref={ customeSlider } className={ classes.slider }>
+        { posts.contents.map((value, i) => {
           let letterFlag = false;
           if (value.content.length > 100) {
             letterFlag = true;
           }
+
           return (
-            <div key={i}>
-              <div className={classes.cardWrapper}>
+            <div key={ i }>
+              <div className={ classes.cardWrapper }>
                 <div
-                  key={i}
-                  className={`
+                  key={ i }
+                  className={ `
               ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
-              `}
-                  style={cardStyle(
+              ` }
+                  style={ cardStyle(
                     value.backgroundColor,
-                    value.backgroundImage
-                  )}
+                    value.backgroundImage,
+                  ) }
                 >
                   <p
-                    className={classes.cardInner}
+                    className={ classes.cardInner }
                     style={{
                       color: value.color,
                       fontFamily: value.font,
@@ -264,23 +268,23 @@ const Detail = (props) => {
                   />
                 </div>
               </div>
-              <div className={classes.sender}>
+              <div className={ classes.sender }>
                 <b>From.</b>
-                {value.author}
+                { value.author }
               </div>
             </div>
           );
-        })}
+        }) }
       </Slider>
       <StickyFooter>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Buttons full light onClick={(e) => gotoPrev(e)}>
+        <Grid container spacing={ 2 }>
+          <Grid item xs={ 6 }>
+            <Buttons full light onClick={ (e) => gotoPrev(e) }>
               이전장
             </Buttons>
           </Grid>
-          <Grid item xs={6}>
-            <Buttons full onClick={(e) => gotoNext(e)}>
+          <Grid item xs={ 6 }>
+            <Buttons full onClick={ (e) => gotoNext(e) }>
               다음장
             </Buttons>
           </Grid>
@@ -295,6 +299,7 @@ const deletePost = async (rolling_id) => {
 
   try {
     await rollingService.deleteRollingContent(rolling_id);
+
     return 200;
   } catch (error) {
     return 400;

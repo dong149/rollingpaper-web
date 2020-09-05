@@ -1,5 +1,5 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const useStyles = makeStyles({
   root: {
@@ -14,7 +14,8 @@ const useStyles = makeStyles({
 });
 const StickyFooter = (props) => {
   const classes = useStyles(props);
-  return <div className={classes.root}>{props.children}</div>;
+
+  return <div className={ classes.root }>{ props.children }</div>;
 };
 
 export default StickyFooter;

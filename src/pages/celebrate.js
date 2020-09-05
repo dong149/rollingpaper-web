@@ -1,17 +1,19 @@
 // 스플래쉬 뷰
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import Buttons from '../components/Buttons';
-import StickyFooter from '../components/StickyFooter';
-import Layouts from '../components/Layouts';
-import { makeStyles } from '@material-ui/core';
 import ReactFullpage from '@fullpage/react-fullpage';
-import AutosizeInput from 'react-input-autosize';
-import { isEmpty } from '../utils';
-import rollingService from '../api/rollingService';
+import { makeStyles } from '@material-ui/core';
+import Head from 'next/head';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
+import AutosizeInput from 'react-input-autosize';
 import VisibilitySensor from 'react-visibility-sensor';
+
+import rollingService from '../api/rollingService';
+import Buttons from '../components/Buttons';
+import Layouts from '../components/Layouts';
+import StickyFooter from '../components/StickyFooter';
+import { isEmpty } from '../utils';
+
 const useStyles = makeStyles({
   main: {
     width: '100%',
@@ -36,53 +38,54 @@ const Index = (props) => {
   const { posts } = props;
   const rollingPaperContent = posts.rollingPaperContent + 500;
   const rollingPaper = posts.rollingPaper + 50;
+
   return (
     <div>
       <Head>
         <title>롤링 페이퍼 :: 특별한 온라인 선물</title>
         <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1"
+          name='viewport'
+          content='width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1'
         />
-        <meta name="description" content="롤링 페이퍼 쉽게 만들기" />
+        <meta name='description' content='롤링 페이퍼 쉽게 만들기' />
         <meta
-          name="keywords"
-          content="롤링페이퍼,선물,생일,여자친구,100일,친구"
+          name='keywords'
+          content='롤링페이퍼,선물,생일,여자친구,100일,친구'
         />
       </Head>
 
-      <div className={`section ${classes.sectionWrapper}`}>
+      <div className={ `section ${classes.sectionWrapper}` }>
         <Layouts>
-          <div className={classes.main} style={{ marginBottom: '16px' }}>
+          <div className={ classes.main } style={{ marginBottom: '16px' }}>
             <span>지금까지</span>
             <br />
-            <CountUp end={rollingPaperContent} redraw={true}>
-              {({ countUpRef, start }) => (
-                <VisibilitySensor onChange={start} delayedCall>
-                  <span ref={countUpRef} />
+            <CountUp end={ rollingPaperContent } redraw={ true }>
+              { ({ countUpRef, start }) => (
+                <VisibilitySensor onChange={ start } delayedCall>
+                  <span ref={ countUpRef } />
                 </VisibilitySensor>
-              )}
+              ) }
             </CountUp>
             <span>명이 작성하고</span>
             <br />
-            <CountUp end={rollingPaper} redraw={true}>
-              {({ countUpRef, start }) => (
-                <VisibilitySensor onChange={start} delayedCall>
-                  <span ref={countUpRef} />
+            <CountUp end={ rollingPaper } redraw={ true }>
+              { ({ countUpRef, start }) => (
+                <VisibilitySensor onChange={ start } delayedCall>
+                  <span ref={ countUpRef } />
                 </VisibilitySensor>
-              )}
+              ) }
             </CountUp>
             <span>명이 축하를</span>
             <br />
             <span>받았어요!</span>
           </div>
-          <StickyFooter position="absolute">
+          <StickyFooter position='absolute'>
             <Link
               href={{
                 pathname: '/create',
               }}
             >
-              <Buttons full={true}>다음</Buttons>
+              <Buttons full={ true }>다음</Buttons>
             </Link>
           </StickyFooter>
         </Layouts>

@@ -16,11 +16,13 @@ const rollingService = {
   getRolling: async (rolling_id) => {
     let res = await baseAPI.get(`/api/v1/rolling/${rolling_id}`);
     console.log('getRolling : ', res.data);
+
     return res.data || [];
   },
   getRollingContent: async (rolling_id) => {
     let res = await baseAPI.get(`/api/rollingcontent?rolling_id=${rolling_id}`);
     console.log(res);
+
     return res.data || [];
   },
 
@@ -35,20 +37,23 @@ const rollingService = {
   // },
   getRolling: async () => {
     let res = await baseAPI.get(`/api/v1/count`);
+
     return res.data || [];
   },
   getRollingByName: async (name, password) => {
     console.log(name, password);
     let res = await baseAPI.get(
       `/api/v1/rolling?receiver=${encodeURI(name)}&password=${encodeURI(
-        password
-      )}`
+        password,
+      )}`,
     );
+
     return res.data || [];
   },
   getRollingSticker: async (rolling_id) => {
     let res = await baseAPI.get(`/api/v1/sticker?rollingpaperId=${rolling_id}`);
     console.log('getRollingSticker : ', res.data);
+
     return res.data || [];
   },
   postRollingSticker: async (rollingpaperId, x, y, url) => {
@@ -86,6 +91,7 @@ const rollingService = {
 
     if (status == 204) {
       console.log('stickerId : ', stickerId);
+
       return message;
     }
 
@@ -121,6 +127,7 @@ const rollingService = {
       })
       .catch((err) => {
         console.log(err);
+
         return 0;
       });
   },
@@ -147,7 +154,7 @@ const rollingService = {
     sort,
     color,
     backgroundColor,
-    backgroundImage
+    backgroundImage,
   ) => {
     // const res = await baseAPI.post(`/api/v1/rolling/${rolling_id}/content`, {
     //   content,

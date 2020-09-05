@@ -1,12 +1,14 @@
 // 스플래쉬 뷰
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import Buttons from '../../components/Buttons';
-import StickyFooter from '../../components/StickyFooter';
-import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core';
+import Head from 'next/head';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+
 import rollingService from '../../api/rollingService';
+import Buttons from '../../components/Buttons';
+import Layouts from '../../components/Layouts';
+import StickyFooter from '../../components/StickyFooter';
+
 const useStyles = makeStyles({
   main: {
     width: '100%',
@@ -31,48 +33,49 @@ const useStyles = makeStyles({
 const Splash = (props) => {
   const classes = useStyles();
   const { posts, name, num } = props;
+
   return (
     <div>
       <Head>
         <title>롤링 페이퍼 :: 특별한 온라인 선물</title>
         <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1"
+          name='viewport'
+          content='width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1'
         />
-        <meta name="description" content="롤링 페이퍼 쉽게 만들기" />
+        <meta name='description' content='롤링 페이퍼 쉽게 만들기' />
         <meta
-          name="keywords"
-          content="롤링페이퍼,선물,생일,여자친구,100일,친구"
+          name='keywords'
+          content='롤링페이퍼,선물,생일,여자친구,100일,친구'
         />
       </Head>
-      <div className={`section ${classes.sectionWrapper}`}>
+      <div className={ `section ${classes.sectionWrapper}` }>
         <Layouts>
-          <div className={classes.main}>
-            <span>{name}님!</span>
+          <div className={ classes.main }>
+            <span>{ name }님!</span>
             <br />
-            <span>{posts.contents.length}명이 준비한</span>
+            <span>{ posts.contents.length }명이 준비한</span>
             <br />
             <span>소중한 롤링페이퍼가</span>
             <br />
             <span>도착했어요</span>
           </div>
           <img
-            className={classes.rolling}
-            src="/gif/receiver.gif"
-            alt="롤링페이퍼 메인"
+            className={ classes.rolling }
+            src='/gif/receiver.gif'
+            alt='롤링페이퍼 메인'
           />
-          <StickyFooter position="absolute">
+          <StickyFooter position='absolute'>
             <Link
               href={{
                 pathname: '/receiver/main',
                 query: { name: name, num: num },
               }}
             >
-              <Buttons full={true}>롤링페이퍼 확인하기</Buttons>
+              <Buttons full={ true }>롤링페이퍼 확인하기</Buttons>
             </Link>
-            {/* <Buttons full={true} light={true}>
+            { /* <Buttons full={true} light={true}>
               내 롤링페이퍼 찾기
-            </Buttons> */}
+            </Buttons> */ }
           </StickyFooter>
         </Layouts>
       </div>
@@ -83,6 +86,7 @@ Splash.getInitialProps = async (context) => {
   const name = context.query.name;
   const num = context.query.num;
   const res = await rollingService.getRollingByName(name, num);
+
   return {
     posts: res.data,
     name: name,

@@ -1,15 +1,16 @@
 // 스플래쉬 뷰
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import Buttons from '../components/Buttons';
-import StickyFooter from '../components/StickyFooter';
-import Layouts from '../components/Layouts';
-import { makeStyles } from '@material-ui/core';
 import ReactFullpage from '@fullpage/react-fullpage';
+import { makeStyles } from '@material-ui/core';
+import Head from 'next/head';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
-import { isEmpty } from '../utils';
+
 import rollingService from '../api/rollingService';
+import Buttons from '../components/Buttons';
+import Layouts from '../components/Layouts';
+import StickyFooter from '../components/StickyFooter';
+import { isEmpty } from '../utils';
 
 const useStyles = makeStyles({
   main: {
@@ -42,27 +43,29 @@ const Index = () => {
       });
     } catch (err) {
       console.log(err);
+
       return;
     }
   };
+
   return (
     <div>
       <Head>
         <title>롤링 페이퍼 :: 특별한 온라인 선물</title>
         <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1"
+          name='viewport'
+          content='width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1'
         />
-        <meta name="description" content="롤링 페이퍼 쉽게 만들기" />
+        <meta name='description' content='롤링 페이퍼 쉽게 만들기' />
         <meta
-          name="keywords"
-          content="롤링페이퍼,선물,생일,여자친구,100일,친구"
+          name='keywords'
+          content='롤링페이퍼,선물,생일,여자친구,100일,친구'
         />
       </Head>
 
-      <div className={`section ${classes.sectionWrapper}`}>
+      <div className={ `section ${classes.sectionWrapper}` }>
         <Layouts>
-          <div className={classes.main} style={{ marginBottom: '16px' }}>
+          <div className={ classes.main } style={{ marginBottom: '16px' }}>
             <span>받을 사람은</span>
             <br />
             <AutosizeInput
@@ -78,12 +81,12 @@ const Index = () => {
                 borderBottom: '1px solid #333',
                 display: 'inline-block',
               }}
-              maxLength="10"
-              value={name}
-              placeholder="이름 혹은 애칭"
-              onChange={(e) => {
+              maxLength='10'
+              value={ name }
+              placeholder='이름 혹은 애칭'
+              onChange={ (e) => {
                 setName(e.target.value);
-              }}
+              } }
             />
             <br />
             <span>이에요.</span>
@@ -91,7 +94,7 @@ const Index = () => {
             <span>우리만의 신호는</span>
             <br />
             <AutosizeInput
-              type="password"
+              type='password'
               inputStyle={{
                 border: 0,
                 fontSize: '34px',
@@ -105,28 +108,28 @@ const Index = () => {
                 // color: "#D5D5D5",
                 display: 'inline-block',
               }}
-              maxLength="10"
-              value={password}
-              placeholder="****"
-              onChange={(e) => {
+              maxLength='10'
+              value={ password }
+              placeholder='****'
+              onChange={ (e) => {
                 setPassword(e.target.value);
-              }}
+              } }
             />
             <span>이에요.</span>
           </div>
-          <StickyFooter position="absolute">
-            {!isEmpty(name) && !isEmpty(password) ? (
+          <StickyFooter position='absolute'>
+            { !isEmpty(name) && !isEmpty(password) ? (
               <Buttons
-                full={true}
-                onClick={() => {
+                full={ true }
+                onClick={ () => {
                   onSubmit();
-                }}
+                } }
               >
                 생성 및 조회하기
               </Buttons>
             ) : (
-                <Buttons full={true}>모두 작성해주세요</Buttons>
-              )}
+              <Buttons full={ true }>모두 작성해주세요</Buttons>
+            ) }
           </StickyFooter>
         </Layouts>
       </div>

@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Layouts from './Layouts';
-import Modal from 'react-modal';
-import ContentEditable from 'react-contenteditable';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
+import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import ContentEditable from 'react-contenteditable';
+import Modal from 'react-modal';
+import Slider from 'react-slick';
+
 import { isEmpty } from '../utils';
+import Layouts from './Layouts';
 
 // static variables
 const FONT_FAMILY = [
@@ -222,44 +224,45 @@ const cardStyle = (bgColor, bgImage) => {
 const FontFamilyButton = (props) => {
   const { currentFont, font, setFont } = props;
   const classes = useStyles({ currentFont });
+
   return (
     <button
-      onClick={() => setFont(currentFont.family)}
+      onClick={ () => setFont(currentFont.family) }
       style={{ fontFamily: currentFont.family }}
-      className={`${classes.fontPropButton} ${
+      className={ `${classes.fontPropButton} ${
         font === currentFont.family && classes.clickedFontPropButton
-        }`}
+      }` }
     >
-      {currentFont.name}
+      { currentFont.name }
     </button>
   );
 };
 const ColorButton = (props) => {
   const { currentColor, color, setColor } = props;
   const classes = useStyles({ currentColor });
+
   return (
     <button
-      onClick={() => setColor(currentColor)}
-      className={`${classes.colorPropButton} ${
+      onClick={ () => setColor(currentColor) }
+      className={ `${classes.colorPropButton} ${
         color === currentColor && classes.clickedColorPropButton
-        }`}
+      }` }
     ></button>
   );
 };
 const AlignButton = (props) => {
   const { currentSort, sort, setSort } = props;
   const classes = useStyles();
+
   return (
     <button
-      className={classes.stylePropButton}
-      onClick={() => setSort(currentSort.align)}
+      className={ classes.stylePropButton }
+      onClick={ () => setSort(currentSort.align) }
     >
       <img
-        src={
-          sort === currentSort.align
-            ? `/icons/${currentSort.imgURL}_focus.png`
-            : `/icons/${currentSort.imgURL}_normal.png`
-        }
+        src={ sort === currentSort.align
+          ? `/icons/${currentSort.imgURL}_focus.png`
+          : `/icons/${currentSort.imgURL}_normal.png` }
       ></img>
     </button>
   );
@@ -295,14 +298,15 @@ const FontModal = (props) => {
     backgroundImage,
   } = props;
   const [editMode, setEditMode] = useState('text');
+
   return (
     <Modal
-      isOpen={fontModalIsOpen}
-      style={customModalStyles}
-      contentLabel="Example Modal"
-      ariaHideApp={false}
+      isOpen={ fontModalIsOpen }
+      style={ customModalStyles }
+      contentLabel='Example Modal'
+      ariaHideApp={ false }
     >
-      <Layouts className={classes.root}>
+      <Layouts className={ classes.root }>
         <div
           style={{
             display: 'flex',
@@ -315,24 +319,24 @@ const FontModal = (props) => {
         >
           <span
             style={{ float: 'left' }}
-            onClick={() => setFontModalIsOpen(false)}
+            onClick={ () => setFontModalIsOpen(false) }
           >
             <img
               style={{ width: '16px' }}
-              src="/icons/back-light-icon.png"
+              src='/icons/back-light-icon.png'
             ></img>
           </span>
 
           <span
             style={{ float: 'right' }}
-            onClick={() => setFontModalIsOpen(false)}
+            onClick={ () => setFontModalIsOpen(false) }
           >
-            <a className={classes.confirmButton}>완료</a>
+            <a className={ classes.confirmButton }>완료</a>
           </span>
         </div>
         <div
-          className={classes.textarea}
-          onClick={() => setFontModalIsOpen(true)}
+          className={ classes.textarea }
+          onClick={ () => setFontModalIsOpen(true) }
           // style={cardStyle(backgroundColor, backgroundImage)}
           style={{
             fontFamily: `${font}`,
@@ -342,7 +346,7 @@ const FontModal = (props) => {
             backgroundColor: `${backgroundColor}`,
             backgroundImage: `${
               !isEmpty(backgroundImage) && `url('${backgroundImage}')`
-              }`,
+            }`,
             backgroundSize: `${!isEmpty(backgroundImage) && 'cover '}`,
             backgroundBlendMode: `${isEmpty(backgroundImage) && 'color-burn'}`,
             backgroundRepeat: 'no-repeat',
@@ -352,17 +356,17 @@ const FontModal = (props) => {
           }}
         >
           <ContentEditable
-            contentEditable="true"
-            html={content}
-            onChange={(e) => {
+            contentEditable='true'
+            html={ content }
+            onChange={ (e) => {
               setContent(e.target.value);
-            }}
-            onKeyDown={(event) => {
+            } }
+            onKeyDown={ (event) => {
               if (event.key === 'Enter') {
                 event.preventDefault();
                 document.execCommand('insertLineBreak');
               }
-            }}
+            } }
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -376,88 +380,82 @@ const FontModal = (props) => {
             }}
           />
         </div>
-        {editMode === 'text' && (
+        { editMode === 'text' && (
           <div
-            className={`${classes.fontPropButtonWrap} ${classes.fontPropButtonFont}`}
+            className={ `${classes.fontPropButtonWrap} ${classes.fontPropButtonFont}` }
           >
-            {FONT_FAMILY.map((value, idx) => {
+            { FONT_FAMILY.map((value, idx) => {
               return (
                 <FontFamilyButton
-                  key={idx}
-                  currentFont={value}
-                  font={font}
-                  setFont={setFont}
+                  key={ idx }
+                  currentFont={ value }
+                  font={ font }
+                  setFont={ setFont }
                 />
               );
-            })}
+            }) }
           </div>
-        )}
-        {editMode === 'sort' && (
-          <div className={classes.fontPropButtonWrap}>
-            {FONT_ALIGN.map((value, idx) => {
+        ) }
+        { editMode === 'sort' && (
+          <div className={ classes.fontPropButtonWrap }>
+            { FONT_ALIGN.map((value, idx) => {
               return (
                 <AlignButton
-                  key={idx}
-                  currentSort={value}
-                  sort={sort}
-                  setSort={setSort}
+                  key={ idx }
+                  currentSort={ value }
+                  sort={ sort }
+                  setSort={ setSort }
                 />
               );
-            })}
+            }) }
           </div>
-        )}
-        {editMode === 'color' && (
-          <div className={classes.fontPropButtonWrap}>
-            {FONT_COLORS.map((value, idx) => {
+        ) }
+        { editMode === 'color' && (
+          <div className={ classes.fontPropButtonWrap }>
+            { FONT_COLORS.map((value, idx) => {
               return (
                 <ColorButton
-                  key={idx}
-                  currentColor={value}
-                  color={color}
-                  setColor={setColor}
+                  key={ idx }
+                  currentColor={ value }
+                  color={ color }
+                  setColor={ setColor }
                 />
               );
-            })}
+            }) }
           </div>
-        )}
-        <div className={classes.editButtonBar}>
+        ) }
+        <div className={ classes.editButtonBar }>
           <span
             style={{ margin: '0 10px 0 0' }}
-            onClick={() => setEditMode('text')}
+            onClick={ () => setEditMode('text') }
           >
             <img
-              src={
-                editMode === 'text'
-                  ? '/icons/option_icon_font1_focus.png'
-                  : '/icons/option_icon_font1_normal.png'
-              }
-              className={classes.menuButton}
+              src={ editMode === 'text'
+                ? '/icons/option_icon_font1_focus.png'
+                : '/icons/option_icon_font1_normal.png' }
+              className={ classes.menuButton }
             />
           </span>
           <span
             style={{ margin: '0 10px 0 10px' }}
-            onClick={() => setEditMode('sort')}
+            onClick={ () => setEditMode('sort') }
           >
             <img
-              src={
-                editMode === 'sort'
-                  ? '/icons/option_icon_text2_focus.png'
-                  : '/icons/option_icon_text2_normal.png'
-              }
-              className={classes.menuButton}
+              src={ editMode === 'sort'
+                ? '/icons/option_icon_text2_focus.png'
+                : '/icons/option_icon_text2_normal.png' }
+              className={ classes.menuButton }
             />
           </span>
           <span
             style={{ margin: '0 0 0 10px' }}
-            onClick={() => setEditMode('color')}
+            onClick={ () => setEditMode('color') }
           >
             <img
-              src={
-                editMode === 'color'
-                  ? '/icons/option_icon_color3_focus.png'
-                  : '/icons/option_icon_color3_normal.png'
-              }
-              className={classes.menuButton}
+              src={ editMode === 'color'
+                ? '/icons/option_icon_color3_focus.png'
+                : '/icons/option_icon_color3_normal.png' }
+              className={ classes.menuButton }
             />
           </span>
         </div>

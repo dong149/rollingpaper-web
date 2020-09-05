@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import rollingService from '../api/rollingService';
 import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+
+import rollingService from '../api/rollingService';
 
 const useStyles = makeStyles((props) => ({
   sticker: {
@@ -80,6 +81,7 @@ const StickerList = (props) => {
         }
       };
       document.addEventListener('mousedown', handleClickOutside);
+
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
@@ -94,6 +96,7 @@ const StickerList = (props) => {
   const deleteSticker = async (sticker_id) => {
     try {
       await rollingService.deleteRollingSticker(sticker_id);
+
       return 200;
     } catch (error) {
       return 400;
@@ -107,9 +110,10 @@ const StickerList = (props) => {
   };
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
+
   return (
-    <div ref={wrapperRef}>
-      {stickerList &&
+    <div ref={ wrapperRef }>
+      { stickerList &&
         stickerList.map((sticker, i) => {
           return (
             // <motion.div
@@ -119,42 +123,41 @@ const StickerList = (props) => {
             // >
             // TODO: 하면 좋은데, Cards와 싱크가 안맞아 보류
             <span
-              key={sticker.id}
-              className={classes.sticker}
+              key={ sticker.id }
+              className={ classes.sticker }
               style={{
                 transform: `translate(${sticker.x}px, ${sticker.y}px)`,
               }}
-              onClick={(e) =>
+              onClick={ (e) =>
                 isReceiverPage
                   ? e.preventDefault()
-                  : setIsEditableKey(sticker.id)
-              }
-              onBlur={(e) => console.log('touchcancel')}
+                  : setIsEditableKey(sticker.id) }
+              onBlur={ (e) => console.log('touchcancel') }
             >
-              {isEditableKey === sticker.id && (
+              { isEditableKey === sticker.id && (
                 <button
-                  className={classes.stickerButton}
-                  onClick={(e) => {
+                  className={ classes.stickerButton }
+                  onClick={ (e) => {
                     e.preventDefault();
                     deleteSticker(sticker.id).then((res) => {
                       setIsStickerUpdated(true);
                     });
-                  }}
+                  } }
                 >
-                  <img src="/icons/icon-delete.png" alt="스티커 삭제하기" />
+                  <img src='/icons/icon-delete.png' alt='스티커 삭제하기' />
                 </button>
-              )}
+              ) }
               <span
-                className={`${classes.stickerImage} ${
+                className={ `${classes.stickerImage} ${
                   isEditableKey === sticker.id && classes.focusedSticker
-                  }`}
+                }` }
               >
-                <img src={sticker.url} />
+                <img src={ sticker.url } />
               </span>
             </span>
             // </motion.div>
           );
-        })}
+        }) }
     </div>
   );
 };

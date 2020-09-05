@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Buttons from '../components/Buttons';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React, { useEffect, useState } from 'react';
+
+import Buttons from '../components/Buttons';
 
 const useStyles = makeStyles(() => ({
   table: {
@@ -16,16 +17,17 @@ const useStyles = makeStyles(() => ({
 
 const Guide = () => {
   const classes = useStyles();
+
   return (
     <>
-      <Typography variant="h3" gutterBottom>
+      <Typography variant='h3' gutterBottom>
         Common Guide
       </Typography>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant='h4' gutterBottom>
         Button
       </Typography>
-      <Typography variant="subtitle1" gutterBottom>
-        <table className={classes.table}>
+      <Typography variant='subtitle1' gutterBottom>
+        <table className={ classes.table }>
           <thead>
             <tr>
               <th>Name</th>
@@ -52,13 +54,13 @@ const Guide = () => {
           </tbody>
         </table>
       </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
+      <Grid container spacing={ 2 }>
+        <Grid item xs={ 6 }>
           <Buttons full light>
             이전장
           </Buttons>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={ 6 }>
           <Buttons full>다음장</Buttons>
         </Grid>
       </Grid>

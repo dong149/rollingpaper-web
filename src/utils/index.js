@@ -1,13 +1,14 @@
-import React from 'react';
 import { saveAs } from 'file-saver';
+import React from 'react';
 import ReactDOM from 'react-dom';
+
 const fileType = {
   PNG: 'image/png',
   JPEG: 'image/jpeg',
   PDF: 'application/pdf',
 };
 
-export const isEmpty = function (value) {
+export const isEmpty = function(value) {
   if (
     value == '' ||
     value == null ||
@@ -41,7 +42,7 @@ export const exportComponentAsPNG = (
   node,
   fileName = 'component.png',
   backgroundColor = null,
-  type = fileType.PNG
+  type = fileType.PNG,
 ) => {
   exportComponent(node, fileName, backgroundColor, type);
 };

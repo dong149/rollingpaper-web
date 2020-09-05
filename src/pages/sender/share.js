@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Layouts from '../../components/Layouts';
-import Buttons from '../../components/Buttons';
-import StickyFooter from '../../components/StickyFooter';
 import { makeStyles } from '@material-ui/core';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+
+import Buttons from '../../components/Buttons';
 import Header from '../../components/Header';
+import Layouts from '../../components/Layouts';
+import StickyFooter from '../../components/StickyFooter';
 
 const useStyles = makeStyles({
   main: {
@@ -67,84 +68,84 @@ const Share = (props) => {
           },
         },
       ],
-      success: function (response) {
+      success: function(response) {
         console.log(response);
       },
-      fail: function (error) {
+      fail: function(error) {
         console.log(error);
       },
     }),
-      window.Kakao.Link.createDefaultButton({
-        container: '#kakao-link-btn-receiver',
-        objectType: 'feed',
-        content: {
-          title: `${name}님에게 롤링페이퍼가 도착했어요!`,
-          description: `정성이 담긴 특별한 선물을 확인해보세요`,
-          imageUrl:
+    window.Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn-receiver',
+      objectType: 'feed',
+      content: {
+        title: `${name}님에게 롤링페이퍼가 도착했어요!`,
+        description: `정성이 담긴 특별한 선물을 확인해보세요`,
+        imageUrl:
             'https://github.com/dong149/image_resources/blob/master/rollingpaper/receiver.png?raw=true',
 
+        link: {
+          webUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
+          mobileWebUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
+        },
+      },
+      social: {
+        likeCount: 100,
+        commentCount: 202,
+        sharedCount: 303,
+      },
+      buttons: [
+        {
+          title: '열어보기',
           link: {
             webUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
             mobileWebUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
           },
         },
-        social: {
-          likeCount: 100,
-          commentCount: 202,
-          sharedCount: 303,
-        },
-        buttons: [
-          {
-            title: '열어보기',
-            link: {
-              webUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
-              mobileWebUrl: `https://rollingpaper.site/receiver/splash?name=${name}&num=${num}`,
-            },
-          },
-        ],
-        success: function (response) {
-          console.log(response);
-        },
-        fail: function (error) {
-          console.log(error);
-        },
-      });
+      ],
+      success: function(response) {
+        console.log(response);
+      },
+      fail: function(error) {
+        console.log(error);
+      },
+    });
   });
 
   return (
     <Layouts>
-      <Header className={classes.header}>
+      <Header className={ classes.header }>
         <Link
           href={{
             pathname: '/sender/main',
             query: { name: name, num: num },
           }}
         >
-          <a className={classes.iconWrapper}>
+          <a className={ classes.iconWrapper }>
             <img
-              src="/icons/back-icon-small.png"
-              alt="뒤로가기"
-              className={classes.icons}
+              src='/icons/back-icon-small.png'
+              alt='뒤로가기'
+              className={ classes.icons }
             />
           </a>
         </Link>
       </Header>
-      <div className={classes.main}>
+      <div className={ classes.main }>
         <span>누구에게 공유하세요?</span>
       </div>
       <img
-        className={classes.rolling}
-        src="/gif/share.gif"
-        alt="롤링페이퍼 메인 이미지"
+        className={ classes.rolling }
+        src='/gif/share.gif'
+        alt='롤링페이퍼 메인 이미지'
       />
       <StickyFooter>
-        <a id="kakao-link-btn" style={{ display: 'block' }}>
-          <Buttons full={true} light={true}>
+        <a id='kakao-link-btn' style={{ display: 'block' }}>
+          <Buttons full={ true } light={ true }>
             함께 준비하는 사람들에게 공유
           </Buttons>
         </a>
-        <a id="kakao-link-btn-receiver" style={{ display: 'block' }}>
-          <Buttons full={true}>주인공에게 공유</Buttons>
+        <a id='kakao-link-btn-receiver' style={{ display: 'block' }}>
+          <Buttons full={ true }>주인공에게 공유</Buttons>
         </a>
       </StickyFooter>
     </Layouts>
@@ -154,6 +155,7 @@ const Share = (props) => {
 Share.getInitialProps = async (context) => {
   const name = context.query.name;
   const num = context.query.num;
+
   return {
     name: name,
     num: num,

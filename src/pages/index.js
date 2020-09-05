@@ -1,11 +1,13 @@
 // 스플래쉬 뷰
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import Buttons from '../components/Buttons';
-import StickyFooter from '../components/StickyFooter';
-import Layouts from '../components/Layouts';
 import { makeStyles } from '@material-ui/core';
+import Head from 'next/head';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+
+import Buttons from '../components/Buttons';
+import Layouts from '../components/Layouts';
+import StickyFooter from '../components/StickyFooter';
+
 const useStyles = makeStyles({
   main: {
     width: '100%',
@@ -29,43 +31,44 @@ const useStyles = makeStyles({
 });
 const Index = () => {
   const classes = useStyles();
+
   return (
     <div>
       <Head>
         <title>롤링 페이퍼 :: 특별한 온라인 선물</title>
         <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1"
+          name='viewport'
+          content='width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1'
         />
-        <meta name="description" content="롤링 페이퍼 쉽게 만들기" />
+        <meta name='description' content='롤링 페이퍼 쉽게 만들기' />
         <meta
-          name="keywords"
-          content="롤링페이퍼,선물,생일,여자친구,100일,친구"
+          name='keywords'
+          content='롤링페이퍼,선물,생일,여자친구,100일,친구'
         />
       </Head>
-      <div className={`section ${classes.sectionWrapper}`}>
+      <div className={ `section ${classes.sectionWrapper}` }>
         <Layouts>
-          <div className={classes.main}>
+          <div className={ classes.main }>
             <span>롤링페이퍼로</span>
             <br />
             <span>마음을 선물하세요.</span>
           </div>
           <img
-            className={classes.rolling}
-            src="/gif/main.gif"
-            alt="롤링페이퍼 메인 이미지"
+            className={ classes.rolling }
+            src='/gif/main.gif'
+            alt='롤링페이퍼 메인 이미지'
           />
-          <StickyFooter position="absolute">
+          <StickyFooter position='absolute'>
             <Link
               href={{
                 pathname: '/celebrate',
               }}
             >
-              <Buttons full={true}>롤링페이퍼 생성 및 조회하기</Buttons>
+              <Buttons full={ true }>롤링페이퍼 생성 및 조회하기</Buttons>
             </Link>
-            {/* <Buttons full={true} light={true}>
+            { /* <Buttons full={true} light={true}>
               내 롤링페이퍼 찾기
-            </Buttons> */}
+            </Buttons> */ }
           </StickyFooter>
         </Layouts>
       </div>

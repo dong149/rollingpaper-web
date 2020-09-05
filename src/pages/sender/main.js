@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import Layouts from '../../components/Layouts';
-import { makeStyles } from '@material-ui/core/styles';
-import rollingService from '../../api/rollingService';
-import Header from '../../components/Header';
-import StickyFooter from '../../components/StickyFooter';
-import StickerModal from '../../components/StickerModal';
-import Cards from '../../components/Cards';
-import Buttons from '../../components/Buttons';
 import Grid from '@material-ui/core/Grid';
-import Link from 'next/link';
-import { isEmpty } from '../../utils';
-import Draggable from 'react-draggable';
-import StickerList from '../../components/StickerList';
+import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import Draggable from 'react-draggable';
+
+import rollingService from '../../api/rollingService';
+import Buttons from '../../components/Buttons';
+import Cards from '../../components/Cards';
+import Header from '../../components/Header';
+import Layouts from '../../components/Layouts';
+import StickerList from '../../components/StickerList';
+import StickerModal from '../../components/StickerModal';
+import StickyFooter from '../../components/StickyFooter';
+import { isEmpty } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -164,7 +165,7 @@ const Main = (props) => {
           posts.rollingpaperId,
           position.x ?? 0,
           position.y ?? 0,
-          stickerURL
+          stickerURL,
         )
         .then((res) => {
           setIsStickerUpdated(true);
@@ -178,22 +179,22 @@ const Main = (props) => {
 
   return (
     <div style={{ backgroundColor: '#F6F6F6' }}>
-      <Layouts className={classes.root} bgColor="#F7F7F7">
+      <Layouts className={ classes.root } bgColor='#F7F7F7'>
         <StickerModal
-          stickerModalIsOpen={stickerModalIsOpen}
-          setStickerModalIsOpen={setStickerModalIsOpen}
-          stickerURL={stickerURL}
-          setStickerURL={setStickerURL}
+          stickerModalIsOpen={ stickerModalIsOpen }
+          setStickerModalIsOpen={ setStickerModalIsOpen }
+          stickerURL={ stickerURL }
+          setStickerURL={ setStickerURL }
         />
-        <Header className={classes.header}>
-          {!stickerURL ? (
+        <Header className={ classes.header }>
+          { !stickerURL ? (
             <>
               <div>
-                <h2 className={classes.title}>to. {name}님</h2>
-                <p className={classes.subtitle}>
-                  {!isEmpty(posts)
+                <h2 className={ classes.title }>to. { name }님</h2>
+                <p className={ classes.subtitle }>
+                  { !isEmpty(posts)
                     ? `지금까지 총 ${posts.contents.length}명이 작성했어요!`
-                    : `아직 아무도 작성하지 않았어요!`}
+                    : `아직 아무도 작성하지 않았어요!` }
                 </p>
               </div>
               <Link
@@ -202,124 +203,124 @@ const Main = (props) => {
                   query: { name: name, num: num, id: posts.rollingpaperId },
                 }}
               >
-                <button className={classes.buttonSmall}>공유하기</button>
+                <button className={ classes.buttonSmall }>공유하기</button>
               </Link>
             </>
           ) : (
-              <a
-                className={classes.iconWrapper}
-                onClick={() => setStickerURL(null)}
-              >
-                <img
-                  src="/icons/back-icon-small.png"
-                  alt="스티커 취소하기"
-                  className={classes.icons}
-                />
-              </a>
-            )}
+            <a
+              className={ classes.iconWrapper }
+              onClick={ () => setStickerURL(null) }
+            >
+              <img
+                src='/icons/back-icon-small.png'
+                alt='스티커 취소하기'
+                className={ classes.icons }
+              />
+            </a>
+          ) }
         </Header>
 
-        <div className={classes.cardWrapper}>
-          {posts.rollingpaperId && (
+        <div className={ classes.cardWrapper }>
+          { posts.rollingpaperId && (
             <StickerList
-              rollingId={posts.rollingpaperId}
-              isStickerUpdated={isStickerUpdated}
-              setIsStickerUpdated={setIsStickerUpdated}
+              rollingId={ posts.rollingpaperId }
+              isStickerUpdated={ isStickerUpdated }
+              setIsStickerUpdated={ setIsStickerUpdated }
             />
-          )}
-          {stickerURL && (
+          ) }
+          { stickerURL && (
             <Draggable
-              bounds="parent"
-              onStart={onStart}
-              onDrag={handleDrag}
-              onStop={onStop}
+              bounds='parent'
+              onStart={ onStart }
+              onDrag={ handleDrag }
+              onStop={ onStop }
               defaultPosition={{ x: 100, y: 200 }}
               style={{ position: 'absolute', bottom: '100px', right: '100px' }}
             >
-              <div className={classes.sticker}>
-                <span className={classes.stickerImage}>
-                  <img src={stickerURL} />
+              <div className={ classes.sticker }>
+                <span className={ classes.stickerImage }>
+                  <img src={ stickerURL } />
                 </span>
               </div>
             </Draggable>
-          )}
-          {posts.contents.length ? (
+          ) }
+          { posts.contents.length ? (
             <Cards
-              content={posts.contents}
-              linked={false}
-              setIsPostsUpdated={setIsPostsUpdated}
-              name={name}
-              num={num}
+              content={ posts.contents }
+              linked={ false }
+              setIsPostsUpdated={ setIsPostsUpdated }
+              name={ name }
+              num={ num }
             />
           ) : (
-              <div
+            <div
+              style={{
+                minHeight: 'calc(100vh - 150px)',
+                textAlign: 'center',
+                paddingTop: '90px',
+              }}
+            >
+              <img
                 style={{
-                  minHeight: 'calc(100vh - 150px)',
-                  textAlign: 'center',
-                  paddingTop: '90px',
+                  width: '80%',
                 }}
-              >
-                <img
-                  style={{
-                    width: '80%',
-                  }}
-                  src="/icons/empty.png"
-                  alt="아무도 작성하지 않은 경우"
-                />
-              </div>
-            )}
+                src='/icons/empty.png'
+                alt='아무도 작성하지 않은 경우'
+              />
+            </div>
+          ) }
         </div>
         <StickyFooter>
-          {stickerURL ? (
-            <Buttons onClick={onCreateSticker} full>
+          { stickerURL ? (
+            <Buttons onClick={ onCreateSticker } full>
               완료
             </Buttons>
           ) : (
-              <Grid container spacing={2}>
-                <Grid item className={classes.btnSquare}>
-                  <motion.div
-                    transition={{
-                      type: 'spring',
-                      stiffness: 100,
-                      damping: 20,
-                      duration: 3,
-                      delay: 3.5,
-                    }}
-                    initial={{ y: 0, opacity: 0 }}
-                    animate={{ y: 65, opacity: [0, 1, 1, 1, 0] }}
-                  >
+            <Grid container spacing={ 2 }>
+              <Grid item className={ classes.btnSquare }>
+                <motion.div
+                  transition={{
+                    type: 'spring',
+                    stiffness: 100,
+                    damping: 20,
+                    duration: 3,
+                    delay: 3.5,
+                  }}
+                  initial={{ y: 0, opacity: 0 }}
+                  animate={{ y: 65, opacity: [0, 1, 1, 1, 0] }}
+                >
+                  <img
+                    className={ classes.tooltip }
+                    src='/images/img_tooltip.png'
+                    alt='스티커로 롤링페이퍼를 꾸며보세요!'
+                  />
+                </motion.div>
+                <button
+                  variant='contained'
+                  onClick={ () => setStickerModalIsOpen(true) }
+                >
+                  <img src='/icons/sticker-icon.png' alt='스티커 붙이기' />
+                </button>
+              </Grid>
+              <Grid item className={ classes.btnfull }>
+                <Link
+                  href={{
+                    pathname: '/sender/editor',
+                    query: { name: name, num: num, id: posts.rollingpaperId },
+                  }}
+                >
+                  <Buttons full={ true }>
                     <img
-                      className={classes.tooltip}
-                      src="/images/img_tooltip.png"
-                      alt="스티커로 롤링페이퍼를 꾸며보세요!"
+                      src='/icons/write-light-icon.png'
+                      alt=''
+                      className={ classes.icon }
                     />
-                  </motion.div>
-                  <button
-                    variant="contained"
-                    onClick={() => setStickerModalIsOpen(true)}
-                  >
-                    <img src="/icons/sticker-icon.png" alt="스티커 붙이기" />
-                  </button>
-                </Grid>
-                <Grid item className={classes.btnfull}>
-                  <Link
-                    href={{
-                      pathname: '/sender/editor',
-                      query: { name: name, num: num, id: posts.rollingpaperId },
-                    }}
-                  >
-                    <Buttons full={true}>
-                      <img
-                        src="/icons/write-light-icon.png"
-                        alt=""
-                        className={classes.icon}
-                      />
                     롤링페이퍼 작성하기
                   </Buttons>
-                  </Link>
-                </Grid>
+                </Link>
               </Grid>
-            )}
+            </Grid>
+          ) }
         </StickyFooter>
       </Layouts>
     </div>

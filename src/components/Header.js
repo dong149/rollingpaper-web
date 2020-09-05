@@ -1,5 +1,5 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const useStyles = makeStyles({
   header: {
@@ -13,7 +13,8 @@ const useStyles = makeStyles({
 
 const Header = (props) => {
   const classes = useStyles(props);
-  return <header className={classes.header}>{props.children}</header>;
+
+  return <header className={ classes.header }>{ props.children }</header>;
 };
 
 export default Header;

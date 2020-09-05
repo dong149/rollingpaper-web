@@ -1,10 +1,11 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Layouts from './Layouts';
-import Modal from 'react-modal';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { motion, AnimatePresence } from 'framer-motion';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
+import Modal from 'react-modal';
+
+import Layouts from './Layouts';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,7 +76,7 @@ const StickerModal = (props) => {
     stickerCards.push(
       <Grid
         item
-        xs={4}
+        xs={ 4 }
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -83,15 +84,15 @@ const StickerModal = (props) => {
         }}
       >
         <button
-          className={classes.imageButton}
-          onClick={() => {
+          className={ classes.imageButton }
+          onClick={ () => {
             setStickerURL(stickerURL);
             setStickerModalIsOpen(false);
-          }}
+          } }
         >
-          <img src={stickerURL} />
+          <img src={ stickerURL } />
         </button>
-      </Grid>
+      </Grid>,
     );
   }
   const spring = {
@@ -100,20 +101,21 @@ const StickerModal = (props) => {
     stiffness: 100,
     when: 'afterChildren',
   };
+
   return (
     <AnimatePresence exitBeforeEnter>
       <Modal
-        isOpen={stickerModalIsOpen}
-        style={customModalStyles}
-        contentLabel="Color Modal"
+        isOpen={ stickerModalIsOpen }
+        style={ customModalStyles }
+        contentLabel='Color Modal'
       >
         <motion.div
-          transition={spring}
+          transition={ spring }
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -100, opacity: 0 }}
         >
-          <Layouts className={classes.root}>
+          <Layouts className={ classes.root }>
             <div
               style={{
                 display: 'flex',
@@ -123,15 +125,15 @@ const StickerModal = (props) => {
                 padding: '0 9px',
               }}
             >
-              <span onClick={() => setStickerModalIsOpen(false)}>
+              <span onClick={ () => setStickerModalIsOpen(false) }>
                 <img
                   style={{ width: '16px' }}
-                  src="/icons/back-light-icon.png"
+                  src='/icons/back-light-icon.png'
                 ></img>
               </span>
             </div>
-            <Grid className={classes.colorList} container spacing={3}>
-              {stickerCards}
+            <Grid className={ classes.colorList } container spacing={ 3 }>
+              { stickerCards }
             </Grid>
           </Layouts>
         </motion.div>

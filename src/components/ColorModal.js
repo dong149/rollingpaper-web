@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Layouts from './Layouts';
-import Modal from 'react-modal';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+
 import { isEmpty } from '../utils';
+import Layouts from './Layouts';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -126,39 +127,39 @@ const ColorModal = (props) => {
     colorCards.push(
       <Grid
         item
-        xs={6}
+        xs={ 6 }
         style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        key={color}
+        key={ color }
       >
         <Paper
-          elevation={0}
-          className={classes.paper}
+          elevation={ 0 }
+          className={ classes.paper }
           style={{ backgroundColor: color }}
-          onClick={() => {
+          onClick={ () => {
             setBackgroundColor(color);
             setColorModalIsOpen(false);
-          }}
+          } }
         >
-          {color === backgroundColor && (
-            <img src="/icons/edit-active-icon.png" style={{ width: '60px' }} />
-          )}
+          { color === backgroundColor && (
+            <img src='/icons/edit-active-icon.png' style={{ width: '60px' }} />
+          ) }
         </Paper>
-      </Grid>
+      </Grid>,
     );
   }
 
   return (
     <Modal
-      isOpen={colorModalIsOpen}
-      style={customModalStyles}
-      contentLabel="Color Modal"
-      ariaHideApp={false}
+      isOpen={ colorModalIsOpen }
+      style={ customModalStyles }
+      contentLabel='Color Modal'
+      ariaHideApp={ false }
     >
-      <Layouts className={classes.root}>
+      <Layouts className={ classes.root }>
         <div
           style={{
             display: 'flex',
@@ -168,72 +169,72 @@ const ColorModal = (props) => {
             padding: '0 9px',
           }}
         >
-          <span onClick={() => setColorModalIsOpen(false)}>
+          <span onClick={ () => setColorModalIsOpen(false) }>
             <img
               style={{ width: '16px' }}
-              src="/icons/back-light-icon.png"
+              src='/icons/back-light-icon.png'
             ></img>
           </span>
           <div>
             <span
-              onClick={() => {
+              onClick={ () => {
                 setEditPaperIsOpen(true);
                 setEditPhotoIsOpen(false);
-              }}
+              } }
             >
-              {editPaperIsOpen ? (
+              { editPaperIsOpen ? (
                 <img
                   style={{ width: '48px' }}
-                  src="/icons/edit-paper-focus.png"
+                  src='/icons/edit-paper-focus.png'
                 ></img>
               ) : (
-                  <img
-                    style={{ width: '48px' }}
-                    src="/icons/edit-paper.png"
-                  ></img>
-                )}
+                <img
+                  style={{ width: '48px' }}
+                  src='/icons/edit-paper.png'
+                ></img>
+              ) }
             </span>
             <span
-              onClick={() => {
+              onClick={ () => {
                 setEditPhotoIsOpen(true);
                 setEditPaperIsOpen(false);
-              }}
+              } }
             >
-              {editPhotoIsOpen ? (
+              { editPhotoIsOpen ? (
                 <img
                   style={{ width: '48px' }}
-                  src="/icons/edit_option_focus.png"
+                  src='/icons/edit_option_focus.png'
                 ></img>
               ) : (
-                  <img
-                    style={{ width: '48px' }}
-                    src="/icons/edit_option_normal.png"
-                  ></img>
-                )}
+                <img
+                  style={{ width: '48px' }}
+                  src='/icons/edit_option_normal.png'
+                ></img>
+              ) }
             </span>
           </div>
           <span>
             <a
-              className={classes.confirmButton}
-              onClick={() => setColorModalIsOpen(false)}
+              className={ classes.confirmButton }
+              onClick={ () => setColorModalIsOpen(false) }
             >
               완료
             </a>
           </span>
         </div>
-        {editPaperIsOpen && (
-          <Grid className={classes.colorList} container spacing={3}>
-            {colorCards}
+        { editPaperIsOpen && (
+          <Grid className={ classes.colorList } container spacing={ 3 }>
+            { colorCards }
           </Grid>
-        )}
-        {editPhotoIsOpen && (
+        ) }
+        { editPhotoIsOpen && (
           <>
             <input
-              accept="image/*"
-              className={classes.input}
-              id="contained-button-file"
-              type="file"
-              onChange={(e) => {
+              accept='image/*'
+              className={ classes.input }
+              id='contained-button-file'
+              type='file'
+              onChange={ (e) => {
                 var file = e.target.files[0];
                 setImageFile(file);
                 const reader = new FileReader();
@@ -242,11 +243,11 @@ const ColorModal = (props) => {
                   setBackgroundImage([reader.result]);
                   console.log(reader.result);
                 };
-              }}
+              } }
             />
             <label
-              className={classes.photoArea}
-              htmlFor="contained-button-file"
+              className={ classes.photoArea }
+              htmlFor='contained-button-file'
               style={{
                 backgroundColor: 'grey',
                 // backgroundPosition: 'center center',
@@ -256,15 +257,15 @@ const ColorModal = (props) => {
                 cursor: 'pointer',
                 backgroundImage: `${
                   !isEmpty(backgroundImage) && `url(${backgroundImage})`
-                  }`,
+                }`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
               }}
             >
-              {isEmpty(backgroundImage) && (
+              { isEmpty(backgroundImage) && (
                 <>
                   <img
-                    src="/icons/edit-photo-add.png"
+                    src='/icons/edit-photo-add.png'
                     style={{ width: '104px', height: '104px' }}
                   />
 
@@ -287,10 +288,10 @@ const ColorModal = (props) => {
                     사진을 추가하세요.
                   </p>
                 </>
-              )}
+              ) }
             </label>
           </>
-        )}
+        ) }
       </Layouts>
     </Modal>
   );

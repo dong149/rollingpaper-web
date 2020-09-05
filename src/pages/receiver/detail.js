@@ -1,22 +1,24 @@
-import React, { useState, useRef } from 'react';
-import Layouts from '../../components/Layouts';
-import { useRouter } from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Buttons from '../../components/Buttons';
-import Slider from 'react-slick';
-import Header from '../../components/Header';
-import StickyFooter from '../../components/StickyFooter';
-import Link from 'next/link';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useRef, useState } from 'react';
+import Slider from 'react-slick';
+
 import rollingService from '../../api/rollingService';
+import Buttons from '../../components/Buttons';
+import Header from '../../components/Header';
+import Layouts from '../../components/Layouts';
 import Modal, {
-  ModalTitie,
-  ModalButtonWrapper,
   ModalButton,
+  ModalButtonWrapper,
   ModalFullButton,
+  ModalTitie,
 } from '../../components/Modal';
+import StickyFooter from '../../components/StickyFooter';
 import { isEmpty } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -138,8 +140,9 @@ const Detail = (props) => {
     e.preventDefault();
     customeSlider.current.slickPrev();
   };
+
   return (
-    <Layouts className={classes.root}>
+    <Layouts className={ classes.root }>
       <header
         style={{
           display: 'flex',
@@ -155,45 +158,46 @@ const Detail = (props) => {
             query: { name: name, num: num },
           }}
         >
-          <a className={classes.iconWrapper}>
+          <a className={ classes.iconWrapper }>
             <img
-              src="/icons/back-icon-small.png"
-              alt="뒤로가기"
-              className={classes.icons}
+              src='/icons/back-icon-small.png'
+              alt='뒤로가기'
+              className={ classes.icons }
             />
           </a>
         </Link>
-        <div className={classes.title}>
-          <strong>{sliderIndex}</strong> / {posts.contents.length}
+        <div className={ classes.title }>
+          <strong>{ sliderIndex }</strong> / { posts.contents.length }
         </div>
         <button
-          className={classes.btnWrapper}
+          className={ classes.btnWrapper }
         // onClick={() => {
         //   setModalIsOpen(true);
         // }}
         ></button>
       </header>
-      <Slider {...settings} ref={customeSlider} className={classes.slider}>
-        {posts.contents.map((value, i) => {
+      <Slider { ...settings } ref={ customeSlider } className={ classes.slider }>
+        { posts.contents.map((value, i) => {
           let letterFlag = false;
           if (value.content.length > 100) {
             letterFlag = true;
           }
+
           return (
-            <div key={i}>
-              <div className={classes.cardWrapper}>
+            <div key={ i }>
+              <div className={ classes.cardWrapper }>
                 <div
-                  key={i}
-                  className={`
+                  key={ i }
+                  className={ `
                 ${classes.card} ${i === sliderIndex - 1 && classes.cardActive}
-                `}
-                  style={cardStyle(
+                ` }
+                  style={ cardStyle(
                     value.backgroundColor,
-                    value.backgroundImage
-                  )}
+                    value.backgroundImage,
+                  ) }
                 >
                   <p
-                    className={classes.cardInner}
+                    className={ classes.cardInner }
                     dangerouslySetInnerHTML={{ __html: value.content }}
                     style={{
                       color: value.color,
@@ -204,24 +208,24 @@ const Detail = (props) => {
                   />
                 </div>
               </div>
-              <div className={classes.sender}>
+              <div className={ classes.sender }>
                 <b>From.</b>
-                {value.author}
+                { value.author }
               </div>
             </div>
           );
-        })}
+        }) }
       </Slider>
 
       <StickyFooter>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Buttons full light onClick={(e) => gotoPrev(e)}>
+        <Grid container spacing={ 2 }>
+          <Grid item xs={ 6 }>
+            <Buttons full light onClick={ (e) => gotoPrev(e) }>
               이전장
             </Buttons>
           </Grid>
-          <Grid item xs={6}>
-            <Buttons full onClick={(e) => gotoNext(e)}>
+          <Grid item xs={ 6 }>
+            <Buttons full onClick={ (e) => gotoNext(e) }>
               다음장
             </Buttons>
           </Grid>

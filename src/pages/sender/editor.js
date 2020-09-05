@@ -1,24 +1,26 @@
 // 에디터 페이지입니다.
-import React, { useState, useEffect, useRef } from 'react';
-import Router from 'next/router';
 import { makeStyles } from '@material-ui/core';
-import Link from 'next/link';
-import Layouts from '../../components/Layouts';
-import Header from '../../components/Header';
-import StickyFooter from '../../components/StickyFooter';
-import Buttons from '../../components/Buttons';
 import dynamic from 'next/dynamic';
-import FontModal from '../../components/FontModal';
-import ColorModal from '../../components/ColorModal';
+import Link from 'next/link';
+import Router from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
 import ContentEditable from 'react-contenteditable';
+
 import rollingService from '../../api/rollingService';
-import { isEmpty } from '../../utils';
+import Buttons from '../../components/Buttons';
+import ColorModal from '../../components/ColorModal';
+import FontModal from '../../components/FontModal';
+import Header from '../../components/Header';
+import Layouts from '../../components/Layouts';
 import Modal, {
-  ModalTitie,
-  ModalFullButton,
-  ModalButtonWrapper,
   ModalButton,
+  ModalButtonWrapper,
+  ModalFullButton,
+  ModalTitie,
 } from '../../components/Modal';
+import StickyFooter from '../../components/StickyFooter';
+import { isEmpty } from '../../utils';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -175,7 +177,7 @@ const Editor = (props) => {
             sort,
             color,
             backgroundColor,
-            imageFile
+            imageFile,
           )
           .then((res) => {
             console.log(res);
@@ -183,14 +185,17 @@ const Editor = (props) => {
             setBackgroundImage('');
             setContent('');
             setAuthor('');
+
             return 200;
           });
       } catch (err) {
         console.log(err);
+
         return 400;
       }
     } else {
       setIsEmptyModalIsOpen(true);
+
       return false;
     }
   };
@@ -202,43 +207,45 @@ const Editor = (props) => {
         if (textBox.current && textBox.current.props.html) {
           setExitModalIsOpen(true);
           setNextPath(url);
+
           return false;
         }
+
         return true;
       });
     };
   });
 
   return (
-    <Layouts className={classes.root}>
+    <Layouts className={ classes.root }>
       <FontModal
-        fontModalIsOpen={fontModalIsOpen}
-        setFontModalIsOpen={setFontModalIsOpen}
-        content={content}
-        setContent={setContent}
-        font={font}
-        setFont={setFont}
-        sort={sort}
-        setSort={setSort}
-        color={color}
-        setColor={setColor}
-        backgroundColor={backgroundColor}
-        setBackgroundColor={setBackgroundColor}
-        backgroundImage={backgroundImage}
+        fontModalIsOpen={ fontModalIsOpen }
+        setFontModalIsOpen={ setFontModalIsOpen }
+        content={ content }
+        setContent={ setContent }
+        font={ font }
+        setFont={ setFont }
+        sort={ sort }
+        setSort={ setSort }
+        color={ color }
+        setColor={ setColor }
+        backgroundColor={ backgroundColor }
+        setBackgroundColor={ setBackgroundColor }
+        backgroundImage={ backgroundImage }
       />
       <ColorModal
-        colorModalIsOpen={colorModalIsOpen}
-        setColorModalIsOpen={setColorModalIsOpen}
-        backgroundColor={backgroundColor}
-        setBackgroundColor={setBackgroundColor}
-        backgroundImage={backgroundImage}
-        setBackgroundImage={setBackgroundImage}
-        imageFile={imageFile}
-        setImageFile={setImageFile}
+        colorModalIsOpen={ colorModalIsOpen }
+        setColorModalIsOpen={ setColorModalIsOpen }
+        backgroundColor={ backgroundColor }
+        setBackgroundColor={ setBackgroundColor }
+        backgroundImage={ backgroundImage }
+        setBackgroundImage={ setBackgroundImage }
+        imageFile={ imageFile }
+        setImageFile={ setImageFile }
       />
       <Modal
-        modalIsOpen={isEmptyModalIsOpen}
-        setModalIsOpen={setIsEmptyModalIsOpen}
+        modalIsOpen={ isEmptyModalIsOpen }
+        setModalIsOpen={ setIsEmptyModalIsOpen }
       >
         <ModalTitie>
           내용과 보내는 이를
@@ -247,17 +254,17 @@ const Editor = (props) => {
         </ModalTitie>
         <ModalButtonWrapper>
           <ModalFullButton
-            onClick={() => {
+            onClick={ () => {
               setIsEmptyModalIsOpen(false);
-            }}
+            } }
           >
             확인
           </ModalFullButton>
         </ModalButtonWrapper>
       </Modal>
       <Modal
-        modalIsOpen={successModalIsOpen}
-        setModalIsOpen={setSuccessModalIsOpen}
+        modalIsOpen={ successModalIsOpen }
+        setModalIsOpen={ setSuccessModalIsOpen }
       >
         <ModalTitie>
           성공적으로
@@ -266,16 +273,16 @@ const Editor = (props) => {
         </ModalTitie>
         <ModalButtonWrapper>
           <ModalFullButton
-            onClick={() => {
+            onClick={ () => {
               setSuccessModalIsOpen(false);
               window.location.href = `/sender/main?name=${name}&num=${num}`;
-            }}
+            } }
           >
             확인
           </ModalFullButton>
         </ModalButtonWrapper>
       </Modal>
-      <Modal modalIsOpen={exitModalIsOpen} setModalIsOpen={setExitModalIsOpen}>
+      <Modal modalIsOpen={ exitModalIsOpen } setModalIsOpen={ setExitModalIsOpen }>
         <ModalTitie>
           이 화면을 나갈 경우,
           <br />
@@ -283,17 +290,17 @@ const Editor = (props) => {
         </ModalTitie>
         <ModalButtonWrapper>
           <ModalButton
-            onClick={() => {
+            onClick={ () => {
               setExitModalIsOpen(false);
-            }}
+            } }
           >
             안나갈래요
           </ModalButton>
           <ModalButton
-            onClick={() => {
+            onClick={ () => {
               setExitModalIsOpen(false);
               window.location.href = nextPath;
-            }}
+            } }
             focus
           >
             나갈래요
@@ -311,41 +318,41 @@ const Editor = (props) => {
         }}
       >
         <span
-          onClick={() => {
+          onClick={ () => {
             if (textBox.current && textBox.current.props.html) {
               setExitModalIsOpen(true);
               setNextPath(`/sender/main?name=${name}&num=${num}`);
             } else {
               window.location.href = `/sender/main?name=${name}&num=${num}`;
             }
-          }}
+          } }
         >
-          <a className={classes.menuButton}>취소</a>
+          <a className={ classes.menuButton }>취소</a>
         </span>
         <div style={{ float: 'right' }}>
-          <span onClick={() => setFontModalIsOpen(true)}>
-            <img style={{ width: '38px' }} src="/icons/text-icon.png"></img>
+          <span onClick={ () => setFontModalIsOpen(true) }>
+            <img style={{ width: '38px' }} src='/icons/text-icon.png'></img>
           </span>
-          <span onClick={() => setColorModalIsOpen(true)}>
+          <span onClick={ () => setColorModalIsOpen(true) }>
             <img
               style={{ width: '38px' }}
-              src="/icons/background-icon.png"
+              src='/icons/background-icon.png'
             ></img>
           </span>
         </div>
       </div>
 
       <div
-        className={`${
+        className={ `${
           isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
-          }`}
-        onClick={() => setFontModalIsOpen(true)}
+        }` }
+        onClick={ () => setFontModalIsOpen(true) }
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
           backgroundImage: `${
             !isEmpty(backgroundImage) && `url(${backgroundImage})`
-            }`,
+          }`,
           backgroundSize: 'cover',
           border: 'none',
           color: `${color}`,
@@ -353,20 +360,20 @@ const Editor = (props) => {
         }}
       >
         <ContentEditable
-          contentEditable="true"
-          html={content}
-          onChange={(e) => {
+          contentEditable='true'
+          html={ content }
+          onChange={ (e) => {
             setContent(e.target.value);
-          }}
-          ref={textBox}
-          onKeyDown={(event) => {
+          } }
+          ref={ textBox }
+          onKeyDown={ (event) => {
             if (event.key === 'Enter') {
               event.preventDefault();
               document.execCommand('insertLineBreak');
             }
-          }}
+          } }
           // placeholder={"이곳을 클릭해 소중한 마음을 적어 주세요"}
-          className={classes.contenteditable}
+          className={ classes.contenteditable }
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -380,20 +387,20 @@ const Editor = (props) => {
           }}
         />
       </div>
-      <div className={classes.from}>
+      <div className={ classes.from }>
         <span>From. </span>
         <div>
           <input
-            type="text"
-            value={author}
-            placeholder="보내는이"
-            maxLength="10"
-            onChange={(e) => setAuthor(e.target.value)}
+            type='text'
+            value={ author }
+            placeholder='보내는이'
+            maxLength='10'
+            onChange={ (e) => setAuthor(e.target.value) }
           />
         </div>
       </div>
-      <StickyFooter align="right">
-        <Buttons onClick={() => onSubmit()}>저장</Buttons>
+      <StickyFooter align='right'>
+        <Buttons onClick={ () => onSubmit() }>저장</Buttons>
       </StickyFooter>
     </Layouts>
   );
@@ -403,6 +410,7 @@ Editor.getInitialProps = async (context) => {
   const num = context.query.num;
   const id = context.query.id || '';
   console.log('sender/editor.js에서의 name, num : ', name, num);
+
   return {
     name: name,
     num: num,

@@ -1,8 +1,8 @@
 // 서비스 전체 레이아웃 컴포넌트
-import React from 'react';
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +19,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Layouts = (props) => {
   const classes = useStyles(props);
+
   return (
-    <Container component="main" maxWidth="xs" className={classes.root}>
+    <Container component='main' maxWidth='xs' className={ classes.root }>
       <CssBaseline />
-      <div className={classes.paper}>{props.children}</div>
+      <div className={ classes.paper }>{ props.children }</div>
     </Container>
   );
 };

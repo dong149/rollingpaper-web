@@ -1,15 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react';
-import Layouts from '../../components/Layouts';
 import { makeStyles } from '@material-ui/core/styles';
-import Header from '../../components/Header';
-import StickyFooter from '../../components/StickyFooter';
-import Cards from '../../components/Cards';
-import Buttons from '../../components/Buttons';
-import { exportComponentAsPNG } from '../../utils';
-import rollingService from '../../api/rollingService';
-import StickerList from '../../components/StickerList';
-
+import React, { useEffect, useRef, useState } from 'react';
 import Confetti from 'react-confetti';
+
+import rollingService from '../../api/rollingService';
+import Buttons from '../../components/Buttons';
+import Cards from '../../components/Cards';
+import Header from '../../components/Header';
+import Layouts from '../../components/Layouts';
+import StickerList from '../../components/StickerList';
+import StickyFooter from '../../components/StickyFooter';
+import { exportComponentAsPNG } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,13 +67,14 @@ const Main = (props) => {
     setBodyWidth(layoutRef.scrollWidth);
     setBodyHeight(layoutRef.current.scrollHeight);
   }, []);
+
   return (
-    <div style={{ backgroundColor: '#F6F6F6' }} ref={layoutRef}>
+    <div style={{ backgroundColor: '#F6F6F6' }} ref={ layoutRef }>
       <Confetti
-        width={bodyWidth}
-        height={bodyHeight}
-        numberOfPieces={100}
-        colors={[
+        width={ bodyWidth }
+        height={ bodyHeight }
+        numberOfPieces={ 100 }
+        colors={ [
           '#f44336',
           '#e91e63',
           '#9c27b0',
@@ -91,52 +92,52 @@ const Main = (props) => {
           '#FF9800',
           '#FF5722',
           '#795548',
-        ]}
-        opacity={0.4}
+        ] }
+        opacity={ 0.4 }
       />
-      <Layouts className={classes.root} bgColor="#F7F7F7">
+      <Layouts className={ classes.root } bgColor='#F7F7F7'>
         <Header>
           <div>
-            <h2 className={classes.title}>to. {name}님</h2>
-            <p className={classes.subtitle}>
-              {posts.contents.length
+            <h2 className={ classes.title }>to. { name }님</h2>
+            <p className={ classes.subtitle }>
+              { posts.contents.length
                 ? `총 ${posts.contents.length}명에게 축하를 받았어요!`
-                : `아직 아무도 작성하지 않았어요!`}
+                : `아직 아무도 작성하지 않았어요!` }
             </p>
           </div>
-          {/* TODO: 주인공 페이지에서 공유하기 버튼 임시 삭제 */}
-          {/* <button className={classes.buttonSmall}>공유하기</button> */}
+          { /* TODO: 주인공 페이지에서 공유하기 버튼 임시 삭제 */ }
+          { /* <button className={classes.buttonSmall}>공유하기</button> */ }
         </Header>
-        <div className={classes.cardWrapper} ref={componentRef}>
-          {posts.rollingpaperId && (
+        <div className={ classes.cardWrapper } ref={ componentRef }>
+          { posts.rollingpaperId && (
             <StickerList
-              rollingId={posts.rollingpaperId}
-              isStickerUpdated={isStickerUpdated}
-              setIsStickerUpdated={setIsStickerUpdated}
-              isReceiverPage={true}
+              rollingId={ posts.rollingpaperId }
+              isStickerUpdated={ isStickerUpdated }
+              setIsStickerUpdated={ setIsStickerUpdated }
+              isReceiverPage={ true }
             />
-          )}
-          {posts.contents.length ? (
-            <Cards name={name} num={num} content={posts.contents} linked />
+          ) }
+          { posts.contents.length ? (
+            <Cards name={ name } num={ num } content={ posts.contents } linked />
           ) : (
-              <div
+            <div
+              style={{
+                minHeight: 'calc(100vh - 150px)',
+                textAlign: 'center',
+                paddingTop: '90px',
+              }}
+            >
+              <img
                 style={{
-                  minHeight: 'calc(100vh - 150px)',
-                  textAlign: 'center',
-                  paddingTop: '90px',
+                  width: '80%',
                 }}
-              >
-                <img
-                  style={{
-                    width: '80%',
-                  }}
-                  src="/icons/empty.png"
-                  alt="아무도 작성하지 않은 경우"
-                />
-              </div>
-            )}
+                src='/icons/empty.png'
+                alt='아무도 작성하지 않은 경우'
+              />
+            </div>
+          ) }
         </div>
-        {/* <StickyFooter>
+        { /* <StickyFooter>
           <Buttons full onClick={() => exportComponentAsPNG(componentRef)}>
             <img
               src="/icons/download-light-icon.png"
@@ -145,7 +146,7 @@ const Main = (props) => {
             />
             전체화면 다운받기
           </Buttons>
-        </StickyFooter> */}
+        </StickyFooter> */ }
       </Layouts>
     </div>
   );

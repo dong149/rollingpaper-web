@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Button, NoSsr } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import React, { forwardRef } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   btn: {
@@ -33,17 +33,16 @@ const useStyles = makeStyles((theme) => ({
 const Buttons = forwardRef(function Buttons(props, ref) {
   const classes = useStyles();
   const { content, light, full, onClick, children } = props;
+
   return (
     <NoSsr>
       <Button
-        variant="contained"
-        fullWidth={full ? true : false}
-        className={
-          classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark)
-        }
-        onClick={onClick}
+        variant='contained'
+        fullWidth={ full ? true : false }
+        className={ classes.btn + ' ' + (light ? classes.btnLight : classes.btnDark) }
+        onClick={ onClick }
       >
-        {children}
+        { children }
       </Button>
     </NoSsr>
   );

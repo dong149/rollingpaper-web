@@ -1,6 +1,6 @@
 // 이미지 업로드 테스트를 위함입니다.
-import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 
 const useStyles = makeStyles({
   input: {
@@ -27,18 +27,19 @@ const Test = () => {
     const res = await axios.post('/api/upload', formData);
     console.log(res);
   };
+
   return (
     <div>
       <input
         // accept="image/*"
         // className={classes.input}
-        id="contained-button-file"
+        id='contained-button-file'
         multiple
-        type="img"
-        onChange={onChange}
+        type='img'
+        onChange={ onChange }
       />
-      <label htmlFor="contained-button-file">dkdkdkdk</label>
-      <img src={selectedFile} />
+      <label htmlFor='contained-button-file'>dkdkdkdk</label>
+      <img src={ selectedFile } />
     </div>
   );
 };

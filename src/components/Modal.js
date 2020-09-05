@@ -1,5 +1,5 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import * as ReactModal from 'react-modal';
 
 const useStyles = makeStyles({
@@ -83,15 +83,16 @@ const customModalStyles = {
 
 const Modal = (props) => {
   const { modalIsOpen, setModalIsOpen, children } = props;
+
   return (
     <ReactModal
-      isOpen={modalIsOpen}
-      style={customModalStyles}
-      onRequestClose={() => setModalIsOpen(false)}
-      contentLabel="Example Modal"
-      ariaHideApp={false}
+      isOpen={ modalIsOpen }
+      style={ customModalStyles }
+      onRequestClose={ () => setModalIsOpen(false) }
+      contentLabel='Example Modal'
+      ariaHideApp={ false }
     >
-      {children}
+      { children }
     </ReactModal>
   );
 };
@@ -99,24 +100,27 @@ const Modal = (props) => {
 export const ModalTitie = (props) => {
   const { children } = props;
   const classes = useStyles(props);
-  return <div className={classes.modalContent}>{children}</div>;
+
+  return <div className={ classes.modalContent }>{ children }</div>;
 };
 
 export const ModalButton = (props) => {
   const { children, onClick, focus } = props;
   const classes = useStyles(props);
+
   return (
-    <button onClick={onClick} className={classes.modalButton}>
-      {children}
+    <button onClick={ onClick } className={ classes.modalButton }>
+      { children }
     </button>
   );
 };
 export const ModalFullButton = (props) => {
   const { children, onClick, focus } = props;
   const classes = useStyles(props);
+
   return (
-    <button onClick={onClick} className={classes.modalFullButton}>
-      {children}
+    <button onClick={ onClick } className={ classes.modalFullButton }>
+      { children }
     </button>
   );
 };
@@ -124,7 +128,8 @@ export const ModalFullButton = (props) => {
 export const ModalButtonWrapper = (props) => {
   const { children } = props;
   const classes = useStyles(props);
-  return <div className={classes.modalButtons}>{children}</div>;
+
+  return <div className={ classes.modalButtons }>{ children }</div>;
 };
 
 export default Modal;

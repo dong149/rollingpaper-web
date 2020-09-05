@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Link from 'next/link';
-import rollingService from '../api/rollingService';
+import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import React, { useState } from 'react';
+
+import rollingService from '../api/rollingService';
 import { isEmpty } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +57,7 @@ const styledRandom = (i, bgColor, bgImage) => {
   let y = Math.floor(hashKey * 40);
   let rotate = Math.floor(hashKey * (i % 2 === 0 ? 30 : -30));
   console.log(bgImage);
+
   return {
     transform:
       'rotate(' +
@@ -71,7 +73,7 @@ const styledRandom = (i, bgColor, bgImage) => {
     // backgroundColor: `${isEmpty(bgImage) ? bgColor : '#FFFFFF'}`,
     backgroundImage: `${
       isEmpty(bgImage) ? `url('/images/bg_card.png')` : `url('${bgImage}')`
-      }`,
+    }`,
     backgroundSize: `${!isEmpty(bgImage) && 'cover '}`,
     backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
   };
@@ -85,19 +87,21 @@ const spring = {
 const Cards = (props) => {
   const classes = useStyles();
   const { name, num, content, linked, setIsPostsUpdated } = props;
+
   return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        {content.map((value, i) => {
+    <div className={ classes.root }>
+      <Grid container spacing={ 2 }>
+        { content.map((value, i) => {
           console.log(value);
+
           return (
-            <Grid item xs={4} key={value.id}>
+            <Grid item xs={ 4 } key={ value.id }>
               <motion.div
                 transition={{ ...spring, delay: i * 0.2 }}
                 initial={{ y: 60, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
               >
-                {linked ? (
+                { linked ? (
                   <Link
                     href={{
                       pathname: '/receiver/detail',
@@ -105,16 +109,16 @@ const Cards = (props) => {
                     }}
                   >
                     <a
-                      elevation={0}
-                      className={classes.card}
-                      style={styledRandom(
+                      elevation={ 0 }
+                      className={ classes.card }
+                      style={ styledRandom(
                         i,
                         value.backgroundColor,
-                        value.backgroundImage
-                      )}
+                        value.backgroundImage,
+                      ) }
                     >
                       <p
-                        className={classes.cardInner}
+                        className={ classes.cardInner }
                         style={{
                           color: value.color,
                           fontFamily: value.font,
@@ -125,37 +129,37 @@ const Cards = (props) => {
                     </a>
                   </Link>
                 ) : (
-                    <Link
-                      href={{
-                        pathname: '/sender/detail',
-                        query: { name: name, num: num, index: i },
-                      }}
+                  <Link
+                    href={{
+                      pathname: '/sender/detail',
+                      query: { name: name, num: num, index: i },
+                    }}
+                  >
+                    <a
+                      elevation={ 0 }
+                      className={ classes.card }
+                      style={ styledRandom(
+                        i,
+                        value.backgroundColor,
+                        value.backgroundImage,
+                      ) }
                     >
-                      <a
-                        elevation={0}
-                        className={classes.card}
-                        style={styledRandom(
-                          i,
-                          value.backgroundColor,
-                          value.backgroundImage
-                        )}
-                      >
-                        <p
-                          className={classes.cardInner}
-                          style={{
-                            color: value.color,
-                            fontFamily: value.font,
-                            justifyContent: value.sort,
-                          }}
-                          dangerouslySetInnerHTML={{ __html: value.content }}
-                        ></p>
-                      </a>
-                    </Link>
-                  )}
+                      <p
+                        className={ classes.cardInner }
+                        style={{
+                          color: value.color,
+                          fontFamily: value.font,
+                          justifyContent: value.sort,
+                        }}
+                        dangerouslySetInnerHTML={{ __html: value.content }}
+                      ></p>
+                    </a>
+                  </Link>
+                ) }
               </motion.div>
             </Grid>
           );
-        })}
+        }) }
       </Grid>
     </div>
   );
@@ -166,6 +170,7 @@ const deletePost = async (rolling_id) => {
 
   try {
     await rollingService.deleteRollingContent(rolling_id);
+
     return 200;
   } catch (error) {
     return 400;
