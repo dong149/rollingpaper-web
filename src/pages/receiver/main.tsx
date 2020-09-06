@@ -118,7 +118,7 @@ const Main = (props) => {
             />
           ) }
           { posts.contents.length ? (
-            <Cards name={ name } num={ num } content={ posts.contents } linked />
+            <Cards name={ name } num={ num } contents={ posts.contents } linked />
           ) : (
             <div
               style={{

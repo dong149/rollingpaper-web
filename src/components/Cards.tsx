@@ -78,21 +78,51 @@ const styledRandom = (i, bgColor, bgImage) => {
     backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
   };
 };
+
 const spring = {
   type: 'spring',
   damping: 20,
   stiffness: 100,
   when: 'afterChildren',
 };
-const Cards = (props) => {
+
+interface Props {
+  name: any;
+  num: any;
+  contents: any;
+  linked: any;
+  setIsPostsUpdated?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface content {
+  author: string;
+  backgroundColor: string;
+  backgroundImage: null | string
+  color: string;
+  content: string;
+  createdAt: string;
+  deletedAt: null | string;
+  font: string;
+  id: number;
+  rollingpaperId: number;
+  sort: 'center' | 'flex-start' | 'flex-end';
+  updatedAt: string;
+}
+const Cards = ({
+  num,
+  name,
+  contents,
+  linked,
+  setIsPostsUpdated,
+}: Props) => {
   const classes = useStyles();
-  const { name, num, content, linked, setIsPostsUpdated } = props;
+  console.log('contents', contents);
 
   return (
     <div className={ classes.root }>
       <Grid container spacing={ 2 }>
-        { content.map((value, i) => {
-          console.log(value);
+        { contents.map((value, i) => {
+          console.log('value', value);
 
           return (
             <Grid item xs={ 4 } key={ value.id }>

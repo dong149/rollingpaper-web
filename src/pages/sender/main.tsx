@@ -246,7 +246,7 @@ const Main = (props) => {
           ) }
           { posts.contents.length ? (
             <Cards
-              content={ posts.contents }
+              contents={ posts.contents }
               linked={ false }
               setIsPostsUpdated={ setIsPostsUpdated }
               name={ name }

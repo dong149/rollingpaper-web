@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import Modal from 'react-modal';
+import { v4 as uuidv4 } from 'uuid';
 
 import Layouts from './Layouts';
 
@@ -72,6 +73,7 @@ const StickerModal = (props) => {
   } = props;
   const stickerCards = [];
   for (let i = 1; i <= 60; i++) {
+    const key = uuidv4();
     const stickerURL = `/images/main_sticker_${i < 10 ? `0${i}` : i}.png`;
     stickerCards.push(
       <Grid
@@ -82,6 +84,7 @@ const StickerModal = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
+        key={ key }
       >
         <button
           className={ classes.imageButton }
