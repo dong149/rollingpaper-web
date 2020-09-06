@@ -1,5 +1,4 @@
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
@@ -8,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import Layouts from './Layouts';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     position: 'relative',
@@ -63,14 +62,19 @@ const customModalStyles = {
   },
 };
 
-const StickerModal = (props) => {
-  const classes = useStyles(props);
-  const {
-    stickerModalIsOpen,
-    setStickerModalIsOpen,
-    stickerURL,
-    setStickerURL,
-  } = props;
+interface Props {
+  setStickerModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setStickerURL: React.Dispatch<React.SetStateAction<string | null>>;
+  stickerModalIsOpen: boolean;
+  stickerURL: string | null;
+}
+
+const StickerModal = ({
+  stickerModalIsOpen,
+  setStickerModalIsOpen,
+  setStickerURL,
+}: Props) => {
+  const classes = useStyles();
   const stickerCards = [];
   for (let i = 1; i <= 60; i++) {
     const key = uuidv4();
@@ -109,7 +113,7 @@ const StickerModal = (props) => {
     <AnimatePresence exitBeforeEnter>
       <Modal
         isOpen={ stickerModalIsOpen }
-        style={ customModalStyles }
+        style={ customModalStyles as Modal.Styles }
         contentLabel='Color Modal'
       >
         <motion.div
