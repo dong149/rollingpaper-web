@@ -2,10 +2,11 @@ import axios from 'axios';
 
 // let BASE_URL = "https://donghoon.tk";
 
-let BASE_URL = 'https://api.rollingpaper.site';
+const BASE_URL = 'https://api.rollingpaper.site';
 
 const baseAPI = axios.create({
   baseURL: BASE_URL,
+  timeout: 10000,
 });
 
 const rollingService = {
@@ -13,14 +14,14 @@ const rollingService = {
   //   let res = await baseAPI.get(`/api/rolling`);
   //   return res.data || [];
   // },
-  getRolling: async (rolling_id) => {
-    let res = await baseAPI.get(`/api/v1/rolling/${rolling_id}`);
+  getRolling: async (rolling_id: string) => {
+    const res = await baseAPI.get(`/api/v1/rolling/${rolling_id}`);
     console.log('getRolling : ', res.data);
 
     return res.data || [];
   },
-  getRollingContent: async (rolling_id) => {
-    let res = await baseAPI.get(`/api/rollingcontent?rolling_id=${rolling_id}`);
+  getRollingContent: async (rolling_id: string) => {
+    const res = await baseAPI.get(`/api/rollingcontent?rolling_id=${rolling_id}`);
     console.log(res);
 
     return res.data || [];
@@ -35,14 +36,14 @@ const rollingService = {
   //   );
   //   return res.data || [];
   // },
-  getRolling: async () => {
-    let res = await baseAPI.get(`/api/v1/count`);
+  getCount: async () => {
+    const res = await baseAPI.get(`/api/v1/count`);
 
     return res.data || [];
   },
-  getRollingByName: async (name, password) => {
+  getRollingByName: async (name: string, password: string) => {
     console.log(name, password);
-    let res = await baseAPI.get(
+    const res = await baseAPI.get(
       `/api/v1/rolling?receiver=${encodeURI(name)}&password=${encodeURI(
         password,
       )}`,
@@ -50,16 +51,16 @@ const rollingService = {
 
     return res.data || [];
   },
-  getRollingSticker: async (rolling_id) => {
-    let res = await baseAPI.get(`/api/v1/sticker?rollingpaperId=${rolling_id}`);
+  getRollingSticker: async (rolling_id: string) => {
+    const res = await baseAPI.get(`/api/v1/sticker?rollingpaperId=${rolling_id}`);
     console.log('getRollingSticker : ', res.data);
 
     return res.data || [];
   },
-  postRollingSticker: async (rollingpaperId, x, y, url) => {
-    console.log(rollingpaperId, x, y, url);
+  postRollingSticker: async (paerID: string, x: string, y: string, url: string) => {
+    console.log(paerID, x, y, url);
     const res = await baseAPI.post(`/api/v1/sticker/`, {
-      rollingpaperId,
+      paerID,
       x,
       y,
       url,
@@ -74,7 +75,7 @@ const rollingService = {
 
     throw Error(message);
   },
-  deleteRollingSticker: async (stickerId) => {
+  deleteRollingSticker: async (stickerId: string) => {
     console.log(stickerId);
     // const res = await baseAPI.delete(`/api/v1/sticker`, {
     //   stickerId,
@@ -110,7 +111,7 @@ const rollingService = {
   //       return 0;
   //     });
   // },
-  postRolling: async (receiver, password) => {
+  postRolling: async (receiver: string, password: string) => {
     console.log('postRolling : ', receiver, password);
     await baseAPI
       .post(`/api/v1/rolling`, {
@@ -147,14 +148,14 @@ const rollingService = {
   // },
 
   postRollingContent: async (
-    rolling_id,
-    content,
-    author,
-    font,
-    sort,
-    color,
-    backgroundColor,
-    backgroundImage,
+    rolling_id: string,
+    content: string,
+    author: string,
+    font: string,
+    sort: string,
+    color: string,
+    backgroundColor: string,
+    backgroundImage: string,
   ) => {
     // const res = await baseAPI.post(`/api/v1/rolling/${rolling_id}/content`, {
     //   content,
@@ -174,7 +175,7 @@ const rollingService = {
     formData.append('color', color);
     formData.append('backgroundColor', backgroundColor);
     formData.append('backgroundImage', backgroundImage);
-    for (var value of formData.values()) {
+    for (const value of formData.values()) {
       console.log(value);
     }
     const res = await baseAPI({
@@ -197,7 +198,7 @@ const rollingService = {
     throw Error(message);
   },
 
-  deleteRollingContent: async (rolling_id) => {
+  deleteRollingContent: async (rolling_id: string) => {
     const res = await baseAPI.delete(`/api/v1/rolling/content/${rolling_id}`);
 
     const { status, message } = res.data;

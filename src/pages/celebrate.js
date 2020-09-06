@@ -95,7 +95,7 @@ const Index = (props) => {
 };
 
 Index.getInitialProps = async () => {
-  const res = await rollingService.getRolling();
+  const res = await rollingService.getCount();
 
   return {
     posts: res.data,
