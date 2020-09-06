@@ -2,12 +2,12 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 
 import rollingService from '../api/rollingService';
 import { isEmpty } from '../utils';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: 'calc(100% + 32px)',
     minHeight: 'calc(100vh - 150px)',
@@ -52,10 +52,10 @@ const useStyles = makeStyles((theme) => ({
 
 const styledRandom = (i, bgColor, bgImage) => {
   // TODO: 좀 더 자연스러운 랜덤 화면 구현
-  let hashKey = (13 / (i + 1) + 0.2) % 1;
-  let x = Math.floor(hashKey * 40);
-  let y = Math.floor(hashKey * 40);
-  let rotate = Math.floor(hashKey * (i % 2 === 0 ? 30 : -30));
+  const hashKey = (13 / (i + 1) + 0.2) % 1;
+  const x = Math.floor(hashKey * 40);
+  const y = Math.floor(hashKey * 40);
+  const rotate = Math.floor(hashKey * (i % 2 === 0 ? 30 : -30));
   console.log(bgImage);
 
   return {
