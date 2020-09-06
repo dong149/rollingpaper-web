@@ -38,9 +38,9 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Buttons = forwardRef(function Buttons(props: Props, ref) {
+const Buttons = forwardRef(function Buttons(props: Props) {
   const classes = useStyles();
-  const { content, light, full, onClick, children } = props;
+  const { light, full, onClick, children } = props;
 
   return (
     <NoSsr>
