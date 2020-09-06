@@ -2,18 +2,12 @@
 const withSass = require('@zeit/next-sass');
 const withFonts = require('nextjs-fonts');
 const withCSS = require('@zeit/next-css');
-
-// module.exports = withSass({
-//   webpack(config, options) {
-//     return config;
-//   },
-//   /* config options here */
-// });
+// const withTypescript = require('next');
 
 module.exports = withFonts(
   withSass(
     withCSS({
-      webpack: function (config) {
+      webpack: function(config) {
         config.module.rules.push({
           test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
           use: {
@@ -24,8 +18,10 @@ module.exports = withFonts(
             },
           },
         });
+
         return config;
       },
-    })
-  )
+    }),
+  ),
 );
+

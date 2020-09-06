@@ -8,18 +8,29 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint src --ext ts --ext tsx",
+    "lint:fix": "eslint src --ext js --ext jsx --fix"
   },
   "dependencies": {
     "@fullpage/react-fullpage": "0.1.17",
     "@material-ui/core": "^4.11.0",
+    "@types/react-input-autosize": "^2.2.0",
+    "@types/react-modal": "^3.10.6",
+    "@types/uuid": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "1.0.1",
     "axios": "0.19.2",
+    "core-js": "^3.6.5",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
     "file-saver": "2.0.2",
     "framer-motion": "^2.4.2",
     "html2canvas": "1.0.0-rc.5",
-    "next": "9.4.4",
+    "next": "^9.5.3",
     "next-fonts": "1.4.0",
     "nextjs-fonts": "0.22.0",
     "node-sass": "4.14.1",
@@ -37,17 +48,22 @@
     "react-textarea-autosize": "8.2.0",
     "react-visibility-sensor": "5.1.1",
     "slick-carousel": "^1.8.1",
+    "uuid": "^8.3.0",
     "wired-elements": "2.1.2"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.13",
+    "@types/node": "^14.6.4",
+    "@types/react": "^16.9.49",
     "babel-eslint": "^10.1.0",
     "css-loader": "^4.2.0",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react": "^7.20.6",
     "file-loader": "^6.0.0",
     "prettier": "2.0.5",
+    "typescript": "^4.0.2",
     "url-loader": "^4.1.0"
   }
 }
