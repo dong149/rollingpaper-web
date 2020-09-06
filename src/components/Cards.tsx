@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 
-import rollingService from '../api/rollingService';
+// import rollingService from '../api/rollingService';
 import { isEmpty } from '../utils';
 
 const useStyles = makeStyles(() => ({
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
     borderTopRightRadius: '28px',
   },
   card: {
-    display: '-webkit-box',
+    // display: '-webkit-box',
     overflow: 'hidden',
     display: 'flex',
     width: '130px',
@@ -50,7 +50,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const styledRandom = (i, bgColor, bgImage) => {
+const styledRandom = (i: number, bgColor: string | null, bgImage: string | null) => {
   // TODO: 좀 더 자연스러운 랜덤 화면 구현
   const hashKey = (13 / (i + 1) + 0.2) % 1;
   const x = Math.floor(hashKey * 40);
@@ -89,7 +89,7 @@ const spring = {
 interface Props {
   name: any;
   num: any;
-  contents: any;
+  contents: content[];
   linked: any;
   setIsPostsUpdated?: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -113,7 +113,6 @@ const Cards = ({
   name,
   contents,
   linked,
-  setIsPostsUpdated,
 }: Props) => {
   const classes = useStyles();
   console.log('contents', contents);
@@ -139,7 +138,7 @@ const Cards = ({
                     }}
                   >
                     <a
-                      elevation={ 0 }
+                      // elevation={ 0 }
                       className={ classes.card }
                       style={ styledRandom(
                         i,
@@ -166,7 +165,7 @@ const Cards = ({
                     }}
                   >
                     <a
-                      elevation={ 0 }
+                      // elevation={ 0 }
                       className={ classes.card }
                       style={ styledRandom(
                         i,
@@ -195,16 +194,16 @@ const Cards = ({
   );
 };
 
-const deletePost = async (rolling_id) => {
-  console.log(rolling_id);
+// const deletePost = async (rolling_id) => {
+//   console.log(rolling_id);
 
-  try {
-    await rollingService.deleteRollingContent(rolling_id);
+//   try {
+//     await rollingService.deleteRollingContent(rolling_id);
 
-    return 200;
-  } catch (error) {
-    return 400;
-  }
-};
+//     return 200;
+//   } catch (error) {
+//     return 400;
+//   }
+// };
 
 export default Cards;
