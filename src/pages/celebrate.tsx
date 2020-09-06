@@ -1,18 +1,15 @@
 // 스플래쉬 뷰
-import ReactFullpage from '@fullpage/react-fullpage';
 import { makeStyles } from '@material-ui/core';
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CountUp from 'react-countup';
-import AutosizeInput from 'react-input-autosize';
 import VisibilitySensor from 'react-visibility-sensor';
 
 import rollingService from '../api/rollingService';
 import Buttons from '../components/Buttons';
 import Layouts from '../components/Layouts';
 import StickyFooter from '../components/StickyFooter';
-import { isEmpty } from '../utils';
 
 const useStyles = makeStyles({
   main: {
@@ -33,9 +30,16 @@ const useStyles = makeStyles({
     marginBottom: '87px',
   },
 });
-const Index = (props) => {
+
+interface Props {
+  posts: {
+    rollingPaperContent: number;
+    rollingPaper: number;
+  }
+}
+
+const Index = ({ posts }: Props) => {
   const classes = useStyles();
-  const { posts } = props;
   const rollingPaperContent = posts.rollingPaperContent + 500;
   const rollingPaper = posts.rollingPaper + 50;
 
