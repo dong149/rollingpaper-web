@@ -1,7 +1,6 @@
 import { ServerStyleSheets } from '@material-ui/styles';
 import Document, { Head, Main, NextScript } from 'next/document';
 import React from 'react';
-import flush from 'styled-jsx/server';
 
 export default class RootDocument extends Document {
   render() {
