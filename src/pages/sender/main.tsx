@@ -141,7 +141,7 @@ const Main = (props) => {
   const [stickerModalIsOpen, setStickerModalIsOpen] = useState(false);
   const [deltaPosition, setDeltaPosition] = useState({ x: 0, y: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [stickerURL, setStickerURL] = useState(null);
+  const [stickerURL, setStickerURL] = useState<string | null>(null);
   const [isStickerUpdated, setIsStickerUpdated] = useState(true);
   const handleDrag = (e, ui) => {
     e.preventDefault();
