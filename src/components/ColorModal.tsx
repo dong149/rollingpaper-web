@@ -7,7 +7,26 @@ import Modal from 'react-modal';
 import { isEmpty } from '../utils';
 import Layouts from './Layouts';
 
-const useStyles = makeStyles((theme) => ({
+const availableColors = [
+  '#FFFFFF',
+  '#F4F4F4',
+  '#DBE6EF',
+  '#F2E5E5',
+  '#FDFFB5',
+  '#E6E4D9',
+  '#B4D4F1',
+  '#F1C0B5',
+  '#AE9BF8',
+  '#F3C982',
+  '#F66DD3',
+  '#FD785C',
+  '#74F0A3',
+  '#6FA6EF',
+  '#8E4FEB',
+  '#232323',
+];
+
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     position: 'relative',
@@ -89,40 +108,46 @@ const customModalStyles = {
   },
 };
 
-const ColorModal = (props) => {
-  const classes = useStyles(props);
-  const availableColors = [
-    '#FFFFFF',
-    '#F4F4F4',
-    '#DBE6EF',
-    '#F2E5E5',
-    '#FDFFB5',
-    '#E6E4D9',
-    '#B4D4F1',
-    '#F1C0B5',
-    '#AE9BF8',
-    '#F3C982',
-    '#F66DD3',
-    '#FD785C',
-    '#74F0A3',
-    '#6FA6EF',
-    '#8E4FEB',
-    '#232323',
-  ];
-  const {
-    colorModalIsOpen,
-    setColorModalIsOpen,
-    backgroundColor,
-    setBackgroundColor,
-    backgroundImage,
-    setBackgroundImage,
-    imageFile,
-    setImageFile,
-  } = props;
+interface Props {
+  colorModalIsOpen: boolean;
+  setColorModalIsOpen: any;
+  backgroundColor: string;
+  setBackgroundColor: <T, P = Record<string, unknown>>(params?: T) => P | void;
+  backgroundImage: any;
+  setBackgroundImage: <T, P = Record<string, unknown>>(params?: T) => P | void;
+  imageFile: any;
+  setImageFile: <T, P = Record<string, unknown>>(params?: T) => P | void;
+}
+
+const ColorModal = ({
+  colorModalIsOpen,
+  setColorModalIsOpen,
+  backgroundColor,
+  setBackgroundColor,
+  backgroundImage,
+  setBackgroundImage,
+  setImageFile,
+}: Props) => {
+  const classes = useStyles();
+
   const colorCards = [];
   const [editPaperIsOpen, setEditPaperIsOpen] = useState(true);
   const [editPhotoIsOpen, setEditPhotoIsOpen] = useState(false);
   // const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleImageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !e.target.files.length) {
+      return;
+    }
+    const file = e.target.files[0];
+    setImageFile(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setBackgroundImage([reader.result]);
+      console.log(reader.result);
+    };
+  };
   for (const color of availableColors) {
     colorCards.push(
       <Grid
@@ -155,7 +180,7 @@ const ColorModal = (props) => {
   return (
     <Modal
       isOpen={ colorModalIsOpen }
-      style={ customModalStyles }
+      style={ customModalStyles as Modal.Styles }
       contentLabel='Color Modal'
       ariaHideApp={ false }
     >
@@ -234,16 +259,7 @@ const ColorModal = (props) => {
               className={ classes.input }
               id='contained-button-file'
               type='file'
-              onChange={ (e) => {
-                var file = e.target.files[0];
-                setImageFile(file);
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onloadend = () => {
-                  setBackgroundImage([reader.result]);
-                  console.log(reader.result);
-                };
-              } }
+              onChange={ handleImageInput }
             />
             <label
               className={ classes.photoArea }
