@@ -1,9 +1,7 @@
 // 스플래쉬 뷰
-import ReactFullpage from '@fullpage/react-fullpage';
 import { makeStyles } from '@material-ui/core';
 import Head from 'next/head';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 
 import rollingService from '../api/rollingService';
@@ -81,7 +79,7 @@ const Index = () => {
                 borderBottom: '1px solid #333',
                 display: 'inline-block',
               }}
-              maxLength='10'
+              maxLength={ 10 }
               value={ name }
               placeholder='이름 혹은 애칭'
               onChange={ (e) => {
@@ -108,7 +106,7 @@ const Index = () => {
                 // color: "#D5D5D5",
                 display: 'inline-block',
               }}
-              maxLength='10'
+              maxLength={ 10 }
               value={ password }
               placeholder='****'
               onChange={ (e) => {
