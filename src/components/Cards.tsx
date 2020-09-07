@@ -193,17 +193,4 @@ const Cards = ({
     </div>
   );
 };
-
-// const deletePost = async (rolling_id) => {
-//   console.log(rolling_id);
-
-//   try {
-//     await rollingService.deleteRollingContent(rolling_id);
-
-//     return 200;
-//   } catch (error) {
-//     return 400;
-//   }
-// };
-
 export default Cards;

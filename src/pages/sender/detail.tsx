@@ -4,13 +4,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 
 import rollingService from '../../api/rollingService';
 import Buttons from '../../components/Buttons';
-import Header from '../../components/Header';
 import Layouts from '../../components/Layouts';
 import Modal, {
   ModalButton,
@@ -21,53 +19,33 @@ import Modal, {
 import StickyFooter from '../../components/StickyFooter';
 import { isEmpty } from '../../utils';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     position: 'relative',
     minHeight: '100vh',
     flexDirection: 'column',
     background: '#FFF',
-  }, // TODO: 나중에 상황 보고 공통화 및 일괄 삭제
+  }, 
   cardWrapper: {
-    // padding: '10px 10px 0',
     padding: '0 10px 0 10px',
   },
   card: {
     display: 'flex',
-    // overflow: 'hidden',
-    // overflow: 'scroll',
-    // padding: 16,
-    // width: '317px',
     height: '426px',
     marginTop: '35px',
-    // padding: '16px',
-    // textAlign: 'center',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     wordBreak: 'break-all',
-    // background: '#E8E6DC',
     borderRadius: '13px',
     transition: 'all .5s ease-in-out',
-    // backgroundImage: `url('/images/bg_card.png')`,
-    // backgroundSize: 'cover',
-    // backgroundBlendMode: 'color-burn',
     backgroundRepeat: 'no-repeat',
   },
   cardInner: {
     overflow: 'scroll',
     flex: 1,
-    // height: '426px',
     padding: '0 32px',
-    // paddingBottom: '32px',
-    // display: 'flex',
     alignItems: 'center',
     fontSize: '32px',
     lineHeight: '45px',
-    // display: 'flex',
-    // alignItems: 'center',
-    // textAlign: 'center',
-    // justifyContent: 'center',
   },
   cardActive: {
     marginTop: 0,
@@ -113,8 +91,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
 }));
-const cardStyle = (bgColor, bgImage) => {
-  // console.log(bgImage);
+const cardStyle = (bgColor: string, bgImage: string) => {
   return {
     backgroundColor: `${bgColor}`,
     backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
@@ -123,11 +100,22 @@ const cardStyle = (bgColor, bgImage) => {
   };
 };
 
-const Detail = (props) => {
+interface Props {
+  name: string;
+  num: string;
+  index: any;
+}
+
+interface CustomSlider extends Slider {
+  slickNext: () => void;
+  slickPrev: () => void;
+}
+
+const Detail = ({
+  name, num, index,
+}: Props) => {
   const classes = useStyles();
-  const router = useRouter();
-  const customeSlider = useRef();
-  const { name, num, index } = props;
+  const customSlider = useRef<CustomSlider>(null);
   const currentIndex = Number(index ?? 0);
   const [posts, setPosts] = useState({ contents: [] });
   const [sliderIndex, setSliderIndex] = useState(currentIndex + 1);
@@ -153,17 +141,21 @@ const Detail = (props) => {
     speed: 500,
     arrows: false,
     initialSlide: currentIndex,
-    beforeChange: (current, next) => {
+    beforeChange: (current: any, next: number) => {
       setSliderIndex(next + 1);
     },
   };
-  const gotoNext = (e) => {
+  const gotoNext = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    customeSlider.current.slickNext();
+    if(customSlider.current !== null){
+      customSlider.current.slickNext();
+    }
   };
-  const gotoPrev = (e) => {
+  const gotoPrev = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    customeSlider.current.slickPrev();
+    if(customSlider.current !== null){
+      customSlider.current.slickPrev();
+    }
   };
 
   return (
@@ -236,8 +228,8 @@ const Detail = (props) => {
           삭제
         </button>
       </header>
-      <Slider { ...settings } ref={ customeSlider } className={ classes.slider }>
-        { posts.contents.map((value, i) => {
+      <Slider { ...settings } ref={ customSlider } className={ classes.slider }>
+        { posts.contents.map((value:any, i:number) => {
           let letterFlag = false;
           if (value.content.length > 100) {
             letterFlag = true;
@@ -279,12 +271,12 @@ const Detail = (props) => {
       <StickyFooter>
         <Grid container spacing={ 2 }>
           <Grid item xs={ 6 }>
-            <Buttons full light onClick={ (e) => gotoPrev(e) }>
+            <Buttons full light onClick={ (e: { preventDefault: () => void; }) => gotoPrev(e) }>
               이전장
             </Buttons>
           </Grid>
           <Grid item xs={ 6 }>
-            <Buttons full onClick={ (e) => gotoNext(e) }>
+            <Buttons full onClick={ (e: { preventDefault: () => void; }) => gotoNext(e) }>
               다음장
             </Buttons>
           </Grid>
@@ -294,7 +286,7 @@ const Detail = (props) => {
   );
 };
 
-const deletePost = async (rolling_id) => {
+const deletePost = async (rolling_id: string) => {
   console.log(rolling_id);
 
   try {
@@ -306,7 +298,13 @@ const deletePost = async (rolling_id) => {
   }
 };
 
-Detail.getInitialProps = async (context) => {
+Detail.getInitialProps = async (context: { query: 
+  { 
+    name: string;
+    num: any;
+    index: number; 
+  };
+}) => {
   const name = context.query.name;
   const num = context.query.num;
   const index = context.query.index;

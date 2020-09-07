@@ -1,8 +1,7 @@
-// 스플래쉬 뷰
 import { makeStyles } from '@material-ui/core';
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import * as React from 'react';
 
 import Buttons from '../components/Buttons';
 import Layouts from '../components/Layouts';
@@ -23,10 +22,8 @@ const useStyles = makeStyles({
   },
   rolling: {
     width: '343px',
-    // height: '379px',
     margin: '0 auto',
     marginTop: '30px',
-    // marginBottom: '87px',
   },
 });
 const Index = () => {
@@ -70,9 +67,6 @@ const Index = () => {
                 롤링페이퍼 생성 및 조회하기
               </Buttons>
             </Link>
-            { /* <Buttons full={true} light={true}>
-              내 롤링페이퍼 찾기
-            </Buttons> */ }
           </StickyFooter>
         </Layouts>
       </div>
