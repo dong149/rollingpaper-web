@@ -2,8 +2,13 @@ import '../styles/post.scss';
 
 import React, { useState } from 'react';
 
-const Post = (props) => {
-  const { content, author, color } = props;
+interface Props{
+  content: string,
+  author: string,
+  color: string,
+}
+
+const Post = ({ content, author, color }:Props) => {
   const [isClicked, setIsClicked] = useState(false);
 
   return (

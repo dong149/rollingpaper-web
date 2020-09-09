@@ -27,6 +27,7 @@
     "@zeit/next-typescript": "1.1.1",
     "axios": "0.19.2",
     "core-js": "^3.6.5",
+    "csstype": "3.0.3",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^24.0.0",
     "eslint-plugin-simple-import-sort": "^5.0.3",

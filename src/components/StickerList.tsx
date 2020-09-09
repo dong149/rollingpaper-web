@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import rollingService from '../api/rollingService';
 
-const useStyles = makeStyles((props) => ({
+const useStyles = makeStyles({
   sticker: {
     display: 'inline-block',
     position: 'absolute',
@@ -19,12 +19,6 @@ const useStyles = makeStyles((props) => ({
       width: '110px',
       height: '110px',
     },
-  },
-  sticker: {
-    position: 'absolute',
-    left: '0',
-    top: '0',
-    zIndex: 10,
   },
   stickerImage: {
     display: 'flex',
@@ -56,27 +50,33 @@ const useStyles = makeStyles((props) => ({
       height: '24px',
     },
   },
-}));
-const StickerList = (props) => {
+});
+
+interface Props{
+  rollingId:string,
+  isStickerUpdated:boolean,
+  setIsStickerUpdated:any,
+  isReceiverPage:boolean,
+}
+const StickerList = ({
+  rollingId,
+  isStickerUpdated,
+  setIsStickerUpdated,
+  isReceiverPage,
+}:Props) => {
   const [stickerList, setStickerList] = useState([]);
   const [isEditableKey, setIsEditableKey] = useState(null);
-  const {
-    rollingId,
-    isStickerUpdated,
-    setIsStickerUpdated,
-    isReceiverPage,
-  } = props;
-  const classes = useStyles(props);
+  const classes = useStyles();
 
   const getStickers = async () => {
     await rollingService.getRollingSticker(rollingId).then((res) => {
       setStickerList(res.data);
     });
   };
-  const useOutsideAlerter = (ref) => {
+  const useOutsideAlerter = (ref:any) => {
     useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (ref.current && !ref.current.contains(event.target)) {
+      const handleClickOutside = (e:any) => {
+        if (ref.current && !ref.current.contains(e.target)) {
           setIsEditableKey(null);
         }
       };
@@ -93,7 +93,7 @@ const StickerList = (props) => {
       setIsStickerUpdated(false);
     }
   }, [isStickerUpdated]);
-  const deleteSticker = async (sticker_id) => {
+  const deleteSticker = async (sticker_id:any) => {
     try {
       await rollingService.deleteRollingSticker(sticker_id);
 
@@ -102,19 +102,19 @@ const StickerList = (props) => {
       return 400;
     }
   };
-  const spring = {
-    type: 'spring',
-    damping: 20,
-    stiffness: 100,
-    when: 'afterChildren',
-  };
+  // const spring = {
+  //   type: 'spring',
+  //   damping: 20,
+  //   stiffness: 100,
+  //   when: 'afterChildren',
+  // };
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
   return (
     <div ref={ wrapperRef }>
       { stickerList &&
-        stickerList.map((sticker, i) => {
+        stickerList.map((sticker:any) => {
           return (
             // <motion.div
             //   transition={{ ...spring }}
@@ -132,14 +132,14 @@ const StickerList = (props) => {
                 isReceiverPage
                   ? e.preventDefault()
                   : setIsEditableKey(sticker.id) }
-              onBlur={ (e) => console.log('touchcancel') }
+              onBlur={ () => console.log('touchcancel') }
             >
               { isEditableKey === sticker.id && (
                 <button
                   className={ classes.stickerButton }
                   onClick={ (e) => {
                     e.preventDefault();
-                    deleteSticker(sticker.id).then((res) => {
+                    deleteSticker(sticker.id).then(() => {
                       setIsStickerUpdated(true);
                     });
                   } }

@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 
-// import rollingService from '../api/rollingService';
 import { isEmpty } from '../utils';
 
 const useStyles = makeStyles(() => ({
@@ -19,12 +18,10 @@ const useStyles = makeStyles(() => ({
     borderTopRightRadius: '28px',
   },
   card: {
-    // display: '-webkit-box',
     overflow: 'hidden',
     display: 'flex',
     width: '130px',
     height: '142px',
-    // background: (props) => props.bgColor,
     padding: '10px',
     borderRadius: '13px',
     lineHeight: '1.5em',
@@ -34,12 +31,8 @@ const useStyles = makeStyles(() => ({
     lineClamp: 6,
     boxOrient: 'vertical',
     textDecoration: 'none',
-    // backgroundImage: `url('/images/bg_card.png')`,
     backgroundSize: 'cover',
-    // backgroundBlendMode: 'color-burn',
     backgroundRepeat: 'no-repeat',
-    // backgroundPosition: 'center center',
-    // backgroundBlendMode: 'multiply',
   },
   cardInner: {
     display: 'flex',

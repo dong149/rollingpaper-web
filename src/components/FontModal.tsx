@@ -127,7 +127,7 @@ const useStyles = makeStyles({
     borderRadius: '12px',
     border: '2px solid #ffffff',
     margin: '0 5px',
-    backgroundColor: (props) => props.currentColor,
+    backgroundColor: (props:any) => props.currentColor,
     display: 'inline-block',
     '&:focus': {
       outline: 'none',
@@ -190,39 +190,40 @@ const useStyles = makeStyles({
     padding: '0 20px',
   },
 });
-const customModalStyles = {
-  overlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: '#666666',
-    zIndex: 100,
-  },
-  content: {
-    top: '0',
-    left: '0',
-    right: '0',
-    bottom: '0',
-    padding: '0',
-    // marginRight: '-50%',
-    width: '100%',
-    height: '100%',
-    background: '#666666',
-    // transform: 'translate(-50%, -50%)',
-  },
-};
-const cardStyle = (bgColor, bgImage) => {
-  return {
-    backgroundColor: `${bgColor}`,
-    backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
-    backgroundSize: `${!isEmpty(bgImage) && '100% 100% '}`,
-    backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
-  };
-};
-const FontFamilyButton = (props) => {
-  const { currentFont, font, setFont } = props;
+interface FontFamilyButtonProps{
+  currentFont: any;
+  font: string; 
+  setFont: any;
+}
+interface ColorButtonProps{
+  currentColor: any;
+  color: string; 
+  setColor: any;
+}
+interface AlignButtonProps{
+  currentSort: any;
+  sort: string; 
+  setSort: any;
+}
+interface FontModalProps{
+  fontModalIsOpen:boolean,
+    setFontModalIsOpen: any,
+    content:string,
+    setContent:any,
+    font:string,
+    setFont:any,
+    sort:string,
+    setSort:any,
+    color:string,
+    setColor:any,
+    backgroundColor:string,
+    backgroundImage:any,
+}
+const FontFamilyButton = ({
+  currentFont,
+  font,
+  setFont,
+}:FontFamilyButtonProps) => {
   const classes = useStyles({ currentFont });
 
   return (
@@ -237,8 +238,11 @@ const FontFamilyButton = (props) => {
     </button>
   );
 };
-const ColorButton = (props) => {
-  const { currentColor, color, setColor } = props;
+const ColorButton = ({
+  currentColor,
+  color,
+  setColor,
+}:ColorButtonProps) => {
   const classes = useStyles({ currentColor });
 
   return (
@@ -250,8 +254,11 @@ const ColorButton = (props) => {
     ></button>
   );
 };
-const AlignButton = (props) => {
-  const { currentSort, sort, setSort } = props;
+const AlignButton = ({
+  currentSort,
+  sort,
+  setSort,
+}:AlignButtonProps) => {
   const classes = useStyles();
 
   return (
@@ -267,42 +274,44 @@ const AlignButton = (props) => {
     </button>
   );
 };
-const FontModal = (props) => {
-  const classes = useStyles(props);
-  const fontSettings = {
-    className: 'slider variable-width',
-    centerMode: true,
-    infinite: true,
-    // slidesToShow: 2,
-    speed: 500,
-    arrows: false,
-    initialSlide: 1,
-    variableWidth: true,
-    // beforeChange: (current, next) => {
-    //   setSliderIndex(next + 1);
-    // },
-  };
-  const {
-    fontModalIsOpen,
-    setFontModalIsOpen,
-    content,
-    setContent,
-    font,
-    setFont,
-    sort,
-    setSort,
-    color,
-    setColor,
-    backgroundColor,
-    setBackgroundColor,
-    backgroundImage,
-  } = props;
+const FontModal = ({ fontModalIsOpen,
+  setFontModalIsOpen,
+  content,
+  setContent,
+  font,
+  setFont,
+  sort,
+  setSort,
+  color,
+  setColor,
+  backgroundColor,
+  backgroundImage }:FontModalProps) => {
+  const classes = useStyles();
+  
   const [editMode, setEditMode] = useState('text');
 
   return (
     <Modal
       isOpen={ fontModalIsOpen }
-      style={ customModalStyles }
+      style={{ overlay: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: '#666666',
+        zIndex: 100,
+      },
+      content: {
+        top: '0',
+        left: '0',
+        right: '0',
+        bottom: '0',
+        padding: '0',
+        width: '100%',
+        height: '100%',
+        background: '#666666',
+      }}}
       contentLabel='Example Modal'
       ariaHideApp={ false }
     >
@@ -337,12 +346,8 @@ const FontModal = (props) => {
         <div
           className={ classes.textarea }
           onClick={ () => setFontModalIsOpen(true) }
-          // style={cardStyle(backgroundColor, backgroundImage)}
           style={{
             fontFamily: `${font}`,
-            // backgroundImage: `url('/images/bg_card.png')`,
-            // backgroundSize: 'cover',
-            // backgroundBlendMode: 'color-burn',
             backgroundColor: `${backgroundColor}`,
             backgroundImage: `${
               !isEmpty(backgroundImage) && `url('${backgroundImage}')`
@@ -352,7 +357,8 @@ const FontModal = (props) => {
             backgroundRepeat: 'no-repeat',
             border: 'none',
             color: `${color}`,
-            textAlign: `${sort}`,
+            // textAlign 에서 바꿨음.
+            verticalAlign: `${sort}`,
           }}
         >
           <ContentEditable

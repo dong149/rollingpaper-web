@@ -6,7 +6,7 @@ import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: (props) => props.bgColor,
+    background: (props:any) => props.bgColor,
   },
   paper: {
     position: 'relative',
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Layouts = (props) => {
+const Layouts = (props:any) => {
   const classes = useStyles(props);
 
   return (

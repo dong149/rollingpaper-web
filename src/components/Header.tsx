@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Header = (props) => {
+const Header = (props:any) => {
   const classes = useStyles(props);
 
   return <header className={ classes.header }>{ props.children }</header>;
