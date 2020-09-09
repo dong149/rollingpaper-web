@@ -55,7 +55,7 @@ const styledRandom = (i, bgColor, bgImage) => {
   let x = Math.floor(hashKey * 40);
   let y = Math.floor(hashKey * 40);
   let rotate = Math.floor(hashKey * (i % 2 === 0 ? 30 : -30));
-  console.log(bgImage);
+  // console.log(bgImage);
   return {
     transform:
       'rotate(' +
@@ -89,7 +89,7 @@ const Cards = (props) => {
     <div className={classes.root}>
       <Grid container spacing={2}>
         {content.map((value, i) => {
-          console.log(value);
+          // console.log(value);
           return (
             <Grid item xs={4} key={value.id}>
               <motion.div
@@ -162,7 +162,7 @@ const Cards = (props) => {
 };
 
 const deletePost = async (rolling_id) => {
-  console.log(rolling_id);
+  // console.log(rolling_id);
 
   try {
     await rollingService.deleteRollingContent(rolling_id);

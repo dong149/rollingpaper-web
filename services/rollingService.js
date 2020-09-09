@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // let BASE_URL = "https://donghoon.tk";
 
-let BASE_URL = 'https://api.rollingpaper.site';
+let BASE_URL = 'https://apis.rollingpaper.site';
 
 const baseAPI = axios.create({
   baseURL: BASE_URL,
@@ -166,7 +166,9 @@ const rollingService = {
     formData.append('sort', sort);
     formData.append('color', color);
     formData.append('backgroundColor', backgroundColor);
-    formData.append('backgroundImage', backgroundImage);
+    if(backgroundImage !== undefined)
+      formData.append('backgroundImage', backgroundImage);
+
     for (var value of formData.values()) {
       console.log(value);
     }

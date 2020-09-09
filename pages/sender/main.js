@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
 const Main = (props) => {
   const classes = useStyles();
   const { data, name, num } = props;
-  console.log('name, num의 props 값 : ', data, name, num);
+  // console.log('name, num의 props 값 : ', data, name, num);
   const [posts, setPosts] = useState(data);
   const [isPostsUpdated, setIsPostsUpdated] = useState(false);
   const [activeDrags, setActiveDrags] = useState(0);
