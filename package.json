@@ -1,10 +1,15 @@
 {
-  "name": "Rollingpaper_client",
+  "name": "rollingpaper-web",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Nexters/Rollingpaper_client.git",
   "author": "DANNIEL <donghoon149@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
     "@fullpage/react-fullpage": "0.1.17",
     "@material-ui/core": "^4.11.0",
@@ -33,11 +38,6 @@
     "react-visibility-sensor": "5.1.1",
     "slick-carousel": "^1.8.1",
     "wired-elements": "2.1.2"
-  },
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
