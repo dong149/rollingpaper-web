@@ -63,7 +63,7 @@ const rollingService = {
     const { status, message } = res.data;
     console.log('postRollingSticker : ', message);
 
-    if (status == 201) {
+    if (status == 200) {
       return message;
     }
 
@@ -166,7 +166,7 @@ const rollingService = {
     formData.append('sort', sort);
     formData.append('color', color);
     formData.append('backgroundColor', backgroundColor);
-    if(backgroundImage !== undefined)
+    if (backgroundImage !== undefined)
       formData.append('backgroundImage', backgroundImage);
 
     for (var value of formData.values()) {
