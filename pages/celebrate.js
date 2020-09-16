@@ -1,14 +1,11 @@
 // 스플래쉬 뷰
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Buttons from '../components/Buttons';
 import StickyFooter from '../components/StickyFooter';
 import Layouts from '../components/Layouts';
 import { makeStyles } from '@material-ui/core';
-import ReactFullpage from '@fullpage/react-fullpage';
-import AutosizeInput from 'react-input-autosize';
-import { isEmpty } from '../functions';
 import rollingService from '../services/rollingService';
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -56,7 +53,7 @@ const Index = (props) => {
           <div className={classes.main} style={{ marginBottom: '16px' }}>
             <span>지금까지</span>
             <br />
-            <CountUp end={rollingPaperContent} redraw={true}>
+            <CountUp end={rollingPaperContent} redraw={true} separator=','>
               {({ countUpRef, start }) => (
                 <VisibilitySensor onChange={start} delayedCall>
                   <span ref={countUpRef} />
@@ -65,7 +62,7 @@ const Index = (props) => {
             </CountUp>
             <span>명이 작성하고</span>
             <br />
-            <CountUp end={rollingPaper} redraw={true}>
+            <CountUp end={rollingPaper} redraw={true} separator=','>
               {({ countUpRef, start }) => (
                 <VisibilitySensor onChange={start} delayedCall>
                   <span ref={countUpRef} />
