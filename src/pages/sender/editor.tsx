@@ -146,7 +146,16 @@ const customModalStyles = {
   },
 };
 
-const Editor = (props) => {
+interface Props {
+  name: string;
+  num: string;
+  id: any;
+  asPath: any;
+}
+
+const Editor = ({ 
+  name, num, id, asPath,
+}: Props) => {
   const [fontModalIsOpen, setFontModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
@@ -162,7 +171,6 @@ const Editor = (props) => {
   const [author, setAuthor] = useState('');
   const [goAway, setGoAway] = useState('');
   const [nextPath, setNextPath] = useState('');
-  const { name, num, id, asPath } = props;
   const classes = useStyles({ backgroundImage: backgroundImage });
   const textBox = useRef(null);
   const onSubmit = async () => {
