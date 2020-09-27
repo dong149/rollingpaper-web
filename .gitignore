@@ -104,3 +104,8 @@ $RECYCLE.BIN/
 .DS_Store
 
 .next
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
