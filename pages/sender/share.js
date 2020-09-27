@@ -68,10 +68,10 @@ const Share = (props) => {
         },
       ],
       success: function (response) {
-        console.log(response);
+        (response);
       },
       fail: function (error) {
-        console.log(error);
+        (error);
       },
     }),
       window.Kakao.Link.createDefaultButton({
@@ -103,10 +103,10 @@ const Share = (props) => {
           },
         ],
         success: function (response) {
-          console.log(response);
+          (response);
         },
         fail: function (error) {
-          console.log(error);
+          (error);
         },
       });
   });

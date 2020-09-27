@@ -112,7 +112,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const cardStyle = (bgColor, bgImage) => {
-  // console.log(bgImage);
   return {
     backgroundColor: `${bgColor}`,
     backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
@@ -291,7 +290,6 @@ const Detail = (props) => {
 };
 
 const deletePost = async (rolling_id) => {
-  console.log(rolling_id);
 
   try {
     await rollingService.deleteRollingContent(rolling_id);

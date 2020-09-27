@@ -101,7 +101,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const cardStyle = (bgColor, bgImage) => {
-  // console.log(bgImage);
   return {
     backgroundColor: `${bgColor}`,
     backgroundImage: `${!isEmpty(bgImage) && `url('${bgImage}')`}`,
@@ -168,9 +167,9 @@ const Detail = (props) => {
         </div>
         <button
           className={classes.btnWrapper}
-          // onClick={() => {
-          //   setModalIsOpen(true);
-          // }}
+        // onClick={() => {
+        //   setModalIsOpen(true);
+        // }}
         ></button>
       </header>
       <Slider {...settings} ref={customeSlider} className={classes.slider}>

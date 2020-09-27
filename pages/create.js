@@ -37,11 +37,11 @@ const Index = () => {
   const onSubmit = async () => {
     try {
       await rollingService.postRolling(name, password).then(async (res) => {
-        console.log(res);
+
         window.location.href = `/sender/main?name=${name}&num=${password}`;
       });
     } catch (err) {
-      console.log(err);
+
       return;
     }
   };
@@ -125,8 +125,8 @@ const Index = () => {
                 생성 및 조회하기
               </Buttons>
             ) : (
-              <Buttons full={true}>모두 작성해주세요</Buttons>
-            )}
+                <Buttons full={true}>모두 작성해주세요</Buttons>
+              )}
           </StickyFooter>
         </Layouts>
       </div>

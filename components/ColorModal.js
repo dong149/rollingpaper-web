@@ -187,11 +187,11 @@ const ColorModal = (props) => {
                   src="/icons/edit-paper-focus.png"
                 ></img>
               ) : (
-                <img
-                  style={{ width: '48px' }}
-                  src="/icons/edit-paper.png"
-                ></img>
-              )}
+                  <img
+                    style={{ width: '48px' }}
+                    src="/icons/edit-paper.png"
+                  ></img>
+                )}
             </span>
             <span
               onClick={() => {
@@ -205,11 +205,11 @@ const ColorModal = (props) => {
                   src="/icons/edit_option_focus.png"
                 ></img>
               ) : (
-                <img
-                  style={{ width: '48px' }}
-                  src="/icons/edit_option_normal.png"
-                ></img>
-              )}
+                  <img
+                    style={{ width: '48px' }}
+                    src="/icons/edit_option_normal.png"
+                  ></img>
+                )}
             </span>
           </div>
           <span>
@@ -240,7 +240,6 @@ const ColorModal = (props) => {
                 reader.readAsDataURL(file);
                 reader.onloadend = () => {
                   setBackgroundImage([reader.result]);
-                  console.log(reader.result);
                 };
               }}
             />
@@ -254,9 +253,8 @@ const ColorModal = (props) => {
                 color: 'white',
                 textAlign: 'center',
                 cursor: 'pointer',
-                backgroundImage: `${
-                  !isEmpty(backgroundImage) && `url(${backgroundImage})`
-                }`,
+                backgroundImage: `${!isEmpty(backgroundImage) && `url(${backgroundImage})`
+                  }`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
               }}

@@ -15,19 +15,18 @@ const rollingService = {
   // },
   getRolling: async (rolling_id) => {
     let res = await baseAPI.get(`/api/v1/rolling/${rolling_id}`);
-    console.log('getRolling : ', res.data);
     return res.data || [];
   },
   getRollingContent: async (rolling_id) => {
     let res = await baseAPI.get(`/api/rollingcontent?rolling_id=${rolling_id}`);
-    console.log(res);
+
     return res.data || [];
   },
 
   // getRollingByName: async (name, password) => {
   //   // const name = "ddd";
   //   // const password = "dd";
-  //   console.log(name, password);
+
   //   let res = await baseAPI.get(
   //     `/api/rolling?name=${encodeURI(name)}&password=${encodeURI(password)}`
   //   );
@@ -38,7 +37,6 @@ const rollingService = {
     return res.data || [];
   },
   getRollingByName: async (name, password) => {
-    console.log(name, password);
     let res = await baseAPI.get(
       `/api/v1/rolling?receiver=${encodeURI(name)}&password=${encodeURI(
         password
@@ -48,11 +46,9 @@ const rollingService = {
   },
   getRollingSticker: async (rolling_id) => {
     let res = await baseAPI.get(`/api/v1/sticker?rollingpaperId=${rolling_id}`);
-    console.log('getRollingSticker : ', res.data);
     return res.data || [];
   },
   postRollingSticker: async (rollingpaperId, x, y, url) => {
-    console.log(rollingpaperId, x, y, url);
     const res = await baseAPI.post(`/api/v1/sticker/`, {
       rollingpaperId,
       x,
@@ -61,7 +57,6 @@ const rollingService = {
     });
 
     const { status, message } = res.data;
-    console.log('postRollingSticker : ', message);
 
     if (status == 200) {
       return message;
@@ -70,7 +65,6 @@ const rollingService = {
     throw Error(message);
   },
   deleteRollingSticker: async (stickerId) => {
-    console.log(stickerId);
     // const res = await baseAPI.delete(`/api/v1/sticker`, {
     //   stickerId,
     // });
@@ -81,31 +75,25 @@ const rollingService = {
         stickerId,
       },
     });
-    console.log('테스트 : ', res);
     const { status, message } = res.data;
 
     if (status == 204) {
-      console.log('stickerId : ', stickerId);
       return message;
     }
 
     throw new Error(message);
   },
   // postRolling: async (object) => {
-  //   console.log("ddd");
   //   await baseAPI
   //     .post(`/api/rolling`, object)
   //     .then((res) => {
-  //       console.log(res.data);
   //       return 1;
   //     })
   //     .catch((err) => {
-  //       console.log(err);
   //       return 0;
   //     });
   // },
   postRolling: async (receiver, password) => {
-    console.log('postRolling : ', receiver, password);
     await baseAPI
       .post(`/api/v1/rolling`, {
         receiver,
@@ -114,27 +102,20 @@ const rollingService = {
       .then((res) => {
         const { status, message } = res.data;
 
-        console.log('postRolling : ', message);
-        console.log(status, message);
-
         return { status, message };
       })
       .catch((err) => {
-        console.log(err);
         return 0;
       });
   },
 
   // postRollingContent: async (object) => {
-  //   console.log("ddd");
   //   await baseAPI
   //     .post(`/api/rollingcontent`, object)
   //     .then((res) => {
-  //       console.log(res.data);
   //       return 1;
   //     })
   //     .catch((err) => {
-  //       console.log(err);
   //       return 0;
   //     });
   // },
@@ -170,7 +151,6 @@ const rollingService = {
       formData.append('backgroundImage', backgroundImage);
 
     for (var value of formData.values()) {
-      console.log(value);
     }
     const res = await baseAPI({
       method: 'post',
@@ -181,9 +161,7 @@ const rollingService = {
       },
       data: formData,
     });
-    console.log(res);
     const { status, message } = res.data;
-    console.log('postRollingContent : ', message);
 
     if (status == 201) {
       return message;
@@ -196,7 +174,6 @@ const rollingService = {
     const res = await baseAPI.delete(`/api/v1/rolling/content/${rolling_id}`);
 
     const { status, message } = res.data;
-    console.log(message);
 
     if (status == 204) {
       return message;
