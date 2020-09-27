@@ -81,19 +81,6 @@ const rollingService = {
 
     throw new Error(message);
   },
-  // postRolling: async (object) => {
-  //   console.log("ddd");
-  //   await baseAPI
-  //     .post(`/api/rolling`, object)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       return 1;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       return 0;
-  //     });
-  // },
   postRolling: async (receiver, password) => {
     console.log('postRolling : ', receiver, password);
     await baseAPI
