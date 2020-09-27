@@ -24,6 +24,7 @@ const exportComponent = (node, fileName, backgroundColor, type) => {
   const element = ReactDOM.findDOMNode(node.current);
   import('html2canvas')
     .then((html2canvas) => {
+      console.log(html2canvas);
       html2canvas
         .default(element, {
           backgroundColor: backgroundColor,

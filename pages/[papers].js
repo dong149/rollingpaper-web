@@ -35,10 +35,10 @@ const Papers = (props) => {
           setCount(rolling.length);
         }
       } catch (err) {
-        return;
+        console.log(err);
       }
     };
-
+    
     getContents();
   }, [isSubmit]);
   useEffect(() => {
@@ -74,10 +74,10 @@ const Papers = (props) => {
         },
       ],
       success: function (response) {
-
+        console.log(response);
       },
       fail: function (error) {
-
+        console.log(error);
       },
     });
     window.Kakao.Link.createDefaultButton({
@@ -109,10 +109,10 @@ const Papers = (props) => {
         },
       ],
       success: function (response) {
-
+        console.log(response);
       },
       fail: function (error) {
-
+        console.log(error);
       },
     });
   }, []);
@@ -144,7 +144,7 @@ const Papers = (props) => {
           // window.location.reload();
         });
     } catch (err) {
-
+      console.log(err);
       return;
     }
   };
@@ -247,21 +247,21 @@ const Papers = (props) => {
                         <span>제출하기</span>
                       </div>
                     ) : (
-                        <div
-                          style={{ backgroundColor: "#222222", color: "#fffeef" }}
-                          className="preview-btn"
-                        >
-                          <span>※작성자도 입력해주세요!</span>
-                        </div>
-                      )
-                  ) : (
                       <div
                         style={{ backgroundColor: "#222222", color: "#fffeef" }}
                         className="preview-btn"
                       >
-                        <span>제출하기</span>
+                        <span>※작성자도 입력해주세요!</span>
                       </div>
-                    )}
+                    )
+                  ) : (
+                    <div
+                      style={{ backgroundColor: "#222222", color: "#fffeef" }}
+                      className="preview-btn"
+                    >
+                      <span>제출하기</span>
+                    </div>
+                  )}
                 </div>
                 <div className="slide">
                   <div className="layout">
@@ -398,10 +398,10 @@ const Papers = (props) => {
                         <span>제출하기</span>
                       </div>
                     ) : (
-                        <div className="inactive-create-btn" name={name}>
-                          <span>위 내용을 작성해주세요!</span>
-                        </div>
-                      )}
+                      <div className="inactive-create-btn" name={name}>
+                        <span>위 내용을 작성해주세요!</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -514,14 +514,14 @@ export const Color = (props) => {
           }}
         ></div>
       ) : (
-          <div
-            onClick={() => {
-              chooseColor(boxColor);
-            }}
-            className="color-box"
-            style={{ backgroundColor: `${boxColor}` }}
-          ></div>
-        )}
+        <div
+          onClick={() => {
+            chooseColor(boxColor);
+          }}
+          className="color-box"
+          style={{ backgroundColor: `${boxColor}` }}
+        ></div>
+      )}
     </>
   );
 };
@@ -529,9 +529,9 @@ export const Color = (props) => {
 Papers.getInitialProps = async (context) => {
   const name = context.query.papers;
   const password = context.asPath.split("?")[1];
-
+  console.log(name, password);
   const res = await rollingService.getRollingByName(name, password);
-
+  console.log(res);
   return {
     rolling: res.data,
     name: name,

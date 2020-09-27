@@ -87,21 +87,21 @@
 var _typeof =
   typeof Symbol === "function" && typeof Symbol.iterator === "symbol"
     ? function (obj) {
-      return typeof obj;
-    }
+        return typeof obj;
+      }
     : function (obj) {
-      return obj &&
-        typeof Symbol === "function" &&
-        obj.constructor === Symbol &&
-        obj !== Symbol.prototype
-        ? "symbol"
-        : typeof obj;
-    };
+        return obj &&
+          typeof Symbol === "function" &&
+          obj.constructor === Symbol &&
+          obj !== Symbol.prototype
+          ? "symbol"
+          : typeof obj;
+      };
 
 (function (f) {
   if (
     (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ===
-    "object" &&
+      "object" &&
     typeof module !== "undefined"
   ) {
     module.exports = f();
@@ -309,7 +309,7 @@ var _typeof =
           process.version = "";
           process.versions = {};
 
-          function noop() { }
+          function noop() {}
 
           process.on = noop;
           process.addListener = noop;
@@ -370,7 +370,7 @@ var _typeof =
               this._id = id;
               this._clearFn = clearFn;
             }
-            Timeout.prototype.unref = Timeout.prototype.ref = function () { };
+            Timeout.prototype.unref = Timeout.prototype.ref = function () {};
             Timeout.prototype.close = function () {
               this._clearFn.call(window, this._id);
             };
@@ -400,32 +400,32 @@ var _typeof =
               typeof setImmediate === "function"
                 ? setImmediate
                 : function (fn) {
-                  var id = nextImmediateId++;
-                  var args =
-                    arguments.length < 2 ? false : slice.call(arguments, 1);
+                    var id = nextImmediateId++;
+                    var args =
+                      arguments.length < 2 ? false : slice.call(arguments, 1);
 
-                  immediateIds[id] = true;
+                    immediateIds[id] = true;
 
-                  nextTick(function onNextTick() {
-                    if (immediateIds[id]) {
-                      if (args) {
-                        fn.apply(null, args);
-                      } else {
-                        fn.call(null);
+                    nextTick(function onNextTick() {
+                      if (immediateIds[id]) {
+                        if (args) {
+                          fn.apply(null, args);
+                        } else {
+                          fn.call(null);
+                        }
+                        exports.clearImmediate(id);
                       }
-                      exports.clearImmediate(id);
-                    }
-                  });
+                    });
 
-                  return id;
-                };
+                    return id;
+                  };
 
             exports.clearImmediate =
               typeof clearImmediate === "function"
                 ? clearImmediate
                 : function (id) {
-                  delete immediateIds[id];
-                };
+                    delete immediateIds[id];
+                  };
           }.call(
             this,
             require("timers").setImmediate,
@@ -553,8 +553,8 @@ var _typeof =
                           if (prop !== "file")
                             searchParams.push(
                               prop +
-                              "=" +
-                              encodeURIComponent(serializedData[prop])
+                                "=" +
+                                encodeURIComponent(serializedData[prop])
                             );
                         }
                         if (searchParams.length > 0)
@@ -1370,8 +1370,8 @@ var _typeof =
                 settings.size === "medium"
                   ? "02"
                   : settings.size === "small"
-                    ? "03"
-                    : "01";
+                  ? "03"
+                  : "01";
 
               var buttonImage =
                 _k.URL.authDomain +
@@ -1552,10 +1552,10 @@ var _typeof =
                   if (authTranId) {
                     _auth.checkAuthorize(
                       _k.URL.authDomain +
-                      "/apiweb/code.json?client_id=" +
-                      _k.RUNTIME.appKey +
-                      "&auth_tran_id=" +
-                      authTranId,
+                        "/apiweb/code.json?client_id=" +
+                        _k.RUNTIME.appKey +
+                        "&auth_tran_id=" +
+                        authTranId,
                       onResponse
                     );
                   }
@@ -1595,7 +1595,7 @@ var _typeof =
                   "S.com.kakao.sdk.talk.redirectUri=" + settings.redirectUri,
                   "S.com.kakao.sdk.talk.kaHeader=" + _k.KAKAO_AGENT,
                   "S.com.kakao.sdk.talk.extraparams=" +
-                  encodeURIComponent(JSON.stringify(params)),
+                    encodeURIComponent(JSON.stringify(params)),
                 ];
 
                 if (settings.state) {
@@ -1632,19 +1632,19 @@ var _typeof =
                 } else {
                   var iosEasyLoginFallback = encodeURIComponent(
                     _k.URL.authorize +
-                    "?" +
-                    _.buildQueryString(
-                      settings.isPopup
-                        ? easyLoginAuthParams
-                        : commonAuthParams
-                    )
+                      "?" +
+                      _.buildQueryString(
+                        settings.isPopup
+                          ? easyLoginAuthParams
+                          : commonAuthParams
+                      )
                   );
                   var iosEasyLogin = encodeURIComponent(
                     _k.URL.authorize +
-                    "?" +
-                    _.buildQueryString(easyLoginAuthParams) +
-                    "&ka=" +
-                    encodeURIComponent(_k.KAKAO_AGENT)
+                      "?" +
+                      _.buildQueryString(easyLoginAuthParams) +
+                      "&ka=" +
+                      encodeURIComponent(_k.KAKAO_AGENT)
                   );
                   var talkWebviewUrl =
                     _k.URL.talkInappScheme + "?url=" + iosEasyLogin;
@@ -2347,6 +2347,7 @@ var _typeof =
             };
 
             Auth.setRefreshToken = function (token) {
+              console.log("unsupported operation: setRefreshToken()");
             };
 
             Auth.getAccessToken = function () {
@@ -2358,6 +2359,7 @@ var _typeof =
             };
 
             Auth.getRefreshToken = function () {
+              console.log("unsupported operation: getRefreshToken()");
               return "";
             };
 
@@ -2483,7 +2485,7 @@ var _typeof =
                     _k.UA.browser.chrome &&
                     !/opr\//i.test(_k.UA.ua) &&
                     _k.UA.browser.version.major >=
-                    MIN_SUPPORT_VER_TO_APP_INTENT_FOR_ANDROID_CHROME &&
+                      MIN_SUPPORT_VER_TO_APP_INTENT_FOR_ANDROID_CHROME &&
                     (!isIntentSupportAndroidWebView ||
                       (isIntentSupportAndroidWebView && isSupportWebView))
                   );
@@ -2508,9 +2510,9 @@ var _typeof =
                   if (!redirectUri) {
                     _loginPopupWindow = _k.windowOpen(
                       _k.URL.universalKakaoLink +
-                      encodeURIComponent(iOSTalkLoginScheme) +
-                      "&web=" +
-                      encodeURIComponent(fallbackWebURL),
+                        encodeURIComponent(iOSTalkLoginScheme) +
+                        "&web=" +
+                        encodeURIComponent(fallbackWebURL),
                       LOGIN_POPUP_NAME,
                       POPUP_FEATURES
                     );
@@ -2615,11 +2617,11 @@ var _typeof =
                 "launchFlags=0x08880000",
                 "S.com.kakao.sdk.talk.appKey=" + _k.RUNTIME.appKey,
                 "S.com.kakao.sdk.talk.redirectUri=" +
-                _k.URL.talkLoginRedirectUri,
+                  _k.URL.talkLoginRedirectUri,
                 "S.com.kakao.sdk.talk.state=" + stateToken,
                 "S.com.kakao.sdk.talk.kaHeader=" + _k.KAKAO_AGENT,
                 "S.com.kakao.sdk.talk.extraparams=" +
-                encodeURIComponent(JSON.stringify(authParams)),
+                  encodeURIComponent(JSON.stringify(authParams)),
                 "S.browser_fallback_url=" + encodeURIComponent(fallbackWebUrl),
                 "end;",
               ].join(";");
@@ -2635,8 +2637,8 @@ var _typeof =
             var pollingCounter = 0;
             var INTERVAL = 1000;
             var MAX_COUNT = 600;
-            var failCallback = function failCallback() { };
-            var pollingAction = function pollingAction() { };
+            var failCallback = function failCallback() {};
+            var pollingAction = function pollingAction() {};
             var stopConditionFunc = function stopConditionFunc() {
               return false;
             };
@@ -2921,14 +2923,14 @@ var _typeof =
 
                   return container
                     ? {
-                      channelPublicId: container.getAttribute(
-                        "data-channel-public-id"
-                      ),
-                      size: container.getAttribute("data-size") || "small",
-                      supportMultipleDensities: !!container.getAttribute(
-                        "data-support-multiple-densities"
-                      ),
-                    }
+                        channelPublicId: container.getAttribute(
+                          "data-channel-public-id"
+                        ),
+                        size: container.getAttribute("data-size") || "small",
+                        supportMultipleDensities: !!container.getAttribute(
+                          "data-support-multiple-densities"
+                        ),
+                      }
                     : null;
                 },
               },
@@ -2954,18 +2956,18 @@ var _typeof =
 
                   return container
                     ? {
-                      channelPublicId: container.getAttribute(
-                        "data-channel-public-id"
-                      ),
-                      color: container.getAttribute("data-color") || "yellow",
-                      shape: container.getAttribute("data-shape") || "pc",
-                      size: container.getAttribute("data-size") || "small",
-                      title:
-                        container.getAttribute("data-title") || "consult",
-                      supportMultipleDensities: !!container.getAttribute(
-                        "data-support-multiple-densities"
-                      ),
-                    }
+                        channelPublicId: container.getAttribute(
+                          "data-channel-public-id"
+                        ),
+                        color: container.getAttribute("data-color") || "yellow",
+                        shape: container.getAttribute("data-shape") || "pc",
+                        size: container.getAttribute("data-size") || "small",
+                        title:
+                          container.getAttribute("data-title") || "consult",
+                        supportMultipleDensities: !!container.getAttribute(
+                          "data-support-multiple-densities"
+                        ),
+                      }
                     : null;
                 },
               },
@@ -3066,6 +3068,7 @@ var _typeof =
 
             _k.logDebug = function (obj) {
               if (_k.isDebug() && window.console) {
+                console.log(JSON.stringify(obj));
               }
             };
 
@@ -3097,9 +3100,9 @@ var _typeof =
               if (missingRequiredKeys.length) {
                 throw new KakaoError(
                   "Missing required keys: " +
-                  missingRequiredKeys.join(",") +
-                  " at " +
-                  callerMsg
+                    missingRequiredKeys.join(",") +
+                    " at " +
+                    callerMsg
                 );
               }
 
@@ -3110,9 +3113,9 @@ var _typeof =
               if (invalidKeys.length) {
                 throw new KakaoError(
                   "Invalid parameter keys: " +
-                  invalidKeys.join(",") +
-                  " at " +
-                  callerMsg
+                    invalidKeys.join(",") +
+                    " at " +
+                    callerMsg
                 );
               }
 
@@ -3320,9 +3323,9 @@ var _typeof =
             if (missingRequiredKeys.length) {
               throw new KakaoError(
                 "Missing required keys: " +
-                missingRequiredKeys.join(",") +
-                " at " +
-                callerMsg
+                  missingRequiredKeys.join(",") +
+                  " at " +
+                  callerMsg
               );
             }
 
@@ -3333,9 +3336,9 @@ var _typeof =
             if (invalidKeys.length) {
               throw new KakaoError(
                 "Invalid parameter keys: " +
-                invalidKeys.join(",") +
-                " at " +
-                callerMsg
+                  invalidKeys.join(",") +
+                  " at " +
+                  callerMsg
               );
             }
 
@@ -3704,12 +3707,15 @@ var _typeof =
                 }
               }
               if (settings.callback && _k.UA.browser.msie)
-                var timer = setInterval(function () {
-                  if (popup.closed) {
-                    clearInterval(timer);
-                    _.removeEvent(window, "message", linkCallback);
-                  }
-                }, 1000);
+                console.log(
+                  "method 'callback' does not support the Internet Explorer environment."
+                );
+              var timer = setInterval(function () {
+                if (popup.closed) {
+                  clearInterval(timer);
+                  _.removeEvent(window, "message", linkCallback);
+                }
+              }, 1000);
               _.addEvent(window, "message", linkCallback);
               cleanups.push(function () {
                 _.removeEvent(window, "message", linkCallback);
@@ -4301,6 +4307,7 @@ var _typeof =
               try {
                 web2app(web2appOptions);
               } catch (e) {
+                console.log(e);
               }
             }
 
@@ -5145,7 +5152,7 @@ var _typeof =
                 destination: shareRules.spot.destinationBuilder(settings),
                 option:
                   JSON.stringify(shareRules.spot.optionBuilder(settings)) ===
-                    "{}"
+                  "{}"
                     ? undefined
                     : shareRules.spot.optionBuilder(settings),
               };
@@ -5385,16 +5392,16 @@ var _typeof =
 
                   return container
                     ? {
-                      plusFriendId: container.getAttribute(
-                        "data-plusfriend-id"
-                      ),
-                      color: container.getAttribute("data-color") || "yellow",
-                      shape: container.getAttribute("data-shape") || "rect",
-                      size: container.getAttribute("data-size") || "small",
-                      supportMultipleDensities: !!container.getAttribute(
-                        "data-support-multiple-densities"
-                      ),
-                    }
+                        plusFriendId: container.getAttribute(
+                          "data-plusfriend-id"
+                        ),
+                        color: container.getAttribute("data-color") || "yellow",
+                        shape: container.getAttribute("data-shape") || "rect",
+                        size: container.getAttribute("data-size") || "small",
+                        supportMultipleDensities: !!container.getAttribute(
+                          "data-support-multiple-densities"
+                        ),
+                      }
                     : null;
                 },
               },
@@ -5420,18 +5427,18 @@ var _typeof =
 
                   return container
                     ? {
-                      plusFriendId: container.getAttribute(
-                        "data-plusfriend-id"
-                      ),
-                      color: container.getAttribute("data-color") || "yellow",
-                      shape: container.getAttribute("data-shape") || "pc",
-                      size: container.getAttribute("data-size") || "small",
-                      title:
-                        container.getAttribute("data-title") || "consult",
-                      supportMultipleDensities: !!container.getAttribute(
-                        "data-support-multiple-densities"
-                      ),
-                    }
+                        plusFriendId: container.getAttribute(
+                          "data-plusfriend-id"
+                        ),
+                        color: container.getAttribute("data-color") || "yellow",
+                        shape: container.getAttribute("data-shape") || "pc",
+                        size: container.getAttribute("data-size") || "small",
+                        title:
+                          container.getAttribute("data-title") || "consult",
+                        supportMultipleDensities: !!container.getAttribute(
+                          "data-support-multiple-densities"
+                        ),
+                      }
                     : null;
                 },
               },
@@ -5674,9 +5681,9 @@ var _typeof =
 
                   return container
                     ? {
-                      url:
-                        container.getAttribute("data-url") || location.href,
-                    }
+                        url:
+                          container.getAttribute("data-url") || location.href,
+                      }
                     : null;
                 },
               },
@@ -6056,7 +6063,7 @@ var _typeof =
               return _.isNumber(obj) && obj % 1 === 0;
             };
 
-            _.emptyFunc = function () { };
+            _.emptyFunc = function () {};
 
             _.getElement = function (selector) {
               if (_.isElement(selector)) {
@@ -6406,10 +6413,10 @@ var _typeof =
                   if (authTranId) {
                     _authCommon.checkAuthorize(
                       _k.URL.authDomain +
-                      "/apiweb/code.json?client_id=" +
-                      _k.RUNTIME.appKey +
-                      "&auth_tran_id=" +
-                      authTranId,
+                        "/apiweb/code.json?client_id=" +
+                        _k.RUNTIME.appKey +
+                        "&auth_tran_id=" +
+                        authTranId,
                       onResponse
                     );
                   }
@@ -6621,12 +6628,12 @@ var _typeof =
                   return _.extend(
                     container
                       ? {
-                        size: container.getAttribute("data-size") || "large",
-                        shape: container.getAttribute("data-shape") || "pc",
-                        supportMultipleDensities: !!container.getAttribute(
-                          "data-support-multiple-densities"
-                        ),
-                      }
+                          size: container.getAttribute("data-size") || "large",
+                          shape: container.getAttribute("data-shape") || "pc",
+                          supportMultipleDensities: !!container.getAttribute(
+                            "data-support-multiple-densities"
+                          ),
+                        }
                       : {},
                     commonDefaultSettings
                   );
@@ -6668,7 +6675,7 @@ var _typeof =
               (function (u, p) {
                 var d = {},
                   l = (d.lib = {}),
-                  s = function s() { },
+                  s = function s() {},
                   t = (l.Base = {
                     extend: function extend(a) {
                       s.prototype = this;
@@ -6687,7 +6694,7 @@ var _typeof =
                       a.init.apply(a, arguments);
                       return a;
                     },
-                    init: function init() { },
+                    init: function init() {},
                     mixIn: function mixIn(a) {
                       for (var c in a) {
                         a.hasOwnProperty(c) && (this[c] = a[c]);
@@ -6882,13 +6889,13 @@ var _typeof =
                   for (var r = 0; r < p; r += 3) {
                     for (
                       var w =
-                        (((l[r >>> 2] >>> (24 - 8 * (r % 4))) & 255) << 16) |
-                        (((l[(r + 1) >>> 2] >>> (24 - 8 * ((r + 1) % 4))) &
-                          255) <<
-                          8) |
-                        ((l[(r + 2) >>> 2] >>> (24 - 8 * ((r + 2) % 4))) &
-                          255),
-                      v = 0;
+                          (((l[r >>> 2] >>> (24 - 8 * (r % 4))) & 255) << 16) |
+                          (((l[(r + 1) >>> 2] >>> (24 - 8 * ((r + 1) % 4))) &
+                            255) <<
+                            8) |
+                          ((l[(r + 2) >>> 2] >>> (24 - 8 * ((r + 2) % 4))) &
+                            255),
+                        v = 0;
                       4 > v && r + 0.75 * v < p;
                       v++
                     ) {
@@ -6896,7 +6903,7 @@ var _typeof =
                     }
                   }
                   if ((l = t.charAt(64)))
-                    for (; d.length % 4;) {
+                    for (; d.length % 4; ) {
                       d.push(l);
                     }
                   return d.join("");
@@ -6939,12 +6946,12 @@ var _typeof =
               }
               for (
                 var t = CryptoJS,
-                r = t.lib,
-                w = r.WordArray,
-                v = r.Hasher,
-                r = t.algo,
-                b = [],
-                x = 0;
+                  r = t.lib,
+                  w = r.WordArray,
+                  v = r.Hasher,
+                  r = t.algo,
+                  b = [],
+                  x = 0;
                 64 > x;
                 x++
               ) {
@@ -7105,11 +7112,11 @@ var _typeof =
                   compute: function compute(d, r) {
                     for (
                       var p = this.cfg,
-                      s = p.hasher.create(),
-                      b = l.create(),
-                      u = b.words,
-                      q = p.keySize,
-                      p = p.iterations;
+                        s = p.hasher.create(),
+                        b = l.create(),
+                        u = b.words,
+                        q = p.keySize,
+                        p = p.iterations;
                       u.length < q;
 
                     ) {
@@ -7239,10 +7246,10 @@ var _typeof =
                   pad: function pad(a, b) {
                     for (
                       var c = 4 * b,
-                      c = c - (a.sigBytes % c),
-                      d = (c << 24) | (c << 16) | (c << 8) | c,
-                      l = [],
-                      n = 0;
+                        c = c - (a.sigBytes % c),
+                        d = (c << 24) | (c << 16) | (c << 8) | c,
+                        l = [],
+                        n = 0;
                       n < c;
                       n += 4
                     ) {
@@ -7281,13 +7288,13 @@ var _typeof =
                   blockSize: 4,
                 });
                 var n = (d.CipherParams = l.extend({
-                  init: function init(a) {
-                    this.mixIn(a);
-                  },
-                  toString: function toString(a) {
-                    return (a || this.formatter).stringify(this);
-                  },
-                })),
+                    init: function init(a) {
+                      this.mixIn(a);
+                    },
+                    toString: function toString(a) {
+                      return (a || this.formatter).stringify(this);
+                    },
+                  })),
                   b = ((p.format = {}).OpenSSL = {
                     stringify: function stringify(a) {
                       var b = a.ciphertext;
@@ -7366,20 +7373,20 @@ var _typeof =
             (function () {
               for (
                 var u = CryptoJS,
-                p = u.lib.BlockCipher,
-                d = u.algo,
-                l = [],
-                s = [],
-                t = [],
-                r = [],
-                w = [],
-                v = [],
-                b = [],
-                x = [],
-                q = [],
-                n = [],
-                a = [],
-                c = 0;
+                  p = u.lib.BlockCipher,
+                  d = u.algo,
+                  l = [],
+                  s = [],
+                  t = [],
+                  r = [],
+                  w = [],
+                  v = [],
+                  b = [],
+                  x = [],
+                  q = [],
+                  n = [],
+                  a = [],
+                  c = 0;
                 256 > c;
                 c++
               ) {
@@ -7410,11 +7417,11 @@ var _typeof =
                   _doReset: function _doReset() {
                     for (
                       var a = this._key,
-                      c = a.words,
-                      d = a.sigBytes / 4,
-                      a = 4 * ((this._nRounds = d + 6) + 1),
-                      e = (this._keySchedule = []),
-                      j = 0;
+                        c = a.words,
+                        d = a.sigBytes / 4,
+                        a = 4 * ((this._nRounds = d + 6) + 1),
+                        e = (this._keySchedule = []),
+                        j = 0;
                       j < a;
                       j++
                     ) {
@@ -7423,12 +7430,12 @@ var _typeof =
                         var k = e[j - 1];
                         j % d
                           ? 6 < d &&
-                          4 == j % d &&
-                          (k =
-                            (l[k >>> 24] << 24) |
-                            (l[(k >>> 16) & 255] << 16) |
-                            (l[(k >>> 8) & 255] << 8) |
-                            l[k & 255])
+                            4 == j % d &&
+                            (k =
+                              (l[k >>> 24] << 24) |
+                              (l[(k >>> 16) & 255] << 16) |
+                              (l[(k >>> 8) & 255] << 8) |
+                              l[k & 255])
                           : ((k = (k << 8) | (k >>> 24)),
                             (k =
                               (l[k >>> 24] << 24) |
@@ -7447,9 +7454,9 @@ var _typeof =
                           4 > d || 4 >= j
                             ? k
                             : b[l[k >>> 24]] ^
-                            x[l[(k >>> 16) & 255]] ^
-                            q[l[(k >>> 8) & 255]] ^
-                            n[l[k & 255]]);
+                              x[l[(k >>> 16) & 255]] ^
+                              q[l[(k >>> 8) & 255]] ^
+                              n[l[k & 255]]);
                     }
                   },
                   encryptBlock: function encryptBlock(a, b) {
@@ -7485,21 +7492,21 @@ var _typeof =
                   ) {
                     for (
                       var m = this._nRounds,
-                      g = a[b] ^ c[0],
-                      h = a[b + 1] ^ c[1],
-                      k = a[b + 2] ^ c[2],
-                      n = a[b + 3] ^ c[3],
-                      p = 4,
-                      r = 1;
+                        g = a[b] ^ c[0],
+                        h = a[b + 1] ^ c[1],
+                        k = a[b + 2] ^ c[2],
+                        n = a[b + 3] ^ c[3],
+                        p = 4,
+                        r = 1;
                       r < m;
                       r++
                     ) {
                       var q =
-                        d[g >>> 24] ^
-                        e[(h >>> 16) & 255] ^
-                        j[(k >>> 8) & 255] ^
-                        l[n & 255] ^
-                        c[p++],
+                          d[g >>> 24] ^
+                          e[(h >>> 16) & 255] ^
+                          j[(k >>> 8) & 255] ^
+                          l[n & 255] ^
+                          c[p++],
                         s =
                           d[h >>> 24] ^
                           e[(k >>> 16) & 255] ^
@@ -7621,7 +7628,7 @@ var _typeof =
                       1
                     );
                     Z = null;
-                  } catch (ad) { }
+                  } catch (ad) {}
                 }
                 if (!j) {
                   return false;
@@ -8168,19 +8175,19 @@ var _typeof =
               })();
               p.Socket = function (Z) {
                 var Y = E(
-                  m(Z).concat([
-                    {
-                      incoming: function incoming(ac, ab) {
-                        Z.onMessage(ac, ab);
+                    m(Z).concat([
+                      {
+                        incoming: function incoming(ac, ab) {
+                          Z.onMessage(ac, ab);
+                        },
+                        callback: function callback(ab) {
+                          if (Z.onReady) {
+                            Z.onReady(ab);
+                          }
+                        },
                       },
-                      callback: function callback(ab) {
-                        if (Z.onReady) {
-                          Z.onReady(ab);
-                        }
-                      },
-                    },
-                  ])
-                ),
+                    ])
+                  ),
                   aa = k(Z.remote);
                 this.origin = k(Z.remote);
                 this.destroy = function () {
@@ -8306,20 +8313,20 @@ var _typeof =
                       af.style,
                       i && ab.swfNoThrottle
                         ? {
-                          height: "20px",
-                          width: "20px",
-                          position: "fixed",
-                          right: 0,
-                          top: 0,
-                        }
+                            height: "20px",
+                            width: "20px",
+                            position: "fixed",
+                            right: 0,
+                            top: 0,
+                          }
                         : {
-                          height: "1px",
-                          width: "1px",
-                          position: "absolute",
-                          overflow: "hidden",
-                          right: 0,
-                          top: 0,
-                        }
+                            height: "1px",
+                            width: "1px",
+                            position: "absolute",
+                            overflow: "hidden",
+                            right: 0,
+                            top: 0,
+                          }
                     );
                     d.body.appendChild(af);
                   }
@@ -8359,7 +8366,7 @@ var _typeof =
                   destroy: function destroy() {
                     try {
                       Z.destroyChannel(ab.channel);
-                    } catch (ah) { }
+                    } catch (ah) {}
                     Z = null;
                     if (Y) {
                       Y.parentNode.removeChild(Y);
@@ -8449,7 +8456,7 @@ var _typeof =
                     ag == ab &&
                     typeof ah.data === "string" &&
                     ah.data.substring(0, ac.channel.length + 1) ==
-                    ac.channel + " "
+                      ac.channel + " "
                   ) {
                     ae.up.incoming(
                       ah.data.substring(ac.channel.length + 1),
@@ -8739,9 +8746,9 @@ var _typeof =
                           try {
                             ac =
                               am.contentWindow.frames[
-                              V + aa.channel + "_consumer"
+                                V + aa.channel + "_consumer"
                               ];
-                          } catch (ar) { }
+                          } catch (ar) {}
                           if (ac) {
                             aj();
                             ad.up.callback(true);
@@ -9107,7 +9114,7 @@ var _typeof =
               function lib$es6$promise$utils$$isMaybeThenable(x) {
                 return (
                   (typeof x === "undefined" ? "undefined" : _typeof(x)) ===
-                  "object" && x !== null
+                    "object" && x !== null
                 );
               }
               var lib$es6$promise$utils$$_isArray;
@@ -9232,7 +9239,7 @@ var _typeof =
               } else {
                 lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useSetTimeout();
               }
-              function lib$es6$promise$$internal$$noop() { }
+              function lib$es6$promise$$internal$$noop() {}
               var lib$es6$promise$$internal$$PENDING = void 0;
               var lib$es6$promise$$internal$$FULFILLED = 1;
               var lib$es6$promise$$internal$$REJECTED = 2;
@@ -9800,7 +9807,7 @@ var _typeof =
                 if (
                   P &&
                   Object.prototype.toString.call(P.resolve()) ===
-                  "[object Promise]" &&
+                    "[object Promise]" &&
                   !P.cast
                 ) {
                   return;
@@ -9829,10 +9836,10 @@ var _typeof =
             typeof global !== "undefined"
               ? global
               : typeof self !== "undefined"
-                ? self
-                : typeof window !== "undefined"
-                  ? window
-                  : {},
+              ? self
+              : typeof window !== "undefined"
+              ? window
+              : {},
             require("timers").setImmediate
           ));
         },
@@ -10037,9 +10044,9 @@ var _typeof =
 
             function web2app(context) {
               var willInvokeApp =
-                typeof context.willInvokeApp === "function"
-                  ? context.willInvokeApp
-                  : function () { },
+                  typeof context.willInvokeApp === "function"
+                    ? context.willInvokeApp
+                    : function () {},
                 onAppMissing =
                   typeof context.onAppMissing === "function"
                     ? context.onAppMissing
@@ -10047,7 +10054,7 @@ var _typeof =
                 onUnsupportedEnvironment =
                   typeof context.onUnsupportedEnvironment === "function"
                     ? context.onUnsupportedEnvironment
-                    : function () { };
+                    : function () {};
 
               willInvokeApp();
 

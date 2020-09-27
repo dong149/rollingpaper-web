@@ -25,7 +25,7 @@ const Test = () => {
     formData.append('file', img);
     // 서버의 upload API 호출
     const res = await axios.post('/api/upload', formData);
-
+    console.log(res);
   };
   return (
     <div>

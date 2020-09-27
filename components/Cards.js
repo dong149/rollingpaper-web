@@ -55,6 +55,7 @@ const styledRandom = (i, bgColor, bgImage) => {
   let x = Math.floor(hashKey * 40);
   let y = Math.floor(hashKey * 40);
   let rotate = Math.floor(hashKey * (i % 2 === 0 ? 30 : -30));
+  // console.log(bgImage);
   return {
     transform:
       'rotate(' +
@@ -68,8 +69,9 @@ const styledRandom = (i, bgColor, bgImage) => {
       'px)',
     backgroundColor: `${bgColor}`,
     // backgroundColor: `${isEmpty(bgImage) ? bgColor : '#FFFFFF'}`,
-    backgroundImage: `${isEmpty(bgImage) ? `url('/images/bg_card.png')` : `url('${bgImage}')`
-      }`,
+    backgroundImage: `${
+      isEmpty(bgImage) ? `url('/images/bg_card.png')` : `url('${bgImage}')`
+    }`,
     backgroundSize: `${!isEmpty(bgImage) && 'cover '}`,
     backgroundBlendMode: `${isEmpty(bgImage) && 'color-burn'}`,
   };
@@ -87,6 +89,7 @@ const Cards = (props) => {
     <div className={classes.root}>
       <Grid container spacing={2}>
         {content.map((value, i) => {
+          // console.log(value);
           return (
             <Grid item xs={4} key={value.id}>
               <motion.div
@@ -122,33 +125,33 @@ const Cards = (props) => {
                     </a>
                   </Link>
                 ) : (
-                    <Link
-                      href={{
-                        pathname: '/sender/detail',
-                        query: { name: name, num: num, index: i },
-                      }}
+                  <Link
+                    href={{
+                      pathname: '/sender/detail',
+                      query: { name: name, num: num, index: i },
+                    }}
+                  >
+                    <a
+                      elevation={0}
+                      className={classes.card}
+                      style={styledRandom(
+                        i,
+                        value.backgroundColor,
+                        value.backgroundImage
+                      )}
                     >
-                      <a
-                        elevation={0}
-                        className={classes.card}
-                        style={styledRandom(
-                          i,
-                          value.backgroundColor,
-                          value.backgroundImage
-                        )}
-                      >
-                        <p
-                          className={classes.cardInner}
-                          style={{
-                            color: value.color,
-                            fontFamily: value.font,
-                            justifyContent: value.sort,
-                          }}
-                          dangerouslySetInnerHTML={{ __html: value.content }}
-                        ></p>
-                      </a>
-                    </Link>
-                  )}
+                      <p
+                        className={classes.cardInner}
+                        style={{
+                          color: value.color,
+                          fontFamily: value.font,
+                          justifyContent: value.sort,
+                        }}
+                        dangerouslySetInnerHTML={{ __html: value.content }}
+                      ></p>
+                    </a>
+                  </Link>
+                )}
               </motion.div>
             </Grid>
           );
@@ -159,6 +162,7 @@ const Cards = (props) => {
 };
 
 const deletePost = async (rolling_id) => {
+  // console.log(rolling_id);
 
   try {
     await rollingService.deleteRollingContent(rolling_id);

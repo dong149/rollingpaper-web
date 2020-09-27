@@ -178,6 +178,7 @@ const Editor = (props) => {
             imageFile
           )
           .then((res) => {
+            console.log(res);
             setSuccessModalIsOpen(true);
             setBackgroundImage('');
             setContent('');
@@ -185,6 +186,7 @@ const Editor = (props) => {
             return 200;
           });
       } catch (err) {
+        console.log(err);
         return 400;
       }
     } else {
@@ -334,14 +336,16 @@ const Editor = (props) => {
       </div>
 
       <div
-        className={`${isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
-          }`}
+        className={`${
+          isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
+        }`}
         onClick={() => setFontModalIsOpen(true)}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
-          backgroundImage: `${!isEmpty(backgroundImage) && `url(${backgroundImage})`
-            }`,
+          backgroundImage: `${
+            !isEmpty(backgroundImage) && `url(${backgroundImage})`
+          }`,
           backgroundSize: 'cover',
           border: 'none',
           color: `${color}`,
@@ -398,7 +402,7 @@ Editor.getInitialProps = async (context) => {
   const name = context.query.name;
   const num = context.query.num;
   const id = context.query.id || '';
-
+  console.log('sender/editor.js에서의 name, num : ', name, num);
   return {
     name: name,
     num: num,

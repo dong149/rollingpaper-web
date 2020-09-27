@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 const Main = (props) => {
   const classes = useStyles();
   const { posts, name, num } = props;
+  console.log('props 값 - ', 'posts :', posts, 'name : ', name, 'num : ', num);
   const componentRef = useRef();
   const layoutRef = useRef();
   const [isStickerUpdated, setIsStickerUpdated] = useState(true);
@@ -118,22 +119,22 @@ const Main = (props) => {
           {posts.contents.length ? (
             <Cards name={name} num={num} content={posts.contents} linked />
           ) : (
-              <div
+            <div
+              style={{
+                minHeight: 'calc(100vh - 150px)',
+                textAlign: 'center',
+                paddingTop: '90px',
+              }}
+            >
+              <img
                 style={{
-                  minHeight: 'calc(100vh - 150px)',
-                  textAlign: 'center',
-                  paddingTop: '90px',
+                  width: '80%',
                 }}
-              >
-                <img
-                  style={{
-                    width: '80%',
-                  }}
-                  src="/icons/empty.png"
-                  alt="아무도 작성하지 않은 경우"
-                />
-              </div>
-            )}
+                src="/icons/empty.png"
+                alt="아무도 작성하지 않은 경우"
+              />
+            </div>
+          )}
         </div>
         {/* <StickyFooter>
           <Buttons full onClick={() => exportComponentAsPNG(componentRef)}>

@@ -129,6 +129,7 @@ const StickerList = (props) => {
                   ? e.preventDefault()
                   : setIsEditableKey(sticker.id)
               }
+              onBlur={(e) => console.log('touchcancel')}
             >
               {isEditableKey === sticker.id && (
                 <button
@@ -144,8 +145,9 @@ const StickerList = (props) => {
                 </button>
               )}
               <span
-                className={`${classes.stickerImage} ${isEditableKey === sticker.id && classes.focusedSticker
-                  }`}
+                className={`${classes.stickerImage} ${
+                  isEditableKey === sticker.id && classes.focusedSticker
+                }`}
               >
                 <img src={sticker.url} />
               </span>
