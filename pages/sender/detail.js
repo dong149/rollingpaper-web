@@ -133,8 +133,8 @@ const Detail = (props) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const [isPostsUpdated, setIsPostsUpdated] = useState(false);
   useEffect(() => {
-    const getPosts = async () => {
-      await rollingService.getRollingByName(name, num).then((res) => {
+    const getPosts = () => {
+      rollingService.getRollingByName(name, num).then((res) => {
         setPosts(res.data);
       });
     };
