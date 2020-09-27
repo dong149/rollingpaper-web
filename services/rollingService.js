@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // let BASE_URL = "https://donghoon.tk";
 
-let BASE_URL = 'https://apis.rollingpaper.site';
+let BASE_URL = 'https://apilb.rollingpaper.site';
 
 const baseAPI = axios.create({
   baseURL: BASE_URL,
