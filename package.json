@@ -6,9 +6,10 @@
   "author": "DANNIEL <donghoon149@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "dev": "next dev",
+    "start": "next start -p 8081",
+    "build": "npm run clean && next build",
+    "clean": "rm -rf .next"
   },
   "dependencies": {
     "@fullpage/react-fullpage": "0.1.17",
