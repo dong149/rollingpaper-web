@@ -7,10 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "start": "next start -p 8081",
+    "start": "next start",
     "build": "npm run clean && next build",
-    "clean": "rm -rf .next",
-    "deploy-dev": "npm install && npm run build && eb deploy RollingPaperClient-dev"
+    "clean": "rm -rf .next"
   },
   "dependencies": {
     "@fullpage/react-fullpage": "0.1.17",
