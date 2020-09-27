@@ -74,6 +74,7 @@ const StickerModal = (props) => {
     const stickerURL = `/images/main_sticker_${i < 10 ? `0${i}` : i}.png`;
     stickerCards.push(
       <Grid
+        key={`key-${i}`}
         item
         xs={4}
         style={{
