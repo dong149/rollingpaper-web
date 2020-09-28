@@ -358,7 +358,7 @@ const Editor = (props) => {
         }}
       >
         <ContentEditable
-          contentEditable="true"
+          contentEditable={colorModalIsOpen || fontModalIsOpen}
           html={content}
           onChange={(e) => {
             setContent(e.target.value);
