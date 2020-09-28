@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     position: 'relative',
-    minHeight: '100vh',
+    height: '560px',
     flexDirection: 'column',
     background: '#FFF',
   },
@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
       // '&::-webkit-scrollbar': {
       //   display: 'none',
       // },
-      height: '340px',
+      minHeight: '20vh',
+      maxHeight: '340px'
     },
   },
   textareaImage: {
@@ -163,6 +164,7 @@ const Editor = (props) => {
   const { name, num, id, asPath } = props;
   const classes = useStyles({ backgroundImage: backgroundImage });
   const textBox = useRef(null);
+
   const onSubmit = async () => {
     if ((!isEmpty(content) || !isEmpty(backgroundImage)) && !isEmpty(author)) {
       try {
@@ -336,16 +338,14 @@ const Editor = (props) => {
       </div>
 
       <div
-        className={`${
-          isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
-        }`}
+        className={`${isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
+          }`}
         onClick={() => setFontModalIsOpen(true)}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
-          backgroundImage: `${
-            !isEmpty(backgroundImage) && `url(${backgroundImage})`
-          }`,
+          backgroundImage: `${!isEmpty(backgroundImage) && `url(${backgroundImage})`
+            }`,
           backgroundSize: 'cover',
           border: 'none',
           color: `${color}`,
@@ -353,7 +353,8 @@ const Editor = (props) => {
         }}
       >
         <ContentEditable
-          contentEditable="true"
+          contentEditable={true}
+          disabled={!colorModalIsOpen || !fontModalIsOpen}
           html={content}
           onChange={(e) => {
             setContent(e.target.value);
@@ -397,18 +398,6 @@ const Editor = (props) => {
       </StickyFooter>
     </Layouts>
   );
-};
-Editor.getInitialProps = async (context) => {
-  const name = context.query.name;
-  const num = context.query.num;
-  const id = context.query.id || '';
-  console.log('sender/editor.js에서의 name, num : ', name, num);
-  return {
-    name: name,
-    num: num,
-    id: id,
-    asPath: context.asPath,
-  };
 };
 
 export default Editor;
