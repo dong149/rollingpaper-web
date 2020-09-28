@@ -336,16 +336,14 @@ const Editor = (props) => {
       </div>
 
       <div
-        className={`${
-          isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
-        }`}
+        className={`${isEmpty(backgroundImage) ? classes.textarea : classes.textareaImage
+          }`}
         onClick={() => setFontModalIsOpen(true)}
         style={{
           fontFamily: `${font}`,
           backgroundColor: `${backgroundColor}`,
-          backgroundImage: `${
-            !isEmpty(backgroundImage) && `url(${backgroundImage})`
-          }`,
+          backgroundImage: `${!isEmpty(backgroundImage) && `url(${backgroundImage})`
+            }`,
           backgroundSize: 'cover',
           border: 'none',
           color: `${color}`,
@@ -354,6 +352,7 @@ const Editor = (props) => {
       >
         <ContentEditable
           contentEditable="true"
+          disabled={!colorModalIsOpen && !fontModalIsOpen}
           html={content}
           onChange={(e) => {
             setContent(e.target.value);
