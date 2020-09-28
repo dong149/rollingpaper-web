@@ -165,11 +165,6 @@ const Editor = (props) => {
   const classes = useStyles({ backgroundImage: backgroundImage });
   const textBox = useRef(null);
 
-  useEffect(() => {
-    if (!fontModalIsOpen && !colorModalIsOpen) {
-      document.body.focus()
-    }
-  }, [fontModalIsOpen, colorModalIsOpen])
   const onSubmit = async () => {
     if ((!isEmpty(content) || !isEmpty(backgroundImage)) && !isEmpty(author)) {
       try {
@@ -358,7 +353,8 @@ const Editor = (props) => {
         }}
       >
         <ContentEditable
-          contentEditable={colorModalIsOpen || fontModalIsOpen}
+          contentEditable={true}
+          disabled={!colorModalIsOpen || !fontModalIsOpen}
           html={content}
           onChange={(e) => {
             setContent(e.target.value);
