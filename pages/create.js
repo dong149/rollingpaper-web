@@ -34,11 +34,12 @@ const Index = () => {
   const classes = useStyles();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const onSubmit = async () => {
+  const onSubmit = () => {
+    const trimmedPassword = password.trim()
     try {
-      await rollingService.postRolling(name, password).then(async (res) => {
+      rollingService.postRolling(name, trimmedPassword).then(async (res) => {
         console.log(res);
-        window.location.href = `/sender/main?name=${name}&num=${password}`;
+        window.location.href = `/sender/main?name=${name}&num=${trimmedPassword}`;
       });
     } catch (err) {
       console.log(err);
@@ -125,8 +126,8 @@ const Index = () => {
                 생성 및 조회하기
               </Buttons>
             ) : (
-              <Buttons full={true}>모두 작성해주세요</Buttons>
-            )}
+                <Buttons full={true}>모두 작성해주세요</Buttons>
+              )}
           </StickyFooter>
         </Layouts>
       </div>
